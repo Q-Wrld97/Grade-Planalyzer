@@ -95,7 +95,7 @@ nav ul li a{
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    height: 100vh;
+    height: auto;
 }
 
 #linkcolor{
@@ -108,14 +108,14 @@ a:link {
 }
 
 .project-box{
-    width: 60%;
+    width: 70%;
     display:flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin:auto;
 }
 .single-project{
-    flex-basis:45%;
+    flex-basis:40%;
     text-align: center;
     border-radius: 7px;
     margin-bottom: 50px;
@@ -141,7 +141,7 @@ a:link {
     opacity: 1;
 } 
 .project-desc{
-    width: 80%;
+    width: 70%;
     position: absolute;
     bottom: 0;
     left: 50%;
