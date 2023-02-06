@@ -13,7 +13,6 @@ body {
 }
 
 #title-text{
-  color: aliceblue;
   animation: effect 2s linear infinite;
   font-size: 5em;
   font-family: serif;
@@ -22,6 +21,28 @@ body {
 
 }
 
+#aboutmetext{
+  color: green;
+  text-align: center;
+  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-width: 1px;
+}
+
+#About-me{
+  width: 50%;
+  height: 20rem;
+  justify-content: center;
+  text-align: center;
+  opacity: .8;
+  margin-top: 30px;
+}
+
+#accordian{
+  color: green;
+  text-align: center;
+  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-width: 1px;
+}
 
 
 .carousel img {
@@ -33,6 +54,8 @@ body {
   margin: auto;
 
 }
+
+
 
 @keyframes effect {
   0% {
