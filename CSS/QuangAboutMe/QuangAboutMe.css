@@ -29,7 +29,7 @@ body {
 }
 
 #About-me{
-  width: 50%;
+  width: 45%;
   height: 30rem;
   justify-content: center;
   text-align: center;
@@ -46,6 +46,16 @@ body {
 
 
 .carousel img {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: auto;
+
+}
+
+.carousel {
   width: 500px;
   height: 500px;
   display: flex;
