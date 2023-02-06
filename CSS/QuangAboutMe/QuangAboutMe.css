@@ -1,0 +1,38 @@
+body {
+  background-image: url(../../Asset/QuangAboutMe/QuangAboutMe.gif) ;
+}
+
+#nav {
+  -webkit-text-fill-color: black;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: lightgreen;
+  background-color: black;
+  border: 1px solid black;
+  opacity: 0.6;
+  
+}
+
+#title-text{
+  color: aliceblue;
+  animation: effect 2s linear infinite;
+  font-size: 5em;
+  font-family: serif;
+  color: transparent;
+  text-shadow: black 1px 0 10px;
+
+}
+
+
+@keyframes effect {
+  0% {
+      background: linear-gradient(
+              #008000, #00FF00);
+      -webkit-background-clip: text;
+  }
+
+  100% {
+      background: linear-gradient(
+              red, gray);
+      -webkit-background-clip: text;
+  }
+}
