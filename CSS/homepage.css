@@ -5,7 +5,7 @@
 }
 
 #banner {
-    background: linear-gradient(to top, rgb(0,0,0,0.0) 50%,#234c6b) 10%, url(Asset/background.png);
+    background: linear-gradient(to top, rgb(0,0,0,0.0) 50%,#234c6b) 10%, url(../Asset/background.png);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -91,7 +91,7 @@ nav ul li a{
 #project {
     width: 100%;
     padding: 70px 0;
-    background-image: url("Asset/background.png");
+    background-image: url("../Asset/background.png");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
