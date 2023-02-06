@@ -1,0 +1,14 @@
+body {
+  background-image: url(../Asset/QuangAboutMe.gif) ;
+}
+
+#nav {
+  background-image: linear-gradient(to right, black, gray);
+}
+
+#searchbutton {
+  margin-left: 5px;
+  border:linear-gradient(to right, black, gray);
+  border-radius:5px;
+  border-width:1px;
+}
