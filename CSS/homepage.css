@@ -137,9 +137,14 @@ a:link {
     opacity: 0;
     transition: 1s;
 }
-.single-project:hover .overlay{
+
+.single-project:active .overlay{
     opacity: 1;
 } 
+.single-project:hover .overlay{
+    opacity: 1;
+}
+
 .project-desc{
     width: 70%;
     position: absolute;
@@ -161,10 +166,16 @@ hr{
 .project-desc p{
     font-size: 14px;
 }
+
+.single-project:active .project-desc{
+    bottom:40%;
+    opacity:1;
+}
 .single-project:hover .project-desc{
     bottom:40%;
     opacity:1;
 }
+
 @media screen and (max-width: 770px){
     .single-project{
         flex-basis: 100%;
