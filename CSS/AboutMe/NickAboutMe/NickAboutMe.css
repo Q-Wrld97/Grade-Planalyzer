@@ -1,0 +1,233 @@
+body {
+    background: rgb(230, 225, 225);
+   margin: 85px auto 0 auto;
+   max-width: 750px;
+}
+
+
+
+header {
+  padding: 20px;
+}
+
+.nav-scroll {
+    background-color:  rgb(230, 225, 225);
+    border-bottom: solid;
+    height: 100px;
+    top : 0;
+    position: fixed;
+    width: 100%;
+    left: 0;
+}
+
+.bio-container {
+    height: auto;
+    /* margin: 1% 25% 3% 25%; */
+    border: 2px solid red;
+}
+
+.bio {
+    margin: 20px;
+}
+
+.bio-title{
+    margin: 10px;
+}
+
+
+.nav-container {
+    margin-top:30px;
+    padding: 20px;
+    background-color: none;
+}
+
+.list li {
+    border: 1px solid black;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    list-style-type: none;
+    text-align: center;
+  }
+  
+  .list li:hover {
+    background-color: lightblue;
+    transform: scale(1.1);
+    transition: all 0.2s ease-in-out;
+  }
+
+
+  .nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    
+}
+
+.nav  a{
+    width: 129px;  
+    padding: 20px;
+    border: 2px solid red;
+    align-items: center;
+    font-size: auto;
+    color: #c73939;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    position: fixed;
+    margin: 20px;
+    
+
+}
+
+.nav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.nav a.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
+.nav a:link {
+    text-decoration: none;
+}
+
+.stuff {
+    margin: 20px;
+    
+}
+
+.stuff {
+ width:auto;   
+    
+    
+}
+
+.stuff-container {  
+    height: auto;
+    margin: 15px;
+    border: 2px solid red;
+    float:left;
+    display:inline-block;
+    width:150px;
+    margin:15px;
+}
+
+
+.stuff-container2 {  
+    height: auto;
+    margin: 15px;
+    border: 2px solid red;
+    float:left;   
+    display:inline-block;
+    max-width:505px;
+}
+
+.stuff-container3 {  
+    height: auto;
+    margin: 15px;
+    border: 2px solid red;
+    float:left;   
+    display:inline-block;
+    max-width:505px;
+}
+
+.stuff-container4 {  
+    height: auto;
+    margin: 15px;
+    border: 2px solid red;
+    float:left;   
+    display:inline-block;
+    max-width:690px;
+    padding: 0 40px 0 40px;
+}
+
+
+.project {
+    margin-bottom: 20px;
+    
+  }
+  
+  .project-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: #000000;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .date {
+    font-weight: normal;
+    font-size: 14px;
+    margin-left: 10px;
+  }
+  
+  .project-description {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  
+  .fa-calendar {
+    margin-left: 10px;
+  }
+  
+  .project-title:hover {
+    color: #ff0000;
+  }
+  
+  /* Popup container - can be anything you want */
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* The actual popup */
+  .popup .popuptext {
+    visibility: hidden;
+    width: 170px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+  }
+  
+  /* Popup arrow */
+  .popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  
+  /* Toggle this class - hide and show the popup */
+  .popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+  }
+  
+  /* Add animation (fade in the popup) */
+  @-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+  }
+  
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+  }
