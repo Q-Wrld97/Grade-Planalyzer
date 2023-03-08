@@ -1,0 +1,37 @@
+/* Style for the navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  height: 60px;
+  padding: 0 20px;
+}
+
+/* Style for the left menu */
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Style for the right menu */
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Style for the navbar links */
+.navbar-link {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 15px;
+}
+
+/* Style for the navbar image */
+.navbar-img {
+  height: 70px;
+  width: 70px;
+}
+
