@@ -22,13 +22,13 @@ function login () {
   auth.signInWithEmailAndPassword(email, password)
   .then((res) => {
     db.collection('users').doc(res.user.uid).update({
-      loginTime: firebase.firestore.FieldValue.serverTimestamp(),
+      loginTime: new Date().toLocaleDateString('en-US', {month: 'numeric', day: 'numeric', year: 'numeric'}),
     })
     .then(() => {
       // Check if the email is verified
       if (res.user.emailVerified == false) {
         // notified user that they need to verify their email
-        alert('please verify your email in 24 hrs from the time of creation of your account');
+        alert('please verify your email in 24 hrs from the time of creation of your account'); // Change with pop up
         // Go to Firestore and check user's creation date
         db.collection('users').doc(res.user.uid).get()
         .then((doc) => {
@@ -40,7 +40,9 @@ function login () {
               // Delete user from Firestore
               db.collection('users').doc(res.user.uid).delete()
               .then(() => {
-                alert('Your account has been deleted due to not verifying your email in 24 hours');
+                alert('Your account has been deleted due to not verifying your email in 24 hours'); // Change with pop up
+                return
+                //stop running code
               })
             });
           }
@@ -50,12 +52,12 @@ function login () {
       window.location = '../../../Dashboard/Courseinfo/html/courseForm.html';
     })
     .catch((error) => {
-      alert(error.message);
+      alert(error.message);// Change with pop up
     });
   })
   .catch((error) => {
-    alert(error.message);
+    alert(error.message);// Change with pop up
   });
 
-  alert('User Logged In!');
+  alert('User Logged In!'); // Change with pop up
 }
