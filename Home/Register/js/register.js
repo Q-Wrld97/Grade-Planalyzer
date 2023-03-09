@@ -1,4 +1,5 @@
 
+// Apple transition to sign up form
 $(window).bind('load', function() {
   var img = document.getElementById("loginImg");
   var form = document.getElementsByClassName("box")[0];
@@ -26,13 +27,13 @@ function register() {
 
   // Check if the passwords match
   if (password != passwordConfirm) {
-    return alert('Passwords do not match')
+    return alert('Passwords do not match') // Change with pop up
     // Don't continue running the code
   }
 
   // Validate input fields
   if (validate_email(email) == false || validate_password(password) == false) {
-    return alert('Bad email or Password')
+    return alert('Bad email or Password') // Change with pop up
     // Don't continue running the code
   }
  
@@ -52,18 +53,20 @@ function register() {
     })
     .then(() => {
       // Alert the user that an email has been sent
-      alert('Verification email sent.')
-      // grab user email from firestore
+      alert('Verification email sent.') // Change with pop up
+      //create modal to ask user to verify email
+
+
     })
     .catch((error) => {
       // Handle any errors that occur during the process
-      alert(error.message)
+      alert(error.message) // Change with pop up
       throw error
     })
   })
   .catch((error) => {
     // Handle any authentication errors that occur
-    alert(error.message)
+    alert(error.message) // Change with pop up
   })
 }
 

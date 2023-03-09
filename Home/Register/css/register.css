@@ -172,11 +172,52 @@ input[type="submit"]:active
 {
 	opacity: 0.8;
 }
+
 /* center the loginIMG */
 #loginImg
 {
 	display:block;
 }
+
+
+/* Nav Bar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  height: 60px;
+  padding: 0 20px;
+}
+
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+
+.navbar-link {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 15px;
+}
+
+
+.navbar-img {
+  height: 70px;
+  width: 70px;
+}
+
+/* Mobile Version CSS */
 @media (max-width: 768px) {
   .box {
     width: 95%;
@@ -234,45 +275,3 @@ input[type="submit"]:active
     margin-left: auto;
   }
 }
-
-
-/* Nav Bar */
-
-
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #333;
-  color: #fff;
-  height: 60px;
-  padding: 0 20px;
-}
-
-
-.navbar-left {
-  display: flex;
-  align-items: center;
-}
-
-
-.navbar-right {
-  display: flex;
-  align-items: center;
-}
-
-
-.navbar-link {
-  color: #fff;
-  text-decoration: none;
-  margin: 0 10px;
-  font-size: 15px;
-}
-
-
-.navbar-img {
-  height: 70px;
-  width: 70px;
-}
-
