@@ -1,3 +1,13 @@
+//check if user is authenticated and if not take them back to home page on load
+window.onload = function() {
+  auth.onAuthStateChanged(function(user) {
+    if (user) {
+      return;
+    } else {
+      window.location.href = "index.html"
+    }
+  })}
+
 // Limit user input to 4 characters
 function limitInputToFourCharacters(inputElement) {
   inputElement.addEventListener('input', function(event) {

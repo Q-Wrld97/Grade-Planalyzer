@@ -1,8 +1,10 @@
 function addNewData(){
-    
-  //=================================================================================//
-  //==========GRABBING COURSE LENGTH, TERM LENGTH AND CREDIT HOURS===================//
-  //=================================================================================//
+  
+
+  //==========GRABBING SEMESTER COURSE LENGTH, TERM LENGTH AND CREDIT HOURS===================//
+  semesterSeason=document.getElementById('semesterSeason').value;
+  semesterYear=document.getElementById('semesterYear').value;
+  semester=semesterSeason+semesterYear;
   courseName=document.getElementsByName('courseName')[0].value;
   termLength=document.getElementsByName('termLength')[0].value;
   creditHours=document.getElementsByName('creditHours')[0].value;
@@ -85,7 +87,7 @@ function addNewData(){
     };
     
     //fuction check to see 
-    //if the gradeSacle is not greater than the previos value and nuke it if its NULL
+    //if the gradeSacle is not greater than the previous value and nuke it if its NULL
 
     let prevValue = Infinity; // Set to infinity to ensure that the first comparison will pass
     let prevKey = '';
@@ -118,85 +120,154 @@ function addNewData(){
 
 
 
-  if (document.getElementById("Exam").checked){
+  if (document.getElementById("Exam").checked && document.getElementById("CategoryYesExam4").value=='Yes'){
     
     var examWeight = {
       'examWeight': document.getElementById("CategoryYesExam").value,
       'examQuantity': document.getElementById("CategoryYesExam2").value,
+      'equallyweighted': document.getElementById("CategoryYesExam4").value,
       'perExamPercent': document.getElementById("CategoryYesExam").value / document.getElementById("CategoryYesExam2").value,  
     }
   }
-
-  if (document.getElementById("Final").checked){
-    
-    var finalWeight = {
-      'finalWeight': document.getElementById("CategoryYesFinal").value,
-      'finalQuantity': document.getElementById("CategoryYesFinal2").value,
-      'perFinalPercent': document.getElementById("CategoryYesFinal").value / document.getElementById("CategoryYesFinal2").value,  
-    } 
-  }
-
-  if (document.getElementById("Midterm").checked){
-    
-    var midtermWeight = {
-      'midtermWeight': document.getElementById("CategoryYesMidterm").value,
-      'midtermQuantity': document.getElementById("CategoryYesMidterm2").value,
-      'perMidtermPercent': document.getElementById("CategoryYesMidterm").value / document.getElementById("CategoryYesMidterm2").value,  
+  //if check and weighted equally is no
+  else if (document.getElementById("Exam").checked && document.getElementById("CategoryYesExam4").value =='No'){
+    var examWeight = {
+      'examWeight': document.getElementById("CategoryYesExam").value,
+      'examQuantity': document.getElementById("CategoryYesExam2").value, 
+      'equallyweighted': document.getElementById("CategoryYesExam4").value,
+     }
+    // check quanity go through for loop to capture indivual grade
+    for (let i=1; i <= document.getElementById("CategoryYesExam2").value; i++){
+      const quantityInput = document.getElementById(`Exam${i}`);
+      //add to examWeight object
+      examWeight[`exam${i}Percent`] = quantityInput.value;
     }
+ }
 
-  }
-
-  if (document.getElementById("Quiz").checked){
+  if (document.getElementById("Quiz").checked && document.getElementById("CategoryYesQuiz4").value == "Yes"){
     
     var quizWeight = {
       'quizWeight': document.getElementById("CategoryYesQuiz").value,
       'quizQuantity': document.getElementById("CategoryYesQuiz2").value,
+      'equallyweighted': document.getElementById("CategoryYesQuiz4").value,
       'perQuizPercent': document.getElementById("CategoryYesQuiz").value / document.getElementById("CategoryYesQuiz2").value,  
     }
-
   }
-
-  if (document.getElementById("HW").checked){
-    
-    var hwWeight = {
-      'hwWeight': document.getElementById("CategoryYesAssignment").value,
-      'hwQuantity': document.getElementById("CategoryYesHW2").value,
-      'perHWPercent': document.getElementById("CategoryYesHW").value / document.getElementById("CategoryYesHW2").value,  
+  //if check and weighted equally is no
+  else if (document.getElementById("Quiz").checked && document.getElementById("CategoryYesQuiz4").value == "No"){
+    var quizWeight = {
+      'quizWeight': document.getElementById("CategoryYesQuiz").value,
+      'quizQuantity': document.getElementById("CategoryYesQuiz2").value, 
+      'equallyweighted': document.getElementById("CategoryYesQuiz4").value,
+     }
+    // check quanity go through for loop to capture indivual grade
+    for (let i=1; i <= document.getElementById("CategoryYesQuiz2").value; i++){
+      const quantityInput = document.getElementById(`Quiz${i}`);
+      //add to examWeight object
+      quizWeight[`quiz${i}Percent`] = quantityInput.value;
     }
-
   }
 
-  if (document.getElementById("Discussion").checked){
+  if (document.getElementById("Assignment").checked && document.getElementById("CategoryYesAssignment4").value == "Yes"){
+    
+    var assignmentWeight = {
+      'assignmentWeight': document.getElementById("CategoryYesAssignment").value,
+      'assignmentQuantity': document.getElementById("CategoryYesAssignment2").value,
+      'equallyweighted': document.getElementById("CategoryYesAssignment4").value,
+      'perAssignmentPercent': document.getElementById("CategoryYesAssignment").value / document.getElementById("CategoryYesAssignment2").value,  
+    }
+  }
+  //if check and weighted equally is no
+  else if (document.getElementById("Assignment").checked && document.getElementById("CategoryYesAssignment4").value == "No"){
+    var assignmentWeight = {
+      'assignmentWeight': document.getElementById("CategoryYesAssignment").value,
+      'assignmentQuantity': document.getElementById("CategoryYesAssignment2").value,
+      'equallyweighted': document.getElementById("CategoryYesAssignment4").value,
+      }
+    // check quanity go through for loop to capture indivual grade
+    for (let i=1; i <= document.getElementById("CategoryYesAssignment2").value; i++){
+      const quantityInput = document.getElementById(`Assignment${i}`);
+      //add to examWeight object
+      assignmentWeight[`assignment${i}Percent`] = quantityInput.value;
+    }
+  }
+
+
+  if (document.getElementById("Discussion").checked && document.getElementById("CategoryYesDiscussion4").value == "Yes"){
     
     var discussionWeight = {
       'discussionWeight': document.getElementById("CategoryYesDiscussion").value,
       'discussionQuantity': document.getElementById("CategoryYesDiscussion2").value,
+      'equallyweighted': document.getElementById("CategoryYesDiscussion4").value,
       'perDiscussionPercent': document.getElementById("CategoryYesDiscussion").value / document.getElementById("CategoryYesDiscussion2").value,  
     }
 
   }
+  //if check and weighted equally is no
+  else if (document.getElementById("Discussion").checked && document.getElementById("CategoryYesDiscussion4").value == "No"){
+    var discussionWeight = {
+      'discussionWeight': document.getElementById("CategoryYesDiscussion").value,
+      'discussionQuantity': document.getElementById("CategoryYesDiscussion2").value,
+      'equallyweighted': document.getElementById("CategoryYesDiscussion4").value,
+      }
+    // check quanity go through for loop to capture indivual grade
+    for (let i=1; i <= document.getElementById("CategoryYesDiscussion2").value; i++){
+      const quantityInput = document.getElementById(`Discussion${i}`);
+      //add to examWeight object
+      discussionWeight[`discussion${i}Percent`] = quantityInput.value;
+    }
+  }
   
-  if (document.getElementById("Project").checked){
+  if (document.getElementById("Project").checked && document.getElementById("CategoryYesProject4").value =="Yes"){
     
     var projectWeight = {
       'projectWeight': document.getElementById("CategoryYesProject").value,
       'projectQuantity': document.getElementById("CategoryYesProject2").value,
+      'equallyweighted': document.getElementById("CategoryYesProject4").value,
       'perProjectPercent': document.getElementById("CategoryYesProject").value / document.getElementById("CategoryYesProject2").value,  
     }
 
   }
+  //if check and weighted equally is no
+  else if (document.getElementById("Project").checked && document.getElementById("CategoryYesProject4").value =="No"){
+    var projectWeight = {
+      'projectWeight': document.getElementById("CategoryYesProject").value,
+      'projectQuantity': document.getElementById("CategoryYesProject2").value,
+      'equallyweighted': document.getElementById("CategoryYesProject4").value,
+      }
+    // check quanity go through for loop to capture indivual grade
+    for (let i=1; i <= document.getElementById("CategoryYesProject2").value; i++){
+      const quantityInput = document.getElementById(`Project${i}`);
+      //add to examWeight object
+      projectWeight[`project${i}Percent`] = quantityInput.value;
+    }
+  }
 
-  if (document.getElementById("Participation").checked){
+  if (document.getElementById("Participation").checked && document.getElementById("CategoryYesParticipation4").value =="Yes"){
     
     var participationWeight = {
       'participationWeight': document.getElementById("CategoryYesParticipation").value,
       'participationQuantity': document.getElementById("CategoryYesParticipation2").value,
+      'equallyweighted': document.getElementById("CategoryYesParticipation4").value,
       'perParticipationPercent': document.getElementById("CategoryYesParticipation").value / document.getElementById("CategoryYesParticipation2").value,  
     }
-
+  }
+  //if check and weighted equally is no
+  else if (document.getElementById("Participation").checked && document.getElementById("CategoryYesParticipation4").value =="No"){
+    var participationWeight = {
+      'participationWeight': document.getElementById("CategoryYesParticipation").value,
+      'participationQuantity': document.getElementById("CategoryYesParticipation2").value,
+      'equallyweighted': document.getElementById("CategoryYesParticipation4").value,
+      }
+    // check quanity go through for loop to capture indivual grade
+    for (let i=1; i <= document.getElementById("CategoryYesParticipation2").value; i++){
+      const quantityInput = document.getElementById(`Participation${i}`);
+      //add to examWeight object
+      participationWeight[`participation${i}Percent`] = quantityInput.value;
+    }
   }
 
-  let weightScale=[examWeight,finalWeight,midtermWeight,quizWeight,hwWeight,discussionWeight,projectWeight,participationWeight];
+  let weightScale=[examWeight,quizWeight,assignmentWeight,discussionWeight,projectWeight,participationWeight];
 
   
 
@@ -215,7 +286,7 @@ function addNewData(){
       }
     }
   });
-
+  alert(totalWeight)
   if (totalWeight > 100 || totalWeight < 100) {
     return alert('The total weight for all categories exceeds or below 100%. Please adjust the weights accordingly.');
   }
@@ -227,18 +298,17 @@ function addNewData(){
   auth.onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.      
-      alert(user.uid)
-      alert(courseName)
-      alert(termLength)  
+      alert(user.uid) // this is the user id for testing
 
-      db.collection('users').doc(user.uid).collection('classes').doc(courseName).set({
+
+      db.collection('users').doc(user.uid).collection(semester).doc(courseName).set({
         courseName: courseName,
         termLength: termLength,
         creditHours: creditHours,
         classDays: checkedDays,
         gradeScale: gradeScale,
         weightScale: weightScale
-      }
+      } 
       
       ).catch((error) => {
         // Firebase will use this to alert of its errors
@@ -253,8 +323,4 @@ function addNewData(){
     }
   });
  
-} //)
-
-//db.collection('users').doc(res.user.uid).collection('classes').update
-// db.collection('users').doc(user.uid).update({
-// db.collection('users').doc(res.user.uid).collection('classes').doc(courseName).set({
+}
