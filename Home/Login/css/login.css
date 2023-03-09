@@ -178,7 +178,6 @@ input[type="submit"]:active
 }
 
 
-
 /* Nav Bar */
 
 
@@ -219,3 +218,60 @@ input[type="submit"]:active
   width: 70px;
 }
 
+
+@media (max-width: 768px) {
+  .box {
+    width: 95%;
+    max-width: 350px;
+  }
+  
+  h2 {
+    font-size: 1.2em;
+  }
+
+  .inputBox input {
+    padding: 10px;
+  }
+
+  .inputBox span {
+    padding: 10px 0px;
+  }
+
+  input[type="submit"] {
+    padding: 10px 20px;
+  }
+
+  .links a {
+    font-size: 0.9em;
+  }
+	.navbar-middle {
+    display: none;
+  }
+  
+  .navbar-img {
+    height: 40px;
+    width: 40px;
+  }
+  
+  .navbar-planalyzer {
+    display: none;
+  }
+  
+  .navbar-link {
+    font-size: 12px;
+    margin: 0 5px;
+  }
+  
+  .navbar {
+    height: 50px;
+    padding: 0 10px;
+  }
+  
+  .navbar-left {
+    margin-right: auto;
+  }
+  
+  .navbar-right {
+    margin-left: auto;
+  }
+}

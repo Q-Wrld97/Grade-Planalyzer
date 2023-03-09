@@ -7,14 +7,15 @@
 <meta name="Description" content="Enter your description here"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link rel="stylesheet" href="/Home/Register/css/register.css">
-<title>Sign Up</title>
+<link rel="stylesheet" href="../css/register.css">
+<title>Login</title>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar">
     <div class="navbar-left">
-      <a href="#" class="navbar-link">Help</a>
+      <a href="#" class="navbar-link">Home</a>
       <a href="#" class="navbar-link">About Us</a>
+      <a href="#" class="navbar-link">Help</a>
     </div>
     <div class="navbar-middle">
       <span class="navbar-grade">Grade</span>
@@ -22,51 +23,47 @@
       <span class="navbar-planalyzer">Planalyzer</span>
     </div>
     <div class="navbar-right">
-      <a href="/Home/Login/html/login.html" class="navbar-link">Sign In</a>
+      <a href="login.html" class="navbar-link">Login</a>
+      <a href="/Home/Register/html/register.html" class="navbar-link">Sign Up</a>
     </div>
   </nav>
-
-  <!--Making a bootstrap compatble Sign Up page-->
-
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header">
-            <h4 class="text-center">Grade Planalyzer</h4>
-          </div>
-          <div class="card-body">
-            <form>
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Enter name" required>
-              </div>
-              <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter email" required>
-              </div>
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password" required>
-              </div>
-              <div class="form-group">
-                <label for="confirm_password">Confirm Password</label>
-                <input type="password" class="form-control" id="confirm_password" placeholder="Confirm Password" required>
-              </div>
-              <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--Sign Up code end here -->
-
+	<div id="container">
+		<div class="box">
+			<div id="animated">
+				<h2>Sign Up</h2>
+				<img src="/Assets/Grade_Planalyzer_Logo_PNG.png" alt="Logo" id="loginImg">
+        <div class="inputBox">
+					<input type="text" required="required">
+					<span>Name</span>
+					<i></i>
+				</div>
+				<div class="inputBox">
+					<input type="text" required="required">
+					<span>Userame</span>
+					<i></i>
+				</div>
+				<div class="inputBox">
+					<input type="password" required="required">
+					<span>Password</span>
+					<i></i>
+				</div>
+        <div class="inputBox">
+					<input type="password" required="required">
+					<span>Confirm Password</span>
+					<i></i>
+				</div>
+				<div class="links">
+					<a href="#">Forgot Password ?</a>
+					<a href="/Home/Register/html/register.html">Signup</a>
+				</div>
+				<input type="submit" value="Login">
+			</div>
+		</div>
+	</div>
 </body>
-
-  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+<script src="../js/register.js"></script>
 </body>
 </html>
