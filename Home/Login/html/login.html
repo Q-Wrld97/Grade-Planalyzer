@@ -13,8 +13,8 @@
 <body>
 	<nav class="navbar">
     <div class="navbar-left">
-      <a href="#" class="navbar-link">Home</a>
-      <a href="#" class="navbar-link">About Us</a>
+      <a href="../../../index.html" class="navbar-link">Home</a>
+      <a href="../../AboutUs/TeamPage.html" class="navbar-link">About Us</a>
       <a href="#" class="navbar-link">Help</a>
     </div>
     <div class="navbar-middle">
@@ -31,14 +31,14 @@
 		<div class="box">
 			<div id="animated">
 				<h2>Login</h2>
-				<img onload="animatedLogin()" src="/Assets/Grade_Planalyzer_Logo_PNG.png" alt="Logo" id="loginImg">
+				<img src="/Assets/Grade_Planalyzer_Logo_PNG.png" alt="Logo" id="loginImg">
 				<div class="inputBox">
-					<input type="text" required="required">
-					<span>Userame</span>
+					<input id="email" type="text" required="required">
+					<span>Email</span>
 					<i></i>
 				</div>
 				<div class="inputBox">
-					<input type="password" required="required">
+					<input id="password" type="password" required="required">
 					<span>Password</span>
 					<i></i>
 				</div>
@@ -46,7 +46,7 @@
 					<a href="#">Forgot Password ?</a>
 					<a href="/Home/Register/html/register.html">Signup</a>
 				</div>
-				<input type="submit" value="Login">
+				<input type="submit" onClick="login()" value="Login">
 			</div>
 		</div>
 	</div>

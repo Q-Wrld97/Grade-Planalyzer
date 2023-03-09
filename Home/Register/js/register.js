@@ -54,8 +54,8 @@ function register() {
     .then(() => {
       // Alert the user that an email has been sent
       alert('Verification email sent.') // Change with pop up
-      //create modal to ask user to verify email
-
+      //redirect user to login after 5 seconds
+      setTimeout(function(){ window.location = '../../login/html/login.html'; }, 5000);
 
     })
     .catch((error) => {

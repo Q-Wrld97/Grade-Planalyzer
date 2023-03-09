@@ -11,3 +11,51 @@ $(window).bind('load', function() {
       opacity -= opacity * 0.1;
   }, 50);
 });
+
+
+function login () {
+  // Get all our input fields
+  var email = document.getElementById('email').value;
+  var password = document.getElementById('password').value;
+
+
+  auth.signInWithEmailAndPassword(email, password)
+  .then((res) => {
+    db.collection('users').doc(res.user.uid).update({
+      loginTime: firebase.firestore.FieldValue.serverTimestamp(),
+    })
+    .then(() => {
+      // Check if the email is verified
+      if (res.user.emailVerified == false) {
+        // notified user that they need to verify their email
+        alert('please verify your email in 24 hrs from the time of creation of your account');
+        // Go to Firestore and check user's creation date
+        db.collection('users').doc(res.user.uid).get()
+        .then((doc) => {
+          // If the user's creation date is more than 24 hours old, delete user from Auth and Firestore
+          if (doc.data().creationDate < new Date().toLocaleDateString('en-US', {month: 'numeric', day: 'numeric', year: 'numeric'})) {
+            // Delete user from Auth
+            res.user.delete()
+            .then(() => {
+              // Delete user from Firestore
+              db.collection('users').doc(res.user.uid).delete()
+              .then(() => {
+                alert('Your account has been deleted due to not verifying your email in 24 hours');
+              })
+            });
+          }
+        });
+      }
+      //redirect user to dashboard and pass auth token
+      window.location = '../../../Dashboard/Courseinfo/html/courseForm.html';
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+  })
+  .catch((error) => {
+    alert(error.message);
+  });
+
+  alert('User Logged In!');
+}
