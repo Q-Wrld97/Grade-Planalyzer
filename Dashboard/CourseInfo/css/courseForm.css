@@ -6,7 +6,9 @@
   width: 100px;
 }
 #courseForm{
-  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #gradescale{
@@ -27,11 +29,13 @@ body{
 #header{
   font-weight: bold;
   margin:10px;
-}
-.boxlength{
-  width: 160px;
-}
-#boxlength{
   width: 160px;
 }
 
+.checkbox{
+  width: 215px;
+}
+
+.classDayLength{
+  width:100% !important;
+}
