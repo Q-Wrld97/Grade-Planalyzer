@@ -55,7 +55,7 @@ function register() {
       // Alert the user that an email has been sent
       alert('Verification email sent.') // Change with pop up
       //redirect user to login after 5 seconds
-      setTimeout(function(){ window.location = '../../login/html/login.html'; }, 5000);
+      setTimeout(function(){ window.location = '../../login/html/login.html'; }, 3000);
 
     })
     .catch((error) => {
