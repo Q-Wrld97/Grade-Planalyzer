@@ -32,8 +32,13 @@ function register() {
   }
 
   // Validate input fields
-  if (validate_email(email) == false || validate_password(password) == false) {
-    return alert('Bad email or Password') // Change with pop up
+  if (validate_email(email) == false) {
+    return alert('Email is in the wrong format') // Change with pop up
+    // Don't continue running the code
+  }
+
+  if (validate_password(password) == false) {
+    return alert('Password need 1 uppercase letter,1 lowercase letter,1 special character, 1 number and at least 6 in length ') // Change with pop up
     // Don't continue running the code
   }
  
