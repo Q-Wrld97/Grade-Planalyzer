@@ -137,6 +137,7 @@ function generateFields2(category) {
     const quantityContainer = document.getElementById(categoryId.quantityContainerId);
     quantityContainer.style.display = 'block';
     quantityContainer.innerHTML = '';
+    //creating dynamic text box
     for (let i = 1; i <= categoryYes2.value; i++) {
       const quantityInput = document.createElement('input');
       quantityInput.type = 'number';

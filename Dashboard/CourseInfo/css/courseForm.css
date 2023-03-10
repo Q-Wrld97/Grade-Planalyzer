@@ -25,6 +25,13 @@ body{
   color: white;
 }
 
+#error2{
+  color: red;
+  font-weight: bold;
+  height: auto;
+  margin: 10px;
+}
+
 
 #header{
   font-weight: bold;
