@@ -22,5 +22,12 @@ function forgetPassword(){
   }).catch(function(error) {
     // An error happened.
     alert(error);
+  })
+  .then(() => {
+    // Alert the user that an email has been sent
+    alert('Verification email sent.') // Change with pop up
+    //redirect user to login after 5 seconds
+    setTimeout(function(){ window.location.href = '../../Login/html/login.html'; }, 1000);
+
   });
 }
