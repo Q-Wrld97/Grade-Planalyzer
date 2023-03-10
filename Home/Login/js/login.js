@@ -49,7 +49,7 @@ function login () {
         });
       }
       //redirect user to dashboard and pass auth token
-      window.location.href = '../../../Dashboard/Courseinfo/html/courseForm.html';
+      window.location.href = '../../../Dashboard/CourseInfo/html/courseForm.html';
     })
     .catch((error) => {
       alert(error.message);// Change with pop up
