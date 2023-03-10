@@ -4,7 +4,7 @@ window.onload = function() {
     if (user) {
       return;
     } else {
-      window.location.href = "index.html"
+      window.location.href = "../../../index.html";
     }
   })}
 
