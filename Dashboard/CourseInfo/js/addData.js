@@ -126,9 +126,19 @@ function addNewData(){
       'examWeight': document.getElementById("CategoryYesExam").value,
       'examQuantity': document.getElementById("CategoryYesExam2").value,
       'equallyweighted': document.getElementById("CategoryYesExam4").value,
-      'perExamPercent': document.getElementById("CategoryYesExam").value / document.getElementById("CategoryYesExam2").value,  
+    }
+    // make variable to store all exam quantity with blank value
+    var examQuantity = document.getElementById("CategoryYesExam2").value;
+    var perExamWeightData = document.getElementById("CategoryYesExam").value / document.getElementById("CategoryYesExam2").value  //this is the weight of each exam;
+    // make a dictionary to store all exam and per exam weight with blank value
+    var exam = {};
+    var perExamWeight = {};
+    for (let i=1; i <= examQuantity; i++){
+      exam[`exam${i}`] = null;
+      perExamWeight[`exam${i}`] = perExamWeightData;
     }
   }
+
   //if check and weighted equally is no
   else if (document.getElementById("Exam").checked && document.getElementById("CategoryYesExam4").value =='No'){
     var examWeight = {
@@ -136,21 +146,34 @@ function addNewData(){
       'examQuantity': document.getElementById("CategoryYesExam2").value, 
       'equallyweighted': document.getElementById("CategoryYesExam4").value,
      }
-    // check quanity go through for loop to capture indivual grade
-    for (let i=1; i <= document.getElementById("CategoryYesExam2").value; i++){
-      const quantityInput = document.getElementById(`Exam${i}`);
-      //add to examWeight object
-      examWeight[`exam${i}Percent`] = quantityInput.value;
+    // make variable to store all exam quantity with blank value
+    var examQuantity = document.getElementById("CategoryYesExam2").value;
+    // make a dictionary to store all exam with blank value
+    var exam = {};
+    var perExamWeight = {};
+    for (let i=1; i <= examQuantity; i++){
+      const perExamWeightData = document.getElementById(`Exam${i}`);
+      exam[`exam${i}`] = null;
+      perExamWeight[`exam${i}`] = perExamWeightData.value;
     }
- }
+  }
 
   if (document.getElementById("Quiz").checked && document.getElementById("CategoryYesQuiz4").value == "Yes"){
     
     var quizWeight = {
       'quizWeight': document.getElementById("CategoryYesQuiz").value,
       'quizQuantity': document.getElementById("CategoryYesQuiz2").value,
-      'equallyweighted': document.getElementById("CategoryYesQuiz4").value,
-      'perQuizPercent': document.getElementById("CategoryYesQuiz").value / document.getElementById("CategoryYesQuiz2").value,  
+      'equallyweighted': document.getElementById("CategoryYesQuiz4").value,  
+    }
+    // make variable to store all exam quantity with blank value
+    var quizQuantity = document.getElementById("CategoryYesQuiz2").value;
+    var perQuizWeightData = document.getElementById("CategoryYesQuiz").value / document.getElementById("CategoryYesQuiz2").value  //this is the weight of each exam;
+    // make a dictionary to store all exam with blank value
+    var quiz = {};
+    var perQuizWeight = {};
+    for (let i=1; i <= quizQuantity; i++){
+      quiz[`quiz${i}`] = null;
+      perQuizWeight[`quiz${i}`] = perQuizWeightData;
     }
   }
   //if check and weighted equally is no
@@ -160,11 +183,15 @@ function addNewData(){
       'quizQuantity': document.getElementById("CategoryYesQuiz2").value, 
       'equallyweighted': document.getElementById("CategoryYesQuiz4").value,
      }
-    // check quanity go through for loop to capture indivual grade
-    for (let i=1; i <= document.getElementById("CategoryYesQuiz2").value; i++){
-      const quantityInput = document.getElementById(`Quiz${i}`);
-      //add to examWeight object
-      quizWeight[`quiz${i}Percent`] = quantityInput.value;
+    // make variable to store all exam quantity with blank value
+    var quizQuantity = document.getElementById("CategoryYesQuiz2").value;
+    // make a dictionary to store all exam with blank value
+    var quiz = {};
+    var perQuizWeight = {};
+    for (let i=1; i <= quizQuantity; i++){
+      const perQuizWeightData = document.getElementById(`Quiz${i}`).value;
+      quiz[`quiz${i}`] = null;
+      perQuizWeight[`quiz${i}`] = perQuizWeightData;
     }
   }
 
@@ -173,8 +200,17 @@ function addNewData(){
     var assignmentWeight = {
       'assignmentWeight': document.getElementById("CategoryYesAssignment").value,
       'assignmentQuantity': document.getElementById("CategoryYesAssignment2").value,
-      'equallyweighted': document.getElementById("CategoryYesAssignment4").value,
-      'perAssignmentPercent': document.getElementById("CategoryYesAssignment").value / document.getElementById("CategoryYesAssignment2").value,  
+      'equallyweighted': document.getElementById("CategoryYesAssignment4").value, 
+    }
+    // make variable to store all exam quantity with blank value
+    var assignmentQuantity = document.getElementById("CategoryYesAssignment2").value;
+    var perAssignmentWeightData = document.getElementById("CategoryYesAssignment").value / document.getElementById("CategoryYesAssignment2").value  //this is the weight of each exam;
+    // make a dictionary to store all exam with blank value
+    var assignment = {};
+    var perAssignmentWeight = {};
+    for (let i=1; i <= assignmentQuantity; i++){
+      assignment[`assignment${i}`] = null;
+      perAssignmentWeight[`assignment${i}`] = perAssignmentWeightData;
     }
   }
   //if check and weighted equally is no
@@ -184,11 +220,15 @@ function addNewData(){
       'assignmentQuantity': document.getElementById("CategoryYesAssignment2").value,
       'equallyweighted': document.getElementById("CategoryYesAssignment4").value,
       }
-    // check quanity go through for loop to capture indivual grade
-    for (let i=1; i <= document.getElementById("CategoryYesAssignment2").value; i++){
-      const quantityInput = document.getElementById(`Assignment${i}`);
-      //add to examWeight object
-      assignmentWeight[`assignment${i}Percent`] = quantityInput.value;
+    // make variable to store all exam quantity with blank value
+    var assignmentQuantity = document.getElementById("CategoryYesAssignment2").value;
+    // make a dictionary to store all exam with blank value
+    var assignment = {};
+    var perAssignmentWeight = {};
+    for (let i=1; i <= assignmentQuantity; i++){
+      const perAssignmentWeightData = document.getElementById(`Assignment${i}`);
+      assignment[`assignment${i}`] = null;
+      perAssignmentWeight[`assignment${i}`] = perAssignmentWeightData.value;
     }
   }
 
@@ -199,8 +239,18 @@ function addNewData(){
       'discussionWeight': document.getElementById("CategoryYesDiscussion").value,
       'discussionQuantity': document.getElementById("CategoryYesDiscussion2").value,
       'equallyweighted': document.getElementById("CategoryYesDiscussion4").value,
-      'perDiscussionPercent': document.getElementById("CategoryYesDiscussion").value / document.getElementById("CategoryYesDiscussion2").value,  
     }
+    // make variable to store all exam quantity with blank value
+    var discussionQuantity = document.getElementById("CategoryYesDiscussion2").value;
+    var perDiscussionWeightData = document.getElementById("CategoryYesDiscussion").value / document.getElementById("CategoryYesDiscussion2").value  //this is the weight of each exam;
+    // make a dictionary to store all exam with blank value
+    var discussion = {};
+    var perDiscussionWeight = {};
+    for (let i=1; i <= discussionQuantity; i++){
+      discussion[`discussion${i}`] = null;
+      perDiscussionWeight[`discussion${i}`] = perDiscussionWeightData;
+    }
+
 
   }
   //if check and weighted equally is no
@@ -210,11 +260,15 @@ function addNewData(){
       'discussionQuantity': document.getElementById("CategoryYesDiscussion2").value,
       'equallyweighted': document.getElementById("CategoryYesDiscussion4").value,
       }
-    // check quanity go through for loop to capture indivual grade
-    for (let i=1; i <= document.getElementById("CategoryYesDiscussion2").value; i++){
-      const quantityInput = document.getElementById(`Discussion${i}`);
-      //add to examWeight object
-      discussionWeight[`discussion${i}Percent`] = quantityInput.value;
+    // make variable to store all exam quantity with blank value
+    var discussionQuantity = document.getElementById("CategoryYesDiscussion2").value;
+    // make a dictionary to store all exam with blank value
+    var discussion = {};
+    var perDiscussionWeight = {};
+    for (let i=1; i <= discussionQuantity; i++){
+      const perDiscussionWeightData = document.getElementById(`Discussion${i}`);
+      discussion[`discussion${i}`] = null;
+      perDiscussionWeight[`discussion${i}`] = perDiscussionWeightData.value;
     }
   }
   
@@ -224,7 +278,16 @@ function addNewData(){
       'projectWeight': document.getElementById("CategoryYesProject").value,
       'projectQuantity': document.getElementById("CategoryYesProject2").value,
       'equallyweighted': document.getElementById("CategoryYesProject4").value,
-      'perProjectPercent': document.getElementById("CategoryYesProject").value / document.getElementById("CategoryYesProject2").value,  
+    }
+    // make variable to store all exam quantity with blank value
+    var projectQuantity = document.getElementById("CategoryYesProject2").value;
+    var perProjectWeightData = document.getElementById("CategoryYesProject").value / document.getElementById("CategoryYesProject2").value  //this is the weight of each exam;
+    // make a dictionary to store all exam with blank value
+    var project = {};
+    var perProjectWeight = {};
+    for (let i=1; i <= projectQuantity; i++){
+      project[`project${i}`] = null;
+      perProjectWeight[`project${i}`] = perProjectWeightData;
     }
 
   }
@@ -235,11 +298,15 @@ function addNewData(){
       'projectQuantity': document.getElementById("CategoryYesProject2").value,
       'equallyweighted': document.getElementById("CategoryYesProject4").value,
       }
-    // check quanity go through for loop to capture indivual grade
-    for (let i=1; i <= document.getElementById("CategoryYesProject2").value; i++){
-      const quantityInput = document.getElementById(`Project${i}`);
-      //add to examWeight object
-      projectWeight[`project${i}Percent`] = quantityInput.value;
+    // make variable to store all exam quantity with blank value
+    var projectQuantity = document.getElementById("CategoryYesProject2").value;
+    // make a dictionary to store all exam with blank value
+    var project = {};
+    var perProjectWeight = {};
+    for (let i=1; i <= projectQuantity; i++){
+      const perProjectWeightData = document.getElementById(`Project${i}`);
+      project[`project${i}`] = null;
+      perProjectWeight[`project${i}`] = perProjectWeightData.value;
     }
   }
 
@@ -248,8 +315,17 @@ function addNewData(){
     var participationWeight = {
       'participationWeight': document.getElementById("CategoryYesParticipation").value,
       'participationQuantity': document.getElementById("CategoryYesParticipation2").value,
-      'equallyweighted': document.getElementById("CategoryYesParticipation4").value,
-      'perParticipationPercent': document.getElementById("CategoryYesParticipation").value / document.getElementById("CategoryYesParticipation2").value,  
+      'equallyweighted': document.getElementById("CategoryYesParticipation4").value, 
+    }
+    // make variable to store all exam quantity with blank value
+    var participationQuantity = document.getElementById("CategoryYesParticipation2").value;
+    var perParticipationWeightData = document.getElementById("CategoryYesParticipation").value / document.getElementById("CategoryYesParticipation2").value  //this is the weight of each exam;
+    // make a dictionary to store all exam with blank value
+    var participation = {};
+    var perParticipationWeight = {};
+    for (let i=1; i <= participationQuantity; i++){
+      participation[`participation${i}`] = null;
+      perParticipationWeight[`participation${i}`] = perParticipationWeightData;
     }
   }
   //if check and weighted equally is no
@@ -259,18 +335,25 @@ function addNewData(){
       'participationQuantity': document.getElementById("CategoryYesParticipation2").value,
       'equallyweighted': document.getElementById("CategoryYesParticipation4").value,
       }
-    // check quanity go through for loop to capture indivual grade
-    for (let i=1; i <= document.getElementById("CategoryYesParticipation2").value; i++){
-      const quantityInput = document.getElementById(`Participation${i}`);
-      //add to examWeight object
-      participationWeight[`participation${i}Percent`] = quantityInput.value;
+    // make variable to store all exam quantity with blank value
+    var participationQuantity = document.getElementById("CategoryYesParticipation2").value;
+    // make a dictionary to store all exam with blank value
+    var participation = {};
+    var perParticipationWeight = {};
+    for (let i=1; i <= participationQuantity; i++){
+      const perParticipationWeightData = document.getElementById(`Participation${i}`);
+      participation[`participation${i}`] = null;
+      perParticipationWeight[`participation${i}`] = perParticipationWeightData.value;
     }
   }
 
   let weightScale=[examWeight,quizWeight,assignmentWeight,discussionWeight,projectWeight,participationWeight];
 
-  
+  let SubCollectionName = ['exam','quiz','assignment','discussion','project','participation'];
 
+  let SubCollectionQuantity = [exam,quiz,assignment,discussion,project,participation];
+
+  let SubCollectionPerWeight = [perExamWeight,perQuizWeight,perAssignmentWeight,perDiscussionWeight,perProjectWeight,perParticipationWeight];
 
   //filter null and empty dictinary inside array
   weightScale = weightScale.filter(obj => obj && Object.keys(obj).length > 0);
@@ -309,7 +392,22 @@ function addNewData(){
         gradeScale: gradeScale,
         weightScale: weightScale
       } 
-      
+      // now we have to add a sub collection per category
+      ).then(() => {
+        
+        for (i=0; i < SubCollectionName.length; i++){
+          //check condition for any sub collection that is not null
+          if (SubCollectionQuantity[i] != null){
+            //add sub collection
+            db.collection('users').doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+'grades').set(
+              SubCollectionQuantity[i]
+            )
+            db.collection('users').doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+'weight').set(
+              SubCollectionPerWeight[i]
+            )
+          }  
+        }
+      }
       ).catch((error) => {
         // Firebase will use this to alert of its errors
         var error_message = error.message
