@@ -125,7 +125,7 @@ function addNewData(){
     var examWeight = {
       'examWeight': document.getElementById("CategoryYesExam").value,
       'examQuantity': document.getElementById("CategoryYesExam2").value,
-      'equallyweighted': document.getElementById("CategoryYesExam4").value,
+      'equallyWeighted': document.getElementById("CategoryYesExam4").value,
     }
     // make variable to store all exam quantity with blank value
     var examQuantity = document.getElementById("CategoryYesExam2").value;
@@ -139,12 +139,12 @@ function addNewData(){
     }
   }
 
-  //if check and weighted equally is no
+  //if check and Weighted equally is no
   else if (document.getElementById("Exam").checked && document.getElementById("CategoryYesExam4").value =='No'){
     var examWeight = {
       'examWeight': document.getElementById("CategoryYesExam").value,
       'examQuantity': document.getElementById("CategoryYesExam2").value, 
-      'equallyweighted': document.getElementById("CategoryYesExam4").value,
+      'equallyWeighted': document.getElementById("CategoryYesExam4").value,
      }
     // make variable to store all exam quantity with blank value
     var examQuantity = document.getElementById("CategoryYesExam2").value;
@@ -163,7 +163,7 @@ function addNewData(){
     var quizWeight = {
       'quizWeight': document.getElementById("CategoryYesQuiz").value,
       'quizQuantity': document.getElementById("CategoryYesQuiz2").value,
-      'equallyweighted': document.getElementById("CategoryYesQuiz4").value,  
+      'equallyWeighted': document.getElementById("CategoryYesQuiz4").value,  
     }
     // make variable to store all exam quantity with blank value
     var quizQuantity = document.getElementById("CategoryYesQuiz2").value;
@@ -176,12 +176,12 @@ function addNewData(){
       perQuizWeight[`quiz${i}`] = perQuizWeightData;
     }
   }
-  //if check and weighted equally is no
+  //if check and Weighted equally is no
   else if (document.getElementById("Quiz").checked && document.getElementById("CategoryYesQuiz4").value == "No"){
     var quizWeight = {
       'quizWeight': document.getElementById("CategoryYesQuiz").value,
       'quizQuantity': document.getElementById("CategoryYesQuiz2").value, 
-      'equallyweighted': document.getElementById("CategoryYesQuiz4").value,
+      'equallyWeighted': document.getElementById("CategoryYesQuiz4").value,
      }
     // make variable to store all exam quantity with blank value
     var quizQuantity = document.getElementById("CategoryYesQuiz2").value;
@@ -200,7 +200,7 @@ function addNewData(){
     var assignmentWeight = {
       'assignmentWeight': document.getElementById("CategoryYesAssignment").value,
       'assignmentQuantity': document.getElementById("CategoryYesAssignment2").value,
-      'equallyweighted': document.getElementById("CategoryYesAssignment4").value, 
+      'equallyWeighted': document.getElementById("CategoryYesAssignment4").value, 
     }
     // make variable to store all exam quantity with blank value
     var assignmentQuantity = document.getElementById("CategoryYesAssignment2").value;
@@ -213,12 +213,12 @@ function addNewData(){
       perAssignmentWeight[`assignment${i}`] = perAssignmentWeightData;
     }
   }
-  //if check and weighted equally is no
+  //if check and Weighted equally is no
   else if (document.getElementById("Assignment").checked && document.getElementById("CategoryYesAssignment4").value == "No"){
     var assignmentWeight = {
       'assignmentWeight': document.getElementById("CategoryYesAssignment").value,
       'assignmentQuantity': document.getElementById("CategoryYesAssignment2").value,
-      'equallyweighted': document.getElementById("CategoryYesAssignment4").value,
+      'equallyWeighted': document.getElementById("CategoryYesAssignment4").value,
       }
     // make variable to store all exam quantity with blank value
     var assignmentQuantity = document.getElementById("CategoryYesAssignment2").value;
@@ -238,7 +238,7 @@ function addNewData(){
     var discussionWeight = {
       'discussionWeight': document.getElementById("CategoryYesDiscussion").value,
       'discussionQuantity': document.getElementById("CategoryYesDiscussion2").value,
-      'equallyweighted': document.getElementById("CategoryYesDiscussion4").value,
+      'equallyWeighted': document.getElementById("CategoryYesDiscussion4").value,
     }
     // make variable to store all exam quantity with blank value
     var discussionQuantity = document.getElementById("CategoryYesDiscussion2").value;
@@ -253,12 +253,12 @@ function addNewData(){
 
 
   }
-  //if check and weighted equally is no
+  //if check and Weighted equally is no
   else if (document.getElementById("Discussion").checked && document.getElementById("CategoryYesDiscussion4").value == "No"){
     var discussionWeight = {
       'discussionWeight': document.getElementById("CategoryYesDiscussion").value,
       'discussionQuantity': document.getElementById("CategoryYesDiscussion2").value,
-      'equallyweighted': document.getElementById("CategoryYesDiscussion4").value,
+      'equallyWeighted': document.getElementById("CategoryYesDiscussion4").value,
       }
     // make variable to store all exam quantity with blank value
     var discussionQuantity = document.getElementById("CategoryYesDiscussion2").value;
@@ -277,7 +277,7 @@ function addNewData(){
     var projectWeight = {
       'projectWeight': document.getElementById("CategoryYesProject").value,
       'projectQuantity': document.getElementById("CategoryYesProject2").value,
-      'equallyweighted': document.getElementById("CategoryYesProject4").value,
+      'equallyWeighted': document.getElementById("CategoryYesProject4").value,
     }
     // make variable to store all exam quantity with blank value
     var projectQuantity = document.getElementById("CategoryYesProject2").value;
@@ -291,12 +291,12 @@ function addNewData(){
     }
 
   }
-  //if check and weighted equally is no
+  //if check and Weighted equally is no
   else if (document.getElementById("Project").checked && document.getElementById("CategoryYesProject4").value =="No"){
     var projectWeight = {
       'projectWeight': document.getElementById("CategoryYesProject").value,
       'projectQuantity': document.getElementById("CategoryYesProject2").value,
-      'equallyweighted': document.getElementById("CategoryYesProject4").value,
+      'equallyWeighted': document.getElementById("CategoryYesProject4").value,
       }
     // make variable to store all exam quantity with blank value
     var projectQuantity = document.getElementById("CategoryYesProject2").value;
@@ -315,7 +315,7 @@ function addNewData(){
     var participationWeight = {
       'participationWeight': document.getElementById("CategoryYesParticipation").value,
       'participationQuantity': document.getElementById("CategoryYesParticipation2").value,
-      'equallyweighted': document.getElementById("CategoryYesParticipation4").value, 
+      'equallyWeighted': document.getElementById("CategoryYesParticipation4").value, 
     }
     // make variable to store all exam quantity with blank value
     var participationQuantity = document.getElementById("CategoryYesParticipation2").value;
@@ -328,12 +328,12 @@ function addNewData(){
       perParticipationWeight[`participation${i}`] = perParticipationWeightData;
     }
   }
-  //if check and weighted equally is no
+  //if check and Weighted equally is no
   else if (document.getElementById("Participation").checked && document.getElementById("CategoryYesParticipation4").value =="No"){
     var participationWeight = {
       'participationWeight': document.getElementById("CategoryYesParticipation").value,
       'participationQuantity': document.getElementById("CategoryYesParticipation2").value,
-      'equallyweighted': document.getElementById("CategoryYesParticipation4").value,
+      'equallyWeighted': document.getElementById("CategoryYesParticipation4").value,
       }
     // make variable to store all exam quantity with blank value
     var participationQuantity = document.getElementById("CategoryYesParticipation2").value;
@@ -380,6 +380,7 @@ function addNewData(){
 
   auth.onAuthStateChanged(function(user) {
     if (user) {
+      alert(weightScale)
       // User is signed in.      
       db.collection('users').doc(user.uid).collection(semester).doc(courseName).set({
         courseName: courseName,
@@ -396,10 +397,10 @@ function addNewData(){
           //check condition for any sub collection that is not null
           if (SubCollectionQuantity[i] != null){
             //add sub collection
-            db.collection('users').doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+'grades').set(
+            db.collection('users').doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+'Grades').set(
               SubCollectionQuantity[i]
             )
-            db.collection('users').doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+'weight').set(
+            db.collection('users').doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+'Weight').set(
               SubCollectionPerWeight[i]
             )
           }  
