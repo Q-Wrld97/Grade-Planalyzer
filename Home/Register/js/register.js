@@ -41,7 +41,8 @@ function register() {
     return alert('Password need 1 uppercase letter,1 lowercase letter,1 special character, 1 number and at least 6 in length ') // Change with pop up
     // Don't continue running the code
   }
- 
+
+
   // Move on with Auth
   auth.createUserWithEmailAndPassword(email, password)
   .then((userCredential) => {
@@ -50,7 +51,8 @@ function register() {
     return userDocRef.set({
       email: email,
       username: userName,
-      creationDate: new Date().toLocaleDateString('en-US', {month: 'numeric', day: 'numeric', year: 'numeric'})
+      creationDate: new Date().toLocaleDateString('en-US', {month: 'numeric', day: 'numeric', year: 'numeric'}),
+      timeVerification: new Date().getTime()
     })
     .then(() => {
       // Send the user a verification email

@@ -13,51 +13,51 @@ $(window).bind('load', function() {
 });
 
 
-function login () {
+
+
+function Login() {
   // Get all our input fields
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
-
-
+  // Check authorization
   auth.signInWithEmailAndPassword(email, password)
   .then((res) => {
+    //store login time
     db.collection('users').doc(res.user.uid).update({
-      loginTime: new Date().toLocaleDateString('en-US', {month: 'numeric', day: 'numeric', year: 'numeric'}),
-    })
-    .then(() => {
-      // Check if the email is verified
-      if (res.user.emailVerified == false) {
-        // notified user that they need to verify their email
-        alert('please verify your email in 24 hrs from the time of creation of your account'); // Change with pop up
-        // Go to Firestore and check user's creation date
-        db.collection('users').doc(res.user.uid).get()
-        .then((doc) => {
-          // If the user's creation date is more than 24 hours old, delete user from Auth and Firestore
-          if (doc.data().creationDate < new Date().toLocaleDateString('en-US', {month: 'numeric', day: 'numeric', year: 'numeric'})) {
-            // Delete user from Auth
-            res.user.delete()
-            .then(() => {
-              // Delete user from Firestore
-              db.collection('users').doc(res.user.uid).delete()
-              .then(() => {
-                alert('Your account has been deleted due to not verifying your email in 24 hours'); // Change with pop up
-                return
-                //stop running code
-              })
-            });
-          }
-        });
-      }
-      //redirect user to dashboard and pass auth token
-      window.location.href = '../../../Dashboard/CourseInfo/html/courseForm.html';
-    })
-    .catch((error) => {
-      alert(error.message);// Change with pop up
+      timeLogin: new Date()
     });
-  })
-  .catch((error) => {
-    alert(error.message);// Change with pop up
+    // if email is not verified
+    if (res.user.emailVerified == false) {
+      // get creationDate from firestore
+      var userdata = db.collection('users').doc(res.user.uid).get();
+      // use snapshot to query timeVerification
+      userdata.then((snapshot) => {
+        var timeVerification = snapshot.data().timeVerification;
+        // if 24 hours have passed, delete user from Auth and Firestore
+        if (new Date().getTime() - timeVerification >= 24 * 60 * 60 * 1000) {
+          // delete user from firestore
+          db.collection('users').doc(res.user.uid).delete()
+            .then(() => {
+            // delete user from auth
+            res.user.delete()
+            alert('Your account has been deleted because you did not verify your email within 24 Hrs of account creation.');
+            window.location.href = '../../Register/html/register.html';
+            //stop running code
+          })
+        }
+        else {
+          alert('please verify your email in 24 Hrs from the time of creation of your account'); // Change with pop up
+          window.location.href = '../../../Dashboard/CourseInfo/html/courseForm.html';
+        }
+      });
+    }
+    else {
+      //verified email go to 
+      window.location.href = '../../../Dashboard/CourseInfo/html/courseForm.html';
+    }
+  }).catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    alert("Wrong Username or Password");
   });
-
-  alert('User Logged In!'); // Change with pop up
 }
