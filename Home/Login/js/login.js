@@ -38,8 +38,8 @@ function Login() {
             // delete user from auth
             res.user.delete()
             alert('Your account has been deleted because you did not verify your email within 24 Hrs of account creation.');
-            window.location.href = '../../Register/html/register.html';
-            //stop running code
+            setTimeout(() => {window.location.href = '../../Register/html/register.html';}, 2000);
+           
           })
         }
         else {

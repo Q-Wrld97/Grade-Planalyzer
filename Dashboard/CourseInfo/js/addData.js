@@ -381,9 +381,6 @@ function addNewData(){
   auth.onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.      
-      alert(user.uid) // this is the user id for testing
-
-
       db.collection('users').doc(user.uid).collection(semester).doc(courseName).set({
         courseName: courseName,
         termLength: termLength,
@@ -407,6 +404,13 @@ function addNewData(){
             )
           }  
         }
+      }).then(() => {
+        var para = new URLSearchParams();
+        para.append("courseName", courseName);
+        para.append("semester", semester);
+
+        //make it wait 2 second before redirecting to the next page
+        setTimeout(function(){window.location.href = "../html/courseForm2.html?" + para.toString();}, 2000);
       }
       ).catch((error) => {
         // Firebase will use this to alert of its errors
@@ -417,7 +421,7 @@ function addNewData(){
       
     }
     else{
-      window.location.href = "index.html"
+      window.location.href =  window.location.href = "../../../index.html";
     }
   });
  
