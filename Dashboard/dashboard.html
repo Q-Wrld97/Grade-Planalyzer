@@ -7,7 +7,7 @@
 <meta name="Description" content="Enter your description here"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link rel="stylesheet" href="/Dashboard/dashboard.css">
+<link rel="stylesheet" href="dashboard.css">
 <title>Title</title>
 </head>
 <body>
@@ -25,7 +25,7 @@
     <div class="navbar-right">
       <a href="dashboard.html" class="navbar-link">Dashboard</a>
       <a href="Settings/html/settings.html" class="navbar-link">Settings</a>
-      <a href="#" class="navbar-link">Sign Out</a>
+      <a onClick="signOut()"  class="navbar-link">Sign Out</a>
     </div>
   </nav>
 
@@ -35,5 +35,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-</body>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+<script src="../Config/config.js"></script>
+<script src="dashboard.js"></script>
 </html>
