@@ -10,24 +10,21 @@ auth.onAuthStateChanged(user => {
 });
 
 
-//Grab Semester From DataBase and display it in the dropdown menu
 async function getSemester() {
-  semesterSelect= document.getElementById("semesterSelect");
-  //Get Semester From DataBase
-  //const snapshot = await db.collection('users').doc(auth.currentUser).collection(semester).get();
-
-  //grab user id from auth
-  const user = auth.currentUser;
-  alert(user)
-
-
-
+  const semesterSelect = document.getElementById("semesterSelect");
+  const userId = auth.currentUser.uid;
+  db.collection('users').doc(userId).getCollections()
+  .then((collections) => {
+    collections.forEach((collection) => {
+      console.log(collection.id);
+      // Replace this console.log statement with the code that you want to execute for each sub-collection
+    });
+  })
+  .catch((error) => {
+    console.error('Error listing sub-collections: ', error);
+  });
 
 }
-
-
-
-
 
 
 
