@@ -139,6 +139,6 @@ async function saveDates() {
   }
   
   // Redirect the user to the dashboard after all the data has been saved to the database
-  setTimeout(function() {window.location.href = "../../Dashboard.html";}, 3000);
+  setTimeout(function() {window.location.href = "../../dashboard.html";}, 3000);
 }
 
