@@ -9,20 +9,12 @@ auth.onAuthStateChanged(user => {
   }
 });
 
-
+/*
 async function getSemester() {
   const semesterSelect = document.getElementById("semesterSelect");
   const userId = auth.currentUser.uid;
-  db.collection('users').doc(userId).getCollections()
-  .then((collections) => {
-    collections.forEach((collection) => {
-      console.log(collection.id);
-      // Replace this console.log statement with the code that you want to execute for each sub-collection
-    });
-  })
-  .catch((error) => {
-    console.error('Error listing sub-collections: ', error);
-  });
+  for(i=0)
+  db.collection('users').doc(userId).collection('semesters').get()
 
 }
 

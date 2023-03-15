@@ -388,8 +388,14 @@ function addNewData(){
         creditHours: creditHours,
         classDays: checkedDays,
         gradeScale: gradeScale,
-        weightScale: weightScale
-      } 
+        weightScale: weightScale,
+      } ,
+
+      db.collection('users').doc(user.uid).update({
+        semester: firebase.firestore.FieldValue.arrayUnion(semester)
+        
+      })
+
       // now we have to add a sub collection per category
       ).then(() => {
         
