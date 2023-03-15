@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="Description" content="Enter your description here"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link rel="stylesheet" href="dashboard.css">
-<title>Title</title>
+    <link rel="stylesheet"  href="dashboard.css">
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="images/logo4.ico">
+    <title>Grade PlanAlyser</title>
 </head>
 <body>
-  <nav class="navbar">
+<nav class="navbar">
     <div class="navbar-left">
       <a href="#" class="navbar-link">Help</a>
       <a href="../Home/AboutUs/TeamPage.html" class="navbar-link">About Us</a>
@@ -27,18 +23,66 @@
       <a href="Settings/html/settings.html" class="navbar-link">Settings</a>
       <a onClick="signOut()"  class="navbar-link">Sign Out</a>
     </div>
-  </nav>
+</nav>
+    
+
+<div action="" class = "select_form">
+    <select name="select" id="semesterSelect"  >
+    </select>
+</div>
+
+<!-- <center><h2>Grade Planalyzer</h2></center> -->
+<div class="tab">
+
+    <button class="tablinks" onclick="openTab(event, 'LookAhead')"><!--<img src="images/logo3.png" height="70px" width="70px">--><i class="fa-regular fa-calendar" style="font-size: 70px;"></i>Look Ahead</button>
+    <button class="tablinks" onclick="openTab(event, 'Infographics')"><!--<img src="images/logo3.png" height="70px" width="70px">--><i class="fa-solid fa-chart-pie" style="font-size: 70px;"></i>Infographics</button>
+    <button class="tablinks" onclick="openTab(event, 'GradeEntry')"><!--<img src="images/logo3.png" height="70px" width="70px">--><i class="fa-solid fa-list" style="font-size: 60px; border: 5px solid black;"></i>Grade Entry</button>
+    <button class="tablinks" onclick="openTab(event, 'CourseInfo')"><!--<img src="images/logo3.png" height="70px" width="70px">--><i class="fa-solid fa-book" style="font-size: 70px;"></i>Course Info</button>
+    <button class="tablinks" onclick="openTab(event, 'WhatIf')"><!--<img src="images/logo3.png" height="70px" width="70px">--><i class="fa-regular fa-circle-question" style="font-size: 70px;"></i>&nbsp;&nbsp;&nbsp;What If?</button>
+    
+</div>
+
+<div class="tab2">
+    <div id="LookAhead" class="tabcontent">
+        <p>&nbsp;</p>
+        <p>Look Ahead</p> <center>
+            Backend Content
+        </center>
+    </div>
+
+    <div id="Infographics" class="tabcontent">
+        <p>&nbsp;</p>
+        <p>Infographics</p> <center>
+            Backend Content
+        </center>
+    </div>
+
+    <div id="GradeEntry" class="tabcontent">
+        <p>&nbsp;</p>
+        <p>Grade Entry</p> <center>
+            Backend Content
+        </center>
+    </div>
+
+    <div id="CourseInfo" class="tabcontent">
+        <p>&nbsp;</p>
+        <p>Course Info</p> <center>
+            Backend Content
+        </center>
+    </div>
+
+    <div id="WhatIf" class="tabcontent">
+        <p>&nbsp;</p>
+        <p>What If?</p> <center>
+            Backend Content
+        </center>
+    </div>
 
 </body>
-
-  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
-<script src="../Config/config.js"></script>
-<script src="dashboard.js"></script>
+<script src="../../../Config/config.js"></script>
+<script src = "dashboard.js"></script>
 </html>
