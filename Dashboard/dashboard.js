@@ -11,6 +11,7 @@ window.addEventListener('load', function() {
   });
 });
 
+//add data to drop down list
 async function getSemester() {
   const semesterSelect = document.getElementById("semesterSelect");
   const userId = auth.currentUser.uid;
