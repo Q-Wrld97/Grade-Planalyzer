@@ -6,7 +6,7 @@ window.addEventListener('load', function() {
       return;
     } 
     else {
-      window.location.href = "../Home/html/home.html";
+      window.location.href = "../Home/home.html";
     }
   });
 });
@@ -35,6 +35,14 @@ async function getSemester() {
   })
 }
 
+async function signOut() {
+  await auth.signOut().then(function() {
+    window.location.href = "../Home/home.html";
+    }).catch(function(error) {
+      // An error happened.
+      console.log("Sign out error");
+  });
+}
 
 
 
