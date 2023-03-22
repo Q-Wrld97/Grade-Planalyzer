@@ -62,96 +62,107 @@ body {
     }
   }
   
-/* Nav Bar */
+/* Style for the navbar */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #333;
-    color: #fff;
-    height: 60px;
-    padding: 0 20px;
-    z-index: 99999;
-    position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  height: 60px;
+  padding: 0 20px;
 }
 
+/* Style for the left menu */
 .navbar-left {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
-  
+
+/* Style for the right menu */
 .navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Style for the navbar links */
+.navbar-link {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 15px;
+}
+
+/* Style for the navbar image */
+.navbar-img {
+  height: 70px;
+  width: 70px;
+}
+
+.navbar-link:hover {
+  cursor: pointer;
+}
+ 
+.navbar-middle{
     display: flex;
     align-items: center;
-}
-
-.navbar-link {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 10px;
-    font-size: 15px;
-}
-
-.navbar-img {
-    height: 70px;
-    width: 70px;
 }
  
 @media (max-width: 768px) {
-    .box {
-        width: 95%;
-        max-width: 350px;
-    }
+  .box {
+    width: 95%;
+    max-width: 350px;
+}
 
-    h2 {
-        font-size: 1.2em;
-    }
+h2 {
+    font-size: 1.2em;
+}
 
-    .inputBox input {
-        padding: 10px;
-    }
+.inputBox input {
+    padding: 10px;
+}
 
-    .inputBox span {
-        padding: 10px 0px;
-    }
+.inputBox span {
+    padding: 10px 0px;
+}
 
-    input[type="submit"] {
-        padding: 10px 20px;
-    }
+input[type="submit"] {
+    padding: 10px 20px;
+}
 
-    .links a {
-        font-size: 0.9em;
-    }
-    .navbar-middle {
-        display: none;
-    }
+.links a {
+    font-size: 0.9em;
+}
+.navbar-middle {
+    display: none;
+}
 
-    .navbar-img {
-        height: 40px;
-        width: 40px;
-    }
+.navbar-img {
+    height: 40px;
+    width: 40px;
+}
 
-    .navbar-planalyzer {
-        display: none;
-    }
+.navbar-planalyzer {
+    display: none;
+}
 
-    .navbar-link {
-        font-size: 12px;
-        margin: 0 5px;
-    }
+.navbar-link {
+    font-size: 12px;
+    margin: 0 5px;
+}
 
-    .navbar {
-        height: 50px;
-        padding: 0 10px;
-    }
+.navbar {
+    height: 50px;
+    padding: 0 10px;
+}
 
-    .navbar-left {
-        margin-right: auto;
-    }
+.navbar-left {
+    margin-right: auto;
+}
 
-    .navbar-right {
-        margin-left: auto;
-    }
+.navbar-right {
+    margin-left: auto;
+}
 }
     
 /* Slider */
