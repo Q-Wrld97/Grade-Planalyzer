@@ -96,7 +96,7 @@ function GradeCategory() {
 }
 
 // if equally weighted is no and quanity more than 1 than add the text box base on amount of quantity
-function generateFields2(category) {
+function generateFields(category) {
   const categoryIdMap = {
     Exam: {
       quantityContainerId: 'quantityContainer',
