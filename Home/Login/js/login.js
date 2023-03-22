@@ -12,7 +12,52 @@ $(window).bind('load', function() {
   }, 50);
 });
 
-function Login() {
+
+
+async function Login2() {
+  // Get all our input fields
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
+  // Check authorization
+  try {
+    const res = await auth.signInWithEmailAndPassword(email, password);
+    // if email is not verified
+    if (!res.user.emailVerified) {
+      alert("Your email was not verified. Please verify your email.");
+      // Sign out the user
+      await auth.signOut();
+      return;
+    }
+    // Fetch the user document from Firestore
+    const userDoc = await db.collection("users").doc(res.user.uid).get();
+    const loginTime = userDoc.data()?.timeLogin;
+    if (loginTime == null) {
+      // Store login time if not exist
+      await db.collection("users").doc(res.user.uid).update({
+        timeLogin: new Date(),
+      });
+      // wait for 1 second before redirecting
+      setTimeout(() => {
+        window.location.href =
+          "../../../Dashboard/CourseInfo/html/courseForm.html";
+      }, 500);
+    } else {
+      // Update the login time in the user document and redirect to dashboard
+      await db.collection("users").doc(res.user.uid).update({
+        timeLogin: new Date(),
+      });
+      setTimeout(() => {
+        window.location.href = "../../../Dashboard/dashboard.html";
+      }, 500);
+    }
+  } catch (error) {
+    alert("Wrong Username or Password or Email not verified within 24 Hrs");
+  }
+}
+
+
+// Old login functionality
+/*function Login() {
   // Get all our input fields
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
@@ -58,7 +103,7 @@ function Login() {
     var errorMessage = error.message;
     alert("Wrong Username or Password");
   });
-}
+}*\
 
 // test code for login and verification delete after 60 seconds instead
 /*function Login() {
