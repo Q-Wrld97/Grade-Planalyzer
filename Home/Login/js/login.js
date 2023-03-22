@@ -14,7 +14,7 @@ $(window).bind('load', function() {
 
 
 
-async function Login2() {
+async function Login() {
   // Get all our input fields
   var email = document.getElementById("email").value;
   var password = document.getElementById("password").value;
