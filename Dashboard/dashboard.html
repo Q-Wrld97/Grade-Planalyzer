@@ -4,6 +4,7 @@
     <link rel="stylesheet"  href="dashboard.css">
     <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="images/logo4.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <title>Grade PlanAlyzer</title>
 </head>
 <body>
@@ -44,9 +45,133 @@
 
 <div class="tab2">
     <div id="LookAhead" class="tabcontent">
-        <p>&nbsp;</p>
-        <p>Look Ahead</p> 
-        
+        <div class="future-forecast">
+            <div class="today" id="current-temp">
+                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                <div class="other">
+                    <div class="day">Monday</div>
+                    <div class="temp">Night - 25.6&#176; C</div>
+                    <div class="temp">Day - 35.6&#176; C</div>
+                </div>
+            </div>
+    
+            <div class="weather-forecast" id="weather-forecast">
+                <div class="weather-forecast-item">
+                    <div class="day">Tue</div>
+                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                    <div class="temp">Night - 25.6&#176; C</div>
+                    <div class="temp">Day - 35.6&#176; C</div>
+                </div>
+                <div class="weather-forecast-item">
+                    <div class="day">Wed</div>
+                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                    <div class="temp">Night - 25.6&#176; C</div>
+                    <div class="temp">Day - 35.6&#176; C</div>
+                </div>
+                <div class="weather-forecast-item">
+                    <div class="day">Thur</div>
+                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                    <div class="temp">Night - 25.6&#176; C</div>
+                    <div class="temp">Day - 35.6&#176; C</div>
+                </div>
+                <div class="weather-forecast-item">
+                    <div class="day">Fri</div>
+                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                    <div class="temp">Night - 25.6&#176; C</div>
+                    <div class="temp">Day - 35.6&#176; C</div>
+                </div>
+                <div class="weather-forecast-item">
+                    <div class="day">Sat</div>
+                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                    <div class="temp">Night - 25.6&#176; C</div>
+                    <div class="temp">Day - 35.6&#176; C</div>
+                </div>
+                <div class="weather-forecast-item">
+                    <div class="day">Sun</div>
+                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                    <div class="temp">Night - 25.6&#176; C</div>
+                    <div class="temp">Day - 35.6&#176; C</div>
+                </div>
+            </div>
+        </div>
+        <div id="col69">
+            <h3 class="display-7">ToDo:</h3>
+            
+        </div>
+        <div id="col70">
+            <div class="button-container">
+                <select name="weeks" id="weeks" >
+                    <option value="Week1">Week1</option>
+                    <option value="Week2">Week2</option>
+                    <option value="Week3">Week3</option>
+                    <option value="Week4">Week4</option>
+                </select>
+                <button class="button">Confirm</button>
+            </div>
+        </div>
+          
+        <div id="col1">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-container">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Assignment</th>
+                                    <th>Grade Weight</th>
+                                    <th>Deadline</th>
+                                    <th>Completion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SWE</td>
+                                    <td>HW 1</td>
+                                    <td>20%</td>
+                                    <td>01/01/3000</td>
+                                    <td><input type="checkbox" id="course" name="course1" value="course1"></td>
+                                </tr>
+                                <tr>
+                                    <td>SWE</td>
+                                    <td>HW 2</td>
+                                    <td>20%</td>
+                                    <td>01/05/3000</td>
+                                    <td><input type="checkbox" id="course" name="course1" value="course1"></td>
+                                </tr>
+                                <tr>
+                                    <td>SWE</td>
+                                    <td>HW 3</td>
+                                    <td>20%</td>
+                                    <td>02/01/3000</td>
+                                    <td><input type="checkbox" id="course" name="course1" value="course1"></td>
+                                </tr>
+                                <tr>
+                                    <td>SWE</td>
+                                    <td>HW 4</td>
+                                    <td>20%</td>
+                                    <td>01/15/3000</td>
+                                    <td><input type="checkbox" id="course" name="course1" value="course1"></td>
+                                </tr>
+                                <tr>
+                                    <td>SWE</td>
+                                    <td>HW 5</td>
+                                    <td>20%</td>
+                                    <td>03/01/3000</td>
+                                    <td><input type="checkbox" id="course" name="course1" value="course1"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+          
+        <div id="col2">
+            <div class="chart-wrapper">
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
     </div>
 
     <div id="Infographics" class="tabcontent">
@@ -78,6 +203,13 @@
     </div>
 
 </body>
+
+<!-- Look Ahead -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Pie Chart -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+<!-- Look Ahead ends here -->
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>

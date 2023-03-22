@@ -120,7 +120,7 @@ body {
     border: 1px solid #ccc;
     text-align:center;
     width: 110px;
-    height: 535px;
+    height: 80vh;
     border: 3px solid rgb(242, 118, 118);
     display: block;
     justify-content: center;
@@ -143,7 +143,7 @@ body {
     text-align: center;
     margin: 5px 0 5px 0;
     width: 110px;
-    height: 100px;
+    height: 120px;
     background-color: white;
 }
 
@@ -169,7 +169,7 @@ body {
     border: 1px solid #ccc;
     text-align:center;
     width: auto;
-    height: 535px;
+    height: 80vh;
     border: 3px solid rgb(242, 118, 118);
     margin-right: 30px;
 }
@@ -182,3 +182,209 @@ body {
     color: black;
     font-weight: bold;
 }
+
+/*====================================================================*/
+/*           Look AHEAD CSS starts here
+/*====================================================================*/
+.display-6{
+    padding-left: 10px;
+}
+
+.toDo{
+    background: rgba(24,24,27,0.8);
+    display: flex;
+    padding: 5px;
+    color:whitesmoke;
+    width: 100%;
+    justify-content: auto;
+}
+
+.container{
+    background: rgba(24,24,27,0.8);
+    padding-bottom: 25px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+
+}
+/*======================Look Ahead code=========================*/
+#col69 {
+    float: left;
+    width: 70%;
+    height:50px;
+    background: rgba(24,24,27,0.8);
+
+}
+#col70 {
+    float: right; 
+    width: 30%;
+    height:50px;
+    padding-top: 10px;
+    background: rgba(24,24,27,0.8);
+}
+.display-7{
+    display:flex;
+    padding-left: 20px;
+    padding-top: 5px;
+}
+
+#weeks{
+    display: inline-block;
+
+}
+.button-container{
+    text-align: left;
+    margin-left: 10px;
+} 
+
+#col1 {
+    float: left;
+    width: 70%;
+    height:300px;
+    background: rgba(24,24,27,0.8);
+}
+
+#col2 {
+    float: left;
+    width: 30%;
+    height:300px;
+    background: rgba(24,24,27,0.8);    
+}
+img{
+    max-width: 60%;
+}
+
+/*=================Pie Chat========================*/
+
+.chart-wrapper {
+    width: 98%;
+    height:98%;
+    margin: 0 auto;
+  }
+
+/*===================scrolling option for table overflow======================*/
+
+.table-container {
+    height: 300px; /* set the height to a fixed value or a percentage */
+    overflow-y: auto; /* set the overflow property to auto to add a scrollbar */
+  }
+
+/*==================Look AHead (api)=============================*/
+
+.future-forecast{
+    background: rgba(24,24,27,0.8);
+    padding: 25px;
+    position: sticky;
+    top: 0;
+    display: flex;
+    color:white;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    overflow-y: hidden;
+}
+
+.future-forecast .today{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding:15px;
+    padding-right: 40px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.2)
+}
+
+.future-forecast .today .day{
+    padding: 5px 15px;
+    background: #3c3c44;
+    border-radius: 50px;
+    text-align: center;
+}
+
+.future-forecast .today .temp{
+    font-size: 18px;
+    padding-top: 15px;
+}
+
+.future-forecast .weather-forecast{
+    display: flex;
+}
+
+.weather-forecast .weather-forecast-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.2)
+}
+
+.weather-forecast .weather-forecast-item .day{
+    padding: 5px 15px;
+    background: #3C3C44;
+    border-radius: 50px;
+    text-align: center;
+}
+
+.weather-forecast .weather-forecast-item .temp{
+    font-weight: 100;
+    font-size: 12px;
+}
+
+
+@media only screen and  (max-width:730px){
+    
+    .container{
+        padding: 20px;
+    }
+    
+    .future-forecast{
+        justify-content: start;
+        align-items: none;
+        overflow-y: scroll;
+    }
+
+    .future-forecast .today .temp{
+        font-size: 16px;
+    }
+
+    .date-container .time{
+        font-size: 50px;
+    }
+
+    .date-container #am-pm{
+        font-size: 20px;
+    }
+
+    .date-container .date{
+        font-size: 20px;
+    }
+
+    .place-container{
+        text-align: end;
+        margin-top: 15px;
+    }
+
+    .place-container .time-zone{
+        font-size: 20px;
+    }
+
+    .current-info .others{
+        padding: 12px;
+    }
+
+    .current-info .others .weather-item{
+        font-size: 14px;
+    }
+
+}
+
+/*====================================================================*/
+/*           Look Ahead CSS ENDS here
+/*====================================================================*/
