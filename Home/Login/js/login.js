@@ -30,13 +30,13 @@ async function Login2() {
     }
     // Fetch the user document from Firestore
     const userDoc = await db.collection("users").doc(res.user.uid).get();
-    const loginTime = userDoc.data()?.timeLogin;
-    if (loginTime == null) {
+    const semester = userDoc.data()?.semester;
+    if (semester == null) {
       // Store login time if not exist
       await db.collection("users").doc(res.user.uid).update({
         timeLogin: new Date(),
       });
-      // wait for 1 second before redirecting
+      // wait for 1 second before redirecting to course form
       setTimeout(() => {
         window.location.href =
           "../../../Dashboard/CourseInfo/html/courseForm.html";
