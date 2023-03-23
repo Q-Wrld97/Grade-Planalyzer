@@ -127,33 +127,33 @@ body {
 /* Style the tab */
 .tab {
     overflow: hidden;
-    border: 1px solid #940000;
+    /*border: 1px solid #940000;*/
     text-align:center;
-    width: 110px;
+    width: 15.5vh;
     height: 80vh;
-    display: block;
+    display: -moz-inline-box;
     justify-content: center;
-    margin-left: 30px;
+    margin-left: 3vh;
     float: left;
-    margin-right: 20px;
+    margin-right: 1vh;
 }
 
 /* Style the buttons inside the tab */
 .tab button {
     background-color: inherit;
-    border: none;
+    border: 1px solid #940000;
     outline: none;
     cursor: pointer;
-    padding: 16px 16px;
+    padding: 1vh 1vh;
     transition: 0.3s;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    flex-direction: row;
+    justify-content: space-evenly;
     text-align: center;
     margin: 5px 0 5px 0;
-    width: 110px;
-    height: 120px;
-    background: rgba(24,24,27,0.8);
+    height: auto;
+    max-width: 100%;
+    background-color: #333;
 }
 
 /* Change background color of buttons on hover */
@@ -171,6 +171,36 @@ body {
     display: none;
     /* border: 3px solid red; */
     width: auto;
+}
+
+.lookAheadIcon {
+    border-radius: 4px;
+    height: auto;
+    max-width: 100%;
+}
+
+.infographicsIcon {
+    border-radius: 4px;
+    height: auto;
+    max-width: 100%;
+}
+
+.gradeEntryIcon{
+    border-radius: 4px;
+    height: auto;
+    max-width: 100%;
+}
+
+.courseInfoIcon {
+    border-radius: 4px;
+    height: auto;
+    max-width: 100%;
+}
+
+.whatIfIcon {
+    border-radius: 4px;
+    height: auto;
+    max-width: 100%;
 }
 
 .tab2 {
