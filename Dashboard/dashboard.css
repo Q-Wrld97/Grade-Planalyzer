@@ -4,6 +4,16 @@ body {
  color: white;
 }
 
+/*============Dash Background=====================*/
+#banner {
+    background: url(../Assets/dashBackground.gif);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100lvh;
+}
+/*============Dash Background=====================*/
+
 /* Style for the navbar */
 .navbar {
   display: flex;
@@ -117,11 +127,10 @@ body {
 /* Style the tab */
 .tab {
     overflow: hidden;
-    border: 1px solid #ccc;
+    border: 1px solid #940000;
     text-align:center;
     width: 110px;
-    height: 80vh;
-    border: 3px solid rgb(242, 118, 118);
+    height: 77vh;
     display: block;
     justify-content: center;
     margin-left: 30px;
@@ -144,7 +153,7 @@ body {
     margin: 5px 0 5px 0;
     width: 110px;
     height: 120px;
-    background-color: white;
+    background: rgba(24,24,27,0.8);
 }
 
 /* Change background color of buttons on hover */
@@ -166,11 +175,11 @@ body {
 
 .tab2 {
     overflow: hidden;
-    border: 1px solid #ccc;
+    border: 1px solid #940000;
     text-align:center;
     width: auto;
     height: 80vh;
-    border: 3px solid rgb(242, 118, 118);
+
     margin-right: 30px;
 }
 
@@ -199,29 +208,23 @@ body {
     justify-content: auto;
 }
 
-.container{
-    background: rgba(24,24,27,0.8);
-    padding-bottom: 25px;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-
-}
 /*======================Look Ahead code=========================*/
 #col69 {
     float: left;
     width: 70%;
-    height:50px;
+    height:7vh;
     background: rgba(24,24,27,0.8);
+    color: white;
 
 }
 #col70 {
     float: right; 
     width: 30%;
-    height:50px;
+    height:7vh;
     padding-top: 10px;
     background: rgba(24,24,27,0.8);
+    color: white;
+    /*border: 1px solid rgb(242, 118, 118);*/
 }
 .display-7{
     display:flex;
@@ -233,23 +236,23 @@ body {
     display: inline-block;
 
 }
-.button-container{
-    text-align: left;
-    margin-left: 10px;
-} 
 
 #col1 {
     float: left;
     width: 70%;
-    height:300px;
+    height: 43vh;
     background: rgba(24,24,27,0.8);
+    color: white;
+
 }
 
 #col2 {
     float: left;
     width: 30%;
-    height:300px;
-    background: rgba(24,24,27,0.8);    
+    height:43vh;
+    background: rgba(24,24,27,0.8);
+    color: white;
+
 }
 img{
     max-width: 60%;
@@ -258,11 +261,13 @@ img{
 /*=================Pie Chat========================*/
 
 .chart-wrapper {
-    width: 98%;
-    height:98%;
+    width: auto;
+    height: 42vh;
     margin: 0 auto;
   }
-
+#pieChart{
+    color: white;
+}
 /*===================scrolling option for table overflow======================*/
 
 .table-container {
@@ -270,10 +275,41 @@ img{
     overflow-y: auto; /* set the overflow property to auto to add a scrollbar */
   }
 
+
+/*======================Button=========================================*/
+.button-container {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    margin-left: 10px;
+  }
+  
+  select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+  }
+  
+  .button {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 3px;
+    border: none;
+    background-color: #690000;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #890000;
+  }
 /*==================Look AHead (api)=============================*/
 
 .future-forecast{
     background: rgba(24,24,27,0.8);
+    /*background: rgba(24,24,27,0.8);*/
     padding: 25px;
     position: sticky;
     top: 0;
@@ -283,6 +319,7 @@ img{
     align-items: center;
     justify-content: center;
     overflow-y: hidden;
+    height: 30vh;
 }
 
 .future-forecast .today{

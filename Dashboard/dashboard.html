@@ -9,199 +9,183 @@
 </head>
 
 <body>
-<nav class="navbar">
-    <div class="navbar-left">
-      <a href="Help/html/help.html" class="navbar-link">Help</a>
-      <a href="ReportIssue/html/reportIssue.html" class="navbar-link">Report Issue</a>
-    </div>
-    <div class="navbar-middle">
-      <span class="navbar-grade">Grade</span>
-      <img src="../Assets/Grade_Planalyzer_Logo_PNG.png" alt="Logo" class="navbar-img">
-      <span class="navbar-planalyzer">Planalyzer</span>
-    </div>
-    <div class="navbar-right">
-      <a href="dashboard.html" class="navbar-link">Dashboard</a>
-      <a href="Settings/html/settings.html" class="navbar-link">Settings</a>
-      <a onClick="signOut()"  class="navbar-link">Sign Out</a>
-    </div>
-</nav>
-    
-
-<div class = "select_form">
-    <select name="select" id="semesterSelect" >
-    </select>
-</div>
-
-<!-- <center><h2>Grade Planalyzer</h2></center> -->
-<div class="tab">
-
-    <button class="tablinks" onclick="openTab(event, 'LookAhead')"><!--<img src="images/logo3.png" height="70px" width="70px">--><i class="fa-regular fa-calendar" style="font-size: 70px;"></i>Look Ahead</button>
-    <button class="tablinks" onclick="openTab(event, 'Infographics')"><!--<img src="images/logo3.png" height="70px" width="70px">--><i class="fa-solid fa-chart-pie" style="font-size: 70px;"></i>Infographics</button>
-    <button class="tablinks" onclick="openTab(event, 'GradeEntry')"><!--<img src="images/logo3.png" height="70px" width="70px">--><i class="fa-solid fa-list" style="font-size: 60px; border: 5px solid black;"></i>Grade Entry</button>
-    <button class="tablinks" onclick="openTab(event, 'CourseInfo')"><!--<img src="images/logo3.png" height="70px" width="70px">--><i class="fa-solid fa-book" style="font-size: 70px;"></i>Course Info</button>
-    <button class="tablinks" onclick="openTab(event, 'WhatIf')"><!--<img src="images/logo3.png" height="70px" width="70px">--><i class="fa-regular fa-circle-question" style="font-size: 70px;"></i>&nbsp;&nbsp;&nbsp;What If?</button>
-    
-</div>
-
-<div class="tab2">
-    <div id="LookAhead" class="tabcontent">
-        <div class="future-forecast">
-            <div class="today" id="current-temp">
-                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-                <div class="other">
-                    <div class="day">Monday</div>
-                    <div class="temp">Night - 25.6&#176; C</div>
-                    <div class="temp">Day - 35.6&#176; C</div>
-                </div>
-            </div>
-    
-            <div class="weather-forecast" id="weather-forecast">
-                <div class="weather-forecast-item">
-                    <div class="day">Tue</div>
-                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-                    <div class="temp">Night - 25.6&#176; C</div>
-                    <div class="temp">Day - 35.6&#176; C</div>
-                </div>
-                <div class="weather-forecast-item">
-                    <div class="day">Wed</div>
-                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-                    <div class="temp">Night - 25.6&#176; C</div>
-                    <div class="temp">Day - 35.6&#176; C</div>
-                </div>
-                <div class="weather-forecast-item">
-                    <div class="day">Thur</div>
-                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-                    <div class="temp">Night - 25.6&#176; C</div>
-                    <div class="temp">Day - 35.6&#176; C</div>
-                </div>
-                <div class="weather-forecast-item">
-                    <div class="day">Fri</div>
-                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-                    <div class="temp">Night - 25.6&#176; C</div>
-                    <div class="temp">Day - 35.6&#176; C</div>
-                </div>
-                <div class="weather-forecast-item">
-                    <div class="day">Sat</div>
-                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-                    <div class="temp">Night - 25.6&#176; C</div>
-                    <div class="temp">Day - 35.6&#176; C</div>
-                </div>
-                <div class="weather-forecast-item">
-                    <div class="day">Sun</div>
-                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
-                    <div class="temp">Night - 25.6&#176; C</div>
-                    <div class="temp">Day - 35.6&#176; C</div>
-                </div>
-            </div>
+    <section id="banner">
+        <div class = "select_form">
+            <select name="select" id="semesterSelect" >
+            </select>
         </div>
-        <div id="col69">
-            <h3 class="display-7">ToDo:</h3>
+
+        <!-- <center><h2>Grade Planalyzer</h2></center> -->
+        <div class="tab">
+
+            <button class="tablinks" onclick="openTab(event, 'LookAhead')"><!--<img src="images/logo3.png" height="70px" width="70px">--><i class="fa-regular fa-calendar" style="font-size: 70px;"></i>Look Ahead</button>
+            <button class="tablinks" onclick="openTab(event, 'Infographics')"><!--<img src="images/logo3.png" height="70px" width="70px">--><i class="fa-solid fa-chart-pie" style="font-size: 70px;"></i>Infographics</button>
+            <button class="tablinks" onclick="openTab(event, 'GradeEntry')"><!--<img src="images/logo3.png" height="70px" width="70px">--><i class="fa-solid fa-list" style="font-size: 60px; border: 5px solid black;"></i>Grade Entry</button>
+            <button class="tablinks" onclick="openTab(event, 'CourseInfo')"><!--<img src="images/logo3.png" height="70px" width="70px">--><i class="fa-solid fa-book" style="font-size: 70px;"></i>Course Info</button>
+            <button class="tablinks" onclick="openTab(event, 'WhatIf')"><!--<img src="images/logo3.png" height="70px" width="70px">--><i class="fa-regular fa-circle-question" style="font-size: 70px;"></i>&nbsp;&nbsp;&nbsp;What If?</button>
             
         </div>
-        <div id="col70">
-            <div class="button-container">
-                <select name="weeks" id="weeks" >
-                    <option value="Week1">Week1</option>
-                    <option value="Week2">Week2</option>
-                    <option value="Week3">Week3</option>
-                    <option value="Week4">Week4</option>
-                </select>
-                <button class="button">Confirm</button>
-            </div>
-        </div>
-          
-        <div id="col1">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="table-container">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Course</th>
-                                    <th>Assignment</th>
-                                    <th>Grade Weight</th>
-                                    <th>Deadline</th>
-                                    <th>Completion</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>SWE</td>
-                                    <td>HW 1</td>
-                                    <td>20%</td>
-                                    <td>01/01/3000</td>
-                                    <td><input type="checkbox" id="course" name="course1" value="course1"></td>
-                                </tr>
-                                <tr>
-                                    <td>SWE</td>
-                                    <td>HW 2</td>
-                                    <td>20%</td>
-                                    <td>01/05/3000</td>
-                                    <td><input type="checkbox" id="course" name="course1" value="course1"></td>
-                                </tr>
-                                <tr>
-                                    <td>SWE</td>
-                                    <td>HW 3</td>
-                                    <td>20%</td>
-                                    <td>02/01/3000</td>
-                                    <td><input type="checkbox" id="course" name="course1" value="course1"></td>
-                                </tr>
-                                <tr>
-                                    <td>SWE</td>
-                                    <td>HW 4</td>
-                                    <td>20%</td>
-                                    <td>01/15/3000</td>
-                                    <td><input type="checkbox" id="course" name="course1" value="course1"></td>
-                                </tr>
-                                <tr>
-                                    <td>SWE</td>
-                                    <td>HW 5</td>
-                                    <td>20%</td>
-                                    <td>03/01/3000</td>
-                                    <td><input type="checkbox" id="course" name="course1" value="course1"></td>
-                                </tr>
-                            </tbody>
-                        </table>
+
+        <div class="tab2">
+            <div id="LookAhead" class="tabcontent">
+                <div class="future-forecast">
+                    <div class="today" id="current-temp">
+                        <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                        <div class="other">
+                            <div class="day">Monday</div>
+                            <div class="temp">Night - 25.6&#176; C</div>
+                            <div class="temp">Day - 35.6&#176; C</div>
+                        </div>
+                    </div>
+            
+                    <div class="weather-forecast" id="weather-forecast">
+                        <div class="weather-forecast-item">
+                            <div class="day">Tue</div>
+                            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                            <div class="temp">Night - 25.6&#176; C</div>
+                            <div class="temp">Day - 35.6&#176; C</div>
+                        </div>
+                        <div class="weather-forecast-item">
+                            <div class="day">Wed</div>
+                            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                            <div class="temp">Night - 25.6&#176; C</div>
+                            <div class="temp">Day - 35.6&#176; C</div>
+                        </div>
+                        <div class="weather-forecast-item">
+                            <div class="day">Thur</div>
+                            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                            <div class="temp">Night - 25.6&#176; C</div>
+                            <div class="temp">Day - 35.6&#176; C</div>
+                        </div>
+                        <div class="weather-forecast-item">
+                            <div class="day">Fri</div>
+                            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                            <div class="temp">Night - 25.6&#176; C</div>
+                            <div class="temp">Day - 35.6&#176; C</div>
+                        </div>
+                        <div class="weather-forecast-item">
+                            <div class="day">Sat</div>
+                            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                            <div class="temp">Night - 25.6&#176; C</div>
+                            <div class="temp">Day - 35.6&#176; C</div>
+                        </div>
+                        <div class="weather-forecast-item">
+                            <div class="day">Sun</div>
+                            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" class="w-icon">
+                            <div class="temp">Night - 25.6&#176; C</div>
+                            <div class="temp">Day - 35.6&#176; C</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="col69">
+                    <h3 class="display-7">ToDo:</h3>
+                    
+                </div>
+                <div id="col70">
+                    <div class="button-container">
+                        <select name="weeks" id="weeks" >
+                            <option value="Week1">Week1</option>
+                            <option value="Week2">Week2</option>
+                            <option value="Week3">Week3</option>
+                            <option value="Week4">Week4</option>
+                        </select>
+                        <button class="button">Confirm</button>
+                    </div>
+                </div>
+                
+                <div id="col1">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-container">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Course</th>
+                                            <th>Assignment</th>
+                                            <th>Grade Weight</th>
+                                            <th>Deadline</th>
+                                            <th>Completion</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>SWE</td>
+                                            <td>HW 1</td>
+                                            <td>20%</td>
+                                            <td>01/01/3000</td>
+                                            <td><input type="checkbox" id="course" name="course1" value="course1"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>SWE</td>
+                                            <td>HW 2</td>
+                                            <td>20%</td>
+                                            <td>01/05/3000</td>
+                                            <td><input type="checkbox" id="course" name="course1" value="course1"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>SWE</td>
+                                            <td>HW 3</td>
+                                            <td>20%</td>
+                                            <td>02/01/3000</td>
+                                            <td><input type="checkbox" id="course" name="course1" value="course1"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>SWE</td>
+                                            <td>HW 4</td>
+                                            <td>20%</td>
+                                            <td>01/15/3000</td>
+                                            <td><input type="checkbox" id="course" name="course1" value="course1"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>SWE</td>
+                                            <td>HW 5</td>
+                                            <td>20%</td>
+                                            <td>03/01/3000</td>
+                                            <td><input type="checkbox" id="course" name="course1" value="course1"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="col2">
+                    <div class="chart-wrapper">
+                        <canvas id="pieChart"></canvas>
                     </div>
                 </div>
             </div>
-        </div>
-          
-        <div id="col2">
-            <div class="chart-wrapper">
-                <canvas id="pieChart"></canvas>
+
+            <div id="Infographics" class="tabcontent">
+                <p>&nbsp;</p>
+                <p>Infographics</p> <center>
+                    Backend Content
+                </center>
+            </div>
+
+            <div id="GradeEntry" class="tabcontent">
+                <p>&nbsp;</p>
+                <p>Grade Entry</p> <center>
+                    Backend Content
+                </center>
+            </div>
+
+            <div id="CourseInfo" class="tabcontent">
+                <p>&nbsp;</p>
+                <p>Course Info</p> <center>
+                    Backend Content
+                </center>
+            </div>
+
+            <div id="WhatIf" class="tabcontent">
+                <p>&nbsp;</p>
+                <p>What If?</p> <center>
+                    Backend Content
+                </center>
             </div>
         </div>
-    </div>
-
-    <div id="Infographics" class="tabcontent">
-        <p>&nbsp;</p>
-        <p>Infographics</p> <center>
-            Backend Content
-        </center>
-    </div>
-
-    <div id="GradeEntry" class="tabcontent">
-        <p>&nbsp;</p>
-        <p>Grade Entry</p> <center>
-            Backend Content
-        </center>
-    </div>
-
-    <div id="CourseInfo" class="tabcontent">
-        <p>&nbsp;</p>
-        <p>Course Info</p> <center>
-            Backend Content
-        </center>
-    </div>
-
-    <div id="WhatIf" class="tabcontent">
-        <p>&nbsp;</p>
-        <p>What If?</p> <center>
-            Backend Content
-        </center>
-    </div>
-
+    </section>
 </body>
 
 <!-- Look Ahead -->
