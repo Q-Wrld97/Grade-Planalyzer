@@ -6,7 +6,7 @@ body {
 
 /*============Dash Background=====================*/
 #banner {
-    background: url(/Assets/dashBackground.gif);
+    background: url(../Assets/dashBackground.gif);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
