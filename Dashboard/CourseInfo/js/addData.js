@@ -378,11 +378,11 @@ function addNewData(){
   //====================================================================================//
 
 
-  auth.onAuthStateChanged(function(user) {
+  auth.onAuthStateChanged(async function(user) {
     if (user) {
       alert(weightScale)
       // User is signed in.      
-      db.collection('users').doc(user.uid).collection(semester).doc(courseName).set({
+     await db.collection('users').doc(user.uid).collection(semester).doc(courseName).set({
         courseName: courseName,
         termLength: termLength,
         creditHours: creditHours,
@@ -391,22 +391,22 @@ function addNewData(){
         weightScale: weightScale,
       } ,
 
-      db.collection('users').doc(user.uid).update({
+     await db.collection('users').doc(user.uid).update({
         semester: firebase.firestore.FieldValue.arrayUnion(semester)
         
       })
 
       // now we have to add a sub collection per category
-      ).then(() => {
+      ).then(async () => {
         
         for (i=0; i < SubCollectionName.length; i++){
           //check condition for any sub collection that is not null
           if (SubCollectionQuantity[i] != null){
             //add sub collection
-            db.collection('users').doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+'Grades').set(
+          await  db.collection('users').doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+'Grades').set(
               SubCollectionQuantity[i]
             )
-            db.collection('users').doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+'Weight').set(
+          await  db.collection('users').doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+'Weight').set(
               SubCollectionPerWeight[i]
             )
           }  

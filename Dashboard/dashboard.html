@@ -99,7 +99,8 @@
                 </div>
                 <div id="col70">
                     <div class="button-container">
-                        <select name="weeks" id="weeks" >
+                        <select onchange="populateData()" name="weeks" id="weeks" >
+                            <option value="" disabled selected>Choose an option</option>
                             <option value="Week1">Week1</option>
                             <option value="Week2">Week2</option>
                             <option value="Week3">Week3</option>
@@ -123,42 +124,8 @@
                                             <th>Completion</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>SWE</td>
-                                            <td>HW 1</td>
-                                            <td>20%</td>
-                                            <td>01/01/3000</td>
-                                            <td><input type="checkbox" id="course" name="course1" value="course1"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>SWE</td>
-                                            <td>HW 2</td>
-                                            <td>20%</td>
-                                            <td>01/05/3000</td>
-                                            <td><input type="checkbox" id="course" name="course1" value="course1"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>SWE</td>
-                                            <td>HW 3</td>
-                                            <td>20%</td>
-                                            <td>02/01/3000</td>
-                                            <td><input type="checkbox" id="course" name="course1" value="course1"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>SWE</td>
-                                            <td>HW 4</td>
-                                            <td>20%</td>
-                                            <td>01/15/3000</td>
-                                            <td><input type="checkbox" id="course" name="course1" value="course1"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>SWE</td>
-                                            <td>HW 5</td>
-                                            <td>20%</td>
-                                            <td>03/01/3000</td>
-                                            <td><input type="checkbox" id="course" name="course1" value="course1"></td>
-                                        </tr>
+                                    <tbody id="tableBody">
+         
                                     </tbody>
                                 </table>
                             </div>
@@ -216,4 +183,5 @@
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
 <script src="../Config/config.js"></script>
 <script src = "dashboard.js"></script>
+<script src="js/lookAhead.js"></script>
 </html>
