@@ -110,35 +110,6 @@ function filterByWeek2(data, currentDate) {
   return filteredData;
 }
 
-function filterByWeek(data, currentDate) {
-  let filteredData = {};
-  for (let classKey in data) {
-    filteredData[classKey] = {};
-    for (let categoryKey in data[classKey]) {
-      filteredData[classKey][categoryKey] = {};
-      for (let [itemKey, item] of Object.entries(data[classKey][categoryKey])) {
-        let itemDate = new Date(item[`${categoryKey}Dates`].replace(/-/g, '/')); // parse with correct format
-        let timeDiff = itemDate.getTime() - currentDate.getTime();
-        let diffInDays = timeDiff / (1000 * 3600 * 24);
-        if (diffInDays >= 0 && diffInDays < 21) {
-          filteredData[classKey][categoryKey][itemKey] = {
-            [`${categoryKey}Dates`]: item[`${categoryKey}Dates`],
-            [`${categoryKey}Grades`]: item[`${categoryKey}Grades`],
-            [`${categoryKey}Weight`]: item[`${categoryKey}Weight`],
-          };
-        }
-      }
-      if (Object.keys(filteredData[classKey][categoryKey]).length === 0) {
-        delete filteredData[classKey][categoryKey];
-      }
-    }
-    if (Object.keys(filteredData[classKey]).length === 0) {
-      delete filteredData[classKey];
-    }
-  }
-  return filteredData;
-}
-
 function filterByWeek3(data, currentDate) {
   let filteredData = {};
   for (let classKey in data) {
@@ -167,6 +138,8 @@ function filterByWeek3(data, currentDate) {
   }
   return filteredData;
 }
+
+
 
 function filterByWeek4(data, currentDate) {
   let filteredData = {};
@@ -209,25 +182,21 @@ async function weekLength(){
   if (weeks == "Week1"){
     let currentDate = new Date();
     let filteredData = filterByWeek(data, currentDate);
-    //now i need to make append it table in html
     return filteredData;
   }
   else if (weeks == "Week2"){
     let currentDate = new Date();
     let filteredData = filterByWeek2(data, currentDate);
-    //now i need to make append it table in html
     return filteredData;
   }
   else if (weeks == "Week3"){
     let currentDate = new Date();
     let filteredData = filterByWeek3(data, currentDate);
-    //now i need to make append it table in html
     return filteredData;
   }
   else if (weeks == "Week4"){
     let currentDate = new Date();
     let filteredData = filterByWeek4(data, currentDate);
-    //now i need to make append it table in htmls
     return filteredData;
   }
 }
@@ -238,37 +207,52 @@ async function populateData() {
   console.log(data);
   let tableBody = document.getElementById("tableBody");
   tableBody.innerHTML = ""; // clear the table body before repopulating it
-  let count = 0;
-  // finding out total amount of items
+  
+  // create an array of items sorted by their deadline dates
+  let items = [];
   for (let classKey in data) {
     for (let categoryKey in data[classKey]) {
       for (let itemKey in data[classKey][categoryKey]) {
-        count++;
         let item = data[classKey][categoryKey][itemKey];
-        let tr = document.createElement("tr");
-        tr.setAttribute("id", `tr${count}`);
-        let courseTd = document.createElement("td");
-        courseTd.textContent = classKey;
-        let assignmentTd = document.createElement("td");
-        assignmentTd.textContent = itemKey;
-        let weightTd = document.createElement("td");
-        weightTd.textContent = `${item[`${categoryKey}Weight`]}%`;
-        let deadlineTd = document.createElement("td");
-        deadlineTd.textContent = item[`${categoryKey}Dates`];
-        let completionTd = document.createElement("td");
-        let completionInput = document.createElement("input");
-        completionInput.setAttribute("type", "checkbox");
-        completionInput.setAttribute("id", `${classKey}-${categoryKey}-${itemKey}`);
-        completionInput.setAttribute("name", `${classKey}-${categoryKey}-${itemKey}`);
-        completionInput.setAttribute("value", "completed");
-        completionTd.appendChild(completionInput);
-        tr.appendChild(courseTd);
-        tr.appendChild(assignmentTd);
-        tr.appendChild(weightTd);
-        tr.appendChild(deadlineTd);
-        tr.appendChild(completionTd);
-        tableBody.appendChild(tr);
+        items.push({
+          classKey: classKey,
+          categoryKey: categoryKey,
+          itemKey: itemKey,
+          item: item,
+          deadline: new Date(item[`${categoryKey}Dates`])
+        });
       }
     }
   }
+  items.sort((a, b) => a.deadline - b.deadline);
+  
+  // create table rows for each item in the sorted array
+  let count = 0;
+  for (let item of items) {
+    count++;
+    let tr = document.createElement("tr");
+    tr.setAttribute("id", `tr${count}`);
+    let courseTd = document.createElement("td");
+    courseTd.textContent = item.classKey;
+    let assignmentTd = document.createElement("td");
+    assignmentTd.textContent = item.itemKey;
+    let weightTd = document.createElement("td");
+    weightTd.textContent = `${item.item[`${item.categoryKey}Weight`]}%`;
+    let deadlineTd = document.createElement("td");
+    deadlineTd.textContent = item.item[`${item.categoryKey}Dates`];
+    let completionTd = document.createElement("td");
+    let completionInput = document.createElement("input");
+    completionInput.setAttribute("type", "checkbox");
+    completionInput.setAttribute("id", `${item.classKey}-${item.categoryKey}-${item.itemKey}`);
+    completionInput.setAttribute("name", `${item.classKey}-${item.categoryKey}-${item.itemKey}`);
+    completionInput.setAttribute("value", "completed");
+    completionTd.appendChild(completionInput);
+    tr.appendChild(courseTd);
+    tr.appendChild(assignmentTd);
+    tr.appendChild(weightTd);
+    tr.appendChild(deadlineTd);
+    tr.appendChild(completionTd);
+    tableBody.appendChild(tr);
+  }
 }
+
