@@ -254,5 +254,96 @@ async function populateData() {
     tr.appendChild(completionTd);
     tableBody.appendChild(tr);
   }
+
+    // count number of items for each class
+    let counts = {};
+    for (let classKey in data) {
+      let count = 0;
+      for (let categoryKey in data[classKey]) {
+        for (let itemKey in data[classKey][categoryKey]) {
+          count++;
+        }
+      }
+      counts[classKey] = count;
+    }
+ 
+// calculate weights for each category and class
+let weights = {};
+for (let classKey in data) {
+  weights[classKey] = {};
+  for (let categoryKey in data[classKey]) {
+    let categoryWeight = 0;
+    for (let itemKey in data[classKey][categoryKey]) {
+      let item = data[classKey][categoryKey][itemKey];
+      categoryWeight += parseFloat(item[`${categoryKey}Weight`]);
+    }
+    weights[classKey][categoryKey] = categoryWeight.toFixed(1);
+  }
 }
+
+// calculate weights for each class
+let classWeights = {};
+for (let classKey in weights) {
+  classWeights[classKey] = 0;
+  for (let categoryKey in weights[classKey]) {
+    let weight = parseFloat(weights[classKey][categoryKey]);
+    classWeights[classKey] += weight;
+  }
+}
+
+// normalize weights to get percentages
+let totalWeight = 0;
+for (let classKey in classWeights) {
+  totalWeight += classWeights[classKey];
+}
+for (let classKey in classWeights) {
+  classWeights[classKey] = ((classWeights[classKey] / totalWeight) * 100).toFixed(1);
+}
+
+console.log(classWeights);
+      
+  
+    // create chart
+    let chartData = {
+      labels: Object.keys(counts),
+      datasets: [
+        {
+          label: 'Number of Items',
+          data: Object.values(classWeights),
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        }
+      ]
+    };
+  
+    let pieChart = document.getElementById('pieChart');
+    if (pieChart) {
+      pieChart.remove();
+    }
+
+    let canvas = document.createElement('canvas');
+    canvas.setAttribute('id', 'pieChart');
+    document.getElementById('chartContainer').appendChild(canvas);
+    let chart = new Chart(document.getElementById('pieChart'), {
+      type: 'pie',
+      data: chartData,
+    });
+}
+
+
 

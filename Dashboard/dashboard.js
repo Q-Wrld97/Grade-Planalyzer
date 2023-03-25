@@ -141,29 +141,3 @@ function showWeatherData (data){
     weatherForecastEl.innerHTML = otherDayForcast;
 }
 
-//============This part is for Pie-Chart================//
-
-new Chart(document.getElementById('pieChart'), {
-  type: 'pie',
-  data: {
-    labels: ["SWE", "MAT", "COT", "CEN", "CNT"],
-    datasets: [{
-      backgroundColor: ["#e63946", "#254BDD",
-        "#ffbe0b", "#1d3557", "#326998"
-      ],
-      data: [10, 60, 30, 20, 80]
-    }]
-  },
-  options: {
-    title: {
-      display: true,
-      text: 'Pie Chart'
-    },
-    reponsive: true,
-    legend: {
-      position: 'bottom'
-    },
-  }
-});
-
-//===========Look Ahead Ends here==================//
