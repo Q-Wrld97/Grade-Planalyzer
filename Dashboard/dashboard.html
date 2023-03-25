@@ -140,135 +140,134 @@
                 </div>
             </div>
 
+
             <div id="Infographics" class="tabcontent">
-                <div id="Infographics" class="tabcontent">
-                    <div class="infotabTopLeft">
-                        <div class="courseHeading">
-                            <h1 class="display-6">Select Course:</h1>
+                <div class="infotabTopLeft">
+                    <div class="courseHeading">
+                        <h1 class="display-6">Select Course:</h1>
+                    </div>
+                </div>
+
+                <div class="infotabRight">
+                    <p class="h5" id="grabVlue1">Current Semester GPA:</p>
+                    <p class="h5" id="grabVlue2">Potential Week-end GPA:</p>
+                    <p class="h5" id="grabVlue2">Potential Term GPA:</p> 
+                </div>
+
+                <div class="infotabBottomLeft">
+                    <div class="container">
+                        <button class="tablinks" onclick="openTab(event, 'Infographics')">ALL</button>
+                        <!--Grab the rest by ID-->
+                        <button class="tablinks" onclick="openTab(event, '#')">SWE</button> 
+                        <button class="tablinks" onclick="openTab(event, '#')">LAN</button>
+                        <button class="tablinks" onclick="openTab(event, '#')">DES</button>
+                        <button class="tablinks" onclick="openTab(event, '#')">COS</button>
+                    </div>
+                </div>
+                
+        
+                <div id="infoColumn">                    
+                    <div id="infoColumn1">
+                        <div class="pieChartSize">
+                            <p class="h3" >Total Coursework Completed</p>
+                            <canvas id="pieChartInfo"></canvas>
                         </div>
                     </div>
-    
-                    <div class="infotabRight">
-                        <p class="h5" id="grabVlue1">Current Semester GPA:</p>
-                        <p class="h5" id="grabVlue2">Potential Week-end GPA:</p>
-                        <p class="h5" id="grabVlue2">Potential Term GPA:</p> 
-                    </div>
-    
-                    <div class="infotabBottomLeft">
-                        <div class="container">
-                            <button class="tablinks" onclick="openTab(event, 'Infographics')">ALL</button>
-                            <!--Grab the rest by ID-->
-                            <button class="tablinks" onclick="openTab(event, '#')">SWE</button> 
-                            <button class="tablinks" onclick="openTab(event, '#')">LAN</button>
-                            <button class="tablinks" onclick="openTab(event, '#')">DES</button>
-                            <button class="tablinks" onclick="openTab(event, '#')">COS</button>
+                    <div id="infoColumn2">
+                        <div class="barChartSize">
+                            <p class="h3" >Weekly Rolling Semester GPA</p>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <canvas id="barChart"></canvas>
                         </div>
                     </div>
-                    
-            
-                    <div id="infoColumn">                    
-                        <div id="infoColumn1">
-                            <div class="pieChartSize">
-                                <p class="h3" >Total Coursework Completed</p>
-                                <canvas id="pieChartInfo"></canvas>
-                            </div>
-                        </div>
-                        <div id="infoColumn2">
-                            <div class="barChartSize">
-                                <p class="h3" >Weekly Rolling Semester GPA</p>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <canvas id="barChart"></canvas>
-                            </div>
-                        </div>
-                        <div id="infoColumn3">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="table-containerInfo">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Course</th>
-                                                    <th>Current Overall Letter Grade</th>
-                                                    <th>Potential Term Letter Grade</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="tableBody">
-                                                <tr>
-                                                    <td>SWE</td>
-                                                    <td>F</td>
-                                                    <td>A+</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>SWE</td>
-                                                    <td>F</td>
-                                                    <td>A+</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>SWE</td>
-                                                    <td>F</td>
-                                                    <td>A+</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>SWE</td>
-                                                    <td>F</td>
-                                                    <td>A+</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>SWE</td>
-                                                    <td>F</td>
-                                                    <td>A+</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>SWE</td>
-                                                    <td>F</td>
-                                                    <td>A+</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>SWE</td>
-                                                    <td>F</td>
-                                                    <td>A+</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>SWE</td>
-                                                    <td>F</td>
-                                                    <td>A+</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>SWE</td>
-                                                    <td>F</td>
-                                                    <td>A+</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>SWE</td>
-                                                    <td>F</td>
-                                                    <td>A+</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>SWE</td>
-                                                    <td>F</td>
-                                                    <td>A+</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>SWE</td>
-                                                    <td>F</td>
-                                                    <td>A+</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>SWE</td>
-                                                    <td>F</td>
-                                                    <td>A+</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>SWE</td>
-                                                    <td>F</td>
-                                                    <td>A+</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                    <div id="infoColumn3">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-containerInfo">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Course</th>
+                                                <th>Current Overall Letter Grade</th>
+                                                <th>Potential Term Letter Grade</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tableBody">
+                                            <tr>
+                                                <td>SWE</td>
+                                                <td>F</td>
+                                                <td>A+</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SWE</td>
+                                                <td>F</td>
+                                                <td>A+</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SWE</td>
+                                                <td>F</td>
+                                                <td>A+</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SWE</td>
+                                                <td>F</td>
+                                                <td>A+</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SWE</td>
+                                                <td>F</td>
+                                                <td>A+</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SWE</td>
+                                                <td>F</td>
+                                                <td>A+</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SWE</td>
+                                                <td>F</td>
+                                                <td>A+</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SWE</td>
+                                                <td>F</td>
+                                                <td>A+</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SWE</td>
+                                                <td>F</td>
+                                                <td>A+</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SWE</td>
+                                                <td>F</td>
+                                                <td>A+</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SWE</td>
+                                                <td>F</td>
+                                                <td>A+</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SWE</td>
+                                                <td>F</td>
+                                                <td>A+</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SWE</td>
+                                                <td>F</td>
+                                                <td>A+</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SWE</td>
+                                                <td>F</td>
+                                                <td>A+</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -306,10 +305,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 <!-- Look Ahead ends here -->
-
 <!--Infographics Starts here-->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!--Infographics Ends here-->
+<!--Infographics Starts here-->
 
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
