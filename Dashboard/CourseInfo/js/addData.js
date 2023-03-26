@@ -133,9 +133,11 @@ function addNewData(){
     // make a dictionary to store all exam and per exam weight with blank value
     var exam = {};
     var perExamWeight = {};
+    var examComplete= {};
     for (let i=1; i <= examQuantity; i++){
       exam[`exam${i}`] = null;
       perExamWeight[`exam${i}`] = perExamWeightData;
+      examComplete[`exam${i}`] = false;
     }
   }
 
@@ -151,10 +153,12 @@ function addNewData(){
     // make a dictionary to store all exam with blank value
     var exam = {};
     var perExamWeight = {};
+    var examComplete ={};
     for (let i=1; i <= examQuantity; i++){
       const perExamWeightData = document.getElementById(`Exam${i}`);
       exam[`exam${i}`] = null;
       perExamWeight[`exam${i}`] = perExamWeightData.value;
+      examComplete[`exam${i}`] = false;
     }
   }
 
@@ -171,9 +175,11 @@ function addNewData(){
     // make a dictionary to store all exam with blank value
     var quiz = {};
     var perQuizWeight = {};
+    var quizComplete = {};
     for (let i=1; i <= quizQuantity; i++){
       quiz[`quiz${i}`] = null;
       perQuizWeight[`quiz${i}`] = perQuizWeightData;
+      quizComplete[`quiz${i}`] = false;
     }
   }
   //if check and Weighted equally is no
@@ -188,10 +194,12 @@ function addNewData(){
     // make a dictionary to store all exam with blank value
     var quiz = {};
     var perQuizWeight = {};
+    var quizComplete = {};
     for (let i=1; i <= quizQuantity; i++){
       const perQuizWeightData = document.getElementById(`Quiz${i}`).value;
       quiz[`quiz${i}`] = null;
       perQuizWeight[`quiz${i}`] = perQuizWeightData;
+      quizComplete[`quiz${i}`] = false;
     }
   }
 
@@ -208,9 +216,11 @@ function addNewData(){
     // make a dictionary to store all exam with blank value
     var assignment = {};
     var perAssignmentWeight = {};
+    var assignmentComplete = {};
     for (let i=1; i <= assignmentQuantity; i++){
       assignment[`assignment${i}`] = null;
       perAssignmentWeight[`assignment${i}`] = perAssignmentWeightData;
+      assignmentComplete[`assignment${i}`] = false;
     }
   }
   //if check and Weighted equally is no
@@ -225,10 +235,12 @@ function addNewData(){
     // make a dictionary to store all exam with blank value
     var assignment = {};
     var perAssignmentWeight = {};
+    var assignmentComplete = {};
     for (let i=1; i <= assignmentQuantity; i++){
       const perAssignmentWeightData = document.getElementById(`Assignment${i}`);
       assignment[`assignment${i}`] = null;
       perAssignmentWeight[`assignment${i}`] = perAssignmentWeightData.value;
+      assignmentComplete[`assignment${i}`] = false;
     }
   }
 
@@ -246,9 +258,11 @@ function addNewData(){
     // make a dictionary to store all exam with blank value
     var discussion = {};
     var perDiscussionWeight = {};
+    var discussionComplete = {};
     for (let i=1; i <= discussionQuantity; i++){
       discussion[`discussion${i}`] = null;
       perDiscussionWeight[`discussion${i}`] = perDiscussionWeightData;
+      discussionComplete[`discussion${i}`] = false;
     }
 
 
@@ -265,10 +279,12 @@ function addNewData(){
     // make a dictionary to store all exam with blank value
     var discussion = {};
     var perDiscussionWeight = {};
+    var discussionComplete = {};
     for (let i=1; i <= discussionQuantity; i++){
       const perDiscussionWeightData = document.getElementById(`Discussion${i}`);
       discussion[`discussion${i}`] = null;
       perDiscussionWeight[`discussion${i}`] = perDiscussionWeightData.value;
+      discussionComplete[`discussion${i}`] = false;
     }
   }
   
@@ -285,9 +301,11 @@ function addNewData(){
     // make a dictionary to store all exam with blank value
     var project = {};
     var perProjectWeight = {};
+    var projectComplete = {};
     for (let i=1; i <= projectQuantity; i++){
       project[`project${i}`] = null;
       perProjectWeight[`project${i}`] = perProjectWeightData;
+      projectComplete[`project${i}`] = false;
     }
 
   }
@@ -303,10 +321,12 @@ function addNewData(){
     // make a dictionary to store all exam with blank value
     var project = {};
     var perProjectWeight = {};
+    var projectComplete = {};
     for (let i=1; i <= projectQuantity; i++){
       const perProjectWeightData = document.getElementById(`Project${i}`);
       project[`project${i}`] = null;
       perProjectWeight[`project${i}`] = perProjectWeightData.value;
+      projectComplete[`project${i}`] = false;
     }
   }
 
@@ -323,9 +343,11 @@ function addNewData(){
     // make a dictionary to store all exam with blank value
     var participation = {};
     var perParticipationWeight = {};
+    var participationComplete = {};
     for (let i=1; i <= participationQuantity; i++){
       participation[`participation${i}`] = null;
       perParticipationWeight[`participation${i}`] = perParticipationWeightData;
+      participationComplete[`participation${i}`] = false;
     }
   }
   //if check and Weighted equally is no
@@ -340,10 +362,12 @@ function addNewData(){
     // make a dictionary to store all exam with blank value
     var participation = {};
     var perParticipationWeight = {};
+    var participationComplete = {};
     for (let i=1; i <= participationQuantity; i++){
       const perParticipationWeightData = document.getElementById(`Participation${i}`);
       participation[`participation${i}`] = null;
       perParticipationWeight[`participation${i}`] = perParticipationWeightData.value;
+      participationComplete[`participation${i}`] = false;
     }
   }
 
@@ -354,6 +378,8 @@ function addNewData(){
   let SubCollectionQuantity = [exam,quiz,assignment,discussion,project,participation];
 
   let SubCollectionPerWeight = [perExamWeight,perQuizWeight,perAssignmentWeight,perDiscussionWeight,perProjectWeight,perParticipationWeight];
+
+  let SubCollectionComplete = [examComplete,quizComplete,assignmentComplete,discussionComplete,projectComplete,participationComplete];
 
   //filter null and empty dictinary inside array
   weightScale = weightScale.filter(obj => obj && Object.keys(obj).length > 0);
@@ -408,6 +434,12 @@ function addNewData(){
             )
           await  db.collection('users').doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+'Weight').set(
               SubCollectionPerWeight[i]
+            )
+          await  db.collection('users').doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+'Weight').set(
+              SubCollectionPerWeight[i]
+            )
+          await db.collection('users').doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+'Complete').set(
+              SubCollectionComplete[i]
             )
           }  
         }

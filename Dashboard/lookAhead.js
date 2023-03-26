@@ -67,6 +67,7 @@ function filterByWeek(data, currentDate) {
             [`${categoryKey}Dates`]: item[`${categoryKey}Dates`],
             [`${categoryKey}Grades`]: item[`${categoryKey}Grades`],
             [`${categoryKey}Weight`]: item[`${categoryKey}Weight`],
+            [`${categoryKey}Complete`]: item[`${categoryKey}Complete`]
           };
         }
       }
@@ -96,6 +97,7 @@ function filterByWeek2(data, currentDate) {
             [`${categoryKey}Dates`]: item[`${categoryKey}Dates`],
             [`${categoryKey}Grades`]: item[`${categoryKey}Grades`],
             [`${categoryKey}Weight`]: item[`${categoryKey}Weight`],
+            [`${categoryKey}Complete`]: item[`${categoryKey}Complete`]
           };
         }
       }
@@ -125,6 +127,7 @@ function filterByWeek3(data, currentDate) {
             [`${categoryKey}Dates`]: item[`${categoryKey}Dates`],
             [`${categoryKey}Grades`]: item[`${categoryKey}Grades`],
             [`${categoryKey}Weight`]: item[`${categoryKey}Weight`],
+            [`${categoryKey}Complete`]: item[`${categoryKey}Complete`]
           };
         }
       }
@@ -156,6 +159,7 @@ function filterByWeek4(data, currentDate) {
             [`${categoryKey}Dates`]: item[`${categoryKey}Dates`],
             [`${categoryKey}Grades`]: item[`${categoryKey}Grades`],
             [`${categoryKey}Weight`]: item[`${categoryKey}Weight`],
+            [`${categoryKey}Complete`]: item[`${categoryKey}Complete`]
           };
         }
       }
@@ -226,9 +230,13 @@ async function populateData() {
   }
   items.sort((a, b) => a.deadline - b.deadline);
   
-  // create table rows for each item in the sorted array
   let count = 0;
   for (let item of items) {
+    // check if the item is marked as complete, if it is, skip to the next item
+    if (item.item[`${item.categoryKey}Complete`] === true) {
+      continue;
+    }
+    
     count++;
     let tr = document.createElement("tr");
     tr.setAttribute("id", `tr${count}`);
@@ -244,6 +252,7 @@ async function populateData() {
     let completionInput = document.createElement("input");
     completionInput.setAttribute("type", "checkbox");
     completionInput.setAttribute("id", `${item.classKey}-${item.categoryKey}-${item.itemKey}`);
+    completionInput.setAttribute("class", "completion");
     completionInput.setAttribute("name", `${item.classKey}-${item.categoryKey}-${item.itemKey}`);
     completionInput.setAttribute("value", "completed");
     completionTd.appendChild(completionInput);
@@ -343,7 +352,34 @@ console.log(classWeights);
       type: 'pie',
       data: chartData,
     });
+
 }
+
+
+
+
+document.getElementById("confirm").addEventListener("click", async function() {
+  let data = Array.from(document.getElementsByClassName("completion"));
+  console.log(data);
+  for (let i = data.length - 1; i >= 0; i--) {
+    if (data[i].checked) {
+      //update firestore with true
+      let classKey = data[i].id.split("-")[0];
+      let categoryKey = data[i].id.split("-")[1];
+      let itemKey = data[i].id.split("-")[2];
+      console.log(classKey, categoryKey, itemKey);
+      //update firestore
+      let userID = auth.currentUser.uid;
+      let semester = document.getElementById("semesterSelect").value;
+      await db.collection("users").doc(userID).collection(semester).doc(classKey).collection(categoryKey).doc(categoryKey+"Complete").update({
+        [itemKey]: true
+      })
+      //delete the row from the table
+      data[i].closest('tr').remove();
+    }
+  }
+});
+
 
 
 
