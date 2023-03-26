@@ -206,7 +206,7 @@ body {
 .tab2 {
     overflow: hidden;
     border: 1px solid #940000;
-    text-align:center;
+
     width: auto;
     height: 80vh;
     background: rgba(24,24,27,0.8);
@@ -568,3 +568,151 @@ img{
   .tablinks:hover {
     background-color: #ff7373;
   }
+
+
+/*====================================================================*/
+/*           Inforgraphics CSS ends here
+/*====================================================================*/
+
+/*====================================================================*/
+/*           GradeEntry CSS starts here
+/*====================================================================*/
+
+.gradeEntryTabTopLeft {
+    width: 65%;
+    height: 7.5vh;
+    float: left;
+    align-self: left;
+
+}
+.gradeEntryTabBottomLeft {
+    float: left;
+    overflow: hidden;
+    /*border: 1px solid #940000;*/
+    width: 65%;
+    height: 7.5vh;
+    padding-left: 30px;
+}
+
+.container-gradeEntry{
+    display: flex;
+    flex-wrap: wrap;
+    height: 7.5vh;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding-left: 20px;
+}
+.container-submitButton{
+    display: flex;
+    flex-wrap: wrap;
+    height: 13vh;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-right: 20px;
+}
+
+.courseHeading {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+    
+}
+
+.gradeEntryTabRight {
+    width: 35%;
+    height: 15vh;
+    float: right;
+
+}
+#pastGradeEntryColumn {
+    float: left;
+    width: 100%;
+    height: 20vh;
+    color: white;
+    background: rgba(24,24,27,0.8);
+    overflow-y: auto;
+
+}
+
+#gradeEntryColumn {
+    float: left;
+    width: 100%;
+    height: 45vh;
+    color: white;
+    background: rgba(24,24,27,0.8);
+}
+
+#gradeEntryColumn1 {
+
+    float: left;
+    width: 16.67%;
+    height: 45vh;
+    color: white;
+
+    overflow-y: auto;
+
+}
+#gradeEntryColumn2 {
+    float: left;
+    width: 16.67%;
+    height: 45vh;
+    color: white;
+
+    overflow-y: auto;
+
+}
+#gradeEntryColumn3 {
+    float: left;
+    width: 16.67%;
+    height: 45vh;
+    color: white;
+
+    overflow-y: auto;
+    
+}
+#gradeEntryColumn4 {
+    float: left;
+    width: 16.67%;
+    height: 45vh;
+    color: white;
+
+    overflow-y: auto;
+    
+}
+#gradeEntryColumn5 {
+    float: left;
+    width: 16.67%;
+    height: 45vh;
+    color: white;
+
+    overflow-y: auto;
+    
+}
+#gradeEntryColumn6 {
+    float: left;
+    width: 16.65%;
+    height: 45vh;
+    color: white;
+
+    overflow-y: auto;
+    
+}
+
+.form-group{
+    max-width: 160px;
+    padding-left: 50px;
+}
+.recentFormSize{
+    height: 20vh;
+    display: flex;
+    flex-wrap: wrap;
+}
+.h5{
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+/*====================================================================*/
+/*           GradeEntry CSS ends here
+/*====================================================================*/
