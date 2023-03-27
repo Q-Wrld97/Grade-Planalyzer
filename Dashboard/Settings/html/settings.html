@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="Description" content="Enter your description here" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="../css/setting.css">
+  <title>Setting</title>
+</head>
+<nav class="navbar">
+  <div class="navbar-left">
+    <a href="../../FAQ/html/faq.html" class="navbar-link">FAQ</a>
+    <a href="../../ReportIssue/html/reportIssue.html" class="navbar-link">Report Issue</a>
+  </div>
+  <div class="navbar-middle">
+    <span class="navbar-grade">Grade</span>
+    <img src="../../../Assets/Grade_Planalyzer_Logo_PNG.png" alt="Logo" class="navbar-img">
+    <span class="navbar-planalyzer">Planalyzer</span>
+  </div>
+  <div class="navbar-right">
+    <a href="../../dashboard.html" class="navbar-link">Dashboard</a>
+    <a href="settings.html" class="navbar-link">Settings</a>
+    <a onclick="signOut()" class="navbar-link">Logout</a>
+  </div>
+</nav>
+
+<body>
+  <div id="overAll">
+    <div id="container">
+      <h1>Setting</h1>
+
+      <div class="form-group">
+        <label>Cumulative GPA</label>
+        <input type="number" class="form-control" id="GPA" placeholder="GPA">
+      </div>
+      <div class="form-group">
+        <label>Cumulative Credit Hours</label>
+        <input type="number" class="form-control" id="credit" placeholder="Current Credit Hours">
+      </div>
+      <div class="form-group" id="schoolType">
+        <label>School Type</label>
+        <div class="custom-control custom-radio">
+          <input onclick="" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+          <label class="custom-control-label" for="customRadio1">College</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input onclick="" type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+          <label class="custom-control-label" for="customRadio2">High School</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Grading Scale</label>
+        <div class="custom-control custom-radio">
+          <input onclick="yesnoCheck()"type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+          <label class="custom-control-label" for="customRadio3"><img id="gradescale" alt="gradeScale1"
+              src="../../../Assets/GradeScale1.png"></label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input onclick="yesnoCheck()" type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
+          <label class="custom-control-label" for="customRadio4">Custom</label>
+        </div>
+        <div id="ifYes" style="display:none">
+          <p><input name="A" type="number" min="1" max="100" placeholder="A" /></p>
+          <p><input name="A-" type="number" min="1" max="100" placeholder="A-" /></p>
+          <p><input name="B+" type="number" min="1" max="100" placeholder="B+" /></p>
+          <p><input name="B" type="number" min="1" max="100" placeholder="B" /></p>
+          <p><input name="B-" type="number" min="1" max="100" placeholder="B-"></p>
+          <p><input name="C+" type="number" min="1" max="100" placeholder="C+" /></p>
+          <p><input name="C" type="number" min="1" max="100" placeholder="C" /></p>
+          <p><input name="C-" type="number" min="1" max="100" placeholder="C-" /></p>
+          <p><input name="D+" type="number" min="1" max="100" placeholder="D+" /></p>
+          <p><input name="D" type="number" min="1" max="100" placeholder="D"></p>
+          <p><input name="D-" type="number" min="1" max="100" placeholder="D-" /></p>
+          <p><input name="F" type="number" min="0" max="100" placeholder="F" /></p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Receive Weekly Email Updates</label>
+        <select id="receiveEmail">
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+      </div>
+      <div>
+        <button onclick="settingConfirm()" type="submit" class="button">Submit</button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+<script src="../../../Config/config.js"></script>
+<script src="../js/setting.js"></script>
+
+</html>

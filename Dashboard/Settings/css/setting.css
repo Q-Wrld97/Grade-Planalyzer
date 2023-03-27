@@ -1,0 +1,90 @@
+body {
+  background: url(../../../Assets/dashBackground.gif);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100lvh;
+}
+#overAll{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+ 
+}
+
+#container {
+  display: flex;
+  width: 30%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid rgba(255, 0, 0, 0.5);
+  background-color: rgba(35, 36, 42, 0.5);
+  color: #fff;
+  padding-bottom: 50px;
+  margin-top: 20px;
+}
+
+
+.button {
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 3px;
+  border: none;
+  background-color: #690000;
+  color: #fff;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #890000;
+}
+
+
+/* Style for the navbar */
+.navbar {
+display: flex;
+justify-content: space-between;
+align-items: center;
+background-color: #333;
+color: #fff;
+height: 60px;
+
+}
+
+/* Style for the left menu */
+.navbar-left {
+display: flex;
+align-items: center;
+}
+
+/* Style for the right menu */
+.navbar-right {
+display: flex;
+align-items: center;
+}
+
+/* Style for the navbar links */
+.navbar-link {
+color: #fff;
+text-decoration: none;
+margin: 0 10px;
+font-size: 15px;
+}
+
+/* Style for the navbar image */
+.navbar-img {
+  height: 50px;
+  width: 50px;
+}
+
+.navbar-link:hover {
+cursor: pointer;
+}
+
+.navbar-middle{
+  display: flex;
+  align-items: center;
+}

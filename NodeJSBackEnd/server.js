@@ -40,45 +40,6 @@ const auth = admin.auth();
 
 
 
-// every hour check for unverified users and delete them if they are older than 24 hours
-const DeleteUser = cron.schedule('0 * * * * *', () => {
-
-
-// Get all users from Firebase auth
-auth.listUsers().then((listUsersResult) => {
-  listUsersResult.users.forEach((userRecord) => {
-    const userUid = userRecord.uid;
-    const userCreationTime = userRecord.metadata.creationTime;
-
-    // Check if the user is not email verified
-    if (!userRecord.emailVerified) {
-      const timeSinceCreation = Date.now() - new Date(userCreationTime).getTime();
-      const timeThreshold = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-
-      // Check if the user account is older than 24 hours and not verified
-      if (timeSinceCreation >= timeThreshold) {
-        // Delete the user account from Firebase auth
-        auth.deleteUser(userUid)
-          .then(() => {
-            console.log(`Successfully deleted user ${userUid} from Firebase auth.`);
-          })
-          .catch((error) => {
-            console.log(`Error deleting user ${userUid} from Firebase auth: ${error}`);
-          });
-
-        // Delete the user data from Firestore
-        db.collection('users').doc(userUid).delete()
-          .then(() => {
-            console.log(`Successfully deleted user data for ${userUid} from Firestore.`);
-          })
-          .catch((error) => {
-            console.log(`Error deleting user data for ${userUid} from Firestore: ${error}`);
-          });
-      }
-    }
-  });
-});
-});
 
 
 //setting up mailgun Note:Redacted for security purposes
@@ -86,6 +47,8 @@ const apiKey = ''; // Replace with your Mailgun API key
 const domain = ''; // Replace with your Mailgun domain
 const mailgun = Mailgun({ apiKey, domain });
 
+
+// Send email to user
 const sendEmail = async (email) => {
   try {
     const data = {
@@ -124,5 +87,50 @@ const scheduleEmail = cron.schedule('*0 9 * * 0', () => {
     });
 });
 
+
+
+// every hour check for unverified users and delete them if they are older than 24 hours
+const DeleteUser = cron.schedule('0 * * * * *', () => {
+
+
+  // Get all users from Firebase auth
+  auth.listUsers().then((listUsersResult) => {
+    listUsersResult.users.forEach((userRecord) => {
+      const userUid = userRecord.uid;
+      const userCreationTime = userRecord.metadata.creationTime;
+  
+      // Check if the user is not email verified
+      if (!userRecord.emailVerified) {
+        const timeSinceCreation = Date.now() - new Date(userCreationTime).getTime();//time since creation in milliseconds
+        const timeThreshold = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+  
+        // Check if the user account is older than 24 hours and not verified
+        if (timeSinceCreation >= timeThreshold) {
+          // Delete the user account from Firebase auth
+          auth.deleteUser(userUid)
+            .then(() => {
+              console.log(`Successfully deleted user ${userUid} from Firebase auth.`);
+            })
+            .catch((error) => {
+              console.log(`Error deleting user ${userUid} from Firebase auth: ${error}`);
+            });
+  
+          // Delete the user data from Firestore
+          db.collection('users').doc(userUid).delete()
+            .then(() => {
+              console.log(`Successfully deleted user data for ${userUid} from Firestore.`);
+            })
+            .catch((error) => {
+              console.log(`Error deleting user data for ${userUid} from Firestore: ${error}`);
+            });
+        }
+      }
+    });
+  });
+  });
+
+
+
+//start the cron jobs
 scheduleEmail.start();
 DeleteUser.start();
