@@ -9,9 +9,11 @@ async function getLookAhead() {
     .collection(semester)
     .get();
   //grab all document from classes
-  let classList = [];
+  let classList = {};
   classes.forEach((doc) => {
-    classList.push(doc.data().courseName);
+    classList[doc.data().courseName] = {
+      creditHours: doc.data().creditHours,
+    };
   });
   let categoryList = [
     "exam",
@@ -23,20 +25,21 @@ async function getLookAhead() {
   ];
   //grabbing data for every Category Type for every class
   let allCategoryTypeData = {};
-  for (let i = 0; i < classList.length; i++) {
-    allCategoryTypeData[classList[i]] = {};
+  for (let courseName in classList) {
+    allCategoryTypeData[courseName] = {
+      creditHours: classList[courseName]["creditHours"],
+    };
     for (let j = 0; j < categoryList.length; j++) {
       individualClassCategory = await db
         .collection("users")
         .doc(userID)
         .collection(semester)
-        .doc(classList[i])
+        .doc(courseName)
         .collection(categoryList[j])
         .get();
       if (!individualClassCategory.empty) {
-        allCategoryTypeData[classList[i]][categoryList[j]] = {};
-        let categoryTypeData =
-          allCategoryTypeData[classList[i]][categoryList[j]];
+        allCategoryTypeData[courseName][categoryList[j]] = {};
+        let categoryTypeData = allCategoryTypeData[courseName][categoryList[j]];
         individualClassCategory.forEach((doc) => {
           const docData = doc.data();
           for (let key in docData) {
@@ -49,33 +52,43 @@ async function getLookAhead() {
       }
     }
   }
+  console.log(allCategoryTypeData);
   return allCategoryTypeData;
 }
 
 ///////////////////////////////Filtering Start///////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-function filterByWeek(data, currentDate) {
+async function filterByWeek(data, currentDate) {
   let filteredData = {};
+
   for (let classKey in data) {
     filteredData[classKey] = {};
     for (let categoryKey in data[classKey]) {
-      filteredData[classKey][categoryKey] = {};
-      for (let [itemKey, item] of Object.entries(data[classKey][categoryKey])) {
-        let itemDate = new Date(item[`${categoryKey}Dates`].replace(/-/g, "/")); // parse with correct format
-        let timeDiff = itemDate.getTime() - currentDate.getTime();
-        let diffInDays = timeDiff / (1000 * 3600 * 24);
-        if (diffInDays >= 0 && diffInDays < 7) {
-          filteredData[classKey][categoryKey][itemKey] = {
-            [`${categoryKey}Dates`]: item[`${categoryKey}Dates`],
-            [`${categoryKey}Grades`]: item[`${categoryKey}Grades`],
-            [`${categoryKey}Weight`]: item[`${categoryKey}Weight`],
-            [`${categoryKey}Complete`]: item[`${categoryKey}Complete`],
-          };
+      if (categoryKey === "creditHours") {
+        filteredData[classKey][categoryKey] = data[classKey][categoryKey];
+      } else {
+        filteredData[classKey][categoryKey] = {};
+        for (let [itemKey, item] of Object.entries(
+          data[classKey][categoryKey]
+        )) {
+          let itemDate = new Date(
+            item[`${categoryKey}Dates`].replace(/-/g, "/")
+          ); // parse with correct format
+          let timeDiff = itemDate.getTime() - currentDate.getTime();
+          let diffInDays = timeDiff / (1000 * 3600 * 24);
+          if (diffInDays >= 0 && diffInDays < 7) {
+            filteredData[classKey][categoryKey][itemKey] = {
+              [`${categoryKey}Dates`]: item[`${categoryKey}Dates`],
+              [`${categoryKey}Grades`]: item[`${categoryKey}Grades`],
+              [`${categoryKey}Weight`]: item[`${categoryKey}Weight`],
+              [`${categoryKey}Complete`]: item[`${categoryKey}Complete`],
+            };
+          }
         }
-      }
-      if (Object.keys(filteredData[classKey][categoryKey]).length === 0) {
-        delete filteredData[classKey][categoryKey];
+        if (Object.keys(filteredData[classKey][categoryKey]).length === 0) {
+          delete filteredData[classKey][categoryKey];
+        }
       }
     }
     if (Object.keys(filteredData[classKey]).length === 0) {
@@ -85,27 +98,36 @@ function filterByWeek(data, currentDate) {
   return filteredData;
 }
 
-function filterByWeek2(data, currentDate) {
+async function filterByWeek2(data, currentDate) {
   let filteredData = {};
+
   for (let classKey in data) {
     filteredData[classKey] = {};
     for (let categoryKey in data[classKey]) {
-      filteredData[classKey][categoryKey] = {};
-      for (let [itemKey, item] of Object.entries(data[classKey][categoryKey])) {
-        let itemDate = new Date(item[`${categoryKey}Dates`].replace(/-/g, "/")); // parse with correct format
-        let timeDiff = itemDate.getTime() - currentDate.getTime();
-        let diffInDays = timeDiff / (1000 * 3600 * 24);
-        if (diffInDays >= 0 && diffInDays < 14) {
-          filteredData[classKey][categoryKey][itemKey] = {
-            [`${categoryKey}Dates`]: item[`${categoryKey}Dates`],
-            [`${categoryKey}Grades`]: item[`${categoryKey}Grades`],
-            [`${categoryKey}Weight`]: item[`${categoryKey}Weight`],
-            [`${categoryKey}Complete`]: item[`${categoryKey}Complete`],
-          };
+      if (categoryKey === "creditHours") {
+        filteredData[classKey][categoryKey] = data[classKey][categoryKey];
+      } else {
+        filteredData[classKey][categoryKey] = {};
+        for (let [itemKey, item] of Object.entries(
+          data[classKey][categoryKey]
+        )) {
+          let itemDate = new Date(
+            item[`${categoryKey}Dates`].replace(/-/g, "/")
+          ); // parse with correct format
+          let timeDiff = itemDate.getTime() - currentDate.getTime();
+          let diffInDays = timeDiff / (1000 * 3600 * 24);
+          if (diffInDays >= 0 && diffInDays < 14) {
+            filteredData[classKey][categoryKey][itemKey] = {
+              [`${categoryKey}Dates`]: item[`${categoryKey}Dates`],
+              [`${categoryKey}Grades`]: item[`${categoryKey}Grades`],
+              [`${categoryKey}Weight`]: item[`${categoryKey}Weight`],
+              [`${categoryKey}Complete`]: item[`${categoryKey}Complete`],
+            };
+          }
         }
-      }
-      if (Object.keys(filteredData[classKey][categoryKey]).length === 0) {
-        delete filteredData[classKey][categoryKey];
+        if (Object.keys(filteredData[classKey][categoryKey]).length === 0) {
+          delete filteredData[classKey][categoryKey];
+        }
       }
     }
     if (Object.keys(filteredData[classKey]).length === 0) {
@@ -115,27 +137,36 @@ function filterByWeek2(data, currentDate) {
   return filteredData;
 }
 
-function filterByWeek3(data, currentDate) {
+async function filterByWeek3(data, currentDate) {
   let filteredData = {};
+
   for (let classKey in data) {
     filteredData[classKey] = {};
     for (let categoryKey in data[classKey]) {
-      filteredData[classKey][categoryKey] = {};
-      for (let [itemKey, item] of Object.entries(data[classKey][categoryKey])) {
-        let itemDate = new Date(item[`${categoryKey}Dates`].replace(/-/g, "/")); // parse with correct format
-        let timeDiff = itemDate.getTime() - currentDate.getTime();
-        let diffInDays = timeDiff / (1000 * 3600 * 24);
-        if (diffInDays >= 0 && diffInDays < 21) {
-          filteredData[classKey][categoryKey][itemKey] = {
-            [`${categoryKey}Dates`]: item[`${categoryKey}Dates`],
-            [`${categoryKey}Grades`]: item[`${categoryKey}Grades`],
-            [`${categoryKey}Weight`]: item[`${categoryKey}Weight`],
-            [`${categoryKey}Complete`]: item[`${categoryKey}Complete`],
-          };
+      if (categoryKey === "creditHours") {
+        filteredData[classKey][categoryKey] = data[classKey][categoryKey];
+      } else {
+        filteredData[classKey][categoryKey] = {};
+        for (let [itemKey, item] of Object.entries(
+          data[classKey][categoryKey]
+        )) {
+          let itemDate = new Date(
+            item[`${categoryKey}Dates`].replace(/-/g, "/")
+          ); // parse with correct format
+          let timeDiff = itemDate.getTime() - currentDate.getTime();
+          let diffInDays = timeDiff / (1000 * 3600 * 24);
+          if (diffInDays >= 0 && diffInDays < 21) {
+            filteredData[classKey][categoryKey][itemKey] = {
+              [`${categoryKey}Dates`]: item[`${categoryKey}Dates`],
+              [`${categoryKey}Grades`]: item[`${categoryKey}Grades`],
+              [`${categoryKey}Weight`]: item[`${categoryKey}Weight`],
+              [`${categoryKey}Complete`]: item[`${categoryKey}Complete`],
+            };
+          }
         }
-      }
-      if (Object.keys(filteredData[classKey][categoryKey]).length === 0) {
-        delete filteredData[classKey][categoryKey];
+        if (Object.keys(filteredData[classKey][categoryKey]).length === 0) {
+          delete filteredData[classKey][categoryKey];
+        }
       }
     }
     if (Object.keys(filteredData[classKey]).length === 0) {
@@ -145,27 +176,36 @@ function filterByWeek3(data, currentDate) {
   return filteredData;
 }
 
-function filterByWeek4(data, currentDate) {
+async function filterByWeek4(data, currentDate) {
   let filteredData = {};
+
   for (let classKey in data) {
     filteredData[classKey] = {};
     for (let categoryKey in data[classKey]) {
-      filteredData[classKey][categoryKey] = {};
-      for (let [itemKey, item] of Object.entries(data[classKey][categoryKey])) {
-        let itemDate = new Date(item[`${categoryKey}Dates`].replace(/-/g, "/")); // parse with correct format
-        let timeDiff = itemDate.getTime() - currentDate.getTime();
-        let diffInDays = timeDiff / (1000 * 3600 * 24);
-        if (diffInDays >= 0 && diffInDays < 28) {
-          filteredData[classKey][categoryKey][itemKey] = {
-            [`${categoryKey}Dates`]: item[`${categoryKey}Dates`],
-            [`${categoryKey}Grades`]: item[`${categoryKey}Grades`],
-            [`${categoryKey}Weight`]: item[`${categoryKey}Weight`],
-            [`${categoryKey}Complete`]: item[`${categoryKey}Complete`],
-          };
+      if (categoryKey === "creditHours") {
+        filteredData[classKey][categoryKey] = data[classKey][categoryKey];
+      } else {
+        filteredData[classKey][categoryKey] = {};
+        for (let [itemKey, item] of Object.entries(
+          data[classKey][categoryKey]
+        )) {
+          let itemDate = new Date(
+            item[`${categoryKey}Dates`].replace(/-/g, "/")
+          ); // parse with correct format
+          let timeDiff = itemDate.getTime() - currentDate.getTime();
+          let diffInDays = timeDiff / (1000 * 3600 * 24);
+          if (diffInDays >= 0 && diffInDays < 28) {
+            filteredData[classKey][categoryKey][itemKey] = {
+              [`${categoryKey}Dates`]: item[`${categoryKey}Dates`],
+              [`${categoryKey}Grades`]: item[`${categoryKey}Grades`],
+              [`${categoryKey}Weight`]: item[`${categoryKey}Weight`],
+              [`${categoryKey}Complete`]: item[`${categoryKey}Complete`],
+            };
+          }
         }
-      }
-      if (Object.keys(filteredData[classKey][categoryKey]).length === 0) {
-        delete filteredData[classKey][categoryKey];
+        if (Object.keys(filteredData[classKey][categoryKey]).length === 0) {
+          delete filteredData[classKey][categoryKey];
+        }
       }
     }
     if (Object.keys(filteredData[classKey]).length === 0) {
@@ -178,30 +218,24 @@ function filterByWeek4(data, currentDate) {
 ///////////////////////////END OF FILTERING/////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
-//filtering by week length
 async function weekLength() {
   let weeks = document.getElementById("weeks").value;
   let data = await getLookAhead();
+  let currentDate = new Date();
   if (weeks == "Week1") {
-    let currentDate = new Date();
     let filteredData = filterByWeek(data, currentDate);
     return filteredData;
   } else if (weeks == "Week2") {
-    let currentDate = new Date();
     let filteredData = filterByWeek2(data, currentDate);
     return filteredData;
   } else if (weeks == "Week3") {
-    let currentDate = new Date();
     let filteredData = filterByWeek3(data, currentDate);
     return filteredData;
   } else if (weeks == "Week4") {
-    let currentDate = new Date();
     let filteredData = filterByWeek4(data, currentDate);
     return filteredData;
   }
 }
-
-
 
 ///////////////////////////POPULATE DATA/////////////////////////////
 
@@ -215,6 +249,10 @@ async function populateData() {
   let items = [];
   for (let classKey in data) {
     for (let categoryKey in data[classKey]) {
+      // Skip processing creditHours
+      if (categoryKey === "creditHours") {
+        continue;
+      }
       for (let itemKey in data[classKey][categoryKey]) {
         let item = data[classKey][categoryKey][itemKey];
         items.push({
@@ -236,6 +274,12 @@ async function populateData() {
       continue;
     }
 
+    // calculate the remaining days until the deadline
+    let currentDate = new Date();
+    let remainingDays = Math.ceil(
+      (item.deadline - currentDate) / (1000 * 60 * 60 * 24)
+    );
+
     count++;
     let tr = document.createElement("tr");
     tr.setAttribute("id", `tr${count}`);
@@ -246,7 +290,9 @@ async function populateData() {
     let weightTd = document.createElement("td");
     weightTd.textContent = `${item.item[`${item.categoryKey}Weight`]}%`;
     let deadlineTd = document.createElement("td");
-    deadlineTd.textContent = item.item[`${item.categoryKey}Dates`];
+    deadlineTd.textContent = `${
+      item.item[`${item.categoryKey}Dates`]
+    } (${remainingDays} days left)`;
     let completionTd = document.createElement("td");
     let completionInput = document.createElement("input");
     completionInput.setAttribute("type", "checkbox");
@@ -269,63 +315,16 @@ async function populateData() {
     tableBody.appendChild(tr);
   }
 
-  // count number of items for each class
-  let counts = {};
-  for (let classKey in data) {
-    let count = 0;
-    for (let categoryKey in data[classKey]) {
-      for (let itemKey in data[classKey][categoryKey]) {
-        count++;
-      }
-    }
-    counts[classKey] = count;
-  }
-
-  // calculate weights for each category and class
-  let weights = {};
-  for (let classKey in data) {
-    weights[classKey] = {};
-    for (let categoryKey in data[classKey]) {
-      let categoryWeight = 0;
-      for (let itemKey in data[classKey][categoryKey]) {
-        let item = data[classKey][categoryKey][itemKey];
-        categoryWeight += parseFloat(item[`${categoryKey}Weight`]);
-      }
-      weights[classKey][categoryKey] = categoryWeight.toFixed(1);
-    }
-  }
-
-  // calculate weights for each class
-  let classWeights = {};
-  for (let classKey in weights) {
-    classWeights[classKey] = 0;
-    for (let categoryKey in weights[classKey]) {
-      let weight = parseFloat(weights[classKey][categoryKey]);
-      classWeights[classKey] += weight;
-    }
-  }
-
-  // normalize weights to get percentages
-  let totalWeight = 0;
-  for (let classKey in classWeights) {
-    totalWeight += classWeights[classKey];
-  }
-  for (let classKey in classWeights) {
-    classWeights[classKey] = (
-      (classWeights[classKey] / totalWeight) *
-      100
-    ).toFixed(1);
-  }
-
-  console.log(classWeights);
-
+  const pieChartData = calculatePieChartData(data);
+  console.log(pieChartData);
+  
   // create chart
   let chartData = {
-    labels: Object.keys(counts),
+    labels: Object.keys(pieChartData),
     datasets: [
       {
-        label: "Number of Items",
-        data: Object.values(classWeights),
+        label: "%",
+        data: Object.values(pieChartData),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -360,7 +359,7 @@ async function populateData() {
     data: chartData,
   });
 }
-
+//CONFIRM BUTTON
 document.getElementById("confirm").addEventListener("click", async function () {
   let data = Array.from(document.getElementsByClassName("completion"));
   console.log(data);
@@ -389,3 +388,56 @@ document.getElementById("confirm").addEventListener("click", async function () {
     }
   }
 });
+
+
+function calculatePieChartData(data) {
+  // todoCourseWeight 
+  let weightedValues = {};
+  for (let classKey in data) {
+    weightedValues[classKey] = 0;
+    for (let categoryKey in data[classKey]) {
+      // Skip processing creditHours
+      if (categoryKey === "creditHours") {
+        continue;
+      }
+      for (let itemKey in data[classKey][categoryKey]) {
+        let item = data[classKey][categoryKey][itemKey]; {
+          weightedValues[classKey] += item[`${categoryKey}Weight`];
+        }
+      }
+    }
+  }
+  // do the same thing but for CreditHours
+  let creditHours = {};
+  for (let classKey in data) {
+    creditHours[classKey] = 0;
+    for (let categoryKey in data[classKey]) {
+      // Skip processing creditHours
+      if (categoryKey === "creditHours") {
+        const creditHoursString = data[classKey][categoryKey];
+        const creditHoursInteger = parseInt(creditHoursString.replace(" Credits", ""));
+        creditHours[classKey] = creditHoursInteger;
+      }
+    }
+  }
+  // todoRelativeWeight
+  let weightedCreditHours = {};
+  for (let classKey in weightedValues) {
+    weightedCreditHours[classKey] = weightedValues[classKey] * creditHours[classKey];
+  }
+  // todoTotalWeight
+  let totalWeightedCreditHours = 0;
+  for (let classKey in weightedCreditHours) {
+    totalWeightedCreditHours += weightedCreditHours[classKey];
+  }
+  // caculate percetnage by dividing todoRelativeWeight by todoTotalWeight
+  let percentage = {};
+  for (let classKey in weightedCreditHours) {
+    percentage[classKey] = (weightedCreditHours[classKey] / totalWeightedCreditHours)*100;
+  }
+  return percentage;
+    
+}
+
+
+

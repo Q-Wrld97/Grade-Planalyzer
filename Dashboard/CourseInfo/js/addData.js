@@ -435,9 +435,6 @@ function addNewData(){
           await  db.collection('users').doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+'Weight').set(
               SubCollectionPerWeight[i]
             )
-          await  db.collection('users').doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+'Weight').set(
-              SubCollectionPerWeight[i]
-            )
           await db.collection('users').doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+'Complete').set(
               SubCollectionComplete[i]
             )
