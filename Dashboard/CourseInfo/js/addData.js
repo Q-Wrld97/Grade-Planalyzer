@@ -34,18 +34,18 @@ function addNewData(){
   if (document.getElementById("customRadio1").checked){
     
     var gradeScale = {
-      'A': '93',
-      'A-': '92',
-      'B+': '87',
-      'B': '83',
-      'B-': '82',
-      'C+': '77',
-      'C': '73',
-      'C-': '70',
-      'D+': '67',
-      'D': '63',
-      'D-': '60',
-      'F': '0'
+      'A': 93,
+      'A-': 92,
+      'B+': 87,
+      'B': 83,
+      'B-': 82,
+      'C+': 77,
+      'C': 73,
+      'C-': 70,
+      'D+': 67,
+      'D': 63,
+      'D-': 60,
+      'F': 0
     };
 
   }
@@ -53,17 +53,17 @@ function addNewData(){
   else if (document.getElementById("customRadio2").checked){
     
     var gradeScale = {
-      'A': '90',
-      'A-': '87',
-      'B+': '83',
-      'B': '80',
-      'B-': '77',
-      'C+': '73',
-      'C': '70',
-      'C-': '67',
-      'D+': '63',
-      'D': '60',
-      'F': '0'
+      'A': 90,
+      'A-': 87,
+      'B+': 83,
+      'B': 80,
+      'B-': 77,
+      'C+': 73,
+      'C': 70,
+      'C-': 67,
+      'D+': 63,
+      'D': 60,
+      'F': 0
     };
 
   }
@@ -72,18 +72,18 @@ function addNewData(){
     
 
     var gradeScale = {
-      'A': document.getElementsByName('A')[0].value,
-      'A-': document.getElementsByName('A-')[0].value,
-      'B+': document.getElementsByName('B+')[0].value,
-      'B': document.getElementsByName('B')[0].value,
-      'B-': document.getElementsByName('B-')[0].value,
-      'C+': document.getElementsByName('C+')[0].value,
-      'C': document.getElementsByName('C')[0].value,
-      'C-': document.getElementsByName('C-')[0].value,
-      'D+': document.getElementsByName('D+')[0].value,
-      'D': document.getElementsByName('D')[0].value,
-      'D-': document.getElementsByName('D-')[0].value,
-      'F': document.getElementsByName('F')[0].value
+      'A': parseFloat(document.getElementsByName('A')[0].value),
+      'A-': parseFloat(document.getElementsByName('A-')[0].value),
+      'B+': parseFloat(document.getElementsByName('B+')[0].value),
+      'B': parseFloat(document.getElementsByName('B')[0].value),
+      'B-': parseFloat(document.getElementsByName('B-')[0].value),
+      'C+': parseFloat(document.getElementsByName('C+')[0].value),
+      'C': parseFloat(document.getElementsByName('C')[0].value),
+      'C-': parseFloat(document.getElementsByName('C-')[0].value),
+      'D+': parseFloat(document.getElementsByName('D+')[0].value),
+      'D': parseFloat(document.getElementsByName('D')[0].value),
+      'D-': parseFloat(document.getElementsByName('D-')[0].value),
+      'F': parseFloat(document.getElementsByName('F')[0].value)
     };
     
     //fuction check to see 
@@ -136,7 +136,7 @@ function addNewData(){
     var examComplete= {};
     for (let i=1; i <= examQuantity; i++){
       exam[`exam${i}`] = null;
-      perExamWeight[`exam${i}`] = perExamWeightData;
+      perExamWeight[`exam${i}`] = parseFloat(perExamWeightData);
       examComplete[`exam${i}`] = false;
     }
   }
@@ -157,7 +157,7 @@ function addNewData(){
     for (let i=1; i <= examQuantity; i++){
       const perExamWeightData = document.getElementById(`Exam${i}`);
       exam[`exam${i}`] = null;
-      perExamWeight[`exam${i}`] = perExamWeightData.value;
+      perExamWeight[`exam${i}`] = parseFloat(perExamWeightData.value);
       examComplete[`exam${i}`] = false;
     }
   }
@@ -178,7 +178,7 @@ function addNewData(){
     var quizComplete = {};
     for (let i=1; i <= quizQuantity; i++){
       quiz[`quiz${i}`] = null;
-      perQuizWeight[`quiz${i}`] = perQuizWeightData;
+      perQuizWeight[`quiz${i}`] = parseFloat(perQuizWeightData);
       quizComplete[`quiz${i}`] = false;
     }
   }
@@ -198,7 +198,7 @@ function addNewData(){
     for (let i=1; i <= quizQuantity; i++){
       const perQuizWeightData = document.getElementById(`Quiz${i}`).value;
       quiz[`quiz${i}`] = null;
-      perQuizWeight[`quiz${i}`] = perQuizWeightData;
+      perQuizWeight[`quiz${i}`] = parseFloat(perQuizWeightData);
       quizComplete[`quiz${i}`] = false;
     }
   }
@@ -219,7 +219,7 @@ function addNewData(){
     var assignmentComplete = {};
     for (let i=1; i <= assignmentQuantity; i++){
       assignment[`assignment${i}`] = null;
-      perAssignmentWeight[`assignment${i}`] = perAssignmentWeightData;
+      perAssignmentWeight[`assignment${i}`] = parseFloat(perAssignmentWeightData);
       assignmentComplete[`assignment${i}`] = false;
     }
   }
@@ -239,7 +239,7 @@ function addNewData(){
     for (let i=1; i <= assignmentQuantity; i++){
       const perAssignmentWeightData = document.getElementById(`Assignment${i}`);
       assignment[`assignment${i}`] = null;
-      perAssignmentWeight[`assignment${i}`] = perAssignmentWeightData.value;
+      perAssignmentWeight[`assignment${i}`] = parseFloat(perAssignmentWeightData.value);
       assignmentComplete[`assignment${i}`] = false;
     }
   }
@@ -261,7 +261,7 @@ function addNewData(){
     var discussionComplete = {};
     for (let i=1; i <= discussionQuantity; i++){
       discussion[`discussion${i}`] = null;
-      perDiscussionWeight[`discussion${i}`] = perDiscussionWeightData;
+      perDiscussionWeight[`discussion${i}`] = parseFloat(perDiscussionWeightData);
       discussionComplete[`discussion${i}`] = false;
     }
 
@@ -283,7 +283,7 @@ function addNewData(){
     for (let i=1; i <= discussionQuantity; i++){
       const perDiscussionWeightData = document.getElementById(`Discussion${i}`);
       discussion[`discussion${i}`] = null;
-      perDiscussionWeight[`discussion${i}`] = perDiscussionWeightData.value;
+      perDiscussionWeight[`discussion${i}`] = parseFloat(perDiscussionWeightData.value);
       discussionComplete[`discussion${i}`] = false;
     }
   }
@@ -304,7 +304,7 @@ function addNewData(){
     var projectComplete = {};
     for (let i=1; i <= projectQuantity; i++){
       project[`project${i}`] = null;
-      perProjectWeight[`project${i}`] = perProjectWeightData;
+      perProjectWeight[`project${i}`] = parseFloat(perProjectWeightData);
       projectComplete[`project${i}`] = false;
     }
 
@@ -325,7 +325,7 @@ function addNewData(){
     for (let i=1; i <= projectQuantity; i++){
       const perProjectWeightData = document.getElementById(`Project${i}`);
       project[`project${i}`] = null;
-      perProjectWeight[`project${i}`] = perProjectWeightData.value;
+      perProjectWeight[`project${i}`] = parseFloat(perProjectWeightData.value);
       projectComplete[`project${i}`] = false;
     }
   }
@@ -346,7 +346,7 @@ function addNewData(){
     var participationComplete = {};
     for (let i=1; i <= participationQuantity; i++){
       participation[`participation${i}`] = null;
-      perParticipationWeight[`participation${i}`] = perParticipationWeightData;
+      perParticipationWeight[`participation${i}`] = parseFloat(perParticipationWeightData);
       participationComplete[`participation${i}`] = false;
     }
   }
@@ -366,7 +366,7 @@ function addNewData(){
     for (let i=1; i <= participationQuantity; i++){
       const perParticipationWeightData = document.getElementById(`Participation${i}`);
       participation[`participation${i}`] = null;
-      perParticipationWeight[`participation${i}`] = perParticipationWeightData.value;
+      perParticipationWeight[`participation${i}`] = parseFloat(perParticipationWeightData.value);
       participationComplete[`participation${i}`] = false;
     }
   }
