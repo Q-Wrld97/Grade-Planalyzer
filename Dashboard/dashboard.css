@@ -729,3 +729,59 @@ img{
 /*====================================================================*/
 /*           GradeEntry CSS ends here
 /*====================================================================*/
+
+.courseInfoContainer {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 100px;
+    height: 80vh;
+    border: 1px solid #940000;
+    padding: 20px;
+    overflow-y: auto;
+    
+  }
+  
+  .course-square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 250px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 5px;
+  
+  }
+  
+  .course-square:hover {
+    transform: scale(1.05);
+  }
+  
+  .course-square i {
+    font-size: 50px;
+    margin-right: 10px;
+  }
+  
+  .course-square span {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .added-course {
+    background: rgba(24,24,27,0.8);
+  }
+  
+  .added-course:hover {
+    transform: none;
+  }
+  
+  .added-course i {
+    color: white;
+  }
+  
+  .added-course span {
+    color: white;
+  }
