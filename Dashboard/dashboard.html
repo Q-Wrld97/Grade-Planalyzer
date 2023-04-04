@@ -36,7 +36,7 @@
 
             <button class="tablinks" onclick="openTab(event, 'LookAhead')"><img src="../Assets/Icons/lookAhead2.png" class="lookAheadIcon"></button>
             <button class="tablinks" onclick="openTab(event, 'Infographics')"><img src="../Assets/Icons/infographics2.png" class="infographicsIcon"><!--Infographics--></button>
-            <button class="tablinks" onclick="openTab(event, 'GradeEntry')"><img src="../Assets/Icons/gradeEntry2.png" class="gradeEntryIcon"></button>
+            <button class="tablinks" id="gradeEntryIcon"><img src="../Assets/Icons/gradeEntry2.png" class="gradeEntryIcon"></button>
             <button class="tablinks" onclick="openTab(event, 'CourseInfo')"><img src="../Assets/Icons/courseInfo2.png" class="courseInfoIcon"></button>
             <button class="tablinks" onclick="openTab(event, 'WhatIf')"><img src="../Assets/Icons/whatIf2.png" class="whatIfIcon"></button>
             
@@ -289,13 +289,9 @@
                 </div>
 
                 <div class="gradeEntryTabBottomLeft">
-                    <div class="container-gradeEntry">
-                        <button class="tablinks" onclick="openTab(event, 'GradeEntry')">SWE</button>
+                    <div id="courseTab" class="container-gradeEntry">
                         <!--Grab the rest by ID-->
-                        <button class="tablinks" onclick="openTab(event, '#')">LAN</button> 
-                        <button class="tablinks" onclick="openTab(event, '#')">DES</button>
-                        <button class="tablinks" onclick="openTab(event, '#')">COS</button>
-                        <button class="tablinks" onclick="openTab(event, '#')">TOC</button>
+               
                     </div>
                 </div>
                 
@@ -460,4 +456,5 @@
 <script src = "dashboard.js"></script>
 <script src="lookAhead.js"></script>
 <script src="infographics.js"></script>
+<script src="gradeEntry.js"></script>
 </html>
