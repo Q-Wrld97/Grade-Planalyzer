@@ -45,7 +45,7 @@ const ctx = document.getElementById('barChart');
 new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ['SWE', 'LAN', 'DES', 'COS', 'TOC', '8001Y'],
+    labels: ['SWE', 'LAN', 'DES', 'COS', 'TOC', 'CNT'],
     datasets: [{
       label: 'Classes',
       data: [12, 19, 3, 5, 2, 33],
