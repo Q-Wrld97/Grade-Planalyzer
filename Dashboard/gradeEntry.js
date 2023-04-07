@@ -67,6 +67,8 @@ async function getGradeEntry() {
   globalComplete = allFinishTypeData;
   return allCategoryTypeData;
 }
+
+
 //removes undefined values from the object 
 function removeUndefined(obj) {
   for (const key in obj) {
@@ -77,7 +79,9 @@ function removeUndefined(obj) {
     }
   }
 }
-//Extract key from hashnmap
+
+
+//Extract key from hash map
 function extractKeys(obj) {
   const result = [];
   for (const key in obj) {
@@ -85,6 +89,8 @@ function extractKeys(obj) {
   }
   return result;
 }
+
+
 //tabbing function for grade entry tab
 function openTab(evt, cityName) {
     var i, tabcontent, tablinks;
@@ -99,6 +105,9 @@ function openTab(evt, cityName) {
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
 }
+
+
+
 //populate the tab for the grade entry
 async function populateCourseTab() {
   if (globalGrades === undefined) {
@@ -150,29 +159,73 @@ async function populateGradeEntryTab(courseName) {
   let courseData = data[courseName];
   let courseData2 = data2[courseName];
   console.log(courseData)
-  let gradeEntry = document.getElementById("recentFormSize");
-  gradeEntry.innerHTML = "";
-  // go throught the courseData if any field is null, populate it in html
+  let gradeEntryRecent = document.getElementById("recentFormSize");
+  gradeEntryRecent.innerHTML = "";
+  let pastDiscussion = document.getElementById("pastDiscussion");
+  pastDiscussion.innerHTML = "";
+  let pastQuiz=document.getElementById("pastQuiz");
+  pastQuiz.innerHTML="";
+  let pastExam=document.getElementById("pastExam");
+  pastExam.innerHTML="";
+  let pastAssignment=document.getElementById("pastAssignment");
+  pastAssignment.innerHTML="";
+  let pastProject=document.getElementById("pastProject");
+  pastProject.innerHTML="";
+  let pastParticipation=document.getElementById("pastParticipation");
+  pastParticipation.innerHTML="";
+
+  // go and populate all the data in grade entry tab base on the class
   for (const key in courseData) {
     for (const key2 in courseData[key]) {
+      //populate for recent grade
       if (courseData[key][key2] === null && courseData2[key][key2] === true) {
         let gradeEntryForm = document.createElement("div");
         gradeEntryForm.className = "form-group";
-        gradeEntry.appendChild(gradeEntryForm);
+        gradeEntryRecent.appendChild(gradeEntryForm);
         let gradeEntryLabel = document.createElement("label");
         gradeEntryLabel.innerHTML = key2;
         gradeEntryLabel.className="recentFormLabel"
         gradeEntryForm.appendChild(gradeEntryLabel);
         let gradeEntryInput = document.createElement("input");
-        gradeEntryInput.id=key2;
-        gradeEntryInput.type=Number;
+        gradeEntryInput.id=key2+"Recent";
+        gradeEntryInput.type="number";
         gradeEntryInput.className="form-control";
         gradeEntryLabel.appendChild(gradeEntryInput)
-
+      }
+      let strippedKey = key.replace(/[0-9]/g, '');
+      let capitalizedKey = strippedKey.charAt(0).toUpperCase() + strippedKey.slice(1);
+      //populate for grade entry for Past grade in the proper section
+      if (courseData[key][key2] !== null && courseData2[key][key2] === true) {
+        let gradeEntryForm = document.createElement("div");
+        gradeEntryForm.className = "form-group";
+        let gradeEntryLabel = document.createElement("label");
+        gradeEntryLabel.innerHTML = key2;
+        gradeEntryLabel.className="recentFormLabel"
+        gradeEntryForm.appendChild(gradeEntryLabel);
+        let gradeEntryInput = document.createElement("input");
+        gradeEntryInput.id=key2+"Past";
+        gradeEntryInput.type="number";
+        gradeEntryInput.value=courseData[key][key2]
+        gradeEntryInput.className="form-control";
+        gradeEntryLabel.appendChild(gradeEntryInput)
+        if (capitalizedKey.includes("Discussion")) {
+          pastDiscussion.appendChild(gradeEntryForm);
+        } else if (capitalizedKey.includes("Quiz")) {
+          pastQuiz.appendChild(gradeEntryForm);
+        } else if (capitalizedKey.includes("Exam")) {
+          pastExam.appendChild(gradeEntryForm);
+        } else if (capitalizedKey.includes("Assignment")) {
+          pastAssignment.appendChild(gradeEntryForm);
+        } else if (capitalizedKey.includes("Project")) {
+          pastProject.appendChild(gradeEntryForm);
+        } else if (capitalizedKey.includes("Participation")) {
+          pastParticipation.appendChild(gradeEntryForm);
+        }
       }
     }
   }
 }
+
 
 
 
