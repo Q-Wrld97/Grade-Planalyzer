@@ -811,3 +811,56 @@ img{
 .add-course-paragraph {
     padding-top: 50px;
 }
+
+/*====================================================================*/
+/*           CourseInfo CSS ends here
+/*====================================================================*/
+
+#courseInfoColumn1 {
+    overflow-y: auto;
+    float: left;
+    width: 60%;
+    height: 65vh;
+    color: white;
+   
+
+}
+#courseInfoColumn2 {
+    float: left;
+    width: 40%;
+    height: 65vh;
+    color: white;
+    padding-right: 30px;
+    flex-direction: row;
+
+}
+.custom-range {
+    width: 90%;
+}
+
+.whatIfcontainer{
+    max-width: 95%;
+    padding-left: 50px;
+    padding-top: 50px;
+}
+
+#scoreValue{
+    padding-left: 30px;
+
+}
+.scrollbar{
+    padding-top: 50px;
+    padding-left: 50px;
+}
+.whatIfGradeImage{
+    height: auto;
+    width: auto;
+    text-align: center;
+}
+
+.whatIfGradeBox {
+    text-align: center;
+    padding: 10px;
+    border: 2px solid rgb(255, 255, 255);
+ 
+}
