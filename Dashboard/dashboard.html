@@ -358,7 +358,7 @@
 
                 <div class="infotabRight">
                     <div class="container-submitButton">
-                        <button class="button" type="submit">Submit Grade Changes</button>
+                        <button id="submitButton" class="button" type="submit">Submit Grade Changes</button>
                     </div>
                 </div>
 
@@ -375,14 +375,14 @@
                 
         
                 <div id="infoColumn">                    
-                    <div id="courseInfoColumn1">
+                    <div id="whatIfColumn1">
                         <div class="scrollbar">
                             <div>
-                                <label for="customRange">Class 1:</label>
+                                <label for="customRange1">Class 1:</label>
                             </div>
                             <div>
-                                <input type="range" class="custom-range" id="customRange" min="0" max="100" step="1">
-                                <span id="scoreValue">0</span>
+                                <input type="range" class="custom-range" id="customRange1" min="0" max="100" step="0.1">
+                                <span id="scoreValue1">0</span>
                             </div>
                         </div>
                         <div class="scrollbar">
@@ -390,7 +390,7 @@
                                 <label for="customRange2">Class 2:</label>
                             </div>
                             <div>
-                                <input type="range" class="custom-range" id="customRange2" min="0" max="100" step="1">
+                                <input type="range" class="custom-range" id="customRange2" min="0" max="100" step="0.1">
                                 <span id="scoreValue2">0</span>
                             </div>
                         </div>
@@ -399,37 +399,36 @@
                                 <label for="customRange3">Class 3:</label>
                             </div>
                             <div>
-                                <input type="range" class="custom-range" id="customRange3" min="0" max="100" step="1">
+                                <input type="range" class="custom-range" id="customRange3" min="0" max="100" step="0.1">
                                 <span id="scoreValue3">0</span>
                             </div>
                         </div>
                         <div class="scrollbar">
                             <div>
-                                <label for="customRange3">Class 4:</label>
+                                <label for="customRange4">Class 4:</label>
                             </div>
                             <div>
-                                <input type="range" class="custom-range" id="customRange3" min="0" max="100" step="1">
-                                <span id="scoreValue3">0</span>
+                                <input type="range" class="custom-range" id="customRange4" min="0" max="100" step="0.1">
+                                <span id="scoreValue4">0</span>
                             </div>
                         </div>
                         <div class="scrollbar">
                             <div>
-                                <label for="customRange3">Class 5:</label>
+                                <label for="customRange5">Class 5:</label>
                             </div>
                             <div>
-                                <input type="range" class="custom-range" id="customRange3" min="0" max="100" step="1">
-                                <span id="scoreValue3">0</span>
+                                <input type="range" class="custom-range" id="customRange5" min="0" max="100" step="0.1">
+                                <span id="scoreValue5">0</span>
                             </div>
                         </div>
                     </div>
                     
-                    
-                    <div id="courseInfoColumn2">
+                    <div id="whatIfColumn2">
                         <div class="whatIfGradeImage">
                             <img src="../Assets/Grade_Planalyzer_Logo_PNG.png" alt="Logo">
                         </div>
                         <div class="whatIfGradeBox">
-                            <div>
+                            <div class="whatIfGradeBoxValue">
                                 <h3>88.24%</h3>
                             </div>
                         </div>
@@ -460,4 +459,5 @@
 <script src="infographics.js"></script>
 <script src="gradeEntry.js"></script>
 <script src="courseInfo.js"></script>
+<script src="whatIf.js"></script>
 </html>
