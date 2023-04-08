@@ -570,9 +570,9 @@ img{
 
 .tablinks {
     background-color: #a1a1a1;
-    border: 1px solid #000000;
+    border-color: black;
     border-bottom: none;
-    padding: 10px 20px;
+    padding: 10px 50px;
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
@@ -816,22 +816,25 @@ img{
 /*           CourseInfo CSS ends here
 /*====================================================================*/
 
-#courseInfoColumn1 {
+/*====================================================================*/
+/*           WhatIf CSS starts here
+/*====================================================================*/
+#whatIfColumn1 {
     overflow-y: auto;
     float: left;
     width: 60%;
     height: 65vh;
     color: white;
-   
-
 }
-#courseInfoColumn2 {
+#whatIfColumn2 {
     float: left;
     width: 40%;
     height: 65vh;
     color: white;
     padding-right: 30px;
     flex-direction: row;
+    text-align: center;
+    overflow-y: auto;
 
 }
 .custom-range {
@@ -853,14 +856,25 @@ img{
     padding-left: 50px;
 }
 .whatIfGradeImage{
-    height: auto;
-    width: auto;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .whatIfGradeBox {
-    text-align: center;
-    padding: 10px;
-    border: 2px solid rgb(255, 255, 255);
- 
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.whatIfGradeBoxValue{
+    text-align: center;
+    border: 3px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    height: 70px;
+    width: 200px;
+}
+
+.whatIfGradeBoxValue h3 {
+    font-size: 3em;
+  }
