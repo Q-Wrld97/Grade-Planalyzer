@@ -1,5 +1,6 @@
-let globalGrades; 
-let globalComplete;
+let globalGrades;  // global variable to store the grades
+let globalComplete; // global variable to store the completion status
+let currentTabPick; // global variable to store the current tab pick
 //grabbing data from the database
 async function getGradeEntry() {
   let userID = auth.currentUser.uid;
@@ -156,6 +157,7 @@ async function populateGradeEntryTab(courseName) {
   } else {
     var data2 = globalComplete;
   }
+
   let courseData = data[courseName];
   let courseData2 = data2[courseName];
   console.log(courseData)
@@ -188,6 +190,8 @@ async function populateGradeEntryTab(courseName) {
         gradeEntryForm.appendChild(gradeEntryLabel);
         let gradeEntryInput = document.createElement("input");
         gradeEntryInput.id=key2+"Recent";
+        gradeEntryInput.name="Recent"
+        gradeEntryInput.value=null;
         gradeEntryInput.type="number";
         gradeEntryInput.className="form-control";
         gradeEntryLabel.appendChild(gradeEntryInput)
@@ -200,11 +204,12 @@ async function populateGradeEntryTab(courseName) {
         gradeEntryForm.className = "form-group";
         let gradeEntryLabel = document.createElement("label");
         gradeEntryLabel.innerHTML = key2;
-        gradeEntryLabel.className="recentFormLabel"
+        gradeEntryLabel.className="pastFormLabel"
         gradeEntryForm.appendChild(gradeEntryLabel);
         let gradeEntryInput = document.createElement("input");
         gradeEntryInput.id=key2+"Past";
         gradeEntryInput.type="number";
+        gradeEntryInput.name="Past"
         gradeEntryInput.value=courseData[key][key2]
         gradeEntryInput.className="form-control";
         gradeEntryLabel.appendChild(gradeEntryInput)
@@ -224,7 +229,57 @@ async function populateGradeEntryTab(courseName) {
       }
     }
   }
+ currentTabPick = courseName
+
 }
+
+// function to submit grades
+async function submitGrade() {
+  
+  //grab data from html elment for recent
+  let recentGradeName = document.getElementsByClassName("recentFormLabel")
+  let recentGradeValue = document.getElementsByName('Recent')
+  let recentGrade = {}
+  let recentGradeValueArray = Array.from(recentGradeValue);
+  for (let i = 0; i < recentGradeName.length; i++) {
+    recentGrade[recentGradeName[i].textContent] = recentGradeValueArray[i].value
+   }
+  let pastGradeName = document.getElementsByClassName("pastFormLabel")
+  let pastGradeValue = document.getElementsByName('Past')
+  let pastGradeValueArray = Array.from(pastGradeValue);
+  for (let i = 0; i < pastGradeName.length; i++) {
+    recentGrade[pastGradeName[i].textContent] = pastGradeValueArray[i].value
+   }
+  console.log(recentGrade)
+  let userID = auth.currentUser.uid;
+  let semester = document.getElementById("semesterSelect").value;
+  let course = currentTabPick;
+  //go through recentgrade and take out the key and store into array
+  let recentGradeKey = Object.keys(recentGrade)
+  // remove number from the key
+  let recentGradeKeyArray = recentGradeKey.map((x) => x.replace(/[0-9]/g, ''));
+  console.log(recentGradeKeyArray)
+  console.log(recentGradeKey)
+  for (i = 0; i < recentGradeKeyArray.length; i++) {
+    courseData = await db.collection("users").doc(userID).collection(semester).doc(course).collection(recentGradeKeyArray[i]).doc(recentGradeKeyArray[i]+"Grades").update({
+      [recentGradeKey[i]]: parseFloat(recentGrade[recentGradeKey[i]])
+    });
+
+  }
+  getGradeEntry()
+
+}
+
+
+ 
+  
+   
+
+
+
+
+
+ 
 
 
 
