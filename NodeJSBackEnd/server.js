@@ -89,8 +89,17 @@ const scheduleEmail = cron.schedule('*0 9 * * 0', () => {
 
 
 
-// every hour check for unverified users and delete them if they are older than 24 hours
-const DeleteUser = cron.schedule('0 * * * * *', () => {
+/*
+//****************************************************************************
+Precondition: User has created an account and 24 hrs has passed without confirmation
+
+Postcondition: We first iterate through all user ID and Time of Creation(TOC) from the authentication in Firebase. Then, for each user, we check using .emailVerified method to verify if the given user is currently not verified. Prior to comparison, we calculate TimeSinceCreation as the difference between the current time and TOC. Additionally, we declare a variable called timeThreshold that holds the 24-hour threshold. If TimeSinceCreation > timeThreshold, we proceed with the "if" statement to delete the user in authentication and Firestore.
+
+Description: Look for users that have registered but have not verified their accounts. If it has been past 24 hours, delete the user account and database. The function runs every hour.
+//****************************************************************************
+
+*/
+const DeleteUser = cron.schedule('0 * * * *',  () => {
 
 
   // Get all users from Firebase auth

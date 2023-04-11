@@ -2,17 +2,7 @@ let addButton = document.querySelector(".course-square");
 let container = document.querySelector(".courseInfoContainer");
 
 addButton.addEventListener("click", function () {
-  let newButton = document.createElement("div");
-  newButton.classList.add("course-square", "added-course");
-  newButton.innerHTML =
-    '<i class="fa fa-book"></i><span>Course Name</span> <button class="edit-button">Edit</button> <button class="delete-button">Delete</button>';
-
-  let deleteButton = newButton.querySelector(".delete-button");
-  deleteButton.addEventListener("click", function () {
-    newButton.remove();
-  });
-
-  container.prepend(newButton);
+  window.location.href = "CourseInfo/html/courseForm.html";
 });
 
 //grab data for course info
@@ -29,8 +19,11 @@ async function getCourseInfoForInfoTab() {
     classList.push(doc.id);
   });
   for (i in classList) {
+    currentElement=document.getElementById(classList[i]+"Icon");
+    if (currentElement ==  null){
     let newButton = document.createElement("div");
     newButton.classList.add("course-square", "added-course");
+    newButton.id = classList[i]+"Icon";
     newButton.innerHTML =
       '<i class="fa fa-book"></i><span>' +
       classList[i] +
@@ -103,6 +96,7 @@ async function getCourseInfoForInfoTab() {
     });
     container.prepend(newButton);
   }
+}
 }
 
 //event listener for the course info tab
