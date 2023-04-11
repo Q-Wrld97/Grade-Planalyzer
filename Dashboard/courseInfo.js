@@ -90,6 +90,7 @@ async function getCourseInfoForInfoTab() {
         para.append("courseName", courseName);
         para.append("semesterSeason", semesterSeason);
         para.append("semesterYear", semesterYear);
+        window.location.href = "CourseInfo/html/editCourseForm.html?" + para.toString();
       } else {
         //do nothing
       }

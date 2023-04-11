@@ -1,0 +1,48 @@
+#semesterSeason {
+  width: 100px;
+}
+
+#semesterYear {
+  width: 100px;
+}
+#courseForm{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#gradescale{
+  width: 100%;
+  margin: 5px;
+}
+
+body{
+  background: linear-gradient(to top, rgb(0,0,0,0.0) 50%,#234c6b) 10%, url(../../../Assets/background.png);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: auto;
+  color: white;
+}
+
+#error2{
+  color: red;
+  font-weight: bold;
+  height: auto;
+  margin: 10px;
+}
+
+
+#header{
+  font-weight: bold;
+  margin:10px;
+  width: 160px;
+}
+
+.checkbox{
+  width: 215px;
+}
+
+.classDayLength{
+  width:100% !important;
+}
