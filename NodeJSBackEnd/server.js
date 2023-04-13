@@ -99,7 +99,7 @@ Description: Look for users that have registered but have not verified their acc
 //****************************************************************************
 
 */
-const DeleteUser = cron.schedule('0 * * * *',  () => {
+const deleteUser = cron.schedule('0 * * * *',  () => {
 
 
   // Get all users from Firebase auth
@@ -136,10 +136,10 @@ const DeleteUser = cron.schedule('0 * * * *',  () => {
       }
     });
   });
-  });
+});
 
 
 
 //start the cron jobs
 scheduleEmail.start();
-DeleteUser.start();
+deleteUser.start();
