@@ -3,24 +3,16 @@
 const submitBtn = document.getElementById('submitButton');
 
 submitBtn.addEventListener("click", () => {
-    const score1 = parseFloat(scoreValue1.innerText);
-    const score2 = parseFloat(scoreValue2.innerText);
-    const score3 = parseFloat(scoreValue3.innerText);
-    const score4 = parseFloat(scoreValue4.innerText);
-    const score5 = parseFloat(scoreValue5.innerText);
-
-    const averageScore = (score1 + score2 + score3 + score4 + score5) / 5;
-
-    console.log(`Class 1: ${score1}, Class 2: ${score2}, Class 3: ${score3}, Class 4: ${score4}, Class 5: ${score5}`);
-    console.log(`Average Score: ${averageScore}`);
-
-    const whatIfGradeBoxValue = document.querySelector('.whatIfGradeBoxValue');
-    whatIfGradeBoxValue.innerHTML = `<h3>${averageScore.toFixed(2)}%</h3>`;
+  calculateWhatif()
 });
 
 /*=====================================Slider Functionalties End==================================================*/
 var currentClassComplete;
 var currentClassGrades;
+var currentClassesWeight;
+var currentClassGeneralData;
+var globalWeight;
+var globalGeneralData;
 
 async function getWhatIf() {
   let userID = auth.currentUser.uid;
@@ -44,6 +36,7 @@ async function getWhatIf() {
   ];
   let allCategoryTypeData = {};
   let allFinishTypeData = {};
+  let allWeightTypeData = {};
   for (let i = 0; i < classList.length; i++) {
     let classData = {};
     for (let j = 0; j < categoryList.length; j++) {
@@ -86,6 +79,40 @@ async function getWhatIf() {
   removeUndefined(allFinishTypeData);
   globalComplete = allFinishTypeData;
   console.log(allFinishTypeData)
+  for (let i = 0; i < classList.length; i++) {
+    let classData = {};
+    for (let j = 0; j < categoryList.length; j++) {
+      let categoryData = {};
+      let data = await db
+        .collection("users")
+        .doc(userID)
+        .collection(semester)
+        .doc(classList[i])
+        .collection(categoryList[j])
+        .doc(categoryList[j] + "Weight")
+        .get();
+      //store the data in the categoryData object
+      categoryData = data.data();
+      classData[categoryList[j]] = categoryData;
+    }
+    allWeightTypeData[classList[i]] = classData;
+  }
+  removeUndefined(allWeightTypeData);
+  globalWeight = allWeightTypeData;
+  console.log(allWeightTypeData)
+  generalData={}
+  //grabbing general data
+  for (let i = 0; i < classList.length; i++) {
+    let data = await db
+      .collection("users")
+      .doc(userID)
+      .collection(semester)
+      .doc(classList[i])
+      .get()
+    generalData[classList[i]]=data.data();
+  }
+  globalGeneralData=generalData;
+  console.log(generalData)
   return allCategoryTypeData;
 }
 
@@ -148,6 +175,11 @@ async function grabDataPerClass(className){
 currentClassComplete= globalComplete[className];
 //to grab the correct  globalGrades base on the class
 currentClassGrades= globalGrades[className];
+//to grab the correct  globalWeight base on the class
+currentClassWeight= globalWeight[className];
+//to grab the correct  globalGeneralData base on the class
+currentClassGeneralData= globalGeneralData[className];
+
 console.log(currentClassGrades)
 console.log(currentClassComplete)
 //grab the class category length
@@ -213,5 +245,101 @@ function allGradeFilled(category) {
   return filled;
 }
 
+function calculateWhatif() {
+  let categoryList = Object.keys(currentClassComplete);
+  let whatIfAllCategoryHashMap = {};
+  for (let i = 0; i < categoryList.length; i++) {
+    let currentCategory = categoryList[i];
+    console.log(currentCategory);
+    console.log(allGradeFilled(currentCategory));
+    if (allGradeFilled(currentCategory) == true) {
+      let categoryCurrentData = currentClassGrades[currentCategory];
+      let categoryCurrentLength = Object.keys(categoryCurrentData).length;
+      let categoryCurrentTotal = 0;
+      for (let j = 0; j < categoryCurrentLength; j++) {
+        categoryCurrentTotal +=categoryCurrentData[Object.keys(categoryCurrentData)[j]];
+      }
+      let categoryCurrentAverage =categoryCurrentTotal / categoryCurrentLength / 100;
+      let categoryCurrentWeight = currentClassWeight[currentCategory];
+      //sum of category current weight
+      let categoryCurrentWeightTotal = 0;
+      //sum of category current weight
+      for (let k = 0; k < Object.keys(categoryCurrentWeight).length; k++) {
+        categoryCurrentWeightTotal +=categoryCurrentWeight[Object.keys(categoryCurrentWeight)[k]];
+      }
+      totalCategoryScore = categoryCurrentAverage * categoryCurrentWeightTotal;
+      whatIfAllCategoryHashMap[currentCategory] = totalCategoryScore;
+    } 
+    else if (allGradeFilled(currentCategory) == false) {
+      let categoryCurrentData = currentClassGrades[currentCategory];
+      let categoryCurrentLength = Object.keys(categoryCurrentData).length;
+      let categoryCurrentTotal = 0;
+      let remainingField = 0;
+      for (let j = 0; j < categoryCurrentLength; j++) {
+        //if the field is not null, then add it to the total
+        if (categoryCurrentData[Object.keys(categoryCurrentData)[j]] != null) {
+          categoryCurrentTotal +=categoryCurrentData[Object.keys(categoryCurrentData)[j]];
+        } else if (
+          categoryCurrentData[Object.keys(categoryCurrentData)[j]] == null
+        ) {
+          remainingField += 1;
+        }
+      }
+      whatIfScore = parseFloat(document.getElementsByName(currentCategory + "WhatifScore")[0].innerHTML)
+      let whatIfSum = whatIfScore * remainingField;
+      let categoryCurrentAverage = ((categoryCurrentTotal + whatIfSum) / categoryCurrentLength) / 100;
+      let categoryCurrentWeight = currentClassWeight[currentCategory];
+      //sum of category current weight
+      let categoryCurrentWeightTotal = 0;
+      //sum of category current weight
+      for (let k = 0; k < Object.keys(categoryCurrentWeight).length; k++) {
+        categoryCurrentWeightTotal +=categoryCurrentWeight[Object.keys(categoryCurrentWeight)[k]];
+      }
+      totalCategoryScore = categoryCurrentAverage * categoryCurrentWeightTotal;
+      whatIfAllCategoryHashMap[currentCategory] = totalCategoryScore;
+
+    }
+  }
+  console.log(whatIfAllCategoryHashMap);
+  lengthOfCategory = Object.keys(whatIfAllCategoryHashMap).length;
+  let totalWhatIfScore = 0;
+  for (let i = 0; i < lengthOfCategory; i++) {
+    totalWhatIfScore += whatIfAllCategoryHashMap[Object.keys(whatIfAllCategoryHashMap)[i]];
+  }
+  console.log(currentClassGeneralData)
+  //grab gradeScale from current class general data
+  let gradeScale = currentClassGeneralData["gradeScale"];
+  //convert all gradeScale value to number
+  for (let i = 0; i < Object.keys(gradeScale).length; i++) {
+    gradeScale[Object.keys(gradeScale)[i]] = parseFloat(gradeScale[Object.keys(gradeScale)[i]]);
+  }
+  //sort grade scale values from lowest to highest
+  gradeScale = Object.fromEntries(
+    Object.entries(gradeScale).sort(([, a], [, b]) => a - b)
+  );
+  //gradeScale hold the lowest threshold for each letter grade compare it to the current total score
+  for (let i = 0; i < Object.keys(gradeScale).length; i++) {
+    if (totalWhatIfScore >= gradeScale[Object.keys(gradeScale)[i]]) {
+      var gradeLetter = Object.keys(gradeScale)[i];
+      console.log(gradeScale[Object.keys(gradeScale)[i]])
+    }
+  }
+
+
+
+
+
+  let whatifGradeBoxValue = document.getElementById("whatIfGradeBoxValue");
+  whatifGradeBoxValue.innerHTML = "";
+  let totalScoreHtml= document.createElement("h3");
+  totalScoreHtml.innerHTML = totalWhatIfScore.toFixed(2);
+  let gradeLetterHtml = document.createElement("h3");
+  gradeLetterHtml.innerHTML = gradeLetter;
+
+
+  whatifGradeBoxValue.appendChild(totalScoreHtml);
+  whatifGradeBoxValue.appendChild(gradeLetterHtml);
+
+}
 
 
