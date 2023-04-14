@@ -32,12 +32,12 @@ function register() {
   }
 
   // Validate input fields
-  if (validate_email(email) == false) {
+  if (validateEmail(email) == false) {
     return alert('Email is in the wrong format') // Change with pop up
     // Don't continue running the code
   }
 
-  if (validate_password(password) == false) {
+  if (validatePassword(password) == false) {
     return alert('Password need 1 uppercase letter,1 lowercase letter,1 special character, 1 number and at least 6 in length ') // Change with pop up
     // Don't continue running the code
   }
@@ -79,7 +79,7 @@ function register() {
 
 
 // Validate that email is in the correct format
-function validate_email(email) {
+function validateEmail(email) {
   expression = /^[^@]+@\w+(\.\w+)+\w$/
   if (expression.test(email) == true) {
     // Email is good
@@ -90,7 +90,7 @@ function validate_email(email) {
   }
 }
 //validate password is in the correct format (1 number, 1 special character, 6 characters, 1 uppercase letter,1 lowercase letter)
-function validate_password(password) {
+function validatePassword(password) {
   var re = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$/;;
   if (re.test(password)==true) {
     return true
