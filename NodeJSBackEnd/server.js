@@ -117,27 +117,26 @@ const deleteUser = cron.schedule('0 * * * *',  () => {
         if (timeSinceCreation >= timeThreshold) {
           // Delete the user account from Firebase auth
           auth.deleteUser(userUid)
-            .then(() => {
-              console.log(`Successfully deleted user ${userUid} from Firebase auth.`);
-            })
-            .catch((error) => {
-              console.log(`Error deleting user ${userUid} from Firebase auth: ${error}`);
-            });
+          .then(() => {
+            console.log(`Successfully deleted user ${userUid} from Firebase auth.`);
+          })
+          .catch((error) => {
+            console.log(`Error deleting user ${userUid} from Firebase auth: ${error}`);
+          });
   
           // Delete the user data from Firestore
           db.collection('users').doc(userUid).delete()
-            .then(() => {
-              console.log(`Successfully deleted user data for ${userUid} from Firestore.`);
-            })
-            .catch((error) => {
-              console.log(`Error deleting user data for ${userUid} from Firestore: ${error}`);
-            });
+          .then(() => {
+            console.log(`Successfully deleted user data for ${userUid} from Firestore.`);
+          })
+          .catch((error) => {
+            console.log(`Error deleting user data for ${userUid} from Firestore: ${error}`);
+          });
         }
       }
     });
   });
 });
-
 
 
 //start the cron jobs

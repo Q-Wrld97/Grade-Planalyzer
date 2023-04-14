@@ -11,6 +11,136 @@ window.addEventListener('load', function() {
   });
 });
 
+//event listener on load to pull global variable
+window.addEventListener("load", async () => {
+  //wait a second to make sure the user is logged in
+  await new Promise((r) => setTimeout(r, 1000));
+  let userID = auth.currentUser.uid;
+  let semester = document.getElementById("semesterSelect").value;
+  let classes = await db
+    .collection("users")
+    .doc(userID)
+    .collection(semester)
+    .get();
+  let classList = [];
+  classes.forEach((doc) => {
+    classList.push(doc.id);
+  });
+  let categoryList = [
+    "exam",
+    "quiz",
+    "assignment",
+    "discussion",
+    "project",
+    "participation",
+  ];
+  let allCategoryTypeData = {};
+  let allFinishTypeData = {};
+  let allDateTypeData = {};
+  let allWeightTypeData = {};
+  let generalData = {};
+  for (let i = 0; i < classList.length; i++) {
+    let classData = {};
+    for (let j = 0; j < categoryList.length; j++) {
+      let categoryData = {};
+      let data = await db
+        .collection("users")
+        .doc(userID)
+        .collection(semester)
+        .doc(classList[i])
+        .collection(categoryList[j])
+        .doc(categoryList[j] + "Grades")
+        .get();
+      //store the data in the categoryData object
+      categoryData = data.data();
+      classData[categoryList[j]] = categoryData;
+    }
+    allCategoryTypeData[classList[i]] = classData;
+  }
+  removeUndefined(allCategoryTypeData);
+  console.log(allCategoryTypeData);
+  globalGrades = allCategoryTypeData;
+  for (let i = 0; i < classList.length; i++) {
+    let classData = {};
+    for (let j = 0; j < categoryList.length; j++) {
+      let categoryData = {};
+      let data = await db
+        .collection("users")
+        .doc(userID)
+        .collection(semester)
+        .doc(classList[i])
+        .collection(categoryList[j])
+        .doc(categoryList[j] + "Complete")
+        .get();
+      //store the data in the categoryData object
+      categoryData = data.data();
+      classData[categoryList[j]] = categoryData;
+    }
+    allFinishTypeData[classList[i]] = classData;
+  }
+  removeUndefined(allFinishTypeData);
+  console.log(allFinishTypeData);
+  globalComplete = allFinishTypeData;
+  //now we grab the dates for the grade entry
+  for (let i = 0; i < classList.length; i++) {
+    let classData = {};
+    for (let j = 0; j < categoryList.length; j++) {
+      let categoryData = {};
+      let data = await db
+        .collection("users")
+        .doc(userID)
+        .collection(semester)
+        .doc(classList[i])
+        .collection(categoryList[j])
+        .doc(categoryList[j] + "Dates")
+        .get();
+      //store the data in the categoryData object
+      categoryData = data.data();
+      classData[categoryList[j]] = categoryData;
+    }
+    allDateTypeData[classList[i]] = classData;
+  }
+  removeUndefined(allDateTypeData);
+  console.log(allDateTypeData);
+  globalDates = allDateTypeData;
+  for (let i = 0; i < classList.length; i++) {
+    let classData = {};
+    for (let j = 0; j < categoryList.length; j++) {
+      let categoryData = {};
+      let data = await db
+        .collection("users")
+        .doc(userID)
+        .collection(semester)
+        .doc(classList[i])
+        .collection(categoryList[j])
+        .doc(categoryList[j] + "Weight")
+        .get();
+      //store the data in the categoryData object
+      categoryData = data.data();
+      classData[categoryList[j]] = categoryData;
+    }
+    allWeightTypeData[classList[i]] = classData;
+  }
+  removeUndefined(allWeightTypeData);
+  globalWeight = allWeightTypeData;
+  console.log(allWeightTypeData)
+  generalData={}
+  //grabbing general data
+  for (let i = 0; i < classList.length; i++) {
+    let data = await db
+      .collection("users")
+      .doc(userID)
+      .collection(semester)
+      .doc(classList[i])
+      .get()
+    generalData[classList[i]]=data.data();
+  }
+  globalGeneralData=generalData;
+  console.log(generalData)
+  return allCategoryTypeData;
+}
+);
+
 //add data to drop down list
 async function getSemester() {
   const semesterSelect = document.getElementById("semesterSelect");

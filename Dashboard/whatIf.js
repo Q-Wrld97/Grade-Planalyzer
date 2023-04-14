@@ -15,6 +15,11 @@ var globalWeight;
 var globalGeneralData;
 
 async function getWhatIf() {
+  // if all global variable exist then we don't need to get the data
+  if (globalGrades != undefined && globalComplete != undefined && globalWeight != undefined && globalGeneralData != undefined) {
+    return;
+  }
+  //if all global variables are undefined, then we need to get the data
   let userID = auth.currentUser.uid;
   let semester = document.getElementById("semesterSelect").value;
   let classes = await db
