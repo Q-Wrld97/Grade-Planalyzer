@@ -17,6 +17,7 @@ function limitInputToFourCharacters(inputElement) {
   });
 }
 
+
 // Take An Input Element Id And Add An Event Listener To uppercase The Input and throw error when user use ALL as input
 function addUpperCaseHandler(inputId) {
   const inputElement = document.getElementById(inputId);
