@@ -158,12 +158,12 @@ body {
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-    background-color: #b74040;
+    background-color: #8f0000;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-    background-color: #a36b6b;
+    background-color: #cb0000;
 }
 
 /* Style the tab content */

@@ -35,13 +35,13 @@
 
       <div class="form-group">
         <label>Cumulative GPA</label>
-        <input type="number" class="form-control" id="GPA" placeholder="GPA">
+        <input type="number" class="form-control" id="GPA" placeholder="Enter Current GPA">
       </div>
       <div class="form-group">
         <label>Cumulative Credit Hours</label>
         <input type="number" class="form-control" id="credit" placeholder="Current Credit Hours">
       </div>
-      <div class="form-group" id="schoolType">
+      <!--<div class="form-group" id="schoolType">
         <label>School Type</label>
         <div class="custom-control custom-radio">
           <input onclick="" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
@@ -51,33 +51,50 @@
           <input onclick="" type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
           <label class="custom-control-label" for="customRadio2">High School</label>
         </div>
-      </div>
+      </div> -->
       <div class="form-group">
         <label>Grading Scale</label>
         <div class="custom-control custom-radio">
           <input onclick="yesnoCheck()"type="radio" id="customRadio3" name="customRadio2" class="custom-control-input">
           <label class="custom-control-label" for="customRadio3"><img id="gradescale" alt="gradeScale1"
-              src="../../../Assets/GradeScale1.png"></label>
+              src="../../../Assets/DefaultGPAScale.png"></label>
         </div>
         <div class="custom-control custom-radio">
           <input onclick="yesnoCheck()" type="radio" id="customRadio4" name="customRadio2" class="custom-control-input">
           <label class="custom-control-label" for="customRadio4">Custom</label>
         </div>
         <div id="ifYes" style="display:none">
-          <p><input name="A" type="number" min="1" max="100" placeholder="A" /></p>
-          <p><input name="A-" type="number" min="1" max="100" placeholder="A-" /></p>
-          <p><input name="B+" type="number" min="1" max="100" placeholder="B+" /></p>
-          <p><input name="B" type="number" min="1" max="100" placeholder="B" /></p>
-          <p><input name="B-" type="number" min="1" max="100" placeholder="B-"></p>
-          <p><input name="C+" type="number" min="1" max="100" placeholder="C+" /></p>
-          <p><input name="C" type="number" min="1" max="100" placeholder="C" /></p>
-          <p><input name="C-" type="number" min="1" max="100" placeholder="C-" /></p>
-          <p><input name="D+" type="number" min="1" max="100" placeholder="D+" /></p>
-          <p><input name="D" type="number" min="1" max="100" placeholder="D"></p>
-          <p><input name="D-" type="number" min="1" max="100" placeholder="D-" /></p>
-          <p><input name="F" type="number" min="0" max="100" placeholder="F" /></p>
+          <label>Enter values between 0.00 and 4.00:</label>
+          <p><input name="A" type="number" min="0" max="4" placeholder="A" /></p>
+          <p><input name="A-" type="number" min="0" max="4" placeholder="A-" /></p>
+          <p><input name="B+" type="number" min="0" max="4" placeholder="B+" /></p>
+          <p><input name="B" type="number" min="0" max="4" placeholder="B" /></p>
+          <p><input name="B-" type="number" min="0" max="4" placeholder="B-"></p>
+          <p><input name="C+" type="number" min="0" max="4" placeholder="C+" /></p>
+          <p><input name="C" type="number" min="0" max="4" placeholder="C" /></p>
+          <p><input name="C-" type="number" min="0" max="4" placeholder="C-" /></p>
+          <p><input name="D+" type="number" min="0" max="4" placeholder="D+" /></p>
+          <p><input name="D" type="number" min="0" max="4" placeholder="D"></p>
+          <p><input name="D-" type="number" min="0" max="4" placeholder="D-" /></p>
+          <p><input name="F" type="number" min="0" max="4" placeholder="F" /></p>
         </div>
       </div>
+        <!--Semester: Newly Added-->
+      <!--<div>
+        <div>
+          <label for="text" style="margin-right: 10px;">Semester</label>
+        <div style="display:flex;align-items:center;">
+          <select name="semester" id ="semesterSeason" class="form-control form-control-sm" style="margin-right: 10px;">
+            <option>Fall</option>
+            <option>Spring</option>
+            <option>Summer</option>
+          </select>
+          <div style="margin-right: 10px;">
+            <input type="number" id="semesterYear" pattern="\d*" maxlength="4" min="1000" max="2090" placeholder="Year" inputmode="numeric" oninput="limitInputToFourCharacters(semesterYear)">
+          </div>
+        </div>
+      </div>
+      <br>-->
       <div class="form-group">
         <label>Receive Weekly Email Updates</label>
         <select id="receiveEmail">
