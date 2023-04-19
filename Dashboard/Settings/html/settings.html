@@ -9,12 +9,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="stylesheet" href="../css/settings.css">
+  <script src="../js/settings.js"></script>
   <title>Settings</title>
 </head>
 <nav class="navbar">
   <div class="navbar-left">
-    <a href="../../FAQ/html/faq.html" class="navbar-link">FAQ</a>
-    <a href="../../ReportIssue/html/reportIssue.html" class="navbar-link">Report Issue</a>
+    <a href="../../FAQ/html/faq.html" id= "faq" class="navbar-link">FAQ</a>
+    <a href="../../ReportIssue/html/reportIssue.html" id="reportIssue" class="navbar-link">Report Issue</a>
   </div>
   <div class="navbar-middle">
     <span class="navbar-grade">Grade</span>
@@ -22,8 +23,8 @@
     <span class="navbar-planalyzer">Planalyzer</span>
   </div>
   <div class="navbar-right">
-    <a href="../../dashboard.html" class="navbar-link">Dashboard</a>
-    <a href="settings.html" class="navbar-link">Settings</a>
+    <a href="../../dashboard.html" id="dashboard" class="navbar-link">Dashboard</a>
+    <a href="settings.html" id="settings" class="navbar-link">Settings</a>
     <a onclick="signOut()" class="navbar-link">Logout</a>
   </div>
 </nav>
@@ -55,13 +56,13 @@
       <div class="form-group">
         <label>Grading Scale</label>
         <div class="custom-control custom-radio">
-          <input onclick="yesnoCheck()"type="radio" id="customRadio3" name="customRadio2" class="custom-control-input">
-          <label class="custom-control-label" for="customRadio3"><img id="gradescale" alt="gradeScale1"
+          <input onclick="yesnoCheck()"type="radio" id="customRadio1" name="customRadio2" class="custom-control-input">
+          <label class="custom-control-label" for="customRadio1"><img id="gradescale" alt="gradeScale1"
               src="../../../Assets/DefaultGPAScale.png"></label>
         </div>
         <div class="custom-control custom-radio">
-          <input onclick="yesnoCheck()" type="radio" id="customRadio4" name="customRadio2" class="custom-control-input">
-          <label class="custom-control-label" for="customRadio4">Custom</label>
+          <input onclick="yesnoCheck()" type="radio" id="customRadio2" name="customRadio2" class="custom-control-input">
+          <label class="custom-control-label" for="customRadio2">Custom</label>
         </div>
         <div id="ifYes" style="display:none">
           <label>Enter values between 0.00 and 4.00:</label>
@@ -120,6 +121,6 @@
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
 <script src="../../../Config/config.js"></script>
-<script src="../js/settings.js"></script>
+
 
 </html>

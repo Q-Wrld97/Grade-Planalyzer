@@ -1,9 +1,21 @@
-window.addEventListener("load", function () {
-  auth.onAuthStateChanged((user) => {
+document.addEventListener("DOMContentLoaded", function ()  {
+  auth.onAuthStateChanged( async (user) => {
     if (user) {
-      return;
-    } else {
-      window.location.href = "../Home/home.html";
+      semesterData = await db.collection("users").doc(auth.currentUser.uid).get();
+      semester= semesterData.data().semester;
+      console.log(semester)
+      if (semester == null) {
+        document.getElementById("faq").style.display = "none";
+        document.getElementById("dashboard").style.display = "none";
+        document.getElementById("reportIssue").style.display = "none";
+        document.getElementById("settings").style.display = "none";
+      }
+      else {
+    
+      }  
+    } 
+    else {
+      window.location.href = "../../../Home/home.html";
     }
   });
 });
@@ -12,7 +24,7 @@ window.addEventListener("load", function () {
 async function settingConfirm() {
   cumulativeGPA = document.getElementById("GPA").value;
   cumulativeCredit = document.getElementById("credit").value;
-  if ((SchoolType = document.getElementById("customRadio1").checked)) {
+  if ((gpaType= document.getElementById("customRadio1").checked)) {
     gpaScale = {
       'A': 4,
       'A-': 3.67,
@@ -27,7 +39,7 @@ async function settingConfirm() {
       'D-': 0.67,
       'F': 0
     };
-  } else if ((SchoolType = document.getElementById("customRadio2").checked)) {
+  } else if ((gpaType= document.getElementById("customRadio2").checked)) {
     gpaScale = {
       'A': document.getElementsByName('A')[0].value,
       'A-': document.getElementsByName('A-')[0].value,
@@ -78,16 +90,37 @@ async function settingConfirm() {
     receiveEmail: receiveEmail,
   });
 
+  semesterData = await db.collection("users").doc(auth.currentUser.uid).get();
+  semester= semesterData.data().semester;
+  if (semester == null) {
+    window.location.href = "../../CourseInfo/html/courseForm.html";
+  }
+  else {
+    window.location.href = "../../dashboard.html";
+  }
+
+
+
   alert("Setting Saved!");
 }
 
 
 //Hide and show GPA scale
 function yesnoCheck() {
-  if (document.getElementById("customRadio4").checked) {
+  if (document.getElementById("customRadio2").checked) {
     document.getElementById("ifYes").style.display = "block";
   }
-  if (document.getElementById("customRadio3").checked) {
+  if (document.getElementById("customRadio1").checked) {
     document.getElementById("ifYes").style.display = "none";
   }
 }
+
+async function signOut() {
+  await auth.signOut().then(function() {
+    window.location.href = "../Home/home.html";
+    }).catch(function(error) {
+      // An error happened.
+      console.log("Sign out error");
+  });
+}
+

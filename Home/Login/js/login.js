@@ -39,7 +39,7 @@ async function Login() {
       // wait for 1 second before redirecting to course form
       setTimeout(() => {
         window.location.href =
-          "../../../Dashboard/CourseInfo/html/courseForm.html";
+          "../../../Dashboard/Settings/html/settings.html";
       }, 500);
     } else {
       // Update the login time in the user document and redirect to dashboard
