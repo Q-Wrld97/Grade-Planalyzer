@@ -2,7 +2,11 @@ let addButton = document.querySelector(".course-square");
 let container = document.querySelector(".courseInfoContainer");
 
 addButton.addEventListener("click", function () {
-  window.location.href = "CourseInfo/html/courseForm.html";
+  //pass through semester parameter to the course form page
+  let semester = document.getElementById("semesterSelect").value;
+  var para = new URLSearchParams();
+  para.append("semester", semester);
+  window.location.href = "CourseInfo/html/courseForm.html?" + para.toString();
 });
 
 //grab data for course info

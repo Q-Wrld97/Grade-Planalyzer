@@ -1,9 +1,9 @@
 //submit button functionality
 
-const submitBtn = document.getElementById('submitButton');
+const submitBtn = document.getElementById("submitButton");
 
 submitBtn.addEventListener("click", () => {
-  calculateWhatif()
+  calculateWhatif();
 });
 
 /*=====================================Slider Functionalties End==================================================*/
@@ -11,12 +11,15 @@ var currentClassComplete;
 var currentClassGrades;
 var currentClassesWeight;
 var currentClassGeneralData;
-var globalWeight;
-var globalGeneralData;
 
 async function getWhatIf() {
   // if all global variable exist then we don't need to get the data
-  if (globalGrades != undefined && globalComplete != undefined && globalWeight != undefined && globalGeneralData != undefined) {
+  if (
+    globalGrades != undefined &&
+    globalComplete != undefined &&
+    globalWeight != undefined &&
+    globalGeneralData != undefined
+  ) {
     return;
   }
   //if all global variables are undefined, then we need to get the data
@@ -83,7 +86,7 @@ async function getWhatIf() {
   }
   removeUndefined(allFinishTypeData);
   globalComplete = allFinishTypeData;
-  console.log(allFinishTypeData)
+  console.log(allFinishTypeData);
   for (let i = 0; i < classList.length; i++) {
     let classData = {};
     for (let j = 0; j < categoryList.length; j++) {
@@ -104,8 +107,8 @@ async function getWhatIf() {
   }
   removeUndefined(allWeightTypeData);
   globalWeight = allWeightTypeData;
-  console.log(allWeightTypeData)
-  generalData={}
+  console.log(allWeightTypeData);
+  generalData = {};
   //grabbing general data
   for (let i = 0; i < classList.length; i++) {
     let data = await db
@@ -113,11 +116,11 @@ async function getWhatIf() {
       .doc(userID)
       .collection(semester)
       .doc(classList[i])
-      .get()
-    generalData[classList[i]]=data.data();
+      .get();
+    generalData[classList[i]] = data.data();
   }
-  globalGeneralData=generalData;
-  console.log(generalData)
+  globalGeneralData = generalData;
+  console.log(generalData);
   return allCategoryTypeData;
 }
 
@@ -139,17 +142,15 @@ function openTab(evt, cityName) {
 //create an event  for id=
 document.getElementById("whatIfIcon").addEventListener("click", (e) => {
   // Call the openTab function with the appropriate parameters
-  openTab(e, 'WhatIf');
-  
+  openTab(e, "WhatIf");
+
   // Call the populateCourseTab function
   getWhatIf().then(() => {
     populateTabWhatIf();
   });
 });
 
-
-
-async function populateTabWhatIf(){
+async function populateTabWhatIf() {
   let userID = auth.currentUser.uid;
   let semester = document.getElementById("semesterSelect").value;
   let classes = await db
@@ -161,79 +162,80 @@ async function populateTabWhatIf(){
   classes.forEach((doc) => {
     classList.push(doc.id);
   });
-  let whatIfTabCourse= document.getElementById("whatIfTabCourse");
+  let whatIfTabCourse = document.getElementById("whatIfTabCourse");
   whatIfTabCourse.innerHTML = "";
-  for (i=0; i < classList.length; i++) {
+  for (i = 0; i < classList.length; i++) {
     tab = document.createElement("button");
-    tab.className= "tablinks";
+    tab.className = "tablinks";
     tab.innerHTML = classList[i];
-    tab.onclick = function() {
+    tab.onclick = function () {
       grabDataPerClass(this.innerHTML);
-    }
+    };
     whatIfTabCourse.appendChild(tab);
   }
-  
 }
 
-async function grabDataPerClass(className){
-//to grab the correct globalComplete base on the class
-currentClassComplete= globalComplete[className];
-//to grab the correct  globalGrades base on the class
-currentClassGrades= globalGrades[className];
-//to grab the correct  globalWeight base on the class
-currentClassWeight= globalWeight[className];
-//to grab the correct  globalGeneralData base on the class
-currentClassGeneralData= globalGeneralData[className];
+async function grabDataPerClass(className) {
+  //to grab the correct globalComplete base on the class
+  currentClassComplete = globalComplete[className];
+  //to grab the correct  globalGrades base on the class
+  currentClassGrades = globalGrades[className];
+  //to grab the correct  globalWeight base on the class
+  currentClassWeight = globalWeight[className];
+  //to grab the correct  globalGeneralData base on the class
+  currentClassGeneralData = globalGeneralData[className];
 
-console.log(currentClassGrades)
-console.log(currentClassComplete)
-//grab the class category length
-allCategoryLength=Object.keys(currentClassComplete).length
-let whatIfColumn1 = document.getElementById("whatIfColumn1");
-whatIfColumn1.innerHTML = "";
-//traverse and pouplate the whatIfSlider
-for (i=0; i < allCategoryLength; i++){
-  //if # field in that category - # field completed = 0, then skip
-  const currentCategory = Object.keys(currentClassComplete)[i];
-  // If all fields in the current category are filled, then skip to the next iteration
-  if (allGradeFilled(currentCategory)) {
-    continue;
-  }
-  let catergorySliderDiv = document.createElement("div");
-  catergorySliderDiv.className = "scrollbar";
-  catergorySliderDiv.id =Object.keys(currentClassComplete)[i];
-  whatIfColumn1.appendChild(catergorySliderDiv);
-  let innerDivLabel= document.createElement("div");
-  catergorySliderDiv.appendChild(innerDivLabel);
-  let catergorySliderLabel = document.createElement("label");
-  catergorySliderLabel.innerHTML = Object.keys(currentClassComplete)[i];
-  catergorySliderLabel.for="customRange"+(i+1);
-  innerDivLabel.appendChild(catergorySliderLabel);
-  let innerDivInput = document.createElement("div");
-  catergorySliderDiv.appendChild(innerDivInput);
-  let catergorySlider = document.createElement("input");
-  catergorySlider.type = "range";
-  catergorySlider.min = "0";
-  catergorySlider.max = "100";
-  catergorySlider.value = "0";
-  catergorySlider.className = "custom-range";
-  catergorySlider.id = "customRange"+(i+1);
-  catergorySlider.step="0.1";
-  catergorySlider.oninput = (function(index) {
-    return function() {
-      const rangeInput = document.getElementById('customRange' + (index + 1));
-      const scoreValue = document.getElementById('scoreValue' + (index + 1));
-      scoreValue.innerHTML = rangeInput.value;
+  console.log(currentClassGrades);
+  console.log(currentClassComplete);
+  //grab the class category length
+  allCategoryLength = Object.keys(currentClassComplete).length;
+  let whatIfColumn1 = document.getElementById("whatIfColumn1");
+  whatIfColumn1.innerHTML = "";
+  //traverse and pouplate the whatIfSlider
+  for (i = 0; i < allCategoryLength; i++) {
+    //if # field in that category - # field completed = 0, then skip
+    const currentCategory = Object.keys(currentClassComplete)[i];
+    // If all fields in the current category are filled, then skip to the next iteration
+    if (allGradeFilled(currentCategory)) {
+      continue;
     }
-  })(i);
-  innerDivInput.appendChild(catergorySlider);
-  let catergorySliderSpan = document.createElement("span");
-  catergorySliderSpan.id ="scoreValue"+(i+1);
-  catergorySliderSpan.setAttribute("name", Object.keys(currentClassComplete)[i] + "WhatifScore");
-  catergorySliderSpan.innerHTML = "0";
-  innerDivInput.appendChild(catergorySliderSpan);
-}
-
+    let catergorySliderDiv = document.createElement("div");
+    catergorySliderDiv.className = "scrollbar";
+    catergorySliderDiv.id = Object.keys(currentClassComplete)[i];
+    whatIfColumn1.appendChild(catergorySliderDiv);
+    let innerDivLabel = document.createElement("div");
+    catergorySliderDiv.appendChild(innerDivLabel);
+    let catergorySliderLabel = document.createElement("label");
+    catergorySliderLabel.innerHTML = Object.keys(currentClassComplete)[i];
+    catergorySliderLabel.for = "customRange" + (i + 1);
+    innerDivLabel.appendChild(catergorySliderLabel);
+    let innerDivInput = document.createElement("div");
+    catergorySliderDiv.appendChild(innerDivInput);
+    let catergorySlider = document.createElement("input");
+    catergorySlider.type = "range";
+    catergorySlider.min = "0";
+    catergorySlider.max = "100";
+    catergorySlider.value = "0";
+    catergorySlider.className = "custom-range";
+    catergorySlider.id = "customRange" + (i + 1);
+    catergorySlider.step = "0.1";
+    catergorySlider.oninput = (function (index) {
+      return function () {
+        const rangeInput = document.getElementById("customRange" + (index + 1));
+        const scoreValue = document.getElementById("scoreValue" + (index + 1));
+        scoreValue.innerHTML = rangeInput.value;
+      };
+    })(i);
+    innerDivInput.appendChild(catergorySlider);
+    let catergorySliderSpan = document.createElement("span");
+    catergorySliderSpan.id = "scoreValue" + (i + 1);
+    catergorySliderSpan.setAttribute(
+      "name",
+      Object.keys(currentClassComplete)[i] + "WhatifScore"
+    );
+    catergorySliderSpan.innerHTML = "0";
+    innerDivInput.appendChild(catergorySliderSpan);
+  }
 }
 
 //function to check if any field is null
@@ -242,7 +244,8 @@ function allGradeFilled(category) {
   let categoryCurrentLength = Object.keys(categoryCurrentData).length;
 
   let filled = true;
-  for (let i = 0; i < categoryCurrentLength; i++) { // Use a local variable instead of the global one
+  for (let i = 0; i < categoryCurrentLength; i++) {
+    // Use a local variable instead of the global one
     if (categoryCurrentData[Object.keys(categoryCurrentData)[i]] == null) {
       return false; // Return false as soon as a null value is found
     }
@@ -262,20 +265,22 @@ function calculateWhatif() {
       let categoryCurrentLength = Object.keys(categoryCurrentData).length;
       let categoryCurrentTotal = 0;
       for (let j = 0; j < categoryCurrentLength; j++) {
-        categoryCurrentTotal +=categoryCurrentData[Object.keys(categoryCurrentData)[j]];
+        categoryCurrentTotal +=
+          categoryCurrentData[Object.keys(categoryCurrentData)[j]];
       }
-      let categoryCurrentAverage =categoryCurrentTotal / categoryCurrentLength / 100;
+      let categoryCurrentAverage =
+        categoryCurrentTotal / categoryCurrentLength / 100;
       let categoryCurrentWeight = currentClassWeight[currentCategory];
       //sum of category current weight
       let categoryCurrentWeightTotal = 0;
       //sum of category current weight
       for (let k = 0; k < Object.keys(categoryCurrentWeight).length; k++) {
-        categoryCurrentWeightTotal +=categoryCurrentWeight[Object.keys(categoryCurrentWeight)[k]];
+        categoryCurrentWeightTotal +=
+          categoryCurrentWeight[Object.keys(categoryCurrentWeight)[k]];
       }
       totalCategoryScore = categoryCurrentAverage * categoryCurrentWeightTotal;
       whatIfAllCategoryHashMap[currentCategory] = totalCategoryScore;
-    } 
-    else if (allGradeFilled(currentCategory) == false) {
+    } else if (allGradeFilled(currentCategory) == false) {
       let categoryCurrentData = currentClassGrades[currentCategory];
       let categoryCurrentLength = Object.keys(categoryCurrentData).length;
       let categoryCurrentTotal = 0;
@@ -283,40 +288,47 @@ function calculateWhatif() {
       for (let j = 0; j < categoryCurrentLength; j++) {
         //if the field is not null, then add it to the total
         if (categoryCurrentData[Object.keys(categoryCurrentData)[j]] != null) {
-          categoryCurrentTotal +=categoryCurrentData[Object.keys(categoryCurrentData)[j]];
+          categoryCurrentTotal +=
+            categoryCurrentData[Object.keys(categoryCurrentData)[j]];
         } else if (
           categoryCurrentData[Object.keys(categoryCurrentData)[j]] == null
         ) {
           remainingField += 1;
         }
       }
-      whatIfScore = parseFloat(document.getElementsByName(currentCategory + "WhatifScore")[0].innerHTML)
+      whatIfScore = parseFloat(
+        document.getElementsByName(currentCategory + "WhatifScore")[0].innerHTML
+      );
       let whatIfSum = whatIfScore * remainingField;
-      let categoryCurrentAverage = ((categoryCurrentTotal + whatIfSum) / categoryCurrentLength) / 100;
+      let categoryCurrentAverage =
+        (categoryCurrentTotal + whatIfSum) / categoryCurrentLength / 100;
       let categoryCurrentWeight = currentClassWeight[currentCategory];
       //sum of category current weight
       let categoryCurrentWeightTotal = 0;
       //sum of category current weight
       for (let k = 0; k < Object.keys(categoryCurrentWeight).length; k++) {
-        categoryCurrentWeightTotal +=categoryCurrentWeight[Object.keys(categoryCurrentWeight)[k]];
+        categoryCurrentWeightTotal +=
+          categoryCurrentWeight[Object.keys(categoryCurrentWeight)[k]];
       }
       totalCategoryScore = categoryCurrentAverage * categoryCurrentWeightTotal;
       whatIfAllCategoryHashMap[currentCategory] = totalCategoryScore;
-
     }
   }
   console.log(whatIfAllCategoryHashMap);
   lengthOfCategory = Object.keys(whatIfAllCategoryHashMap).length;
   let totalWhatIfScore = 0;
   for (let i = 0; i < lengthOfCategory; i++) {
-    totalWhatIfScore += whatIfAllCategoryHashMap[Object.keys(whatIfAllCategoryHashMap)[i]];
+    totalWhatIfScore +=
+      whatIfAllCategoryHashMap[Object.keys(whatIfAllCategoryHashMap)[i]];
   }
-  console.log(currentClassGeneralData)
+  console.log(currentClassGeneralData);
   //grab gradeScale from current class general data
   let gradeScale = currentClassGeneralData["gradeScale"];
   //convert all gradeScale value to number
   for (let i = 0; i < Object.keys(gradeScale).length; i++) {
-    gradeScale[Object.keys(gradeScale)[i]] = parseFloat(gradeScale[Object.keys(gradeScale)[i]]);
+    gradeScale[Object.keys(gradeScale)[i]] = parseFloat(
+      gradeScale[Object.keys(gradeScale)[i]]
+    );
   }
   //sort grade scale values from lowest to highest
   gradeScale = Object.fromEntries(
@@ -326,25 +338,17 @@ function calculateWhatif() {
   for (let i = 0; i < Object.keys(gradeScale).length; i++) {
     if (totalWhatIfScore >= gradeScale[Object.keys(gradeScale)[i]]) {
       var gradeLetter = Object.keys(gradeScale)[i];
-      console.log(gradeScale[Object.keys(gradeScale)[i]])
+      console.log(gradeScale[Object.keys(gradeScale)[i]]);
     }
   }
 
-
-
-
-
   let whatifGradeBoxValue = document.getElementById("whatIfGradeBoxValue");
   whatifGradeBoxValue.innerHTML = "";
-  let totalScoreHtml= document.createElement("h3");
+  let totalScoreHtml = document.createElement("h3");
   totalScoreHtml.innerHTML = totalWhatIfScore.toFixed(2);
   let gradeLetterHtml = document.createElement("h3");
   gradeLetterHtml.innerHTML = gradeLetter;
 
-
   whatifGradeBoxValue.appendChild(totalScoreHtml);
   whatifGradeBoxValue.appendChild(gradeLetterHtml);
-
 }
-
-
