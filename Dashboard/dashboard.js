@@ -212,6 +212,14 @@ async function getSemester() {
 document
   .getElementById("semesterSelect")
   .addEventListener("change", async function () {
+
+    var progressBar = document.getElementById('preLoading');
+    progressBar.setAttribute('aria-valuenow', 25);
+    progressBar.style.width = 25 + '%';
+    
+    const preloader = document.querySelector('.preloader');
+    preloader.style.display = 'flex';
+
     //wait a second to make sure the user is logged in
     let userID = auth.currentUser.uid;
     let semester = document.getElementById("semesterSelect").value;
@@ -255,6 +263,11 @@ document
       }
       allCategoryTypeData[classList[i]] = classData;
     }
+
+    // show progress bar at 50%
+    progressBar.setAttribute('aria-valuenow', 50);
+    progressBar.style.width = 50 + '%';
+
     removeUndefined(allCategoryTypeData);
     console.log(allCategoryTypeData);
     globalGrades = allCategoryTypeData;
@@ -298,6 +311,11 @@ document
       }
       allDateTypeData[classList[i]] = classData;
     }
+
+    // show progress bar at 75%
+    progressBar.setAttribute('aria-valuenow', 75);
+    progressBar.style.width = 75 + '%';
+
     removeUndefined(allDateTypeData);
     console.log(allDateTypeData);
     globalDates = allDateTypeData;
@@ -335,6 +353,30 @@ document
     }
     globalGeneralData = generalData;
     console.log(generalData);
+
+    //// show progress bar at 100%
+    progressBar.setAttribute('aria-valuenow', 100);
+    progressBar.style.width = 100 + '%';
+    // opening LookAhead tab
+
+    // hide the loading screen
+    preloader.style.display = 'none';
+    //=======================
+    // Get the element you want to click
+    const elementToClick = document.getElementById('lookAheadIcon');
+
+    // Create a new mouse event
+    const clickEvent = new MouseEvent('click', {
+      view: window,
+      bubbles: true,
+      cancelable: true
+    });
+
+    // Dispatch the event on the element
+    elementToClick.dispatchEvent(clickEvent);
+
+    //==================
+
     return allCategoryTypeData;
   });
 
