@@ -255,7 +255,7 @@ function openTab(evt, cityName) {
   evt.currentTarget.className += " active";
 }
 
-//create an event  for id=
+//pathing for infographic tab
 document.getElementById("infographicIcon").addEventListener("click", (e) => {
   // Call the openTab function with the appropriate parameters
   openTab(e, "Infographics");
@@ -264,3 +264,62 @@ document.getElementById("infographicIcon").addEventListener("click", (e) => {
   getInfographicDataCheck()
 
 });
+
+//populate infographic data for all tabs in the infographic tab
+async function populateInfographicDataAllTab() {
+  //check if data is avaiable
+  if (
+    globalGrades != undefined &&
+    globalComplete != undefined &&
+    globalWeight != undefined &&
+    globalGeneralData != undefined &&
+    globalDates != undefined
+  ){
+    //continue
+
+  }
+  else {
+    getInfographicData()
+  }
+
+  compleleteData = globalComplete;
+  datesData = globalDates;
+  console.log(compleleteData)
+  //go throught date data and complete data if an item is pass the date make complete data true
+  for (let i = 0; i < Object.keys(datesData).length; i++) {
+    let classData = datesData[Object.keys(datesData)[i]];
+    for (let j = 0; j < Object.keys(classData).length; j++) {
+      let categoryData = classData[Object.keys(classData)[j]];
+      for (let k = 0; k < Object.keys(categoryData).length; k++) {
+        let itemData = categoryData[Object.keys(categoryData)[k]];
+        let date = new Date(itemData);
+        let today = new Date();
+        if (date < today) {
+          compleleteData[Object.keys(datesData)[i]][
+            Object.keys(classData)[j]
+          ][Object.keys(categoryData)[k]] = true;
+        }
+      }
+    }
+  }
+  
+
+  // get how many item is completed and divide by total number of items base on classes
+  for (let i = 0; i < Object.keys(compleleteData).length; i++) {
+    let classData = compleleteData[Object.keys(compleleteData)[i]];
+    let totalItems = 0;
+    let completedItems = 0;
+    for (let j = 0; j < Object.keys(classData).length; j++) {
+      let categoryData = classData[Object.keys(classData)[j]];
+      for (let k = 0; k < Object.keys(categoryData).length; k++) {
+        let itemData = categoryData[Object.keys(categoryData)[k]];
+        if (itemData === true) {
+          completedItems++;
+        }
+        totalItems++;
+      }
+    }
+
+  }
+
+}
