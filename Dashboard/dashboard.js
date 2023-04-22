@@ -18,6 +18,12 @@ var globalComplete; // global variable to store the completion statu
 
 //event listener on load to pull global variable
 window.addEventListener("load", async () => {
+
+  // show the loading screen
+  var progressBar = document.getElementById('preLoading');
+  const preloader = document.querySelector('.preloader');
+  preloader.style.display = 'flex';
+
   //wait a second to make sure the user is logged in
   await new Promise((r) => setTimeout(r, 1000));
   let userID = auth.currentUser.uid;
@@ -62,6 +68,11 @@ window.addEventListener("load", async () => {
     }
     allCategoryTypeData[classList[i]] = classData;
   }
+
+  // show progress bar at 50%
+  progressBar.setAttribute('aria-valuenow', 50);
+  progressBar.style.width = 50 + '%';
+
   removeUndefined(allCategoryTypeData);
   console.log(allCategoryTypeData);
   globalGrades = allCategoryTypeData;
@@ -105,6 +116,11 @@ window.addEventListener("load", async () => {
     }
     allDateTypeData[classList[i]] = classData;
   }
+
+  // show progress bar at 75%
+  progressBar.setAttribute('aria-valuenow', 75);
+  progressBar.style.width = 75 + '%';
+
   removeUndefined(allDateTypeData);
   console.log(allDateTypeData);
   globalDates = allDateTypeData;
@@ -142,6 +158,13 @@ window.addEventListener("load", async () => {
   }
   globalGeneralData = generalData;
   console.log(generalData);
+
+  // show progress bar at 100%
+  progressBar.setAttribute('aria-valuenow', 100);
+  progressBar.style.width = 100 + '%';
+  // hide the loading screen
+  preloader.style.display = 'none';
+
   return allCategoryTypeData;
 });
 
