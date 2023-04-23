@@ -93,7 +93,7 @@ async function settingConfirm() {
   semesterData = await db.collection("users").doc(auth.currentUser.uid).get();
   semester= semesterData.data().semester;
   if (semester == null) {
-    window.location.href = "../../CourseInfo/html/courseForm.html";
+    window.location.href = "../../CourseInfo/html/semesterForm.html";
   }
   else {
     window.location.href = "../../dashboard.html";
