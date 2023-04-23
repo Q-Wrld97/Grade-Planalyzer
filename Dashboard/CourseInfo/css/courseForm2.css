@@ -1,5 +1,5 @@
-body{
-  background: linear-gradient(to top, rgb(0,0,0,0.0) 50%,#234c6b) 10%, url(../../../Assets/background.png);
+body {
+  background: linear-gradient(to top, rgb(0, 0, 0, 0.0) 50%, #234c6b) 10%, url(../../../Assets/background.png);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -7,14 +7,126 @@ body{
   color: white;
 }
 
-.container{
+.container {
   width: 400px;
 }
 
 
 
-label{
+label {
   font-weight: bold;
   font-size: 1.2em;
   border-bottom: 1px solid white;
+}
+
+#banner {
+  background: url(../../../Assets/dashBackground.gif);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.submitButton{
+  padding: 30px;
+  border-radius: 10px;
+}
+
+/* Nav Bar */
+
+
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  height: 60px;
+  padding: 0 20px;
+}
+
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+
+.navbar-link {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 15px;
+}
+
+
+.navbar-img {
+  height: 70px;
+  width: 70px;
+}
+
+
+@media (max-width: 768px) {
+  .box {
+    width: 95%;
+    max-width: 350px;
+  }
+
+  h2 {
+    font-size: 1.2em;
+  }
+
+  .inputBox input {
+    padding: 10px;
+  }
+
+  .inputBox span {
+    padding: 10px 0px;
+  }
+
+  input[type="submit"] {
+    padding: 10px 20px;
+  }
+
+  .links a {
+    font-size: 0.9em;
+  }
+
+  .navbar-middle {
+    display: none;
+  }
+
+  .navbar-img {
+    height: 40px;
+    width: 40px;
+  }
+
+  .navbar-planalyzer {
+    display: none;
+  }
+
+  .navbar-link {
+    font-size: 12px;
+    margin: 0 5px;
+  }
+
+  .navbar {
+    height: 50px;
+    padding: 0 10px;
+  }
+
+  .navbar-left {
+    margin-right: auto;
+  }
+
+  .navbar-right {
+    margin-left: auto;
+  }
 }
