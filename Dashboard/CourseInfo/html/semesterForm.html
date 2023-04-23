@@ -38,7 +38,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="semester-season">Semester Season</label>
-                                        <select class="form-control" id="semester-season" name="semester-season">
+                                        <select class="form-control" id="semesterSeason" name="semester-season">
                                             <option value="Fall">Fall</option>
                                             <option value="Spring">Spring</option>
                                             <option value="Summer">Summer</option>
@@ -48,7 +48,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="semester-year">Semester Year</label>
-                                        <input type="number" class="form-control" id="semester-year" name="semester-year" min="2023" max="2099">
+                                        <input type="number" class="form-control" id="semesterYear" oninput="limitInputToFourCharacters(semesterYear)" name="semester-year" min="2023" max="2099">
                                     </div>
                                 </div>
                             </div>
@@ -56,18 +56,18 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="semester-starting-date">Semester Starting Date</label>
-                                        <input type="date" class="form-control" id="semester-starting-date" name="semester-starting-date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                                        <input type="date" class="form-control" id="semesterStartingDate" name="semester-starting-date " pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="semester-ending-date">Semester Ending Date</label>
-                                        <input type="date" class="form-control" id="semester-ending-date" name="semester-ending-date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                                        <input type="date" class="form-control" id="semesterEndingDate" name="semester-ending-date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <input type="submit" onclick="addNewData()" value="Submit">
+                        <input type="submit" onclick="addSemesterData()" value="Next">
                     </div>
                 </div>
             </div>
@@ -79,7 +79,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 
 <script src="../js/semesterForm.js"></script>
-<script src="../js/addData.js"></script>
+
 
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>

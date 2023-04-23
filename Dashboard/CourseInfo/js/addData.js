@@ -1,31 +1,16 @@
 function addNewData(){
-  
+  //grab from URL 
+  var para = new URLSearchParams(window.location.search);
+  var semesterYear = para.get("semesterYear");
+  var semesterSeason = para.get("semesterSeason");  
+  var semester = semesterSeason + semesterYear;
 
   //==========GRABBING SEMESTER COURSE LENGTH, TERM LENGTH AND CREDIT HOURS===================//
-  semesterSeason=document.getElementById('semesterSeason').value;
-  semesterYear=document.getElementById('semesterYear').value;
   semester=semesterSeason+semesterYear;
   courseName=document.getElementsByName('courseName')[0].value;
-  termLength=document.getElementsByName('termLength')[0].value;
   creditHours=document.getElementsByName('creditHours')[0].value;
 
-  //=================================================================================//
-  //=================FETCHING DAYS OF THE WEEK THAT USER HAS CLASS===================//
-  //=================================================================================//
 
-  // Create an array to store the days that are checked
-  let checkedDays = [];
-
-  // Loop through each checkbox
-  for (let i = 0; i < 8; i++) {
-    // Get the checkbox element by its id
-    let checkbox = document.getElementById(`day-${i}`);
-
-    // If the checkbox is checked, add its value to the checkedDays array
-    if (checkbox.checked) {
-      checkedDays.push(checkbox.value);
-    }
-  }
   
   //=================================================================================//
   //=========================GRADE SCALE FUCNTION CHECK==============================//
@@ -115,7 +100,7 @@ function addNewData(){
 
   
   //=================================================================================//
-  //=================FETCHING DAYS OF THE WEEK THAT USER HAS CLASS===================//
+  //=================Parsing data correctly for weighted cateogry===================//
   //=================================================================================//
 
 
@@ -395,7 +380,7 @@ function addNewData(){
       }
     }
   });
-  alert(totalWeight)
+ 
   if (totalWeight > 100 || totalWeight < 100) {
     return alert('The total weight for all categories exceeds or below 100%. Please adjust the weights accordingly.');
   }
@@ -406,13 +391,11 @@ function addNewData(){
 
   auth.onAuthStateChanged(async function(user) {
     if (user) {
-      alert(weightScale)
+      
       // User is signed in.      
      await db.collection('users').doc(user.uid).collection(semester).doc(courseName).set({
         courseName: courseName,
-        termLength: termLength,
         creditHours: creditHours,
-        classDays: checkedDays,
         gradeScale: gradeScale,
         weightScale: weightScale,
       } ,

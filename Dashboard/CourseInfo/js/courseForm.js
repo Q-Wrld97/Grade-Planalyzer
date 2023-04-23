@@ -1,16 +1,23 @@
-// animate img to disspear slowly and let the login form appear
-$(window).bind('load', function () {
-    var img = document.getElementById("loginImg");
-    var opacity = 1;
-    var timer = setInterval(function () {
-        if (opacity <= 0.1) {
-            clearInterval(timer);
-            img.style.display = "none";
-        }
-        img.style.opacity = opacity;
-        opacity -= opacity * 0.1;
-    }, 50);
-});
+// Take An Input Element Id And Add An Event Listener To uppercase The Input and throw error when user use ALL as input
+function addUpperCaseHandler(inputId) {
+    const inputElement = document.getElementById(inputId);
+    inputElement.addEventListener('input', function() {
+      let cursorPosition = this.selectionStart;
+      this.value = this.value.toUpperCase();
+      this.setSelectionRange(cursorPosition, cursorPosition);  
+    });
+    //Error message when user use ALL as input
+    inputElement.addEventListener('input', () => {
+      if (/\b(all)\b/i.test(inputElement.value)) {
+        document.getElementById('error1').style.display = 'block';
+        document.getElementById('error1').style.color = 'red';
+        inputElement.value = inputElement.value.replace(/\b(all)\b/i, '');
+      } 
+      else if(inputElement.value.length == 3){
+        document.getElementById('error1').style.display = 'none';
+      }
+    });
+  }
 
 // Check for the value of the radio button and display the text box or not
 function yesnoCheck() {
