@@ -191,12 +191,12 @@ async function getSemester() {
         }
         const option = document.createElement("option");
         // Set the value of the option element
-        option.value = "CourseInfo/html/courseForm.html";
+        option.value = "CourseInfo/html/semesterForm.html";
         // Set the text of the option element
         option.text = "Add New Semester";
         // add on click event to the option element
         semesterSelect.addEventListener("change", function () {
-          if (semesterSelect.value === "CourseInfo/html/courseForm.html") {
+          if (semesterSelect.value === "CourseInfo/html/semesterForm.html") {
             window.location.href = semesterSelect.value;
           }
         });
