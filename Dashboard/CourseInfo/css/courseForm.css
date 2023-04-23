@@ -56,7 +56,7 @@
     position: relative;
     width: 700px;
     height: 800px;
-    background: #1c1c1c;
+    background: rgba(24,24,27);
     border-radius: 8px;
     overflow: hidden;
 }
@@ -87,6 +87,15 @@
     animation: animate 6s linear infinite;
     animation-delay: -3s;
 }
+.courseFromTextColor{
+    color: white;
+}
+h6{
+    color:white;
+}
+label{
+    color:white;
+}
 
 @keyframes animate {
     0% {
@@ -101,7 +110,7 @@
 #animated {
     position: absolute;
     inset: 2px;
-    background: #28292d;
+    background: rgba(24,24,27,0.98);
     padding-top: 30px;
     padding-left: 50px;
     padding-right: 50px;
@@ -112,29 +121,7 @@
     flex-direction: column;
 }
 
-h2 {
-    color: red;
-    font-weight: 500;
-    text-align: center;
-    letter-spacing: 0.1em;
-}
 
-.links {
-    display: flex;
-    justify-content: space-between;
-}
-
-.links a {
-    margin: 10px 0;
-    font-size: 0.75em;
-    color: #8f8f8f;
-    text-decoration: beige;
-}
-
-.links a:hover,
-.links a:nth-child(2) {
-    color: red;
-}
 
 input[type="submit"] {
     border: none;
