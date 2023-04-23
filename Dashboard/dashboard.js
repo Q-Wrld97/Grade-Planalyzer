@@ -515,3 +515,21 @@ function showWeatherData(data) {
 
   weatherForecastEl.innerHTML = otherDayForcast;
 }
+//=============================================
+// code for empty section. if tab != clicked show the information for each tab
+// and if tab  == cliked then show only the element that is inside that tab
+// Get all elements with class "tab"
+const tabs = document.querySelectorAll('.tab');
+
+// Loop through each tab and add a click event listener
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    // Get all elements with class "dashboardEmptySection"
+    const sections = document.querySelectorAll('.dashboardEmptySection');
+    
+    // Loop through each section and hide it
+    sections.forEach(section => {
+      section.style.display = 'none';
+    });
+  });
+});

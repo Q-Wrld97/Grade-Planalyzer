@@ -1,7 +1,7 @@
 body {
- margin: 0;
- background-color: #23242a;
- color: white;
+    margin: 0;
+    background-color: #23242a;
+    color: white;
 }
 
 /*============Dash Background=====================*/
@@ -12,37 +12,38 @@ body {
     background-attachment: fixed;
     height: 100lvh;
 }
+
 /*============Dash Background=====================*/
 
 /* Style for the navbar */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #333;
-  color: #fff;
-  height: 60px;
-  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    height: 60px;
+
 }
 
 /* Style for the left menu */
 .navbar-left {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 /* Style for the right menu */
 .navbar-right {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 /* Style for the navbar links */
 .navbar-link {
-  color: #fff;
-  text-decoration: none;
-  margin: 0 10px;
-  font-size: 15px;
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 15px;
 }
 
 /* Style for the navbar image */
@@ -52,10 +53,10 @@ body {
 }
 
 .navbar-link:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
- 
-.navbar-middle{
+
+.navbar-middle {
     display: flex;
     align-items: center;
 }
@@ -85,6 +86,7 @@ body {
     .links a {
         font-size: 0.9em;
     }
+
     .navbar-middle {
         display: none;
     }
@@ -119,8 +121,8 @@ body {
 
 /* Select Option */
 .select_form {
-  padding: 20px;
-  border-radius: 10px;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 
@@ -129,7 +131,7 @@ body {
 .tab {
     overflow: hidden;
     /*border: 1px solid #940000;*/
-    text-align:center;
+    text-align: center;
     width: 15.5vh;
     height: 80vh;
     display: -moz-inline-box;
@@ -137,7 +139,7 @@ body {
     margin-left: 3vh;
     float: left;
     margin-right: 1vh;
-    
+
 }
 
 /* Style the buttons inside the tab */
@@ -188,7 +190,7 @@ body {
     max-width: 100%;
 }
 
-.gradeEntryIcon{
+.gradeEntryIcon {
     border-radius: 4px;
     height: auto;
     max-width: 100%;
@@ -212,9 +214,41 @@ body {
 
     width: auto;
     height: 80vh;
-    background: rgba(24,24,27,0.8);
+    background: rgba(24, 24, 27, 0.8);
     margin-right: 30px;
     border-radius: 10px;
+}
+
+/*===========Empty section in Tab2 when tab != clicked */
+.dashboardEmptySection {
+    position: relative;
+    padding: 10px;
+    margin: 10px;
+    height: 15vh;
+    background: rgba(24, 24, 27, 0.8);
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.dashboardEmptySection:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    transform: translateY(-50%);
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #ccc;
+}
+
+.dashboardEmptySection:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    transform: translateY(-50%);
+    border: 10px solid transparent;
+    border-right: 10px solid #ccc;
 }
 
 .tablinks {
@@ -229,15 +263,15 @@ body {
 /*====================================================================*/
 /*           Look AHEAD CSS starts here
 /*====================================================================*/
-.display-6{
+.display-6 {
     padding-left: 10px;
 }
 
-.toDo{
-    background: rgba(24,24,27,0.8);
+.toDo {
+    background: rgba(24, 24, 27, 0.8);
     display: flex;
     padding: 5px;
-    color:whitesmoke;
+    color: whitesmoke;
     width: 100%;
     justify-content: auto;
 }
@@ -246,30 +280,32 @@ body {
 #col69 {
     float: left;
     width: 70%;
-    height:7vh;
-    background: rgba(24,24,27,0.8);
+    height: 7vh;
+    background: rgba(24, 24, 27, 0.8);
     color: white;
-    
-    
+
+
 
 }
+
 #col70 {
-    float: right; 
+    float: right;
     width: 30%;
-    height:7vh;
+    height: 7vh;
     padding-top: 10px;
-    background: rgba(24,24,27,0.8);
+    background: rgba(24, 24, 27, 0.8);
     color: white;
     /*border: 1px solid rgb(242, 118, 118);*/
 
 }
-.display-7{
-    display:flex;
+
+.display-7 {
+    display: flex;
     padding-left: 20px;
     padding-top: 5px;
 }
 
-#weeks{
+#weeks {
     display: inline-block;
 
 }
@@ -278,20 +314,21 @@ body {
     float: left;
     width: 70%;
     height: 43vh;
-    background: rgba(24,24,27,0.8);
+    background: rgba(24, 24, 27, 0.8);
     color: white;
-    
+
 }
 
 #col2 {
     float: left;
     width: 30%;
-    height:43vh;
-    background: rgba(24,24,27,0.8);
+    height: 43vh;
+    background: rgba(24, 24, 27, 0.8);
     color: white;
-    
+
 }
-img{
+
+img {
     max-width: 60%;
 }
 
@@ -301,16 +338,20 @@ img{
     width: auto;
     height: 42vh;
     margin: 0 auto;
-  }
-#pieChart{
+}
+
+#pieChart {
     color: white;
 }
+
 /*===================scrolling option for table overflow======================*/
 
 .table-container {
-    height: 300px; /* set the height to a fixed value or a percentage */
-    overflow-y: auto; /* set the overflow property to auto to add a scrollbar */
-  }
+    height: 300px;
+    /* set the height to a fixed value or a percentage */
+    overflow-y: auto;
+    /* set the overflow property to auto to add a scrollbar */
+}
 
 
 /*======================Button=========================================*/
@@ -319,17 +360,17 @@ img{
     align-items: center;
     text-align: left;
     margin-left: 10px;
-    
-  }
-  
-  select {
+
+}
+
+select {
     padding: 0.5rem;
     font-size: 1rem;
     border-radius: 3px;
     border: 1px solid #ccc;
-  }
-  
-  .button {
+}
+
+.button {
     margin-left: 1rem;
     padding: 0.5rem 1rem;
     font-size: 1rem;
@@ -338,58 +379,59 @@ img{
     background-color: #cb0000;
     color: #fff;
     cursor: pointer;
-  }
-  
-  .button:hover {
+}
+
+.button:hover {
     background-color: #890000;
-  }
+}
+
 /*==================Look AHead (api)=============================*/
 
-.future-forecast{
-    background: rgba(24,24,27,0.8);
+.future-forecast {
+    background: rgba(24, 24, 27, 0.8);
     /*background: rgba(24,24,27,0.8);*/
     padding: 25px;
     position: sticky;
     top: 0;
     display: flex;
-    color:white;
+    color: white;
     width: 100%;
     align-items: center;
     justify-content: center;
     overflow-y: hidden;
     height: 30vh;
-    
+
 }
 
-.future-forecast .today{
+.future-forecast .today {
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid #eee;
     border-radius: 10px;
-    padding:15px;
+    padding: 15px;
     padding-right: 40px;
     border-radius: 10px;
-    background: rgba(0,0,0,0.2)
+    background: rgba(0, 0, 0, 0.2)
 }
 
-.future-forecast .today .day{
+.future-forecast .today .day {
     padding: 5px 15px;
     background: #3c3c44;
     border-radius: 50px;
     text-align: center;
 }
 
-.future-forecast .today .temp{
+.future-forecast .today .temp {
     font-size: 18px;
     padding-top: 15px;
 }
 
-.future-forecast .weather-forecast{
+.future-forecast .weather-forecast {
     display: flex;
 }
 
-.weather-forecast .weather-forecast-item{
+.weather-forecast .weather-forecast-item {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -398,71 +440,72 @@ img{
     border: 1px solid #eee;
     padding: 15px;
     border-radius: 10px;
-    background: rgba(0,0,0,0.2)
+    background: rgba(0, 0, 0, 0.2)
 }
 
-.weather-forecast .weather-forecast-item .day{
+.weather-forecast .weather-forecast-item .day {
     padding: 5px 15px;
     background: #3C3C44;
     border-radius: 50px;
     text-align: center;
 }
 
-.weather-forecast .weather-forecast-item .temp{
+.weather-forecast .weather-forecast-item .temp {
     font-weight: 100;
     font-size: 12px;
 }
 
 
-@media only screen and  (max-width:730px){
-    
-    .container{
+@media only screen and (max-width:730px) {
+
+    .container {
         padding: 20px;
     }
-    
-    .future-forecast{
+
+    .future-forecast {
         justify-content: start;
         align-items: none;
         overflow-y: scroll;
     }
 
-    .future-forecast .today .temp{
+    .future-forecast .today .temp {
         font-size: 16px;
     }
 
-    .date-container .time{
+    .date-container .time {
         font-size: 50px;
     }
 
-    .date-container #am-pm{
+    .date-container #am-pm {
         font-size: 20px;
     }
 
-    .date-container .date{
+    .date-container .date {
         font-size: 20px;
     }
 
-    .place-container{
+    .place-container {
         text-align: end;
         margin-top: 15px;
     }
 
-    .place-container .time-zone{
+    .place-container .time-zone {
         font-size: 20px;
     }
 
-    .current-info .others{
+    .current-info .others {
         padding: 12px;
     }
 
-    .current-info .others .weather-item{
+    .current-info .others .weather-item {
         font-size: 14px;
     }
 
 }
+
 /*=====================Look ahead table========================*/
 
-#tableLookAhead{
+#tableLookAhead {
     height: 70vh;
 }
 
@@ -490,6 +533,7 @@ img{
     float: left;
     align-self: left;
 }
+
 .infotabBottomLeft {
     float: left;
     overflow: hidden;
@@ -504,6 +548,7 @@ img{
     justify-content: flex-start;
     align-items: flex-end;
 }
+
 .courseHeading {
     display: flex;
     flex-wrap: wrap;
@@ -512,7 +557,7 @@ img{
 }
 
 .infotabRight {
-    text-align:center;
+    text-align: center;
     width: 35%;
     height: 15vh;
     justify-content: space-between;
@@ -524,7 +569,7 @@ img{
     float: left;
     width: 100%;
     height: 65vh;
-    background: rgba(24,24,27,0.8);
+    background: rgba(24, 24, 27, 0.8);
     color: white;
 }
 
@@ -536,6 +581,7 @@ img{
     color: white;
 
 }
+
 #infoColumn2 {
     float: left;
     width: 33.33%;
@@ -544,32 +590,39 @@ img{
     padding-right: 30px;
 
 }
+
 #infoColumn3 {
     float: left;
     width: 33.33%;
     height: 65vh;
     color: white;
-    
+
 }
+
 .pieChartSize {
     width: 500px;
     height: 500px;
     margin: 0 auto;
 }
-.barChartSize{
+
+.barChartSize {
     width: auto;
     height: auto;
     margin: 0 auto;
     padding-left: 20px;
-    
+
 }
+
 #pieChartInfo {
     width: 100%;
     height: 100%;
 }
+
 .table-containerInfo {
-    height: 60vh; /* set the height to a fixed value or a percentage */
-    overflow-y: auto; /* set the overflow property to auto to add a scrollbar */
+    height: 60vh;
+    /* set the height to a fixed value or a percentage */
+    overflow-y: auto;
+    /* set the overflow property to auto to add a scrollbar */
 }
 
 .tablinks {
@@ -580,11 +633,11 @@ img{
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
-  }
-  
-  .tablinks:hover {
+}
+
+.tablinks:hover {
     background-color: #ff7373;
-  }
+}
 
 
 /*====================================================================*/
@@ -602,6 +655,7 @@ img{
     align-self: left;
 
 }
+
 .gradeEntryTabBottomLeft {
     float: left;
     overflow: hidden;
@@ -611,7 +665,7 @@ img{
     padding-left: 30px;
 }
 
-.container-gradeEntry{
+.container-gradeEntry {
     display: flex;
     flex-wrap: wrap;
     height: 7.5vh;
@@ -619,7 +673,8 @@ img{
     align-items: flex-end;
     padding-left: 20px;
 }
-.container-submitButton{
+
+.container-submitButton {
     display: flex;
     flex-wrap: wrap;
     height: 13vh;
@@ -633,7 +688,7 @@ img{
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-end;
-    
+
 }
 
 .gradeEntryTabRight {
@@ -642,12 +697,13 @@ img{
     float: right;
 
 }
+
 #pastGradeEntryColumn {
     float: left;
     width: 100%;
     height: 20vh;
     color: white;
-    background: rgba(24,24,27,0.8);
+    background: rgba(24, 24, 27, 0.8);
     overflow-y: auto;
 
 }
@@ -657,7 +713,7 @@ img{
     width: 100%;
     height: 45vh;
     color: white;
-    background: rgba(24,24,27,0.8);
+    background: rgba(24, 24, 27, 0.8);
 }
 
 #gradeEntryColumn1 {
@@ -670,6 +726,7 @@ img{
     overflow-y: auto;
 
 }
+
 #gradeEntryColumn2 {
     float: left;
     width: 16.67%;
@@ -679,6 +736,7 @@ img{
     overflow-y: auto;
 
 }
+
 #gradeEntryColumn3 {
     float: left;
     width: 16.67%;
@@ -686,8 +744,9 @@ img{
     color: white;
 
     overflow-y: auto;
-    
+
 }
+
 #gradeEntryColumn4 {
     float: left;
     width: 16.67%;
@@ -695,8 +754,9 @@ img{
     color: white;
 
     overflow-y: auto;
-    
+
 }
+
 #gradeEntryColumn5 {
     float: left;
     width: 16.67%;
@@ -704,8 +764,9 @@ img{
     color: white;
 
     overflow-y: auto;
-    
+
 }
+
 #gradeEntryColumn6 {
     float: left;
     width: 16.65%;
@@ -713,19 +774,21 @@ img{
     color: white;
 
     overflow-y: auto;
-    
+
 }
 
-.form-group{
+.form-group {
     max-width: 160px;
     padding-left: 50px;
 }
-.recentFormSize{
+
+.recentFormSize {
     height: 20vh;
     display: flex;
     flex-wrap: wrap;
 }
-.h5{
+
+.h5 {
     padding-top: 10px;
     padding-left: 10px;
 }
@@ -741,11 +804,11 @@ img{
     height: 80vh;
     padding: 20px;
     overflow-y: auto;
-    
+
 }
 
 .course-square {
-    
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -756,26 +819,27 @@ img{
     padding: 10px;
     margin: 10px;
     transition: all 0.3s ease;
-    background: rgba(24,24,27,0.8);
+    background: rgba(24, 24, 27, 0.8);
 }
+
 .course-square span {
     padding-top: 50px;
 }
-  
+
 .course-square:hover {
     transform: translateY(-10px);
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 }
-  
+
 .added-course {
-    background: rgba(24,24,27,0.8);
+    background: rgba(24, 24, 27, 0.8);
 }
-  
+
 .added-course:hover .edit-button,
 .added-course:hover .delete-button {
     display: block;
 }
-  
+
 .added-course .edit-button,
 .added-course .delete-button {
     display: none;
@@ -790,28 +854,29 @@ img{
     font-size: 14px;
     cursor: pointer;
 }
-  
+
 .added-course .edit-button {
     right: 60px;
 }
-  
+
 .added-course .delete-button {
     right: 5px;
 }
-  
+
 .added-course i {
-    font-size:100px;
-    padding-top:50px;
+    font-size: 100px;
+    padding-top: 50px;
 }
 
 .fa-plus {
     font-size: 100px;
 }
-  
+
 .added-course span {
     font-size: 16px;
     margin-top: auto;
 }
+
 .add-course-paragraph {
     padding-top: 50px;
 }
@@ -830,6 +895,7 @@ img{
     height: 65vh;
     color: white;
 }
+
 #whatIfColumn2 {
     float: left;
     width: 40%;
@@ -841,25 +907,28 @@ img{
     overflow-y: auto;
 
 }
+
 .custom-range {
     width: 90%;
 }
 
-.whatIfcontainer{
+.whatIfcontainer {
     max-width: 95%;
     padding-left: 50px;
     padding-top: 50px;
 }
 
-#scoreValue{
+#scoreValue {
     padding-left: 30px;
 
 }
-.scrollbar{
+
+.scrollbar {
     padding-top: 50px;
     padding-left: 50px;
 }
-.whatIfGradeImage{
+
+.whatIfGradeImage {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -871,7 +940,7 @@ img{
     align-items: center;
 }
 
-.whatIfGradeBoxValue{
+.whatIfGradeBoxValue {
     text-align: center;
     border: 3px solid rgb(255, 255, 255);
     border-radius: 5px;
@@ -900,10 +969,12 @@ img{
     justify-content: center;
     align-items: center;
 }
+
 .logo {
     margin-bottom: 1rem;
     text-align: center;
 }
+
 .progress {
     width: 100%;
     margin-top: 5rem;
