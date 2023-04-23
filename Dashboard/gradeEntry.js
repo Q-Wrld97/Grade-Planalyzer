@@ -6,9 +6,6 @@ var globalDates;
 //grabbing data from the database
 async function getGradeEntry() {
   //if global variable exist then we don't need to grab data
-  if (globalGrades != undefined && globalComplete != undefined && globalDates != undefined) {
-    return
-  }
   let userID = auth.currentUser.uid;
   let semester = document.getElementById("semesterSelect").value;
   let classes = await db
