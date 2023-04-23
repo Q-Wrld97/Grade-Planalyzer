@@ -5,7 +5,12 @@ addButton.addEventListener("click", function () {
   //pass through semester parameter to the course form page
   let semester = document.getElementById("semesterSelect").value;
   var para = new URLSearchParams();
-  para.append("semester", semester);
+  semesterSeason= semester.slice(0, -4);
+  semesterYear = semester.replace(/\D/g, '');
+  console.log(semesterYear);
+  console.log(semesterSeason);
+  para.append("semesterSeason", semesterSeason);
+  para.append("semesterYear", semesterYear);
   window.location.href = "CourseInfo/html/courseForm.html?" + para.toString();
 });
 
