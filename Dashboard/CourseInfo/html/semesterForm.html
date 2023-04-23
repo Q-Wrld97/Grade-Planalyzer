@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../css/semesterForm.css">
+    <title>Course From</title>
+</head>
+
+<body>
+    <section id="banner">
+        <nav class="navbar">
+            <div class="navbar-left">
+
+            </div>
+            <div class="navbar-middle">
+                <span class="navbar-grade">Grade</span>
+                <img src="../../../Assets/Grade_Planalyzer_Logo_PNG.png" alt="Logo" class="navbar-img">
+                <span class="navbar-planalyzer">Planalyzer</span>
+            </div>
+            <div class="navbar-right">
+
+            </div>
+        </nav>
+        <div id="container">
+            <div class="box">
+                <div id="animated">
+                    <!-- <h2>Login</h2>
+					<img src="../../../Assets/Grade_Planalyzer_Logo_PNG.png" alt="Logo" id="loginImg">-->
+                    <div class="courseFromTextColor">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="semester-season">Semester Season</label>
+                                        <select class="form-control" id="semester-season" name="semester-season">
+                                            <option value="Fall">Fall</option>
+                                            <option value="Spring">Spring</option>
+                                            <option value="Summer">Summer</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="semester-year">Semester Year</label>
+                                        <input type="number" class="form-control" id="semester-year" name="semester-year" min="2023" max="2099">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="semester-starting-date">Semester Starting Date</label>
+                                        <input type="date" class="form-control" id="semester-starting-date" name="semester-starting-date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="semester-ending-date">Semester Ending Date</label>
+                                        <input type="date" class="form-control" id="semester-ending-date" name="semester-ending-date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="submit" onclick="addNewData()" value="Submit">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+
+<script src="../js/semesterForm.js"></script>
+<script src="../js/addData.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+<script src="../../../Config/config.js"></script>
+
+</html>
