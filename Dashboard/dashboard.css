@@ -120,6 +120,7 @@ body {
 /* Select Option */
 .select_form {
   padding: 20px;
+  border-radius: 10px;
 }
 
 
@@ -136,6 +137,7 @@ body {
     margin-left: 3vh;
     float: left;
     margin-right: 1vh;
+    
 }
 
 /* Style the buttons inside the tab */
@@ -154,6 +156,7 @@ body {
     height: auto;
     max-width: 100%;
     background-color: #333;
+    border-radius: 10px;
 }
 
 /* Change background color of buttons on hover */
@@ -211,6 +214,7 @@ body {
     height: 80vh;
     background: rgba(24,24,27,0.8);
     margin-right: 30px;
+    border-radius: 10px;
 }
 
 .tablinks {
