@@ -389,6 +389,7 @@ document.getElementById("confirm").addEventListener("click", async function () {
       data[i].closest("tr").remove();
     }
   }
+  populateData()
 });
 
 
