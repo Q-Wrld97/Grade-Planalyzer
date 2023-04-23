@@ -1,27 +1,3 @@
-//check if user is authenticated and if not take them back to home page on load
-window.onload = function() {
-  auth.onAuthStateChanged(function(user) {
-    if (user) {
-      var para = new URLSearchParams(window.location.search);
-      var semesterYear = para.get("semesterYear");
-      var courseName = para.get("courseName");
-      var semesterSeason = para.get("semesterSeason");
-      let htmlSemesterSeason = document.getElementById("semesterSeason");
-      let htmlSemesterYear = document.getElementById("semesterYear");
-      let htmlCourseName = document.getElementById("CourseName");
-      htmlSemesterYear.value = semesterYear;
-      htmlCourseName.value = courseName;
-      //create a new option element
-      let newOption = document.createElement("option");
-      //create a text node to add to option element (opt)
-      newOption.text = semesterSeason;
-      //add the text node to the option element
-      htmlSemesterSeason.add(newOption);
-    } else {
-      window.location.href = "../../../index.html";
-    }
-  })}
-
 // Limit user input to 4 characters
 function limitInputToFourCharacters(inputElement) {
   inputElement.addEventListener('input', function(event) {

@@ -1,35 +1,28 @@
 //Global Variables will be use for comparision later
 var courseNameTemp;
-var termLengthTemp;
 var creditHoursTemp;
-var classDaysTemp;
 var gradeScaleTemp;
 var weightScaleTemp;
 var completionNameTemp = [];
+var userUid;
 window.onload = function () {
   auth.onAuthStateChanged(async function (user) {
     if (user) {
       var para = new URLSearchParams(window.location.search);
       var semesterYearTemp = para.get("semesterYear");
-      var courseNameTemp = para.get("courseName");
       var semesterSeasonTemp = para.get("semesterSeason");
-      let htmlSemesterSeason = document.getElementById("semesterSeason");
-      let htmlSemesterYear = document.getElementById("semesterYear");
+      var courseNameTemp = para.get("courseName");
       let htmlCourseName = document.getElementById("CourseName");
-      htmlSemesterYear.value = semesterYearTemp;
-      htmlCourseName.value = courseNameTemp;
-      //create a new option element
-      let newOption = document.createElement("option");
-      //create a text node to add to option element (opt)
-      newOption.text = semesterSeasonTemp;
-      //add the text node to the option element
-      htmlSemesterSeason.add(newOption);
-
       // grabbing data from DB
       var semesterTemp = semesterSeasonTemp + semesterYearTemp;
       var userUid = user.uid;
       console.log(userUid);
       console.log(semesterTemp);
+
+      htmlCourseName.value = courseNameTemp;
+
+ 
+      var userUid = user.uid;
 
       categoryType = ["exam","quiz", "assignment","discussion","project","participation",];
 
@@ -43,9 +36,7 @@ window.onload = function () {
       if (courseData.exists) {
         //grabbing general course data from DB
         courseNameTemp = courseData.data().courseName;
-        termLengthTemp = courseData.data().termLength;
         creditHoursTemp = courseData.data().creditHours;
-        classDaysTemp = courseData.data().classDays;
         gradeScaleTemp = courseData.data().gradeScale;
         weightScaleTemp = courseData.data().weightScale;
 
@@ -74,87 +65,84 @@ window.onload = function () {
 };
 
 
-function addNewData() {
+function addNewData(){
+  //grab from URL 
+  var para = new URLSearchParams(window.location.search);
+  var semesterYear = para.get("semesterYear");
+  var semesterSeason = para.get("semesterSeason");  
+  var semester = semesterSeason + semesterYear;
+
   //==========GRABBING SEMESTER COURSE LENGTH, TERM LENGTH AND CREDIT HOURS===================//
-  semesterSeason = document.getElementById("semesterSeason").value;
-  semesterYear = document.getElementById("semesterYear").value;
-  semester = semesterSeason + semesterYear;
-  courseName = document.getElementsByName("courseName")[0].value;
-  termLength = document.getElementsByName("termLength")[0].value;
-  creditHours = document.getElementsByName("creditHours")[0].value;
+  semester=semesterSeason+semesterYear;
+  courseName=document.getElementsByName('courseName')[0].value;
+  creditHours=document.getElementsByName('creditHours')[0].value;
 
-  //=================================================================================//
-  //=================FETCHING DAYS OF THE WEEK THAT USER HAS CLASS===================//
-  //=================================================================================//
 
-  // Create an array to store the days that are checked
-  let checkedDays = [];
-
-  // Loop through each checkbox
-  for (let i = 0; i < 8; i++) {
-    // Get the checkbox element by its id
-    let checkbox = document.getElementById(`day-${i}`);
-
-    // If the checkbox is checked, add its value to the checkedDays array
-    if (checkbox.checked) {
-      checkedDays.push(checkbox.value);
-    }
-  }
-
+  
   //=================================================================================//
   //=========================GRADE SCALE FUCNTION CHECK==============================//
   //=================================================================================//
 
-  if (document.getElementById("customRadio1").checked) {
+  if (document.getElementById("customRadio1").checked){
+    
     var gradeScale = {
-      A: 93,
-      "A-": 92,
-      "B+": 87,
-      B: 83,
-      "B-": 82,
-      "C+": 77,
-      C: 73,
-      "C-": 70,
-      "D+": 67,
-      D: 63,
-      "D-": 60,
-      F: 0,
-    };
-  } else if (document.getElementById("customRadio2").checked) {
-    var gradeScale = {
-      A: 90,
-      "A-": 87,
-      "B+": 83,
-      B: 80,
-      "B-": 77,
-      "C+": 73,
-      C: 70,
-      "C-": 67,
-      "D+": 63,
-      D: 60,
-      F: 0,
-    };
-  } else if (document.getElementById("customRadio3").checked) {
-    var gradeScale = {
-      A: parseFloat(document.getElementsByName("A")[0].value),
-      "A-": parseFloat(document.getElementsByName("A-")[0].value),
-      "B+": parseFloat(document.getElementsByName("B+")[0].value),
-      B: parseFloat(document.getElementsByName("B")[0].value),
-      "B-": parseFloat(document.getElementsByName("B-")[0].value),
-      "C+": parseFloat(document.getElementsByName("C+")[0].value),
-      C: parseFloat(document.getElementsByName("C")[0].value),
-      "C-": parseFloat(document.getElementsByName("C-")[0].value),
-      "D+": parseFloat(document.getElementsByName("D+")[0].value),
-      D: parseFloat(document.getElementsByName("D")[0].value),
-      "D-": parseFloat(document.getElementsByName("D-")[0].value),
-      F: parseFloat(document.getElementsByName("F")[0].value),
+      'A': 93,
+      'A-': 92,
+      'B+': 87,
+      'B': 83,
+      'B-': 82,
+      'C+': 77,
+      'C': 73,
+      'C-': 70,
+      'D+': 67,
+      'D': 63,
+      'D-': 60,
+      'F': 0
     };
 
-    //fuction check to see
+  }
+
+  else if (document.getElementById("customRadio2").checked){
+    
+    var gradeScale = {
+      'A': 90,
+      'A-': 87,
+      'B+': 83,
+      'B': 80,
+      'B-': 77,
+      'C+': 73,
+      'C': 70,
+      'C-': 67,
+      'D+': 63,
+      'D': 60,
+      'F': 0
+    };
+
+  }
+
+  else if (document.getElementById("customRadio3").checked){
+    
+
+    var gradeScale = {
+      'A': parseFloat(document.getElementsByName('A')[0].value),
+      'A-': parseFloat(document.getElementsByName('A-')[0].value),
+      'B+': parseFloat(document.getElementsByName('B+')[0].value),
+      'B': parseFloat(document.getElementsByName('B')[0].value),
+      'B-': parseFloat(document.getElementsByName('B-')[0].value),
+      'C+': parseFloat(document.getElementsByName('C+')[0].value),
+      'C': parseFloat(document.getElementsByName('C')[0].value),
+      'C-': parseFloat(document.getElementsByName('C-')[0].value),
+      'D+': parseFloat(document.getElementsByName('D+')[0].value),
+      'D': parseFloat(document.getElementsByName('D')[0].value),
+      'D-': parseFloat(document.getElementsByName('D-')[0].value),
+      'F': parseFloat(document.getElementsByName('F')[0].value)
+    };
+    
+    //fuction check to see 
     //if the gradeSacle is not greater than the previous value and nuke it if its NULL
 
     let prevValue = Infinity; // Set to infinity to ensure that the first comparison will pass
-    let prevKey = "";
+    let prevKey = '';
 
     for (const key in gradeScale) {
       const value = parseInt(gradeScale[key]); // Convert value to integer for comparison
@@ -163,42 +151,42 @@ function addNewData() {
         delete gradeScale[key]; // Remove the key if value is empty or not a number
       } else {
         if (value > prevValue) {
-          return alert(
-            `Value for ${key} (${value}) is greater than previous value for ${prevKey} (${prevValue}).`
-          );
+          return alert(`Value for ${key} (${value}) is greater than previous value for ${prevKey} (${prevValue}).`);
           // Do something here to handle the case where the value is not decreasing
         }
         prevValue = value;
         prevKey = key;
       }
     }
-  } else {
-    return alert("Invalid Input");
   }
 
+  else {
+    return alert ("Invalid Input")
+  }
+
+
+  
   //=================================================================================//
-  //=================FETCHING DAYS OF THE WEEK THAT USER HAS CLASS===================//
+  //=================Parsing data correctly for weighted cateogry===================//
   //=================================================================================//
 
-  if (
-    document.getElementById("Exam").checked &&
-    document.getElementById("CategoryYesExam4").value == "Yes"
-  ) {
+
+
+  if (document.getElementById("Exam").checked && document.getElementById("CategoryYesExam4").value=='Yes'){
+    
     var examWeight = {
-      examWeight: document.getElementById("CategoryYesExam").value,
-      examQuantity: document.getElementById("CategoryYesExam2").value,
-      equallyWeighted: document.getElementById("CategoryYesExam4").value,
-    };
+      'examWeight': document.getElementById("CategoryYesExam").value,
+      'examQuantity': document.getElementById("CategoryYesExam2").value,
+      'equallyWeighted': document.getElementById("CategoryYesExam4").value,
+    }
     // make variable to store all exam quantity with blank value
     var examQuantity = document.getElementById("CategoryYesExam2").value;
-    var perExamWeightData =
-      document.getElementById("CategoryYesExam").value /
-      document.getElementById("CategoryYesExam2").value; //this is the weight of each exam;
+    var perExamWeightData = document.getElementById("CategoryYesExam").value / document.getElementById("CategoryYesExam2").value  //this is the weight of each exam;
     // make a dictionary to store all exam and per exam weight with blank value
     var exam = {};
     var perExamWeight = {};
-    var examComplete = {};
-    for (let i = 1; i <= examQuantity; i++) {
+    var examComplete= {};
+    for (let i=1; i <= examQuantity; i++){
       exam[`exam${i}`] = null;
       perExamWeight[`exam${i}`] = parseFloat(perExamWeightData);
       examComplete[`exam${i}`] = false;
@@ -206,22 +194,19 @@ function addNewData() {
   }
 
   //if check and Weighted equally is no
-  else if (
-    document.getElementById("Exam").checked &&
-    document.getElementById("CategoryYesExam4").value == "No"
-  ) {
+  else if (document.getElementById("Exam").checked && document.getElementById("CategoryYesExam4").value =='No'){
     var examWeight = {
-      examWeight: document.getElementById("CategoryYesExam").value,
-      examQuantity: document.getElementById("CategoryYesExam2").value,
-      equallyWeighted: document.getElementById("CategoryYesExam4").value,
-    };
+      'examWeight': document.getElementById("CategoryYesExam").value,
+      'examQuantity': document.getElementById("CategoryYesExam2").value, 
+      'equallyWeighted': document.getElementById("CategoryYesExam4").value,
+     }
     // make variable to store all exam quantity with blank value
     var examQuantity = document.getElementById("CategoryYesExam2").value;
     // make a dictionary to store all exam with blank value
     var exam = {};
     var perExamWeight = {};
-    var examComplete = {};
-    for (let i = 1; i <= examQuantity; i++) {
+    var examComplete ={};
+    for (let i=1; i <= examQuantity; i++){
       const perExamWeightData = document.getElementById(`Exam${i}`);
       exam[`exam${i}`] = null;
       perExamWeight[`exam${i}`] = parseFloat(perExamWeightData.value);
@@ -229,47 +214,40 @@ function addNewData() {
     }
   }
 
-  if (
-    document.getElementById("Quiz").checked &&
-    document.getElementById("CategoryYesQuiz4").value == "Yes"
-  ) {
+  if (document.getElementById("Quiz").checked && document.getElementById("CategoryYesQuiz4").value == "Yes"){
+    
     var quizWeight = {
-      quizWeight: document.getElementById("CategoryYesQuiz").value,
-      quizQuantity: document.getElementById("CategoryYesQuiz2").value,
-      equallyWeighted: document.getElementById("CategoryYesQuiz4").value,
-    };
+      'quizWeight': document.getElementById("CategoryYesQuiz").value,
+      'quizQuantity': document.getElementById("CategoryYesQuiz2").value,
+      'equallyWeighted': document.getElementById("CategoryYesQuiz4").value,  
+    }
     // make variable to store all exam quantity with blank value
     var quizQuantity = document.getElementById("CategoryYesQuiz2").value;
-    var perQuizWeightData =
-      document.getElementById("CategoryYesQuiz").value /
-      document.getElementById("CategoryYesQuiz2").value; //this is the weight of each exam;
+    var perQuizWeightData = document.getElementById("CategoryYesQuiz").value / document.getElementById("CategoryYesQuiz2").value  //this is the weight of each exam;
     // make a dictionary to store all exam with blank value
     var quiz = {};
     var perQuizWeight = {};
     var quizComplete = {};
-    for (let i = 1; i <= quizQuantity; i++) {
+    for (let i=1; i <= quizQuantity; i++){
       quiz[`quiz${i}`] = null;
       perQuizWeight[`quiz${i}`] = parseFloat(perQuizWeightData);
       quizComplete[`quiz${i}`] = false;
     }
   }
   //if check and Weighted equally is no
-  else if (
-    document.getElementById("Quiz").checked &&
-    document.getElementById("CategoryYesQuiz4").value == "No"
-  ) {
+  else if (document.getElementById("Quiz").checked && document.getElementById("CategoryYesQuiz4").value == "No"){
     var quizWeight = {
-      quizWeight: document.getElementById("CategoryYesQuiz").value,
-      quizQuantity: document.getElementById("CategoryYesQuiz2").value,
-      equallyWeighted: document.getElementById("CategoryYesQuiz4").value,
-    };
+      'quizWeight': document.getElementById("CategoryYesQuiz").value,
+      'quizQuantity': document.getElementById("CategoryYesQuiz2").value, 
+      'equallyWeighted': document.getElementById("CategoryYesQuiz4").value,
+     }
     // make variable to store all exam quantity with blank value
     var quizQuantity = document.getElementById("CategoryYesQuiz2").value;
     // make a dictionary to store all exam with blank value
     var quiz = {};
     var perQuizWeight = {};
     var quizComplete = {};
-    for (let i = 1; i <= quizQuantity; i++) {
+    for (let i=1; i <= quizQuantity; i++){
       const perQuizWeightData = document.getElementById(`Quiz${i}`).value;
       quiz[`quiz${i}`] = null;
       perQuizWeight[`quiz${i}`] = parseFloat(perQuizWeightData);
@@ -277,163 +255,126 @@ function addNewData() {
     }
   }
 
-  if (
-    document.getElementById("Assignment").checked &&
-    document.getElementById("CategoryYesAssignment4").value == "Yes"
-  ) {
+  if (document.getElementById("Assignment").checked && document.getElementById("CategoryYesAssignment4").value == "Yes"){
+    
     var assignmentWeight = {
-      assignmentWeight: document.getElementById("CategoryYesAssignment").value,
-      assignmentQuantity: document.getElementById("CategoryYesAssignment2")
-        .value,
-      equallyWeighted: document.getElementById("CategoryYesAssignment4").value,
-    };
+      'assignmentWeight': document.getElementById("CategoryYesAssignment").value,
+      'assignmentQuantity': document.getElementById("CategoryYesAssignment2").value,
+      'equallyWeighted': document.getElementById("CategoryYesAssignment4").value, 
+    }
     // make variable to store all exam quantity with blank value
-    var assignmentQuantity = document.getElementById(
-      "CategoryYesAssignment2"
-    ).value;
-    var perAssignmentWeightData =
-      document.getElementById("CategoryYesAssignment").value /
-      document.getElementById("CategoryYesAssignment2").value; //this is the weight of each exam;
+    var assignmentQuantity = document.getElementById("CategoryYesAssignment2").value;
+    var perAssignmentWeightData = document.getElementById("CategoryYesAssignment").value / document.getElementById("CategoryYesAssignment2").value  //this is the weight of each exam;
     // make a dictionary to store all exam with blank value
     var assignment = {};
     var perAssignmentWeight = {};
     var assignmentComplete = {};
-    for (let i = 1; i <= assignmentQuantity; i++) {
+    for (let i=1; i <= assignmentQuantity; i++){
       assignment[`assignment${i}`] = null;
-      perAssignmentWeight[`assignment${i}`] = parseFloat(
-        perAssignmentWeightData
-      );
+      perAssignmentWeight[`assignment${i}`] = parseFloat(perAssignmentWeightData);
       assignmentComplete[`assignment${i}`] = false;
     }
   }
   //if check and Weighted equally is no
-  else if (
-    document.getElementById("Assignment").checked &&
-    document.getElementById("CategoryYesAssignment4").value == "No"
-  ) {
+  else if (document.getElementById("Assignment").checked && document.getElementById("CategoryYesAssignment4").value == "No"){
     var assignmentWeight = {
-      assignmentWeight: document.getElementById("CategoryYesAssignment").value,
-      assignmentQuantity: document.getElementById("CategoryYesAssignment2")
-        .value,
-      equallyWeighted: document.getElementById("CategoryYesAssignment4").value,
-    };
+      'assignmentWeight': document.getElementById("CategoryYesAssignment").value,
+      'assignmentQuantity': document.getElementById("CategoryYesAssignment2").value,
+      'equallyWeighted': document.getElementById("CategoryYesAssignment4").value,
+      }
     // make variable to store all exam quantity with blank value
-    var assignmentQuantity = document.getElementById(
-      "CategoryYesAssignment2"
-    ).value;
+    var assignmentQuantity = document.getElementById("CategoryYesAssignment2").value;
     // make a dictionary to store all exam with blank value
     var assignment = {};
     var perAssignmentWeight = {};
     var assignmentComplete = {};
-    for (let i = 1; i <= assignmentQuantity; i++) {
+    for (let i=1; i <= assignmentQuantity; i++){
       const perAssignmentWeightData = document.getElementById(`Assignment${i}`);
       assignment[`assignment${i}`] = null;
-      perAssignmentWeight[`assignment${i}`] = parseFloat(
-        perAssignmentWeightData.value
-      );
+      perAssignmentWeight[`assignment${i}`] = parseFloat(perAssignmentWeightData.value);
       assignmentComplete[`assignment${i}`] = false;
     }
   }
 
-  if (
-    document.getElementById("Discussion").checked &&
-    document.getElementById("CategoryYesDiscussion4").value == "Yes"
-  ) {
+
+  if (document.getElementById("Discussion").checked && document.getElementById("CategoryYesDiscussion4").value == "Yes"){
+    
     var discussionWeight = {
-      discussionWeight: document.getElementById("CategoryYesDiscussion").value,
-      discussionQuantity: document.getElementById("CategoryYesDiscussion2")
-        .value,
-      equallyWeighted: document.getElementById("CategoryYesDiscussion4").value,
-    };
+      'discussionWeight': document.getElementById("CategoryYesDiscussion").value,
+      'discussionQuantity': document.getElementById("CategoryYesDiscussion2").value,
+      'equallyWeighted': document.getElementById("CategoryYesDiscussion4").value,
+    }
     // make variable to store all exam quantity with blank value
-    var discussionQuantity = document.getElementById(
-      "CategoryYesDiscussion2"
-    ).value;
-    var perDiscussionWeightData =
-      document.getElementById("CategoryYesDiscussion").value /
-      document.getElementById("CategoryYesDiscussion2").value; //this is the weight of each exam;
+    var discussionQuantity = document.getElementById("CategoryYesDiscussion2").value;
+    var perDiscussionWeightData = document.getElementById("CategoryYesDiscussion").value / document.getElementById("CategoryYesDiscussion2").value  //this is the weight of each exam;
     // make a dictionary to store all exam with blank value
     var discussion = {};
     var perDiscussionWeight = {};
     var discussionComplete = {};
-    for (let i = 1; i <= discussionQuantity; i++) {
+    for (let i=1; i <= discussionQuantity; i++){
       discussion[`discussion${i}`] = null;
-      perDiscussionWeight[`discussion${i}`] = parseFloat(
-        perDiscussionWeightData
-      );
+      perDiscussionWeight[`discussion${i}`] = parseFloat(perDiscussionWeightData);
       discussionComplete[`discussion${i}`] = false;
     }
+
+
   }
   //if check and Weighted equally is no
-  else if (
-    document.getElementById("Discussion").checked &&
-    document.getElementById("CategoryYesDiscussion4").value == "No"
-  ) {
+  else if (document.getElementById("Discussion").checked && document.getElementById("CategoryYesDiscussion4").value == "No"){
     var discussionWeight = {
-      discussionWeight: document.getElementById("CategoryYesDiscussion").value,
-      discussionQuantity: document.getElementById("CategoryYesDiscussion2")
-        .value,
-      equallyWeighted: document.getElementById("CategoryYesDiscussion4").value,
-    };
+      'discussionWeight': document.getElementById("CategoryYesDiscussion").value,
+      'discussionQuantity': document.getElementById("CategoryYesDiscussion2").value,
+      'equallyWeighted': document.getElementById("CategoryYesDiscussion4").value,
+      }
     // make variable to store all exam quantity with blank value
-    var discussionQuantity = document.getElementById(
-      "CategoryYesDiscussion2"
-    ).value;
+    var discussionQuantity = document.getElementById("CategoryYesDiscussion2").value;
     // make a dictionary to store all exam with blank value
     var discussion = {};
     var perDiscussionWeight = {};
     var discussionComplete = {};
-    for (let i = 1; i <= discussionQuantity; i++) {
+    for (let i=1; i <= discussionQuantity; i++){
       const perDiscussionWeightData = document.getElementById(`Discussion${i}`);
       discussion[`discussion${i}`] = null;
-      perDiscussionWeight[`discussion${i}`] = parseFloat(
-        perDiscussionWeightData.value
-      );
+      perDiscussionWeight[`discussion${i}`] = parseFloat(perDiscussionWeightData.value);
       discussionComplete[`discussion${i}`] = false;
     }
   }
-
-  if (
-    document.getElementById("Project").checked &&
-    document.getElementById("CategoryYesProject4").value == "Yes"
-  ) {
+  
+  if (document.getElementById("Project").checked && document.getElementById("CategoryYesProject4").value =="Yes"){
+    
     var projectWeight = {
-      projectWeight: document.getElementById("CategoryYesProject").value,
-      projectQuantity: document.getElementById("CategoryYesProject2").value,
-      equallyWeighted: document.getElementById("CategoryYesProject4").value,
-    };
+      'projectWeight': document.getElementById("CategoryYesProject").value,
+      'projectQuantity': document.getElementById("CategoryYesProject2").value,
+      'equallyWeighted': document.getElementById("CategoryYesProject4").value,
+    }
     // make variable to store all exam quantity with blank value
     var projectQuantity = document.getElementById("CategoryYesProject2").value;
-    var perProjectWeightData =
-      document.getElementById("CategoryYesProject").value /
-      document.getElementById("CategoryYesProject2").value; //this is the weight of each exam;
+    var perProjectWeightData = document.getElementById("CategoryYesProject").value / document.getElementById("CategoryYesProject2").value  //this is the weight of each exam;
     // make a dictionary to store all exam with blank value
     var project = {};
     var perProjectWeight = {};
     var projectComplete = {};
-    for (let i = 1; i <= projectQuantity; i++) {
+    for (let i=1; i <= projectQuantity; i++){
       project[`project${i}`] = null;
       perProjectWeight[`project${i}`] = parseFloat(perProjectWeightData);
       projectComplete[`project${i}`] = false;
     }
+
   }
   //if check and Weighted equally is no
-  else if (
-    document.getElementById("Project").checked &&
-    document.getElementById("CategoryYesProject4").value == "No"
-  ) {
+  else if (document.getElementById("Project").checked && document.getElementById("CategoryYesProject4").value =="No"){
     var projectWeight = {
-      projectWeight: document.getElementById("CategoryYesProject").value,
-      projectQuantity: document.getElementById("CategoryYesProject2").value,
-      equallyWeighted: document.getElementById("CategoryYesProject4").value,
-    };
+      'projectWeight': document.getElementById("CategoryYesProject").value,
+      'projectQuantity': document.getElementById("CategoryYesProject2").value,
+      'equallyWeighted': document.getElementById("CategoryYesProject4").value,
+      }
     // make variable to store all exam quantity with blank value
     var projectQuantity = document.getElementById("CategoryYesProject2").value;
     // make a dictionary to store all exam with blank value
     var project = {};
     var perProjectWeight = {};
     var projectComplete = {};
-    for (let i = 1; i <= projectQuantity; i++) {
+    for (let i=1; i <= projectQuantity; i++){
       const perProjectWeightData = document.getElementById(`Project${i}`);
       project[`project${i}`] = null;
       perProjectWeight[`project${i}`] = parseFloat(perProjectWeightData.value);
@@ -441,246 +382,129 @@ function addNewData() {
     }
   }
 
-  if (
-    document.getElementById("Participation").checked &&
-    document.getElementById("CategoryYesParticipation4").value == "Yes"
-  ) {
+  if (document.getElementById("Participation").checked && document.getElementById("CategoryYesParticipation4").value =="Yes"){
+    
     var participationWeight = {
-      participationWeight: document.getElementById("CategoryYesParticipation")
-        .value,
-      participationQuantity: document.getElementById(
-        "CategoryYesParticipation2"
-      ).value,
-      equallyWeighted: document.getElementById("CategoryYesParticipation4")
-        .value,
-    };
+      'participationWeight': document.getElementById("CategoryYesParticipation").value,
+      'participationQuantity': document.getElementById("CategoryYesParticipation2").value,
+      'equallyWeighted': document.getElementById("CategoryYesParticipation4").value, 
+    }
     // make variable to store all exam quantity with blank value
-    var participationQuantity = document.getElementById(
-      "CategoryYesParticipation2"
-    ).value;
-    var perParticipationWeightData =
-      document.getElementById("CategoryYesParticipation").value /
-      document.getElementById("CategoryYesParticipation2").value; //this is the weight of each exam;
+    var participationQuantity = document.getElementById("CategoryYesParticipation2").value;
+    var perParticipationWeightData = document.getElementById("CategoryYesParticipation").value / document.getElementById("CategoryYesParticipation2").value  //this is the weight of each exam;
     // make a dictionary to store all exam with blank value
     var participation = {};
     var perParticipationWeight = {};
     var participationComplete = {};
-    for (let i = 1; i <= participationQuantity; i++) {
+    for (let i=1; i <= participationQuantity; i++){
       participation[`participation${i}`] = null;
-      perParticipationWeight[`participation${i}`] = parseFloat(
-        perParticipationWeightData
-      );
+      perParticipationWeight[`participation${i}`] = parseFloat(perParticipationWeightData);
       participationComplete[`participation${i}`] = false;
     }
   }
   //if check and Weighted equally is no
-  else if (
-    document.getElementById("Participation").checked &&
-    document.getElementById("CategoryYesParticipation4").value == "No"
-  ) {
+  else if (document.getElementById("Participation").checked && document.getElementById("CategoryYesParticipation4").value =="No"){
     var participationWeight = {
-      participationWeight: document.getElementById("CategoryYesParticipation")
-        .value,
-      participationQuantity: document.getElementById(
-        "CategoryYesParticipation2"
-      ).value,
-      equallyWeighted: document.getElementById("CategoryYesParticipation4")
-        .value,
-    };
+      'participationWeight': document.getElementById("CategoryYesParticipation").value,
+      'participationQuantity': document.getElementById("CategoryYesParticipation2").value,
+      'equallyWeighted': document.getElementById("CategoryYesParticipation4").value,
+      }
     // make variable to store all exam quantity with blank value
-    var participationQuantity = document.getElementById(
-      "CategoryYesParticipation2"
-    ).value;
+    var participationQuantity = document.getElementById("CategoryYesParticipation2").value;
     // make a dictionary to store all exam with blank value
     var participation = {};
     var perParticipationWeight = {};
     var participationComplete = {};
-    for (let i = 1; i <= participationQuantity; i++) {
-      const perParticipationWeightData = document.getElementById(
-        `Participation${i}`
-      );
+    for (let i=1; i <= participationQuantity; i++){
+      const perParticipationWeightData = document.getElementById(`Participation${i}`);
       participation[`participation${i}`] = null;
-      perParticipationWeight[`participation${i}`] = parseFloat(
-        perParticipationWeightData.value
-      );
+      perParticipationWeight[`participation${i}`] = parseFloat(perParticipationWeightData.value);
       participationComplete[`participation${i}`] = false;
     }
   }
 
-  let weightScale = [
-    examWeight,
-    quizWeight,
-    assignmentWeight,
-    discussionWeight,
-    projectWeight,
-    participationWeight,
-  ];
+  let weightScale=[examWeight,quizWeight,assignmentWeight,discussionWeight,projectWeight,participationWeight];
 
-  let SubCollectionName = [
-    "exam",
-    "quiz",
-    "assignment",
-    "discussion",
-    "project",
-    "participation",
-  ];
+  let SubCollectionName = ['exam','quiz','assignment','discussion','project','participation'];
 
-  let SubCollectionQuantity = [
-    exam,
-    quiz,
-    assignment,
-    discussion,
-    project,
-    participation,
-  ];
+  let SubCollectionQuantity = [exam,quiz,assignment,discussion,project,participation];
 
-  let SubCollectionPerWeight = [
-    perExamWeight,
-    perQuizWeight,
-    perAssignmentWeight,
-    perDiscussionWeight,
-    perProjectWeight,
-    perParticipationWeight,
-  ];
+  let SubCollectionPerWeight = [perExamWeight,perQuizWeight,perAssignmentWeight,perDiscussionWeight,perProjectWeight,perParticipationWeight];
 
-  let SubCollectionComplete = [
-    examComplete,
-    quizComplete,
-    assignmentComplete,
-    discussionComplete,
-    projectComplete,
-    participationComplete,
-  ];
-
-
+  let SubCollectionComplete = [examComplete,quizComplete,assignmentComplete,discussionComplete,projectComplete,participationComplete];
 
   //filter null and empty dictinary inside array
-  weightScale = weightScale.filter((obj) => obj && Object.keys(obj).length > 0);
-
-  // checking weightScale add upto 100
+  weightScale = weightScale.filter(obj => obj && Object.keys(obj).length > 0);
+  
+  // checking weightScale add upto 100 
 
   let totalWeight = 0;
 
   weightScale.forEach((obj) => {
     for (const key in obj) {
-      if (key.endsWith("Weight")) {
+      if (key.endsWith('Weight')) {
         totalWeight += parseInt(obj[key]);
       }
     }
   });
+ 
   if (totalWeight > 100 || totalWeight < 100) {
-    return alert(
-      "The total weight for all categories exceeds or below 100%. Please adjust the weights accordingly."
-    );
+    return alert('The total weight for all categories exceeds or below 100%. Please adjust the weights accordingly.');
   }
 
-  console.log(SubCollectionComplete)
-// Create an empty array to store the differences between the lengths of corresponding elements in SubCollectionComplete and completionNameTemp
-var difference = [];
-
-// Loop over each element in the SubCollectionComplete array
-for (var i = 0; i < SubCollectionComplete.length; i++) {
-  // Get the corresponding element in the completionNameTemp array
-  var completionName = completionNameTemp[i];
-
-  // If the completionName is null or undefined, add the length of the sub-collection to the difference array
-  if (!completionName) {
-    difference.push(Object.keys(SubCollectionComplete[i] || {}).length);
-  } else {
-    // Otherwise, calculate the difference in length and add it to the difference array
-    var subCollectionKeys = Object.keys(SubCollectionComplete[i] || {});
-    var completionNameKeys = Object.keys(completionName);
-    difference.push({subCollectionKeys :completionNameKeys.length-subCollectionKeys.length});
-  }
-}
-
-console.log(difference);
-
-//go through firestore and delete all field by difference array
-//if difference is positive, delete the field
-for (var i = 0; i < difference.length; i++) {
- dataComplete= db.collection("users").doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+"Complete");
- dataGrades= db.collection("users").doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+"Grades");
- dataWeight= db.collection("users").doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+"Weight");
- dataDates= db.collection("users").doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+"Dates");
- if (difference[i]>0 && SubCollectionQuantity[i] != null){
-  //delete field from bottom up
-  for (var j = subCollectionKeys.length; j < difference[i]; j--) {
-    dataComplete.data().deleteField(SubCollectionName[i]+j);
-    dataGrades.data().deleteField(SubCollectionName[i]+j);
-    dataWeight.data().deleteField(SubCollectionName[i]+j);
-    dataDates.data().deleteField(SubCollectionName[i]+j);
-  }    
-}
-}
-//Gotta finish out
-
-  return
-  //we have to add a sub collection per weight catg
+  //we have to add a sub collection per weight catg 
   //====================================================================================//
 
-  auth.onAuthStateChanged(async function (user) {
+
+  auth.onAuthStateChanged(async function(user) {
     if (user) {
-      alert(weightScale);
-      await db
-        .collection("users")
-        .doc(user.uid)
-        .collection(semester)
-        .doc(courseName)
-        .delete();
-      // User is signed in.
-      await db
-        .collection("users")
-        .doc(user.uid)
-        .collection(semester)
-        .doc(courseName)
-        .set(
-          {
-            courseName: courseName,
-            termLength: termLength,
-            creditHours: creditHours,
-            classDays: checkedDays,
-            gradeScale: gradeScale,
-            weightScale: weightScale,
-          },
+      
+      // User is signed in.      
+     await db.collection('users').doc(user.uid).collection(semester).doc(courseName).set({
+        courseName: courseName,
+        creditHours: creditHours,
+        gradeScale: gradeScale,
+        weightScale: weightScale,
+      } ,
 
-          await db
-            .collection("users")
-            .doc(user.uid)
-            .update({
-              semester: firebase.firestore.FieldValue.arrayUnion(semester) ,
-            })
 
-          // now we have to add a sub collection per category
-        )
-        .then(async () => {
-          for (i = 0; i < SubCollectionName.length; i++) {
-            //check condition for any sub collection that is not null
-            if (SubCollectionQuantity[i] != null) {
+      // now we have to add a sub collection per category
+      ).then(async () => {
         
+        for (i=0; i < SubCollectionName.length; i++){
+          //check condition for any sub collection that is not null
+          if (SubCollectionQuantity[i] != null){
+            //add sub collection
+          await  db.collection('users').doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+'Grades').set(
+              SubCollectionQuantity[i]
+            )
+          await  db.collection('users').doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+'Weight').set(
+              SubCollectionPerWeight[i]
+            )
+          await db.collection('users').doc(user.uid).collection(semester).doc(courseName).collection(SubCollectionName[i]).doc(SubCollectionName[i]+'Complete').set(
+              SubCollectionComplete[i]
+            )
+          }  
+        }
+      }).then(() => {
+        var para = new URLSearchParams();
+        para.append("courseName", courseName);
+        para.append("semester", semester);
 
-            }
-          }
-        })
-        .then(() => {
-          var para = new URLSearchParams();
-          para.append("courseName", courseName);
-          para.append("semester", semester);
-
-          //make it wait 2 second before redirecting to the next page
-          //setTimeout(function () {
-            //window.location.href =
-             // "../html/courseForm2.html?" + para.toString();
-       //   }, 2000);
-        })
-        .catch((error) => {
-          // Firebase will use this to alert of its errors
-          var error_message = error.message;
-
-          alert(error_message);
-        });
-    } else {
-      window.location.href = window.location.href = "../../../index.html";
+        //make it wait 2 second before redirecting to the next page
+        setTimeout(function(){window.location.href = "../html/courseForm2.html?" + para.toString();}, 2000);
+      }
+      ).catch((error) => {
+        // Firebase will use this to alert of its errors
+        var error_message = error.message
+    
+        alert(error_message)
+      })
+      
+    }
+    else{
+      window.location.href =  window.location.href = "../../../index.html";
     }
   });
+ 
 }

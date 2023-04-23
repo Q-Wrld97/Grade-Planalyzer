@@ -7,192 +7,165 @@
 <meta name="Description" content="Enter your description here">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link rel="stylesheet" href="../css/editCourseForm.css">
-<title>Title</title>
+<link rel="stylesheet" href="../css/courseForm.css">
+<title>Course From</title>
 </head>
 <body>
-<div class="container" id="courseForm">
-  <!--Semester: Newly Added-->
-  <div >
-    <div>
-      <label for="text" style="margin-right: 10px;">Semester</label>
-    <div style="display:flex;align-items:center;">
-      <select name="semester" id ="semesterSeason" class="form-control form-control-sm" style="margin-right: 10px;" readonly>
-        
-      </select>
-      <div style="margin-right: 10px;">
-        <input type="number" id="semesterYear" pattern="\d*" min="1" max="2090" placeholder="Year" inputmode="numeric" oninput="limitInputToFourCharacters(semesterYear)" readonly>
-      </div>
-    </div>
-  </div>
-    <!--Course Name: Made a resuable fuction call addUpperCaseHandler -->
-    <div class="checkbox">
-      <label for="text" >Course Name</label>
-      <input type="text" name="courseName" id="CourseName" class="form-control" placeholder="Enter 3 Letter Acronym" maxlength="3" aria-describedby="CourseName" oninput="addUpperCaseHandler('CourseName')" readonly>
-      <p id="error1" style="display:none" >Sorry, the word "all" is a reserve word</p>
-    </div>
-    <!--Term Length: No Changes -->
-    <div class="checkbox">
-      <label for="text">Term Length</label>  
-      <select  name="termLength" class="form-control form-control-sm">
-        <option>16 Weeks</option>
-        <option>12 Weeks</option>
-        <option>8 Weeks</option></select>
-    </div>
-    <!--Credit Hours: No Changes -->
-    <div class="checkbox">
-      <label for="text">Credit Hours</label>
-      <select name="creditHours" class="form-control form-control-sm">
-      <option>3 Credits</option>
-      <option>4 Credits</option></select>
-    </div>
-    <!--Class Days: Optomize JS Functionalities-->
-    <div class="classDayLength">
-      <label for="text">Class Days:</label>
-      <div> 
-        <input onclick="classDayCheck()" type="checkbox" id="day-0" value="Monday">
-        <label for="day-0">M</label>
-        
-        <input onclick="classDayCheck()" type="checkbox" id="day-1" value="Tuesday">
-        <label for="day-1">T</label>
-        
-        <input onclick="classDayCheck()" type="checkbox" id="day-2" value="Wednesday">
-        <label for="day-2">W</label>
-        
-        <input onclick="classDayCheck()" type="checkbox" id="day-3" value="Thursday">
-        <label for="day-3">Th</label>
-        
-        <input onclick="classDayCheck()" type="checkbox" id="day-4" value="Friday">
-        <label for="day-4">F</label>
-        
-        <input onclick="classDayCheck()" type="checkbox" id="day-5" value="Saturday">
-        <label for="day-5">Sa</label>
+	<section id="banner">
+		<nav class="navbar">
+			<div class="navbar-left">
+		
+			</div>
+			<div class="navbar-middle">
+			<span class="navbar-grade">Grade</span>
+			<img src="../../../Assets/Grade_Planalyzer_Logo_PNG.png" alt="Logo" class="navbar-img">
+			<span class="navbar-planalyzer">Planalyzer</span>
+			</div>
+			<div class="navbar-right">
 
-        <input onclick="classDayCheck()" type="checkbox" id="day-6" value="Sunday">
-        <label for="day-6">Su</label>
-
-        <input onclick="classDayCheck()" type="checkbox" id="day-7" value="Remote">
-        <label for="day-7">Remote</label>
-      </div>
-    </div>
-    <!--Grading Scale: No Changes -->
-    <div>
-      <label for="text">Grading Scale</label>
-      <div class="custom-control custom-radio">
-      <input onclick="yesnoCheck()" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-      <label class="custom-control-label" for="customRadio1"><img id="gradescale" alt="gradeScale1" src="../../../Assets/GradeScale1.png"></label>
-      </div>
-      <div class="custom-control custom-radio">
-      <input onclick="yesnoCheck()" type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-      <label class="custom-control-label" for="customRadio2"><img id ="gradescale" alt="gradeScale2" src="../../../Assets/GradeScale2.png"></label>
-      </div>
-      <div class="custom-control custom-radio">
-      <input onclick="yesnoCheck()" type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-      <label class="custom-control-label" for="customRadio3">Custom</label>
-      </div>
-      <div id="ifYes" style="display:none" >
-          <p>
-          Enter lower bound (ex: If A is 90-100, input '90') </p>
-          <p><input name="A"   type="number" min="1" max="100" placeholder="A"/></p>
-          <p><input name="A-"  type="number" min="1" max="100" placeholder="A-"/></p>
-          <p><input name="B+"   type="number" min="1" max="100" placeholder="B+"/></p>
-          <p><input name="B"  type="number" min="1" max="100" placeholder="B"/></p>
-          <p><input name="B-"   type="number" min="1" max="100" placeholder="B-"></p>
-          <p><input name="C+"   type="number" min="1" max="100" placeholder="C+"/></p>
-          <p><input name="C"  type="number" min="1" max="100" placeholder="C"/></p>
-          <p><input name="C-"  type="number" min="1" max="100" placeholder="C-"/></p>
-          <p><input name="D+"  type="number" min="1" max="100" placeholder="D+"/></p>
-          <p><input name="D"  type="number" min="1" max="100" placeholder="D"></p>
-          <p><input name="D-"  type="number" min="1" max="100" placeholder="D-"/></p>
-          <p><input name="F"   type="number" min="0" max="100" placeholder="F"/></p>
-      </div>
-    </div>
-    <!--Grading Scale: Optimize JS code -->
-    <div>
-      
-      <label for="text">Weighted Category (check all that apply)</label>   
-      <div class="col-md-12">
-          <div class="checkbox">
-          <label><input onclick="GradeCategory()" id="Exam" type="checkbox" value="">Exams</label>
-          <input id="CategoryYesExam"style="display:none" type="number" min="0" max="100" placeholder="% of 100">
-          <input id="CategoryYesExam2"style="display:none" type="number" min="0" placeholder="Quantity">
-          <label style="display:none" id ="CategoryYesExam3">Equally weighted</label>
-          <select id ="CategoryYesExam4" onchange="generateFields('Exam')" class="form-control form-control-sm" style="display:none">
-            <option>Yes</option>
-            <option>No</option>
-          </select>
-          <p id="quantityContainer"style="display:none" type="number" min="0" max="100" placeholder="% of 100"> </p>
-          </div>
-          <div class="checkbox">
-          <label><input onclick="GradeCategory()" id="Quiz" type="checkbox" value="">Quiz</label>
-          <input id="CategoryYesQuiz"style="display:none" type="number" min="0" max="100" placeholder="% of 100">
-          <input id="CategoryYesQuiz2"style="display:none" type="number" min="0" placeholder="Quantity">
-          <label style="display:none" id ="CategoryYesQuiz3">Equally weighted</label>
-          <select id ="CategoryYesQuiz4" onchange="generateFields('Quiz')" class="form-control form-control-sm" style="display:none">
-            <option>Yes</option>
-            <option>No</option>
-          </select>
-          <p id="quantityContainer2"style="display:none" type="number" min="0" max="100" placeholder="% of 100"> </p>
-          </div>
-          <div class="checkbox">
-          <label><input onclick="GradeCategory()"  id="Assignment" type="checkbox" value="">Assignment</label>
-          <input id="CategoryYesAssignment"style="display:none" type="number" min="0" max="100" placeholder="% of 100">
-          <input id="CategoryYesAssignment2"style="display:none" type="number" min="0" placeholder="Quantity">
-          <label style="display:none" id ="CategoryYesAssignment3">Equally weighted</label>
-          <select id ="CategoryYesAssignment4" onchange="generateFields('Assignment')" class="form-control form-control-sm" style="display:none">
-            <option>Yes</option>
-            <option>No</option>
-          </select>
-          <p id="quantityContainer3"style="display:none" type="number" min="0" max="100" placeholder="% of 100"> </p>
-          </div>
-          <div class="checkbox">
-          <label><input onclick="GradeCategory()" id="Discussion" type="checkbox" value="">Discussion</label>
-          <input id="CategoryYesDiscussion"style="display:none" type="number" min="0" max="100" placeholder="% of 100">
-          <input id="CategoryYesDiscussion2"style="display:none" type="number" min="0" placeholder="Quantity">
-          <label style="display:none" id ="CategoryYesDiscussion3">Equally weighted</label>
-          <select id ="CategoryYesDiscussion4" onchange="generateFields('Discussion')"  class="form-control form-control-sm" style="display:none">
-            <option>Yes</option>
-            <option>No</option>
-          </select>
-          <p id="quantityContainer4"style="display:none" type="number" min="0" max="100" placeholder="% of 100"> </p>
-          </div>
-          <div class="checkbox">
-          <label><input onclick="GradeCategory()" id="Project" type="checkbox" value="">Project</label>
-          <input id="CategoryYesProject"style="display:none" type="number" min="0" max="100" placeholder="% of 100">
-          <input id="CategoryYesProject2"style="display:none" type="number" min="0" placeholder="Quantity">
-          <label style="display:none" id ="CategoryYesProject3">Equally weighted</label>
-          <select id ="CategoryYesProject4" onchange="generateFields('Project')" class="form-control form-control-sm" style="display:none">
-            <option>Yes</option>
-            <option>No</option>
-          </select>
-          <p id="quantityContainer5"style="display:none" type="number" min="0" max="100" placeholder="% of 100"> </p>
-          </div>
-          <div class="checkbox">
-          <label><input onclick="GradeCategory()" id="Participation" type="checkbox" value="">Participation</label>
-          <input id="CategoryYesParticipation"style="display:none" type="number" min="0" max="100" placeholder="% of 100">
-          <input id="CategoryYesParticipation2"style="display:none" type="number" min="0" placeholder="Quantity">
-          <label style="display:none" id ="CategoryYesParticipation3">Equally weighted</label>
-          <select id ="CategoryYesParticipation4" onchange="generateFields('Participation')" class="form-control form-control-sm" style="display:none">
-            <option>Yes</option>
-            <option>No</option>
-          </select>
-          <p id="quantityContainer6"style="display:none" type="number" min="0" max="100" placeholder="% of 100"> </p>
-          </div>
-          <p id="error2" style="display:none">Error Check Per Percentage</p>
-        </div> 
-
-    <!--Submit Button -->
-      <button onclick="addNewData()">Submit</button>
-    </div>
-  </div>
-</div>
-
+			</div>
+		</nav>
+		<div id="container">
+			<div class="box">
+				<div id="animated">
+					<!-- <h2>Login</h2>
+					<img src="../../../Assets/Grade_Planalyzer_Logo_PNG.png" alt="Logo" id="loginImg">-->
+					<div class="courseFromTextColor">
+						<h6>Course Name</h6>
+						<div class="checkBox">
+							<input type="text" name="courseName" id="CourseName" class="form-control" placeholder="Enter 3 Letter Acronym" maxlength="3" aria-describedby="CourseName" oninput="addUpperCaseHandler('CourseName')">
+							<p id="error1" style="display:none" >Sorry, the word "all" is a reserve word</p>
+						</div>
+						<h6>Credit Hours</h6>
+						<div class="checkbox">
+							<select name="creditHours" class="form-control form-control-sm">
+							<option>3 Credits</option>
+							<option>4 Credits</option></select>
+						</div>
+						<h6>Grading Scale</h6>
+						<div>
+							<div class="gradingScaleBox">
+								<div class="gradingScale">
+									<div class="custom-control custom-radio" style="margin-left: 10px;">
+										<input onclick="yesnoCheck()" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+										
+										<label class="custom-control-label" for="customRadio1"><img id="gradescale" alt="gradeScale1" src="../../../Assets/GradeScale1.png"></label>
+									</div>
+									<div class="custom-control custom-radio" style="margin-left: 10px;">
+										<input onclick="yesnoCheck()" type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+										
+										<label class="custom-control-label" for="customRadio2"><img id ="gradescale" alt="gradeScale2" src="../../../Assets/GradeScale2.png"></label>
+									</div>
+									<div class="custom-control custom-radio" style="margin-left: 10px;">
+										<input onclick="yesnoCheck()" type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+						
+										<label class="custom-control-label" for="customRadio3"></label>
+										<div id="ifYes" >
+											<input class="form-control-custom" name="A" type="number" min="1" max="100" placeholder="A"/>
+											<input class="form-control-custom" name="A-" type="number" min="1" max="100" placeholder="A-"/>
+											<input class="form-control-custom" name="B+" type="number" min="1" max="100" placeholder="B+"/>
+											<input class="form-control-custom" name="B" type="number" min="1" max="100" placeholder="B"/>
+											<input class="form-control-custom" name="B-" type="number" min="1" max="100" placeholder="B-">
+											<input class="form-control-custom" name="C+" type="number" min="1" max="100" placeholder="C+"/>
+											<input class="form-control-custom" name="C" type="number" min="1" max="100" placeholder="C"/>
+											<input class="form-control-custom" name="C-" type="number" min="1" max="100" placeholder="C-"/>
+											<input class="form-control-custom" name="D+" type="number" min="1" max="100" placeholder="D+"/>
+											<input class="form-control-custom" name="D" type="number" min="1" max="100" placeholder="D">
+											<input class="form-control-custom" name="D-" type="number" min="1" max="100" placeholder="D-"/>
+											<input class="form-control-custom" name="F" type="number" min="0" max="100" placeholder="F"/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<h6>Weighted Category (check all that apply)</h6>
+						<div>
+							<div class="weightCatagoryBox">  
+								<div class="col-sm-12">
+									<div class="checkbox">
+										<label><input onclick="GradeCategory()" id="Exam" type="checkbox" value="">Exams</label>
+										<input class="form-control-custom" id="CategoryYesExam"style="display:none" type="number" min="0" max="100" placeholder="Enter Weight Percentage">
+										<input class="form-control-custom" id="CategoryYesExam2"style="display:none" type="number" min="0" placeholder="Enter Exam Quantity">
+										<label style="display:none" id ="CategoryYesExam3">Equally weighted</label>
+										<select id ="CategoryYesExam4" onchange="generateFields('Exam')" class="form-control-custom" style="display:none">
+											<option>Yes</option>
+											<option>No</option>
+										</select>
+										<p id="quantityContainer"style="display:none" type="number" min="0" max="100" placeholder="Enter Weight Percentage"> </p>
+									</div>
+									<div class="checkbox">
+										<label><input onclick="GradeCategory()" id="Quiz" type="checkbox" value="">Quiz</label>
+										<input class="form-control-custom" id="CategoryYesQuiz"style="display:none" type="number" min="0" max="100" placeholder="Enter Weight Percentage">
+										<input class="form-control-custom" id="CategoryYesQuiz2"style="display:none" type="number" min="0" placeholder="Enter Quiz Quantity">
+										<label style="display:none" id ="CategoryYesQuiz3">Equally weighted</label>
+										<select id ="CategoryYesQuiz4" onchange="generateFields('Quiz')" class="form-control-custom" style="display:none">
+                                            <option>Yes</option>
+                                            <option>No</option>
+										</select>
+										<p id="quantityContainer2"style="display:none" type="number" min="0" max="100" placeholder="Enter Weight Percentage"> </p>
+									</div>
+									<div class="checkbox">
+										<label><input onclick="GradeCategory()"  id="Assignment" type="checkbox" value="">Assignment</label>
+										<input class="form-control-custom" id="CategoryYesAssignment"style="display:none" type="number" min="0" max="100" placeholder="Enter Weight Percentage">
+										<input class="form-control-custom" id="CategoryYesAssignment2"style="display:none" type="number" min="0" placeholder="Enter Assignment Quantity">
+										<label style="display:none" id ="CategoryYesAssignment3">Equally weighted</label>
+										<select id ="CategoryYesAssignment4" onchange="generateFields('Assignment')" class="form-control-custom" style="display:none">
+                                            <option>Yes</option>
+                                            <option>No</option>
+										</select>
+										<p id="quantityContainer3"style="display:none" type="number" min="0" max="100" placeholder="Enter Weight Percentage"> </p>
+									</div>
+									<div class="checkbox">
+										<label><input onclick="GradeCategory()"  id="Discussion" type="checkbox" value="">Discussion</label>
+										<input class="form-control-custom" id="CategoryYesDiscussion"style="display:none" type="number" min="0" max="100" placeholder="Enter Weight Percentage">
+										<input class="form-control-custom" id="CategoryYesDiscussion2"style="display:none" type="number" min="0" placeholder="Enter Discussion Quantity">
+										<label style="display:none" id ="CategoryYesDiscussion3">Equally weighted</label>
+										<select id ="CategoryYesDiscussion4" onchange="generateFields('Discussion')"  class="form-control-custom" style="display:none">
+                                            <option>Yes</option>
+                                            <option>No</option>
+										</select>
+										<p id="quantityContainer4"style="display:none" type="number" min="0" max="100" placeholder="Enter Weight Percentage"> </p>
+									</div>
+									<div class="checkbox">
+										<label><input onclick="GradeCategory()" id="Project" type="checkbox" value="">Project</label>
+										<input class="form-control-custom" id="CategoryYesProject"style="display:none" type="number" min="0" max="100" placeholder="Enter Weight Percentage">
+										<input class="form-control-custom" id="CategoryYesProject2"style="display:none" type="number" min="0" placeholder="Enter Project Quantity">
+										<label style="display:none" id ="CategoryYesProject3">Equally weighted</label>
+										<select id ="CategoryYesProject4" onchange="generateFields('Project')" class="form-control-custom" style="display:none">
+                                            <option>Yes</option>
+                                            <option>No</option>
+										</select>
+										<p id="quantityContainer5"style="display:none" type="number" min="0" max="100" placeholder="Enter Weight Percentage"> </p>
+									</div>
+									<div class="checkbox">
+										<label><input onclick="GradeCategory()" id="Participation" type="checkbox" value="">Participation</label>
+										<input class="form-control-custom" id="CategoryYesParticipation"style="display:none" type="number" min="0" max="100" placeholder="Enter Weight Percentage">
+										<input class="form-control-custom" id="CategoryYesParticipation2"style="display:none" type="number" min="0" placeholder="Enter Participation Quantity">
+										<label style="display:none" id ="CategoryYesParticipation3">Equally weighted</label>
+										<select id ="CategoryYesParticipation4" onchange="generateFields('Participation')" class="form-control-custom" style="display:none">
+                                            <option>Yes</option>
+                                            <option>No</option>
+										</select>
+										<p id="quantityContainer6"style="display:none" type="number" min="0" max="100" placeholder="Enter Weight Percentage"> </p>
+									</div>
+									<p id="error2" style="display:none">Error Check Per Percentage</p>
+								</div> 
+							</div>
+						</div>
+						<input type="submit" onclick="addNewData()" value="Submit">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-</body>
-<script src="../js/EditcourseForm.js"></script>
+
+<script src="../js/editCourseForm.js"></script>
 <script src="../js/addData2.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
