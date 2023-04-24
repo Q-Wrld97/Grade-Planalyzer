@@ -168,9 +168,15 @@ async function populateTabWhatIf() {
     tab = document.createElement("button");
     tab.className = "tablinks";
     tab.innerHTML = classList[i];
+    tab.id = "whatIfTabCourse" + i;
     tab.onclick = function () {
       grabDataPerClass(this.innerHTML);
+      for( i = 0 ; i < classList.length; i++){
+        document.getElementById("whatIfTabCourse" + i).style.backgroundColor = "grey";
+      }
+      this.style.backgroundColor = "red";
     };
+    
     whatIfTabCourse.appendChild(tab);
   }
 }

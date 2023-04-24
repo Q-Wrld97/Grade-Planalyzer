@@ -223,7 +223,7 @@ async function populateInfographicTabs() {
 
 
   for (let i = 0; i < courseList.length; i++) {
-    let buttonId = "infographicClass" + i;
+    let buttonId = "infographicClass" + (i+1);
 
     // Check if a button with the specific ID already exists
     if (document.getElementById(buttonId) === null) {
@@ -233,6 +233,10 @@ async function populateInfographicTabs() {
       course.id = buttonId;
       course.onclick = function () {
         // populate the infographic data
+        for (i=0; i <= courseList.length; i++) {
+          document.getElementById("infographicClass" + i).style.backgroundColor = "grey";
+        }
+        this.style.backgroundColor = "red";
       };
       infographicTabs.appendChild(course);
     }
@@ -325,3 +329,18 @@ async function populateInfographicDataAllTab() {
 }
 
 
+//create even listner for "All" button to turn red and populate data
+document.getElementById("infographicClass0").addEventListener("click", async function () {
+  if (globalGrades === undefined) {
+    var data = await getInfographicData() ;
+  } else {
+    var data = globalGrades;
+  }
+  let courseList = extractKeys(data)
+  // populate the infographic data
+  for (i=0; i <= courseList.length; i++) {
+    document.getElementById("infographicClass" + i).style.backgroundColor = "grey";
+  }
+  document.getElementById("infographicClass" + 0).style.backgroundColor = "red";
+  
+});
