@@ -1,45 +1,4 @@
-// Pie chart for column 1
-
-new Chart(document.getElementById("pieChartInfo"), {
-  type: "pie",
-  data: {
-    labels: ["SWE", "MAT", "COT", "CEN", "CNT"],
-    datasets: [
-      {
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.5)",
-          "rgba(54, 162, 235, 0.5)",
-          "rgba(255, 206, 86, 0.5)",
-          "rgba(75, 192, 192, 0.5)",
-          "rgba(153, 102, 255, 0.5)",
-          "rgba(255, 159, 64, 0.5)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
-        data: [10, 60, 30, 20, 80],
-      },
-    ],
-  },
-  options: {
-    title: {
-      display: true,
-      text: "Pie Chart",
-    },
-    reponsive: true,
-    legend: {
-      position: "bottom",
-    },
-  },
-});
-
 //Line chart for column
-
 const ctx = document.getElementById("barChart");
 
 new Chart(ctx, {
@@ -72,12 +31,12 @@ function getInfographicDataCheck() {
     globalGeneralData != undefined &&
     globalDates != undefined
   ) {
-    populateInfographicTabs()
+    populateInfographicTabs();
 
     return;
   } else {
     getInfographicData();
-    populateInfographicTabs()
+    populateInfographicTabs();
   }
 }
 
@@ -210,20 +169,18 @@ async function getInfographicData() {
   console.log(generalData);
 }
 
-
 // populate tabs for Infographic
 async function populateInfographicTabs() {
   if (globalGrades === undefined) {
-    var data = await getInfographicData() ;
+    var data = await getInfographicData();
   } else {
     var data = globalGrades;
   }
   let courseList = extractKeys(data);
-  let infographicTabs= document.getElementById("infographicTabs");
-
+  let infographicTabs = document.getElementById("infographicTabs");
 
   for (let i = 0; i < courseList.length; i++) {
-    let buttonId = "infographicClass" + (i+1);
+    let buttonId = "infographicClass" + (i + 1);
 
     // Check if a button with the specific ID already exists
     if (document.getElementById(buttonId) === null) {
@@ -233,16 +190,18 @@ async function populateInfographicTabs() {
       course.id = buttonId;
       course.onclick = function () {
         // populate the infographic data
-        for (i=0; i <= courseList.length; i++) {
-          document.getElementById("infographicClass" + i).style.backgroundColor = "grey";
+        for (i = 0; i <= courseList.length; i++) {
+          document.getElementById(
+            "infographicClass" + i
+          ).style.backgroundColor = "grey";
         }
         this.style.backgroundColor = "red";
+        dataForTabs(this.innerHTML)
       };
-      infographicTabs.appendChild(course);
+      infographicTabs.appendChild(course);   
     }
   }
 }
-
 
 //tabbing function for infographic
 function openTab(evt, cityName) {
@@ -265,8 +224,7 @@ document.getElementById("infographicIcon").addEventListener("click", (e) => {
   openTab(e, "Infographics");
 
   // Call the populateCourseTab function
-  getInfographicDataCheck()
-
+  getInfographicDataCheck();
 });
 
 //populate infographic data for all tabs in the infographic tab
@@ -278,17 +236,15 @@ async function populateInfographicDataAllTab() {
     globalWeight != undefined &&
     globalGeneralData != undefined &&
     globalDates != undefined
-  ){
+  ) {
     //continue
-
-  }
-  else {
-    getInfographicData()
+  } else {
+    getInfographicData();
   }
 
   compleleteData = globalComplete;
   datesData = globalDates;
-  console.log(compleleteData)
+  console.log(compleleteData);
   //go throught date data and complete data if an item is pass the date make complete data true
   for (let i = 0; i < Object.keys(datesData).length; i++) {
     let classData = datesData[Object.keys(datesData)[i]];
@@ -299,14 +255,13 @@ async function populateInfographicDataAllTab() {
         let date = new Date(itemData);
         let today = new Date();
         if (date < today) {
-          compleleteData[Object.keys(datesData)[i]][
-            Object.keys(classData)[j]
-          ][Object.keys(categoryData)[k]] = true;
+          compleleteData[Object.keys(datesData)[i]][Object.keys(classData)[j]][
+            Object.keys(categoryData)[k]
+          ] = true;
         }
       }
     }
   }
-  
 
   // get how many item is completed and divide by total number of items base on classes
   for (let i = 0; i < Object.keys(compleleteData).length; i++) {
@@ -323,24 +278,195 @@ async function populateInfographicDataAllTab() {
         totalItems++;
       }
     }
-
   }
-
 }
 
+// Create an event listener for the "All" button to turn red and populate data
+document
+  .getElementById("infographicClass0")
+  .addEventListener("click", async function () {
+    // Check if data is available
+    if (globalGrades === undefined) {
+      var data = await getInfographicData();
+    } else {
+      var data = globalGrades;
+    }
 
-//create even listner for "All" button to turn red and populate data
-document.getElementById("infographicClass0").addEventListener("click", async function () {
-  if (globalGrades === undefined) {
-    var data = await getInfographicData() ;
-  } else {
-    var data = globalGrades;
-  }
-  let courseList = extractKeys(data)
-  // populate the infographic data
-  for (i=0; i <= courseList.length; i++) {
-    document.getElementById("infographicClass" + i).style.backgroundColor = "grey";
-  }
-  document.getElementById("infographicClass" + 0).style.backgroundColor = "red";
-  
-});
+    // Color the "All" button when clicked
+    let courseList = extractKeys(data);
+    for (let i = 0; i < courseList.length; i++) {
+      document.getElementById("infographicClass" + i).style.backgroundColor =
+        "grey";
+    }
+    document.getElementById("infographicClass0").style.backgroundColor = "red";
+
+    data = globalComplete;
+    // Populate the infographic data for all tab
+    // Loop through all the classes
+
+    let classTotals = {};
+    let grandTotalItems = 0;
+    let grandTotalCompleted = 0;
+
+    // Loop through all classes
+    for (let i = 0; i < Object.keys(data).length; i++) {
+      // Get the class name and its data
+      let className = Object.keys(data)[i];
+      let classData = data[className];
+
+      // Initialize the dictionary for the current class if not already initialized
+      if (!classTotals[className]) {
+        classTotals[className] = { total: 0, completed: 0 };
+      }
+
+      // Loop through each category within the class
+      for (let j = 0; j < Object.keys(classData).length; j++) {
+        let categoryData = classData[Object.keys(classData)[j]];
+
+        // Loop through each item within the category
+        for (let k = 0; k < Object.keys(categoryData).length; k++) {
+          let itemData = categoryData[Object.keys(categoryData)[k]];
+
+          // If the item is completed, update the completed count in classTotals and grandTotalCompleted
+          if (itemData === true) {
+            classTotals[className].completed += 1;
+            grandTotalCompleted += 1;
+          }
+
+          // Update the total count in classTotals and grandTotalItems
+          classTotals[className].total += 1;
+          grandTotalItems += 1;
+        }
+      }
+    }
+
+    // Log the results to the console
+    console.log(classTotals);
+    console.log("Grand Total Items:", grandTotalItems);
+    console.log("Grand Total Completed:", grandTotalCompleted);
+    
+
+    // Calculate not completed items
+    let grandTotalNotCompleted = grandTotalItems - grandTotalCompleted;
+    
+    let pieChart = document.getElementById("pieChartInfo");
+    if (pieChart) {
+      pieChart.remove();
+    }
+    
+  let canvas = document.createElement("canvas");
+  canvas.setAttribute("id", "pieChartInfo");
+  document.getElementById("pieChartSize").appendChild(canvas);
+  new Chart(document.getElementById("pieChartInfo"), {
+    type: "pie",
+    data: {
+      labels: ["Completed", "Not Completed"],
+      datasets: [
+        {
+          backgroundColor: [
+            "rgba(75, 192, 192, 0.5)",
+            "rgba(255, 99, 132, 0.5)",
+          ],
+          borderColor: ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)"],
+          data: [grandTotalCompleted, grandTotalNotCompleted],
+        },
+      ],
+    },
+    options: {
+      title: {
+        display: true,
+        text: "Pie Chart - Completed vs. Not Completed",
+      },
+      responsive: true,
+      legend: {
+        position: "bottom",
+      },
+    },
+  });
+  });
+
+
+
+  async function dataForTabs(course) {
+    // Check if data is available
+    if (globalGrades === undefined) {
+      var data = await getInfographicData();
+    } else {
+      var data = globalGrades;
+    }
+    data = globalComplete;
+    // Populate the infographic data for all tab
+    // Loop through all the classes
+    let classTotals = {};
+
+    // Loop through all classes
+    for (let i = 0; i < Object.keys(data).length; i++) {
+      // Get the class name and its data
+      let className = Object.keys(data)[i];
+      let classData = data[className];
+    
+      // Initialize the dictionary for the current class if not already initialized
+      if (!classTotals[className]) {
+        classTotals[className] = { total: 0, completed: 0 };
+      }
+    
+      // Loop through each category within the class
+      for (let j = 0; j < Object.keys(classData).length; j++) {
+        let categoryData = classData[Object.keys(classData)[j]];
+    
+        // Loop through each item within the category
+        for (let k = 0; k < Object.keys(categoryData).length; k++) {
+          let itemData = categoryData[Object.keys(categoryData)[k]];
+    
+          // If the item is completed, update the completed count in classTotals
+          if (itemData === true) {
+            classTotals[className].completed += 1;
+          }
+    
+          // Update the total count in classTotals
+          classTotals[className].total += 1;
+        }
+      }
+    }
+    
+    // Log the results to the console
+    console.log(classTotals);
+    console.log(course)
+    // Calculate not completed items
+    let notCompleted = classTotals[course].total - classTotals[course].completed;
+    // populate the pie chart
+    let pieChart = document.getElementById("pieChartInfo");
+    if (pieChart) {
+      pieChart.remove();
+    }
+    
+  let canvas = document.createElement("canvas");
+  canvas.setAttribute("id", "pieChartInfo");
+  document.getElementById("pieChartSize").appendChild(canvas);
+  new Chart(document.getElementById("pieChartInfo"), {
+    type: "pie",
+    data: {
+      labels: ["Completed", "Not Completed"],
+      datasets: [
+        {
+          backgroundColor: [
+            "rgba(75, 192, 192, 0.5)",
+            "rgba(255, 99, 132, 0.5)",
+          ],
+          borderColor: ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)"],
+          data: [classTotals[course].completed, notCompleted],
+        },
+      ],
+    },
+    options: {
+      title: {
+        display: true,
+        text: "Pie Chart - Completed vs. Not Completed",
+      },
+      responsive: true,
+      legend: {
+        position: "bottom",
+      },
+    },
+  });
+}
