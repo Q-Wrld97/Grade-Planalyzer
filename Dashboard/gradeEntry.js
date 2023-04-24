@@ -151,10 +151,23 @@ async function populateCourseTab() {
       course.id = buttonId;
       course.onclick = function () {
         populateGradeEntryTab(this.innerHTML);
+        // make the tab color red when clicked
+        for(i = 0; i < courseList.length; i++){
+          document.getElementById("courseButton" + i).style.backgroundColor = "grey";
+        }
+        this.style.backgroundColor = "red";
+
       };
       courseTab.appendChild(course);
     }
   }
+  const clickEvent = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  });
+  const secondElementToClick = document.getElementById("courseButton0")
+  secondElementToClick.dispatchEvent(clickEvent);
 }
 
 //create an event  for id=gradeEntry
@@ -275,6 +288,12 @@ async function populateGradeEntryTab(courseName) {
 
 // function to submit grades
 async function submitGrade() {
+  var progressBar = document.getElementById('preLoading');
+  progressBar.setAttribute('aria-valuenow', 25);
+  progressBar.style.width = 25 + '%';
+  const preloader = document.querySelector('.preloader');
+  preloader.style.display = 'flex';
+  
   //grab data from html elment for recent
   let recentGradeName = document.getElementsByClassName("recentFormLabel");
   let recentGradeValue = document.getElementsByName("Recent");
@@ -312,5 +331,25 @@ async function submitGrade() {
         [recentGradeKey[i]]: parseFloat(recentGrade[recentGradeKey[i]]),
       });
   }
+  // show the loading screen
   getGradeEntry();
+  progressBar.setAttribute('aria-valuenow', 50);
+  progressBar.style.width = 50 + '%';
+  populateCourseTab();
+  progressBar.setAttribute('aria-valuenow', 100);
+  progressBar.style.width = 100 + '%';
+      //=======================
+  // Get the element you want to click
+  const elementToClick = document.getElementById('gradeEntryIcon');
+  // Create a new mouse event
+  const clickEvent = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  });
+  
+  // Dispatch the event on the element
+  const secondElementToClick = document.getElementById(courseButton0)
+  secondElementToClick.dispatchEvent(clickEvent);
+  preloader.style.display = 'none';
 }
