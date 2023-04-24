@@ -177,8 +177,21 @@ async function populateInfographicTabs() {
     var data = globalGrades;
   }
   let courseList = extractKeys(data);
+  //remove all tabs except the first one
   let infographicTabs = document.getElementById("infographicTabs");
-
+  // Get the reference to the first child
+  let firstChild = infographicTabs.firstElementChild;
+  
+  // Clear all tabs beside the first one
+  while (infographicTabs.lastElementChild) {
+    // Check if the current last child is the first child
+    if (infographicTabs.lastElementChild === firstChild) {
+      break;
+    }
+  
+    // Remove the last child if it's not the first child
+    infographicTabs.removeChild(infographicTabs.lastElementChild);
+  }
   for (let i = 0; i < courseList.length; i++) {
     let buttonId = "infographicClass" + (i + 1);
 
@@ -196,9 +209,9 @@ async function populateInfographicTabs() {
           ).style.backgroundColor = "grey";
         }
         this.style.backgroundColor = "red";
-        dataForTabs(this.innerHTML)
+        dataForTabs(this.innerHTML);
       };
-      infographicTabs.appendChild(course);   
+      infographicTabs.appendChild(course);
     }
   }
 }
