@@ -181,14 +181,14 @@ async function populateInfographicTabs() {
   let infographicTabs = document.getElementById("infographicTabs");
   // Get the reference to the first child
   let firstChild = infographicTabs.firstElementChild;
-  
+
   // Clear all tabs beside the first one
   while (infographicTabs.lastElementChild) {
     // Check if the current last child is the first child
     if (infographicTabs.lastElementChild === firstChild) {
       break;
     }
-  
+
     // Remove the last child if it's not the first child
     infographicTabs.removeChild(infographicTabs.lastElementChild);
   }
@@ -307,7 +307,7 @@ document
 
     // Color the "All" button when clicked
     let courseList = extractKeys(data);
-    for (let i = 0; i < courseList.length; i++) {
+    for (let i = 0; i <= courseList.length; i++) {
       document.getElementById("infographicClass" + i).style.backgroundColor =
         "grey";
     }
@@ -357,102 +357,99 @@ document
     console.log(classTotals);
     console.log("Grand Total Items:", grandTotalItems);
     console.log("Grand Total Completed:", grandTotalCompleted);
-    
 
     // Calculate not completed items
     let grandTotalNotCompleted = grandTotalItems - grandTotalCompleted;
-    
+
     let pieChart = document.getElementById("pieChartInfo");
     if (pieChart) {
       pieChart.remove();
     }
-    
-  let canvas = document.createElement("canvas");
-  canvas.setAttribute("id", "pieChartInfo");
-  document.getElementById("pieChartSize").appendChild(canvas);
-  new Chart(document.getElementById("pieChartInfo"), {
-    type: "pie",
-    data: {
-      labels: ["Completed", "Not Completed"],
-      datasets: [
-        {
-          backgroundColor: [
-            "rgba(75, 192, 192, 0.5)",
-            "rgba(255, 99, 132, 0.5)",
-          ],
-          borderColor: ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)"],
-          data: [grandTotalCompleted, grandTotalNotCompleted],
+
+    let canvas = document.createElement("canvas");
+    canvas.setAttribute("id", "pieChartInfo");
+    document.getElementById("pieChartSize").appendChild(canvas);
+    new Chart(document.getElementById("pieChartInfo"), {
+      type: "pie",
+      data: {
+        labels: ["Completed", "Not Completed"],
+        datasets: [
+          {
+            backgroundColor: [
+              "rgba(75, 192, 192, 0.5)",
+              "rgba(255, 99, 132, 0.5)",
+            ],
+            borderColor: ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)"],
+            data: [grandTotalCompleted, grandTotalNotCompleted],
+          },
+        ],
+      },
+      options: {
+        title: {
+          display: true,
+          text: "Pie Chart - Completed vs. Not Completed",
         },
-      ],
-    },
-    options: {
-      title: {
-        display: true,
-        text: "Pie Chart - Completed vs. Not Completed",
+        responsive: true,
+        legend: {
+          position: "bottom",
+        },
       },
-      responsive: true,
-      legend: {
-        position: "bottom",
-      },
-    },
-  });
+    });
   });
 
+async function dataForTabs(course) {
+  // Check if data is available
+  if (globalGrades === undefined) {
+    var data = await getInfographicData();
+  } else {
+    var data = globalGrades;
+  }
+  data = globalComplete;
+  // Populate the infographic data for all tab
+  // Loop through all the classes
+  let classTotals = {};
 
+  // Loop through all classes
+  for (let i = 0; i < Object.keys(data).length; i++) {
+    // Get the class name and its data
+    let className = Object.keys(data)[i];
+    let classData = data[className];
 
-  async function dataForTabs(course) {
-    // Check if data is available
-    if (globalGrades === undefined) {
-      var data = await getInfographicData();
-    } else {
-      var data = globalGrades;
+    // Initialize the dictionary for the current class if not already initialized
+    if (!classTotals[className]) {
+      classTotals[className] = { total: 0, completed: 0 };
     }
-    data = globalComplete;
-    // Populate the infographic data for all tab
-    // Loop through all the classes
-    let classTotals = {};
 
-    // Loop through all classes
-    for (let i = 0; i < Object.keys(data).length; i++) {
-      // Get the class name and its data
-      let className = Object.keys(data)[i];
-      let classData = data[className];
-    
-      // Initialize the dictionary for the current class if not already initialized
-      if (!classTotals[className]) {
-        classTotals[className] = { total: 0, completed: 0 };
-      }
-    
-      // Loop through each category within the class
-      for (let j = 0; j < Object.keys(classData).length; j++) {
-        let categoryData = classData[Object.keys(classData)[j]];
-    
-        // Loop through each item within the category
-        for (let k = 0; k < Object.keys(categoryData).length; k++) {
-          let itemData = categoryData[Object.keys(categoryData)[k]];
-    
-          // If the item is completed, update the completed count in classTotals
-          if (itemData === true) {
-            classTotals[className].completed += 1;
-          }
-    
-          // Update the total count in classTotals
-          classTotals[className].total += 1;
+    // Loop through each category within the class
+    for (let j = 0; j < Object.keys(classData).length; j++) {
+      let categoryData = classData[Object.keys(classData)[j]];
+
+      // Loop through each item within the category
+      for (let k = 0; k < Object.keys(categoryData).length; k++) {
+        let itemData = categoryData[Object.keys(categoryData)[k]];
+
+        // If the item is completed, update the completed count in classTotals
+        if (itemData === true) {
+          classTotals[className].completed += 1;
         }
+
+        // Update the total count in classTotals
+        classTotals[className].total += 1;
       }
     }
-    
-    // Log the results to the console
-    console.log(classTotals);
-    console.log(course)
-    // Calculate not completed items
-    let notCompleted = classTotals[course].total - classTotals[course].completed;
-    // populate the pie chart
-    let pieChart = document.getElementById("pieChartInfo");
-    if (pieChart) {
-      pieChart.remove();
-    }
-    
+  }
+
+  // Log the results to the console
+  console.log(classTotals);
+  console.log(course);
+  // Calculate not completed items
+  let notCompleted = classTotals[course].total - classTotals[course].completed;
+  // populate the pie chart
+  let pieChart = document.getElementById("pieChartInfo");
+  if (pieChart) {
+    pieChart.remove();
+  }
+
   let canvas = document.createElement("canvas");
   canvas.setAttribute("id", "pieChartInfo");
   document.getElementById("pieChartSize").appendChild(canvas);
@@ -482,4 +479,18 @@ document
       },
     },
   });
+  // grabbing data for rollin gpa
+  completedWork = globalComplete[course];
+  currentGeneral = globalGeneralData[course];
+  currentGrades = globalGrades[course];
+  currentDates = globalDates[course];
+  currentWeight = globalWeight[course];
+
+  console.log(completedWork);
+  console.log(currentGrades);
+  console.log(currentGeneral);
+  console.log(currentDates);
+  console.log(currentWeight);
+
+  semester = document.getElementById("semesterSelect").value;
 }

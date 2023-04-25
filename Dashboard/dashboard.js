@@ -17,7 +17,7 @@ var globalGrades; // global variable to store the grades
 var globalComplete; // global variable to store the completion statu
 
 //event listener on load to pull global variable
-window.addEventListener("load", async () => {
+window.addEventListener("DOMContentLoaded", async () => {
 
   // show the loading screen
   var progressBar = document.getElementById('preLoading');
@@ -28,6 +28,7 @@ window.addEventListener("load", async () => {
   await new Promise((r) => setTimeout(r, 1000));
   let userID = auth.currentUser.uid;
   let semester = document.getElementById("semesterSelect").value;
+  console.log(semester)
   let classes = await db
     .collection("users")
     .doc(userID)
