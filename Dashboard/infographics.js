@@ -22,6 +22,8 @@ new Chart(ctx, {
   },
 });
 
+
+
 // Grab Data for Infographic
 function getInfographicDataCheck() {
   if (
@@ -395,8 +397,76 @@ document
         },
       },
     });
+  completedWork = globalComplete;
+  currentClassGeneral = globalGeneralData;
+  currentGrades = globalGrades;
+  currentDates = globalDates;
+  currentWeight = globalWeight;
+
+  semester = document.getElementById("semesterSelect").value;
+
+  // call for all user general data
+  userGeneralData = globalUserData;
+  console.log(userGeneralData);
+  //parsing out start and end date
+  semesterDatesArray= userGeneralData["semesterStartAndEnd"]
+  var startAndEnd
+  //go through arrayy and find the semester
+  for (i=0; i<semesterDatesArray.length; i++){
+    const targetKey = semester
+    const semesterDates = semesterDatesArray[i];
+    if(semesterDates.hasOwnProperty(targetKey)){
+      startAndEnd=semesterDatesArray[i]
+      break
+    }
+    else{
+      console.log("key not found")
+    }
+  }
+  
+  const dateRangeString = startAndEnd[semester];
+  const dateSeparator = "||";
+  const dates = dateRangeString.split(dateSeparator);
+  const startDate = dates[0];
+  const endDate = dates[1];
+
+  console.log("Start date:", startDate);
+  console.log("End date:", endDate);
+
+  const startDateFormat = new Date(startDate);
+  const endDateFormat = new Date(endDate);
+
+  // Generate a list of dates between startDateFormat and endDateFormat
+  const dateList = [];
+  let currentDate = startDateFormat;
+  while (currentDate <= endDateFormat) {
+    dateList.push(new Date(currentDate).toISOString().split("T")[0]);
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  // Split the dateList into chunks of 7 days
+  const weeklyChunks = [];
+  while (dateList.length) {
+    weeklyChunks.push(dateList.splice(0, 7));
+  }
+
+  // Save weeks with date ranges in a dictionary
+  const weeksDictionary = {};
+  weeklyChunks.forEach((chunk, index) => {
+    const weekKey = `Week ${index + 1}`;
+    const weekValue = `${chunk[0]}-${chunk[chunk.length - 1]}`;
+    weeksDictionary[weekKey] = weekValue;
   });
 
+  console.log(weeksDictionary);
+
+  //for each week range in week dictionary we want to find the number of assignments with grades !-null if it is remove from the dictionary
+ 
+
+  });
+
+
+//function for all other course tab
 async function dataForTabs(course) {
   // Check if data is available
   if (globalGrades === undefined) {
@@ -481,16 +551,84 @@ async function dataForTabs(course) {
   });
   // grabbing data for rollin gpa
   completedWork = globalComplete[course];
-  currentGeneral = globalGeneralData[course];
+  currentClassGeneral = globalGeneralData[course];
   currentGrades = globalGrades[course];
   currentDates = globalDates[course];
   currentWeight = globalWeight[course];
 
+
+
   console.log(completedWork);
   console.log(currentGrades);
-  console.log(currentGeneral);
+  console.log(currentClassGeneral);
   console.log(currentDates);
   console.log(currentWeight);
 
   semester = document.getElementById("semesterSelect").value;
+
+  // call for all user general data
+  userGeneralData = globalUserData;
+  console.log(userGeneralData);
+  //parsing out start and end date
+  semesterDatesArray= userGeneralData["semesterStartAndEnd"]
+  var startAndEnd
+  //go through arrayy and find the semester
+  for (i=0; i<semesterDatesArray.length; i++){
+    const targetKey = semester
+    const semesterDates = semesterDatesArray[i];
+    if(semesterDates.hasOwnProperty(targetKey)){
+      startAndEnd=semesterDatesArray[i]
+      break
+    }
+    else{
+      console.log("key not found")
+    }
+  }
+  
+  const dateRangeString = startAndEnd[semester];
+  const dateSeparator = "||";
+  const dates = dateRangeString.split(dateSeparator);
+  const startDate = dates[0];
+  const endDate = dates[1];
+
+  console.log("Start date:", startDate);
+  console.log("End date:", endDate);
+
+  const startDateFormat = new Date("2023-04-24");
+  const endDateFormat = new Date("2023-05-06");
+
+  // Generate a list of dates between startDateFormat and endDateFormat
+  const dateList = [];
+  let currentDate = startDateFormat;
+  while (currentDate <= endDateFormat) {
+    dateList.push(new Date(currentDate).toISOString().split("T")[0]);
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  // Split the dateList into chunks of 7 days
+  const weeklyChunks = [];
+  while (dateList.length) {
+    weeklyChunks.push(dateList.splice(0, 7));
+  }
+
+  // Save weeks with date ranges in a dictionary
+  const weeksDictionary = {};
+  weeklyChunks.forEach((chunk, index) => {
+    const weekKey = `Week ${index + 1}`;
+    const weekValue = `${chunk[0]}-${chunk[chunk.length - 1]}`;
+    weeksDictionary[weekKey] = weekValue;
+  });
+
+  console.log(weeksDictionary);
+
+
+
+
+  
+  
+
+  
 }
+
+
+

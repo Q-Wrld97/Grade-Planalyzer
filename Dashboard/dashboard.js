@@ -15,6 +15,7 @@ var globalGeneralData; //global variable to store the general data
 var globalDates; //global variable to store the dates
 var globalGrades; // global variable to store the grades
 var globalComplete; // global variable to store the completion statu
+var globalUserData
 
 //event listener on load to pull global variable
 window.addEventListener("DOMContentLoaded", async () => {
@@ -165,10 +166,16 @@ window.addEventListener("DOMContentLoaded", async () => {
   progressBar.style.width = 100 + '%';
   // hide the loading screen
   preloader.style.display = 'none';
-
+  globalUserData = await grabGPAandSemesterDates();
   return allCategoryTypeData;
 });
 
+// grab classes general data
+async function grabGPAandSemesterDates(){
+  data = await db.collection("users").doc(auth.currentUser.uid).get();
+  allData = data.data();
+  return allData
+}
 //add data to drop down list
 async function getSemester() {
   const semesterSelect = document.getElementById("semesterSelect");
