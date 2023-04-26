@@ -31,18 +31,18 @@
 					<!-- <h2>Login</h2>
 					<img src="../../../Assets/Grade_Planalyzer_Logo_PNG.png" alt="Logo" id="loginImg">-->
 					<div class="courseFromTextColor">
-						<h6>Course Name</h6>
+						<h6>Course Name:</h6>
 						<div class="checkBox">
 							<input type="text" name="courseName" id="CourseName" class="form-control" placeholder="Enter 3 Letter Acronym" maxlength="3" aria-describedby="CourseName" oninput="addUpperCaseHandler('CourseName')">
 							<p id="error1" style="display:none" >Sorry, the word "all" is a reserve word</p>
 						</div>
-						<h6>Credit Hours</h6>
+						<h6>Credit Hours:</h6>
 						<div class="checkbox">
 							<select name="creditHours" class="form-control form-control-sm">
 							<option>3 Credits</option>
 							<option>4 Credits</option></select>
 						</div>
-						<h6>Grading Scale</h6>
+						<h6>Grading Scale:</h6>
 						<div>
 							<div class="gradingScaleBox">
 								<div class="gradingScale">
@@ -78,7 +78,7 @@
 								</div>
 							</div>
 						</div>
-						<h6>Weighted Category (check all that apply)</h6>
+						<h6>Weighted Categories (check all that apply):</h6>
 						<div>
 							<div class="weightCatagoryBox">  
 								<div class="col-sm-12">
@@ -86,7 +86,7 @@
 										<label><input onclick="GradeCategory()" id="Exam" type="checkbox" value="">Exams</label>
 										<input class="form-control-custom" id="CategoryYesExam"style="display:none" type="number" min="0" max="100" placeholder="Enter Weight Percentage">
 										<input class="form-control-custom" id="CategoryYesExam2"style="display:none" type="number" min="0" placeholder="Enter Exam Quantity">
-										<label style="display:none" id ="CategoryYesExam3">Equally weighted</label>
+										<label style="display:none" id ="CategoryYesExam3">Is Each Exam Equally Weighted?</label>
 										<select id ="CategoryYesExam4" onchange="generateFields('Exam')" class="form-control-custom" style="display:none">
 											<option>Yes</option>
 											<option>No</option>
@@ -97,7 +97,7 @@
 										<label><input onclick="GradeCategory()" id="Quiz" type="checkbox" value="">Quiz</label>
 										<input class="form-control-custom" id="CategoryYesQuiz"style="display:none" type="number" min="0" max="100" placeholder="Enter Weight Percentage">
 										<input class="form-control-custom" id="CategoryYesQuiz2"style="display:none" type="number" min="0" placeholder="Enter Quiz Quantity">
-										<label style="display:none" id ="CategoryYesQuiz3">Equally weighted</label>
+										<label style="display:none" id ="CategoryYesQuiz3">Is Each Quiz Equally Weighted?</label>
 										<select id ="CategoryYesQuiz4" onchange="generateFields('Quiz')" class="form-control-custom" style="display:none">
                                             <option>Yes</option>
                                             <option>No</option>
@@ -108,7 +108,7 @@
 										<label><input onclick="GradeCategory()"  id="Assignment" type="checkbox" value="">Assignment</label>
 										<input class="form-control-custom" id="CategoryYesAssignment"style="display:none" type="number" min="0" max="100" placeholder="Enter Weight Percentage">
 										<input class="form-control-custom" id="CategoryYesAssignment2"style="display:none" type="number" min="0" placeholder="Enter Assignment Quantity">
-										<label style="display:none" id ="CategoryYesAssignment3">Equally weighted</label>
+										<label style="display:none" id ="CategoryYesAssignment3">Is Each Assignment Equally Weighted?</label>
 										<select id ="CategoryYesAssignment4" onchange="generateFields('Assignment')" class="form-control-custom" style="display:none">
                                             <option>Yes</option>
                                             <option>No</option>
@@ -119,7 +119,7 @@
 										<label><input onclick="GradeCategory()"  id="Discussion" type="checkbox" value="">Discussion</label>
 										<input class="form-control-custom" id="CategoryYesDiscussion"style="display:none" type="number" min="0" max="100" placeholder="Enter Weight Percentage">
 										<input class="form-control-custom" id="CategoryYesDiscussion2"style="display:none" type="number" min="0" placeholder="Enter Discussion Quantity">
-										<label style="display:none" id ="CategoryYesDiscussion3">Equally weighted</label>
+										<label style="display:none" id ="CategoryYesDiscussion3">Is Each Discussion Equally Weighted?</label>
 										<select id ="CategoryYesDiscussion4" onchange="generateFields('Discussion')"  class="form-control-custom" style="display:none">
                                             <option>Yes</option>
                                             <option>No</option>
@@ -130,7 +130,7 @@
 										<label><input onclick="GradeCategory()" id="Project" type="checkbox" value="">Project</label>
 										<input class="form-control-custom" id="CategoryYesProject"style="display:none" type="number" min="0" max="100" placeholder="Enter Weight Percentage">
 										<input class="form-control-custom" id="CategoryYesProject2"style="display:none" type="number" min="0" placeholder="Enter Project Quantity">
-										<label style="display:none" id ="CategoryYesProject3">Equally weighted</label>
+										<label style="display:none" id ="CategoryYesProject3">Is Each Project Equally Weighted?</label>
 										<select id ="CategoryYesProject4" onchange="generateFields('Project')" class="form-control-custom" style="display:none">
                                             <option>Yes</option>
                                             <option>No</option>
@@ -141,7 +141,7 @@
 										<label><input onclick="GradeCategory()" id="Participation" type="checkbox" value="">Participation</label>
 										<input class="form-control-custom" id="CategoryYesParticipation"style="display:none" type="number" min="0" max="100" placeholder="Enter Weight Percentage">
 										<input class="form-control-custom" id="CategoryYesParticipation2"style="display:none" type="number" min="0" placeholder="Enter Participation Quantity">
-										<label style="display:none" id ="CategoryYesParticipation3">Equally weighted</label>
+										<label style="display:none" id ="CategoryYesParticipation3">Is Each Participation Equally Weighted?</label>
 										<select id ="CategoryYesParticipation4" onchange="generateFields('Participation')" class="form-control-custom" style="display:none">
                                             <option>Yes</option>
                                             <option>No</option>
