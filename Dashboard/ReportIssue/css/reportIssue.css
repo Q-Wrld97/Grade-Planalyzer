@@ -1,115 +1,265 @@
-.form {
-    max-width: 400px;
-    margin: 20px auto 20px auto;
-    padding: 20px;
-    border: 5px solid rgb(223, 71, 71);
-    box-shadow: -16px 16px 10px 5px rgb(0, 0, 0);
+#banner {
+    background: url(../../../Assets/dashBackground.gif);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
 }
-  
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+#banner {
+    background: url(../../../Assets/dashBackground.gif);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.gradingScale {
+    display: flex;
+    flex-direction: row;
+    width: 700px;
+    height: 300px;
+}
+
+.gradingScaleBox {
+    width: 700px;
+    height: 300px;
+    align-self: center;
+    overflow-y: auto;
+}
+
+.customGradingScale {
+    display: none;
+}
+
+.form-control-custom {
+    width: 200px;
+}
+
+.weightCatagoryBox {
+    width: 700px;
+    height: 220px;
+    overflow-y: auto;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    background: url(../Assets/dashBackground.gif);
+}
+
+.box {
+    position: relative;
+    width: 700px;
+    height: 800px;
+    background: rgba(24,24,27);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.box::before {
+    content: '';
+    z-index: 1;
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 700px;
+    height: 800px;
+    transform-origin: bottom right;
+    background: linear-gradient(0deg, transparent, red, red);
+    animation: animate 6s linear infinite;
+}
+
+.box::after {
+    content: '';
+    z-index: 1;
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 700px;
+    height: 800px;
+    transform-origin: bottom right;
+    background: linear-gradient(0deg, transparent, red, red);
+    animation: animate 6s linear infinite;
+    animation-delay: -3s;
+}
+.courseFromTextColor{
+    color: white;
+}
+.font-color{
+    color: white;
+  }
+label{
+    color:white;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#animated {
+    position: absolute;
+    inset: 2px;
+    background: rgba(24,24,27,0.98);
+    padding-top: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 5px;
+    border-radius: 8px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+input[type="submit"] {
+    border: none;
+    outline: none;
+    padding: 11px 25px;
+    background: red;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: 600;
+    width: 100px;
+    margin-top: 10px;
+}
+
+input[type="submit"]:active {
+    opacity: 0.8;
+}
+.submitBtn {
+    text-align: center;
+}
+
+/* center the loginIMG */
+#loginImg {
+    display: block;
+}
+/* Nav BAR*/
 /* Style for the navbar */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #333;
-  color: #fff;
-  height: 60px;
-  padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    height: 60px;
+
 }
 
 /* Style for the left menu */
 .navbar-left {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 /* Style for the right menu */
 .navbar-right {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 /* Style for the navbar links */
 .navbar-link {
-  color: #fff;
-  text-decoration: none;
-  margin: 0 10px;
-  font-size: 15px;
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 15px;
 }
 
 /* Style for the navbar image */
 .navbar-img {
-  height: 70px;
-  width: 70px;
+    height: 50px;
+    width: 50px;
 }
 
 .navbar-link:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
- 
-.navbar-middle{
+
+.navbar-middle {
     display: flex;
     align-items: center;
 }
- 
+
 @media (max-width: 768px) {
-  .box {
-    width: 95%;
-    max-width: 350px;
+    .box {
+        width: 95%;
+        max-width: 350px;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    .inputBox input {
+        padding: 10px;
+    }
+
+    .inputBox span {
+        padding: 10px 0px;
+    }
+
+    input[type="submit"] {
+        padding: 10px 20px;
+    }
+
+    .links a {
+        font-size: 0.9em;
+    }
+
+    .navbar-middle {
+        display: none;
+    }
+
+    .navbar-img {
+        height: 40px;
+        width: 40px;
+    }
+
+    .navbar-planalyzer {
+        display: none;
+    }
+
+    .navbar-link {
+        font-size: 12px;
+        margin: 0 5px;
+    }
+
+    .navbar {
+        height: 50px;
+        padding: 0 10px;
+    }
+
+    .navbar-left {
+        margin-right: auto;
+    }
+
+    .navbar-right {
+        margin-left: auto;
+    }
 }
 
-h2 {
-    font-size: 1.2em;
-}
-
-.inputBox input {
-    padding: 10px;
-}
-
-.inputBox span {
-    padding: 10px 0px;
-}
-
-input[type="submit"] {
-    padding: 10px 20px;
-}
-
-.links a {
-    font-size: 0.9em;
-}
-.navbar-middle {
-    display: none;
-}
-
-.navbar-img {
-    height: 40px;
-    width: 40px;
-}
-
-.navbar-planalyzer {
-    display: none;
-}
-
-.navbar-link {
-    font-size: 12px;
-    margin: 0 5px;
-}
-
-.navbar {
-    height: 50px;
-    padding: 0 10px;
-}
-
-.navbar-left {
-    margin-right: auto;
-}
-
-.navbar-right {
-    margin-left: auto;
-}
-}
-
-/* Issue Form */
+/* Issue Form 
 .toggle-response {
     background: none;
     border: none;
@@ -143,7 +293,7 @@ input[type="submit"] {
   /* .common-issues {
     max-width: 400px;
     margin: 20px auto 20px auto;
-  } */
+  } 
 
   .container {
     margin-top: 30px;
@@ -151,7 +301,7 @@ input[type="submit"] {
     justify-content: center;
     align-items: center;
     /* border: 5px solid rgb(223, 71, 71);
-    box-shadow: -16px 16px 10px 5px rgb(0, 0, 0); */
+    box-shadow: -16px 16px 10px 5px rgb(0, 0, 0); 
   }
   @media only screen and (max-width: 800px) {
     .container {
@@ -171,3 +321,4 @@ input[type="submit"] {
       margin-top: 10px;
     }
   }
+*/
