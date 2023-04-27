@@ -22,8 +22,6 @@ new Chart(ctx, {
   },
 });
 
-
-
 // Grab Data for Infographic
 function getInfographicDataCheck() {
   if (
@@ -397,76 +395,118 @@ document
         },
       },
     });
-  completedWork = globalComplete;
-  currentClassGeneral = globalGeneralData;
-  currentGrades = globalGrades;
-  currentDates = globalDates;
-  currentWeight = globalWeight;
+    completedWork = globalComplete;
+    currentClassGeneral = globalGeneralData;
+    currentGrades = globalGrades;
+    currentDates = globalDates;
+    currentWeight = globalWeight;
 
-  semester = document.getElementById("semesterSelect").value;
+    semester = document.getElementById("semesterSelect").value;
 
-  // call for all user general data
-  userGeneralData = globalUserData;
-  console.log(userGeneralData);
-  //parsing out start and end date
-  semesterDatesArray= userGeneralData["semesterStartAndEnd"]
-  var startAndEnd
-  //go through arrayy and find the semester
-  for (i=0; i<semesterDatesArray.length; i++){
-    const targetKey = semester
-    const semesterDates = semesterDatesArray[i];
-    if(semesterDates.hasOwnProperty(targetKey)){
-      startAndEnd=semesterDatesArray[i]
-      break
+    // call for all user general data
+    userGeneralData = globalUserData;
+    console.log(userGeneralData);
+    //parsing out start and end date
+    semesterDatesArray = userGeneralData["semesterStartAndEnd"];
+    var startAndEnd;
+    //go through arrayy and find the semester
+    for (i = 0; i < semesterDatesArray.length; i++) {
+      const targetKey = semester;
+      const semesterDates = semesterDatesArray[i];
+      if (semesterDates.hasOwnProperty(targetKey)) {
+        startAndEnd = semesterDatesArray[i];
+        break;
+      } else {
+        console.log("key not found");
+      }
     }
-    else{
-      console.log("key not found")
+
+    const dateRangeString = startAndEnd[semester];
+    const dateSeparator = "||";
+    const dates = dateRangeString.split(dateSeparator);
+    const startDate = dates[0];
+    const endDate = dates[1];
+
+    console.log("Start date:", startDate);
+    console.log("End date:", endDate);
+
+    const startDateFormat = new Date(startDate);
+    const endDateFormat = new Date(endDate);
+
+    // Generate a list of dates between startDateFormat and endDateFormat
+    const dateList = [];
+    let currentDate = startDateFormat;
+    while (currentDate <= endDateFormat) {
+      dateList.push(new Date(currentDate).toISOString().split("T")[0]);
+      currentDate.setDate(currentDate.getDate() + 1);
     }
-  }
-  
-  const dateRangeString = startAndEnd[semester];
-  const dateSeparator = "||";
-  const dates = dateRangeString.split(dateSeparator);
-  const startDate = dates[0];
-  const endDate = dates[1];
 
-  console.log("Start date:", startDate);
-  console.log("End date:", endDate);
+    // Split the dateList into chunks of 7 days
+    const weeklyChunks = [];
+    while (dateList.length) {
+      weeklyChunks.push(dateList.splice(0, 7));
+    }
 
-  const startDateFormat = new Date(startDate);
-  const endDateFormat = new Date(endDate);
+    // Save weeks with date ranges in a dictionary
+    const weeksDictionary = {};
+    weeklyChunks.forEach((chunk, index) => {
+      const weekKey = `Week ${index + 1}`;
+      const weekValue = `${chunk[0]}||${chunk[chunk.length - 1]}`;
+      weeksDictionary[weekKey] = weekValue;
+    });
 
-  // Generate a list of dates between startDateFormat and endDateFormat
-  const dateList = [];
-  let currentDate = startDateFormat;
-  while (currentDate <= endDateFormat) {
-    dateList.push(new Date(currentDate).toISOString().split("T")[0]);
-    currentDate.setDate(currentDate.getDate() + 1);
-  }
+    console.log(weeksDictionary);
 
-  // Split the dateList into chunks of 7 days
-  const weeklyChunks = [];
-  while (dateList.length) {
-    weeklyChunks.push(dateList.splice(0, 7));
-  }
+    //for each week range in week dictionary, check if the task date is in the range
+    //if it is, add it to the output dictionary
+    const weeklyAssignmentSplit = {};
 
-  // Save weeks with date ranges in a dictionary
-  const weeksDictionary = {};
-  weeklyChunks.forEach((chunk, index) => {
-    const weekKey = `Week ${index + 1}`;
-    const weekValue = `${chunk[0]}-${chunk[chunk.length - 1]}`;
-    weeksDictionary[weekKey] = weekValue;
+    for (const week in weeksDictionary) {
+      const weekRange = weeksDictionary[week];
+      weeklyAssignmentSplit[week] = {};
+    
+      for (const course in currentDates) {
+        weeklyAssignmentSplit[week][course] = {};
+    
+        for (const taskType in currentDates[course]) {
+          weeklyAssignmentSplit[week][course][taskType] = {};
+    
+          for (const task in currentDates[course][taskType]) {
+            const taskDate = currentDates[course][taskType][task];
+    
+            if (isDateInWeek(taskDate, weekRange)) {
+              weeklyAssignmentSplit[week][course][taskType][task] = taskDate;
+            }
+          }
+    
+          // If no task found for the taskType, delete the empty object
+          if (Object.keys(weeklyAssignmentSplit[week][course][taskType]).length === 0) {
+            delete weeklyAssignmentSplit[week][course][taskType];
+          }
+        }
+      }
+    }
+    
+    console.log(weeklyAssignmentSplit);
+    //for each week in the output dictionary, replace the task date with the grade
+    const weeklyAssignmentGradeSplit = JSON.parse(JSON.stringify(weeklyAssignmentSplit));
+
+    for (const week in weeklyAssignmentGradeSplit) {
+      for (const course in weeklyAssignmentGradeSplit[week]) {
+        for (const taskType in weeklyAssignmentGradeSplit[week][course]) {
+          for (const task in weeklyAssignmentGradeSplit[week][course][taskType]) {
+            const grade = currentGrades[course][taskType][task];
+            weeklyAssignmentGradeSplit[week][course][taskType][task] = grade;
+          }
+        }
+      }
+    }
+    
+    console.log(weeklyAssignmentGradeSplit); 
   });
 
-  console.log(weeksDictionary);
 
-  //for each week range in week dictionary we want to find the number of assignments with grades !-null if it is remove from the dictionary
- 
-
-  });
-
-
-//function for all other course tab
+///////////function for all other course tab/////////////////
 async function dataForTabs(course) {
   // Check if data is available
   if (globalGrades === undefined) {
@@ -556,8 +596,6 @@ async function dataForTabs(course) {
   currentDates = globalDates[course];
   currentWeight = globalWeight[course];
 
-
-
   console.log(completedWork);
   console.log(currentGrades);
   console.log(currentClassGeneral);
@@ -570,21 +608,20 @@ async function dataForTabs(course) {
   userGeneralData = globalUserData;
   console.log(userGeneralData);
   //parsing out start and end date
-  semesterDatesArray= userGeneralData["semesterStartAndEnd"]
-  var startAndEnd
+  semesterDatesArray = userGeneralData["semesterStartAndEnd"];
+  var startAndEnd;
   //go through arrayy and find the semester
-  for (i=0; i<semesterDatesArray.length; i++){
-    const targetKey = semester
+  for (i = 0; i < semesterDatesArray.length; i++) {
+    const targetKey = semester;
     const semesterDates = semesterDatesArray[i];
-    if(semesterDates.hasOwnProperty(targetKey)){
-      startAndEnd=semesterDatesArray[i]
-      break
-    }
-    else{
-      console.log("key not found")
+    if (semesterDates.hasOwnProperty(targetKey)) {
+      startAndEnd = semesterDatesArray[i];
+      break;
+    } else {
+      console.log("key not found");
     }
   }
-  
+
   const dateRangeString = startAndEnd[semester];
   const dateSeparator = "||";
   const dates = dateRangeString.split(dateSeparator);
@@ -620,15 +657,12 @@ async function dataForTabs(course) {
   });
 
   console.log(weeksDictionary);
-
-
-
-
-  
-  
-
-  
 }
 
+//helper function for rolling GPA
+function isDateInWeek(dateStr, weekRange) {
+  const date = new Date(dateStr);
+  const [start, end] = weekRange.split("||").map((str) => new Date(str));
 
-
+  return date >= start && date <= end;
+}
