@@ -501,7 +501,6 @@ document
         }
       }
     }
-    
     console.log(weeklyAssignmentGradeSplit); 
   });
 

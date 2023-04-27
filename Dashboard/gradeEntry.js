@@ -227,12 +227,16 @@ async function populateGradeEntryTab(courseName) {
   pastProject.innerHTML = "";
   let pastParticipation = document.getElementById("pastParticipation");
   pastParticipation.innerHTML = "";
-
+  console.log(courseData);
+  console.log(courseData2)
   // go and populate all the data in grade entry tab base on the class
   for (const key in courseData) {
     for (const key2 in courseData[key]) {
       //populate for recent grade
+      
       if (courseData[key][key2] === null && courseData2[key][key2] === true) {
+        console.log(courseData[key])
+        console.log(courseData2[key])
         let gradeEntryForm = document.createElement("div");
         gradeEntryForm.className = "form-group";
         gradeEntryRecent.appendChild(gradeEntryForm);
@@ -339,17 +343,8 @@ async function submitGrade() {
   progressBar.setAttribute('aria-valuenow', 100);
   progressBar.style.width = 100 + '%';
       //=======================
-  // Get the element you want to click
-  const elementToClick = document.getElementById('gradeEntryIcon');
-  // Create a new mouse event
-  const clickEvent = new MouseEvent('click', {
-    view: window,
-    bubbles: true,
-    cancelable: true
-  });
+ 
   
-  // Dispatch the event on the element
-  const secondElementToClick = document.getElementById(courseButton0)
-  secondElementToClick.dispatchEvent(clickEvent);
+
   preloader.style.display = 'none';
 }
