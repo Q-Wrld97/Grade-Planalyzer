@@ -3,3 +3,4 @@ $('.toggle-response').on('click', function() {
   $(this).next('.response').slideToggle();
 });
 
+
