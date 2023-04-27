@@ -653,6 +653,7 @@ select {
     height: 7.5vh;
     float: left;
     align-self: left;
+    
 
 }
 
@@ -662,7 +663,6 @@ select {
     /*border: 1px solid #940000;*/
     width: 65%;
     height: 7.5vh;
-    padding-left: 30px;
 }
 
 .container-gradeEntry {
@@ -984,5 +984,5 @@ select {
 .dashtext {
     padding-top: 35px;
     padding-left: 20px;
-    font-size: 20px;
+    
 }
