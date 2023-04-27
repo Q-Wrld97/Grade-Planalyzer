@@ -31,10 +31,7 @@
 
  .common-issues {
   max-width: 800px;
-  margin: 20px auto 20px auto;
-  border: 5px solid rgb(223, 71, 71);
-  box-shadow: -16px 16px 10px 5px rgb(0, 0, 0);
-  padding: 35px;
+  padding: 20px;
 } 
 
 .issue {
@@ -122,30 +119,8 @@
 }
 
 
-
-input[type="submit"] {
-  border: none;
-  outline: none;
-  padding: 11px 25px;
-  background: red;
-  cursor: pointer;
-  border-radius: 4px;
-  font-weight: 600;
-  width: 100px;
-  margin-top: 10px;
-}
-
-input[type="submit"]:active {
-  opacity: 0.8;
-}
-
 .submitBtn {
   text-align: center;
-}
-
-/* center the loginIMG */
-#loginImg {
-  display: block;
 }
 
 /* Nav BAR*/
