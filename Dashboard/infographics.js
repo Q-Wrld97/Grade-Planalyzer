@@ -502,6 +502,35 @@ document
       }
     }
     console.log(weeklyAssignmentGradeSplit); 
+
+    // go through weeklyAssignmentGradeSplit and remove any null tasks
+    removeNullValues(weeklyAssignmentGradeSplit)
+    removeEmptyObjects(weeklyAssignmentGradeSplit)
+    console.log(weeklyAssignmentGradeSplit)
+
+
+
+    avgCurrentGrades=calculateAverages(currentGrades)
+
+    console.log(avgCurrentGrades)
+
+    sumGradedCatWeights=sumValidWeights(currentGrades, currentWeight);
+
+    console.log(sumGradedCatWeights)
+
+    earnedCatWeights = calculateWeightedAverages(avgCurrentGrades, sumGradedCatWeights);
+
+    console.log(earnedCatWeights)
+
+    totalEarnedWeight  = sumNestedValues(earnedCatWeights)
+
+    console.log(totalEarnedWeight)
+
+    totalGradedCatWeights = sumNestedValues(sumGradedCatWeights)
+
+    console.log(totalGradedCatWeights)
+    
+ 
   });
 
 
@@ -664,4 +693,89 @@ function isDateInWeek(dateStr, weekRange) {
   const [start, end] = weekRange.split("||").map((str) => new Date(str));
 
   return date >= start && date <= end;
+}
+
+//helper function to remove null task
+function removeNullValues(data) {
+  if (typeof data === 'object' && data !== null) {
+    for (const key in data) {
+      if (data[key] === null) {
+        delete data[key];
+      } else {
+        removeNullValues(data[key]);
+      }
+    }
+  }
+}
+
+//help function to remove any empty object
+function removeEmptyObjects(data) {
+  if (typeof data === 'object' && data !== null) {
+    for (const key in data) {
+      if (typeof data[key] === 'object' && Object.keys(data[key]).length === 0) {
+        delete data[key];
+      } else {
+        removeEmptyObjects(data[key]);
+      }
+    }
+  }
+}
+
+//helper function to calculate average of grades
+function calculateAverages(data) {
+  const averages = {};
+  for (const className in data) {
+    averages[className] = {};
+    for (const category in data[className]) {
+      const values = Object.values(data[className][category]);
+      const validValues = values.filter(value => value !== null);
+      const sum = validValues.reduce((total, value) => total + value, 0);
+      const average = (sum / validValues.length)/100;
+      averages[className][category] = average;
+    }
+  }
+  return averages;
+}
+
+//helper function to calculate sums of weighted cat
+function sumValidWeights(grades, weights) {
+  const summedWeights = {};
+  for (const className in grades) {
+    summedWeights[className] = {};
+    for (const category in grades[className]) {
+      let sum = 0;
+      for (const item in grades[className][category]) {
+        if (grades[className][category][item] !== null) {
+          sum += weights[className][category][item];
+        }
+      }
+      summedWeights[className][category] = sum;
+    }
+  }
+  return summedWeights;
+}
+
+function calculateWeightedAverages(avgGrades, catWeights) {
+  const weightedAverages = {};
+  for (const className in avgGrades) {
+    weightedAverages[className] = {};
+    for (const category in avgGrades[className]) {
+      const product = avgGrades[className][category] * catWeights[className][category];
+      weightedAverages[className][category] = product;
+    }
+  }
+  return weightedAverages;
+}
+
+//Total Earn Weight
+function sumNestedValues(data) {
+  const summedValues = {};
+  for (const className in data) {
+    let sum = 0;
+    for (const category in data[className]) {
+      sum += data[className][category];
+    }
+    summedValues[className] = sum;
+  }
+  return summedValues;
 }
