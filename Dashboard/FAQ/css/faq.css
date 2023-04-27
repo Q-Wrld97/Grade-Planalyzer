@@ -1,180 +1,254 @@
-/* .form {
-    max-width: 400px;
-    margin: 20px auto 20px auto;
-    padding: 20px;
-} */
-  
+/* Issue Form */
+.toggle-response {
+  background: none;
+  border: none;
+  color: rgb(223, 71, 71);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  outline: none;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.toggle-response::after {
+  content: '\25BC';
+  display: inline-block;
+  margin-left: 5px;
+  transform: translateY(-1px);
+  transition: transform 0.3s ease-in-out;
+}
+
+.toggle-response.open::after {
+  transform: translateY(1px) rotateX(180deg);
+}
+
+.response {
+  display: none;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+ .common-issues {
+  max-width: 800px;
+  margin: 20px auto 20px auto;
+  border: 5px solid rgb(223, 71, 71);
+  box-shadow: -16px 16px 10px 5px rgb(0, 0, 0);
+  padding: 35px;
+} 
+
+.issue {
+  margin: 10px;
+}
+
+/*reusing code*/
+
+#banner {
+  background: url(../../../Assets/dashBackground.gif);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;
+  background: url(../Assets/dashBackground.gif);
+}
+
+.box {
+  position: relative;
+  width: 700px;
+  height: 800px;
+  background: rgba(24, 24, 27);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.box::before {
+  content: '';
+  z-index: 1;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 700px;
+  height: 800px;
+  transform-origin: bottom right;
+  background: linear-gradient(0deg, transparent, red, red);
+  animation: animate 6s linear infinite;
+}
+
+.box::after {
+  content: '';
+  z-index: 1;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 700px;
+  height: 800px;
+  transform-origin: bottom right;
+  background: linear-gradient(0deg, transparent, red, red);
+  animation: animate 6s linear infinite;
+  animation-delay: -3s;
+}
+
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#animated {
+  position: absolute;
+  inset: 2px;
+  background: rgba(24, 24, 27, 0.98);
+  padding-top: 30px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 5px;
+  border-radius: 8px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+
+
+input[type="submit"] {
+  border: none;
+  outline: none;
+  padding: 11px 25px;
+  background: red;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 600;
+  width: 100px;
+  margin-top: 10px;
+}
+
+input[type="submit"]:active {
+  opacity: 0.8;
+}
+
+.submitBtn {
+  text-align: center;
+}
+
+/* center the loginIMG */
+#loginImg {
+  display: block;
+}
+
+/* Nav BAR*/
 /* Style for the navbar */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #333;
-    color: #fff;
-    height: 60px;
-    padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  height: 60px;
+
+}
+
+/* Style for the left menu */
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Style for the right menu */
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Style for the navbar links */
+.navbar-link {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 15px;
+}
+
+/* Style for the navbar image */
+.navbar-img {
+  height: 50px;
+  width: 50px;
+}
+
+.navbar-link:hover {
+  cursor: pointer;
+}
+
+.navbar-middle {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .box {
+    width: 95%;
+    max-width: 350px;
   }
-  
-  /* Style for the left menu */
-  .navbar-left {
-    display: flex;
-    align-items: center;
-  }
-  
-  /* Style for the right menu */
-  .navbar-right {
-    display: flex;
-    align-items: center;
-  }
-  
-  /* Style for the navbar links */
-  .navbar-link {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 10px;
-    font-size: 15px;
-  }
-  
-  /* Style for the navbar image */
-  .navbar-img {
-    height: 70px;
-    width: 70px;
-  }
-  
-  .navbar-link:hover {
-    cursor: pointer;
-  }
-   
-  .navbar-middle{
-      display: flex;
-      align-items: center;
-  }
-   
-  @media (max-width: 768px) {
-    .box {
-      width: 95%;
-      max-width: 350px;
-  }
-  
+
   h2 {
-      font-size: 1.2em;
+    font-size: 1.2em;
   }
-  
+
   .inputBox input {
-      padding: 10px;
+    padding: 10px;
   }
-  
+
   .inputBox span {
-      padding: 10px 0px;
+    padding: 10px 0px;
   }
-  
+
   input[type="submit"] {
-      padding: 10px 20px;
+    padding: 10px 20px;
   }
-  
+
   .links a {
-      font-size: 0.9em;
+    font-size: 0.9em;
   }
+
   .navbar-middle {
-      display: none;
+    display: none;
   }
-  
+
   .navbar-img {
-      height: 40px;
-      width: 40px;
+    height: 40px;
+    width: 40px;
   }
-  
+
   .navbar-planalyzer {
-      display: none;
+    display: none;
   }
-  
+
   .navbar-link {
-      font-size: 12px;
-      margin: 0 5px;
+    font-size: 12px;
+    margin: 0 5px;
   }
-  
+
   .navbar {
-      height: 50px;
-      padding: 0 10px;
+    height: 50px;
+    padding: 0 10px;
   }
-  
+
   .navbar-left {
-      margin-right: auto;
+    margin-right: auto;
   }
-  
+
   .navbar-right {
-      margin-left: auto;
+    margin-left: auto;
   }
-  }
-  
-  /* Issue Form */
-  .toggle-response {
-      background: none;
-      border: none;
-      color: rgb(223, 71, 71);
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: bold;
-      outline: none;
-      padding: 0;
-      text-decoration: underline;
-    }
-    
-    .toggle-response::after {
-      content: '\25BC';
-      display: inline-block;
-      margin-left: 5px;
-      transform: translateY(-1px);
-      transition: transform 0.3s ease-in-out;
-    }
-    
-    .toggle-response.open::after {
-      transform: translateY(1px) rotateX(180deg);
-    }
-    
-    .response {
-      display: none;
-      font-size: 14px;
-      margin-top: 10px;
-    }
-    
-     .common-issues {
-      width: 800px;
-      margin: 20px auto 20px auto;
-      border: 5px solid rgb(223, 71, 71);
-      box-shadow: -16px 16px 10px 5px rgb(0, 0, 0);
-      padding: 35px;
-    } 
-  
-    .issue {
-      margin: 10px;
-      width: 800px;
-    }
-  
-    .container {
-      margin-top: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      /* border: 5px solid rgb(223, 71, 71);
-      box-shadow: -16px 16px 10px 5px rgb(0, 0, 0); */
-    }
-    @media only screen and (max-width: 800px) {
-      .container {
-        flex-direction: column;
-      }
-    }
-    @media only screen and (max-width: 480px) {
-      .form {
-        display: flex;
-        flex-wrap: wrap;
-      }
-      .name_option {
-        width: 100%;
-      }
-      .email_option {
-        width: 100%;
-        margin-top: 10px;
-      }
-    }
-  
+}

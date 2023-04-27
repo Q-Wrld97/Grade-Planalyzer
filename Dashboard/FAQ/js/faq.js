@@ -1,6 +1,5 @@
 $('.toggle-response').on('click', function() {
-    $(this).toggleClass('open');
-    $(this).next('.response').slideToggle();
-  });
+  $(this).toggleClass('open');
+  $(this).next('.response').slideToggle();
+});
 
- 
