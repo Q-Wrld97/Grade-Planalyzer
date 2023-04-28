@@ -291,7 +291,7 @@ document
     }
     document.getElementById("infographicClass0").style.backgroundColor = "red";
 
-    data = globalComplete;
+    data = globalGrades;
     // Populate the infographic data for all tab
     // Loop through all the classes
 
@@ -319,7 +319,7 @@ document
           let itemData = categoryData[Object.keys(categoryData)[k]];
 
           // If the item is completed, update the completed count in classTotals and grandTotalCompleted
-          if (itemData === true) {
+          if (itemData !== null) {
             classTotals[className].completed += 1;
             grandTotalCompleted += 1;
           }
@@ -335,10 +335,12 @@ document
     console.log(classTotals);
     console.log("Grand Total Items:", grandTotalItems);
     console.log("Grand Total Completed:", grandTotalCompleted);
-
+    
     // Calculate not completed items
     let grandTotalNotCompleted = grandTotalItems - grandTotalCompleted;
-
+    grandTotalCompleted = grandTotalCompleted/grandTotalItems * 100;
+    grandTotalNotCompleted = grandTotalNotCompleted/grandTotalItems * 100;
+    
     let pieChart = document.getElementById("pieChartInfo");
     if (pieChart) {
       pieChart.remove();
@@ -705,7 +707,7 @@ document
   }
   // remove the ending dates of each weeks
   for (let week in GPAbyWeekWithDates) {
-    const newKey = week.split("|")[0]
+    const newKey = week.split("|")[0].substring(5)
     GPAbyWeekWithDates[newKey] = GPAbyWeekWithDates[week];
     delete GPAbyWeekWithDates[week];
   }
@@ -721,6 +723,29 @@ document
     min = courseGPA[course];
   }
 
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  for (let week in GPAbyWeekWithDates) {
+    const monthNum = Number(week.split("|")[0].substring(0, 2));
+    const monthName = monthNames[monthNum - 1];
+    const dayNum = week.split("|")[0].substring(3);
+    const newKey = `${monthName} ${dayNum}`;
+    GPAbyWeekWithDates[newKey] = GPAbyWeekWithDates[week];
+    delete GPAbyWeekWithDates[week];
+  }
 
 
   console.log(GPAbyWeekWithDates);
@@ -751,6 +776,7 @@ document
       y: {
         min: min,
         max: max,
+        
         ticks: {
           stepSize: 0.5
         }
@@ -780,7 +806,7 @@ async function dataForTabs(course) {
   } else {
     var data = globalGrades;
   }
-  data = globalComplete;
+  data = globalGrades;
   // Populate the infographic data for all tab
   // Loop through all the classes
   let classTotals = {};
@@ -805,7 +831,7 @@ async function dataForTabs(course) {
         let itemData = categoryData[Object.keys(categoryData)[k]];
 
         // If the item is completed, update the completed count in classTotals
-        if (itemData === true) {
+        if (itemData !== null) {
           classTotals[className].completed += 1;
         }
 
@@ -819,7 +845,8 @@ async function dataForTabs(course) {
   console.log(classTotals);
   console.log(course);
   // Calculate not completed items
-  let notCompleted = classTotals[course].total - classTotals[course].completed;
+  let notCompleted = (classTotals[course].total - classTotals[course].completed);
+
   // populate the pie chart
   let pieChart = document.getElementById("pieChartInfo");
   if (pieChart) {
@@ -840,7 +867,7 @@ async function dataForTabs(course) {
             "rgba(255, 99, 132, 0.5)",
           ],
           borderColor: ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)"],
-          data: [classTotals[course].completed, notCompleted],
+          data: [classTotals[course].completed/classTotals[course].total*100, notCompleted/classTotals[course].total*100],
         },
       ],
     },
