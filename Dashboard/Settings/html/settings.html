@@ -12,110 +12,98 @@
   <script src="../js/settings.js"></script>
   <title>Settings</title>
 </head>
-<nav class="navbar">
-  <div class="navbar-left">
-    <a href="../../FAQ/html/faq.html" id= "faq" class="navbar-link">FAQ</a>
-    <a href="../../ReportIssue/html/reportIssue.html" id="reportIssue" class="navbar-link">Report Issue</a>
-  </div>
-  <div class="navbar-middle">
-    <span class="navbar-grade">Grade</span>
-    <img src="../../../Assets/Grade_Planalyzer_Logo_PNG.png" alt="Logo" class="navbar-img">
-    <span class="navbar-planalyzer">Planalyzer</span>
-  </div>
-  <div class="navbar-right">
-    <a href="../../dashboard.html" id="dashboard" class="navbar-link">Dashboard</a>
-    <a href="settings.html" id="settings" class="navbar-link">Settings</a>
-    <a onclick="signOut()" class="navbar-link">Logout</a>
-  </div>
-</nav>
 
 <body>
-  <div id="overAll">
-    <div id="container">
-      <h1>Settings</h1>
+  <section id="banner">
+    <nav class="navbar">
+      <div class="navbar-left">
 
-      <div class="form-group">
-        <label>Cumulative GPA</label>
-        <input type="number" class="form-control" id="GPA" placeholder="Enter Current GPA">
       </div>
-      <div class="form-group">
-        <label>Cumulative Credit Hours</label>
-        <input type="number" class="form-control" id="credit" placeholder="Current Credit Hours">
+      <div class="navbar-middle">
+        <span class="navbar-grade">Grade</span>
+        <img src="../../../Assets/Grade_Planalyzer_Logo_PNG.png" alt="Logo" class="navbar-img">
+        <span class="navbar-planalyzer">Planalyzer</span>
       </div>
-      <!--<div class="form-group" id="schoolType">
-        <label>School Type</label>
-        <div class="custom-control custom-radio">
-          <input onclick="" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-          <label class="custom-control-label" for="customRadio1">College</label>
-        </div>
-        <div class="custom-control custom-radio">
-          <input onclick="" type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-          <label class="custom-control-label" for="customRadio2">High School</label>
-        </div>
-      </div> -->
-      <div class="form-group">
-        <label>Grading Scale</label>
-        <div class="custom-control custom-radio">
-          <input onclick="yesnoCheck()"type="radio" id="customRadio1" name="customRadio2" class="custom-control-input">
-          <label class="custom-control-label" for="customRadio1"><img id="gradescale" alt="gradeScale1"
-              src="../../../Assets/DefaultGPAScale.png"></label>
-        </div>
-        <div class="custom-control custom-radio">
-          <input onclick="yesnoCheck()" type="radio" id="customRadio2" name="customRadio2" class="custom-control-input">
-          <label class="custom-control-label" for="customRadio2">Custom</label>
-        </div>
-        <div id="ifYes" style="display:none">
-          <label>Enter values between 0.00 and 4.00:</label>
-          <p><input name="A" type="number" min="0" max="4" step=".01" placeholder="A" /></p>
-          <p><input name="A-" type="number" min="0" max="4" step=".01" placeholder="A-" /></p>
-          <p><input name="B+" type="number" min="0" max="4" step=".01" placeholder="B+" /></p>
-          <p><input name="B" type="number" min="0" max="4" step=".01" placeholder="B" /></p>
-          <p><input name="B-" type="number" min="0" max="4" step=".01" placeholder="B-"></p>
-          <p><input name="C+" type="number" min="0" max="4" step=".01" placeholder="C+" /></p>
-          <p><input name="C" type="number" min="0" max="4" step=".01" placeholder="C" /></p>
-          <p><input name="C-" type="number" min="0" max="4" step=".01" placeholder="C-" /></p>
-          <p><input name="D+" type="number" min="0" max="4" step=".01" placeholder="D+" /></p>
-          <p><input name="D" type="number" min="0" max="4" step=".01" placeholder="D"></p>
-          <p><input name="D-" type="number" min="0" max="4" step=".01" placeholder="D-" /></p>
-          <p><input name="F" type="number" min="0" max="4" step=".01" placeholder="F" /></p>
-        </div>
+      <div class="navbar-right">
+
       </div>
-        <!--Semester: Newly Added-->
-      <!--<div>
-        <div>
-          <label for="text" style="margin-right: 10px;">Semester</label>
-        <div style="display:flex;align-items:center;">
-          <select name="semester" id ="semesterSeason" class="form-control form-control-sm" style="margin-right: 10px;">
-            <option>Fall</option>
-            <option>Spring</option>
-            <option>Summer</option>
-          </select>
-          <div style="margin-right: 10px;">
-            <input type="number" id="semesterYear" pattern="\d*" maxlength="4" min="1000" max="2090" placeholder="Year" inputmode="numeric" oninput="limitInputToFourCharacters(semesterYear)">
+    </nav>
+    <div id="container">
+      <div class="box">
+        <div id="animated">
+          <!-- <h2>Login</h2>
+					<img src="../../../Assets/Grade_Planalyzer_Logo_PNG.png" alt="Logo" id="loginImg">-->
+          <div class="font-color"> 
+            <h2>Settings</h2>
+        </div>
+          <div class="courseFromTextColor">
+            <div class="form-group">
+              <label>Cumulative GPA</label>
+              <input type="number" class="form-control" id="GPA" placeholder="Enter Current GPA">
+            </div>
+            <div class="form-group">
+              <label>Cumulative Credit Hours</label>
+              <input type="number" class="form-control" id="credit" placeholder="Current Credit Hours">
+            </div>
+            <h6>Grading Scale:</h6>
+            <div class="container-gradingScaleBox">
+              <div class="gradingScale">
+                <div class="gradescaleImage1">
+                  <div class="custom-control custom-radio">
+                    <input onclick="yesnoCheck()" type="radio" id="customRadio1" name="customRadio2"
+                      class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio1"><img id="gradescale" alt="gradeScale1"
+                        src="../../../Assets/DefaultGPAScale.png"></label>
+                  </div>
+                </div>
+                <div class="gradescaleImage2">
+                  <div class="custom-control custom-radio">
+                    <input onclick="yesnoCheck()" type="radio" id="customRadio2" name="customRadio2"
+                      class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio2">Custom</label>
+                    <div id="ifYes" style="display:none">
+                      <label>Enter values between 0.00 and 4.00:</label>
+                      .container-gradingScaleBox {
+                        width: 500px;
+                        height: 300px;
+                        align-self: center;
+                      
+                      }
+                      <p><input name="A-" type="number" min="0" max="4" step=".01" placeholder="A-" /></p>
+                      <p><input name="B+" type="number" min="0" max="4" step=".01" placeholder="B+" /></p>
+                      <p><input name="B" type="number" min="0" max="4" step=".01" placeholder="B" /></p>
+                      <p><input name="B-" type="number" min="0" max="4" step=".01" placeholder="B-"></p>
+                      <p><input name="C+" type="number" min="0" max="4" step=".01" placeholder="C+" /></p>
+                      <p><input name="C" type="number" min="0" max="4" step=".01" placeholder="C" /></p>
+                      <p><input name="C-" type="number" min="0" max="4" step=".01" placeholder="C-" /></p>
+                      <p><input name="D+" type="number" min="0" max="4" step=".01" placeholder="D+" /></p>
+                      <p><input name="D" type="number" min="0" max="4" step=".01" placeholder="D"></p>
+                      <p><input name="D-" type="number" min="0" max="4" step=".01" placeholder="D-" /></p>
+                      <p><input name="F" type="number" min="0" max="4" step=".01" placeholder="F" /></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="emailUpdate">
+              <label>Receive Weekly Email Updates</label>
+              <select id="receiveEmail">
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </div>
+            <div>
+              <button onclick="settingConfirm()" type="submit" class="button">Submit</button>
+            </div>
           </div>
         </div>
       </div>
-      <br>-->
-      <div class="form-group">
-        <label>Receive Weekly Email Updates</label>
-        <select id="receiveEmail">
-          <option>Yes</option>
-          <option>No</option>
-        </select>
-      </div>
-      <div>
-        <button onclick="settingConfirm()" type="submit" class="button">Submit</button>
-      </div>
     </div>
-  </div>
-
-
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+  </section>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
