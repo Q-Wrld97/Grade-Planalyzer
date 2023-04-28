@@ -59,7 +59,15 @@
     flex-direction: column;
     background: url(../Assets/dashBackground.gif);
 }
+.container-Btn {
+    display: flex;
+    justify-content: flex-end;
+}
 
+.submitBtn {
+    margin-left: 10px;
+    /* Optional: to add some spacing between the button and the container edge */
+}
 .box {
     position: relative;
     width: 700px;
@@ -115,14 +123,19 @@ label{
     }
 }
 
+.submitBtn{
+    display: flex;
+    justify-content: flex-end;
+}
+
 #animated {
     position: absolute;
     inset: 2px;
     background: rgba(24,24,27,0.98);
-    padding-top: 30px;
+    padding-top: 10px;
     padding-left: 50px;
     padding-right: 50px;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
     border-radius: 8px;
     z-index: 2;
     display: flex;

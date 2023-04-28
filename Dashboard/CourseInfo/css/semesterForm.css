@@ -15,33 +15,10 @@
     min-height: 100vh;
 }
 
-.gradingScale {
-    display: flex;
-    flex-direction: row;
-    width: 700px;
-    height: 300px;
-}
-
-.gradingScaleBox {
-    width: 700px;
-    height: 300px;
-    align-self: center;
-    overflow-y: auto;
-}
-
-.customGradingScale {
-    display: none;
-}
-
 .form-control-custom {
     width: 200px;
 }
 
-.weightCatagoryBox {
-    width: 700px;
-    height: 220px;
-    overflow-y: auto;
-}
 
 #container {
     display: flex;
@@ -49,13 +26,12 @@
     align-items: center;
     min-height: 100vh;
     flex-direction: column;
-    background: url(../Assets/dashBackground.gif);
 }
 
 .box {
     position: relative;
     width: 700px;
-    height: 300px;
+    height: 350px;
     background: rgba(24,24,27);
     border-radius: 8px;
     overflow: hidden;
@@ -68,7 +44,7 @@
     top: -50%;
     left: -50%;
     width: 700px;
-    height: 300px;
+    height: 350px;
     transform-origin: bottom right;
     background: linear-gradient(0deg, transparent, red, red);
     animation: animate 6s linear infinite;
@@ -81,7 +57,7 @@
     top: -50%;
     left: -50%;
     width: 700px;
-    height: 300px;
+    height: 350px;
     transform-origin: bottom right;
     background: linear-gradient(0deg, transparent, red, red);
     animation: animate 6s linear infinite;
@@ -119,6 +95,7 @@ label{
     z-index: 2;
     display: flex;
     flex-direction: column;
+    color: white;
 }
 
 
@@ -143,6 +120,7 @@ input[type="submit"]:active {
 #loginImg {
     display: block;
 }
+
 
 
 /* Nav Bar */
