@@ -313,6 +313,7 @@ body {
     background: rgba(24, 24, 27, 0.8);
     color: white;
     /*border: 1px solid rgb(242, 118, 118);*/
+    text-align: center;
 
 }
 
@@ -355,7 +356,8 @@ img {
 .chart-wrapper {
     width: auto;
     height: 42vh;
-    margin: 0 auto;
+    display: flex;
+    justify-content: center;
 }
 
 #pieChart {
@@ -365,7 +367,9 @@ img {
 /*===================scrolling option for table overflow======================*/
 
 .table-container {
-    height: 300px;
+    height: 43vh;
+    padding-left: 20px;
+    text-align: center;
     /* set the height to a fixed value or a percentage */
     overflow-y: auto;
     /* set the overflow property to auto to add a scrollbar */
@@ -526,7 +530,7 @@ select {
 /*=====================Look ahead table========================*/
 
 #tableLookAhead {
-    height: 70vh;
+    height: 43vh;
 }
 
 
