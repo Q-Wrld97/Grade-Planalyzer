@@ -278,14 +278,24 @@ body {
 
 /*======================Look Ahead code=========================*/
 #col69 {
+    display: flex;
     float: left;
     width: 70%;
     height: 7vh;
     background: rgba(24, 24, 27, 0.8);
     color: white;
+    padding-top: 10px;
+}
+.col69-1, .col69-2, .col69-3 {
+    flex: 1;
+}
 
+.col69-2{
+    flex-basis: auto;
+}
 
-
+.col69-3 {
+    text-align: right;
 }
 
 #col70 {
@@ -303,6 +313,7 @@ body {
     display: flex;
     padding-left: 20px;
     padding-top: 5px;
+
 }
 
 #weeks {
@@ -356,10 +367,12 @@ img {
 
 /*======================Button=========================================*/
 .button-container {
-    display: flex;
-    align-items: center;
-    text-align: left;
+
     margin-left: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-right: 20px;
 
 }
 
@@ -982,7 +995,7 @@ select {
 
 /*===============================================*/
 .dashtext {
-    padding-top: 35px;
+    padding-top: 40px;
     padding-left: 20px;
     
 }
