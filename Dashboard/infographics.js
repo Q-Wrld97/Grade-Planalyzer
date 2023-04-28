@@ -748,6 +748,10 @@ document
       delete GPAbyWeekWithDates[week];
     }
 
+    title = document.getElementById("rollingBar")
+
+    title.innerHTML = "Weekly Rolling Semester GPA"
+
     console.log(GPAbyWeekWithDates);
     let barChart = document.getElementById("barChart");
     if (barChart) {
@@ -1146,6 +1150,10 @@ for (const [key, value] of Object.entries(updatedWeeklyCourseGrades)) {
 }
 
 console.log(newWeeklyCourseGrades);
+
+title = document.getElementById("rollingBar")
+
+title.innerHTML = "Rolling Average Grade"
 
 let barChart = document.getElementById("barChart");
 if (barChart) {
