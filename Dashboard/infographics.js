@@ -447,7 +447,7 @@ document
       weeklyChunks.push(dateList.splice(0, 7));
     }
 
-    // Save weeks with date ranges in a dictionary
+    // Save courseDataTotal with date ranges in a dictionary
     const weeksDictionary = {};
     weeklyChunks.forEach((chunk, index) => {
       const weekKey = `Week ${index + 1}`;
@@ -464,75 +464,280 @@ document
     for (const week in weeksDictionary) {
       const weekRange = weeksDictionary[week];
       weeklyAssignmentSplit[week] = {};
-    
+
       for (const course in currentDates) {
         weeklyAssignmentSplit[week][course] = {};
-    
+
         for (const taskType in currentDates[course]) {
           weeklyAssignmentSplit[week][course][taskType] = {};
-    
+
           for (const task in currentDates[course][taskType]) {
             const taskDate = currentDates[course][taskType][task];
-    
+
             if (isDateInWeek(taskDate, weekRange)) {
               weeklyAssignmentSplit[week][course][taskType][task] = taskDate;
             }
           }
-    
+
           // If no task found for the taskType, delete the empty object
-          if (Object.keys(weeklyAssignmentSplit[week][course][taskType]).length === 0) {
+          if (
+            Object.keys(weeklyAssignmentSplit[week][course][taskType])
+              .length === 0
+          ) {
             delete weeklyAssignmentSplit[week][course][taskType];
           }
         }
       }
     }
-    
+
     console.log(weeklyAssignmentSplit);
     //for each week in the output dictionary, replace the task date with the grade
-    const weeklyAssignmentGradeSplit = JSON.parse(JSON.stringify(weeklyAssignmentSplit));
+    const weeklyAssignmentGradeSplit = JSON.parse(
+      JSON.stringify(weeklyAssignmentSplit)
+    );
 
     for (const week in weeklyAssignmentGradeSplit) {
       for (const course in weeklyAssignmentGradeSplit[week]) {
         for (const taskType in weeklyAssignmentGradeSplit[week][course]) {
-          for (const task in weeklyAssignmentGradeSplit[week][course][taskType]) {
+          for (const task in weeklyAssignmentGradeSplit[week][course][
+            taskType
+          ]) {
             const grade = currentGrades[course][taskType][task];
             weeklyAssignmentGradeSplit[week][course][taskType][task] = grade;
           }
         }
       }
     }
-    console.log(weeklyAssignmentGradeSplit); 
 
     // go through weeklyAssignmentGradeSplit and remove any null tasks
-    removeNullValues(weeklyAssignmentGradeSplit)
-    removeEmptyObjects(weeklyAssignmentGradeSplit)
-    console.log(weeklyAssignmentGradeSplit)
+    removeNullValues(weeklyAssignmentGradeSplit);
+    removeEmptyObjects(weeklyAssignmentGradeSplit);
+    console.log(weeklyAssignmentGradeSplit);
 
+    //for each week in the output dictionary, replace the task date with the weight
+    const weeklyAssignmentWeightSplit = JSON.parse(
+      JSON.stringify(weeklyAssignmentSplit)
+    );
 
+    for (const week in weeklyAssignmentWeightSplit) {
+      for (const course in weeklyAssignmentWeightSplit[week]) {
+        for (const taskType in weeklyAssignmentWeightSplit[week][course]) {
+          for (const task in weeklyAssignmentWeightSplit[week][course][
+            taskType
+          ]) {
+            const weight = currentWeight[course][taskType][task];
+            weeklyAssignmentWeightSplit[week][course][taskType][task] = weight;
+          }
+        }
+      }
+    }
 
-    avgCurrentGrades=calculateAverages(currentGrades)
+    console.log(weeklyAssignmentWeightSplit);
 
-    console.log(avgCurrentGrades)
+    for (const week in weeklyAssignmentWeightSplit) {
+      for (const class_name in weeklyAssignmentWeightSplit[week]) {
+        for (const category in weeklyAssignmentWeightSplit[week][class_name]) {
+          const taskNames = Object.keys(
+            weeklyAssignmentWeightSplit[week][class_name][category]
+          );
+          for (const taskName of taskNames) {
+            if (
+              !weeklyAssignmentGradeSplit.hasOwnProperty(week) ||
+              !weeklyAssignmentGradeSplit[week].hasOwnProperty(class_name) ||
+              !weeklyAssignmentGradeSplit[week][class_name].hasOwnProperty(
+                category
+              ) ||
+              !weeklyAssignmentGradeSplit[week][class_name][
+                category
+              ].hasOwnProperty(taskName)
+            ) {
+              delete weeklyAssignmentWeightSplit[week][class_name][category][
+                taskName
+              ];
+            }
+          }
+        }
+      }
+    }
 
-    sumGradedCatWeights=sumValidWeights(currentGrades, currentWeight);
+    removeEmptyObjects(weeklyAssignmentWeightSplit);
+    console.log(weeklyAssignmentWeightSplit);
 
-    console.log(sumGradedCatWeights)
+    carryOverTasks(weeklyAssignmentGradeSplit);
+    carryOverTasks(weeklyAssignmentWeightSplit);
+    console.log(weeklyAssignmentGradeSplit);
+    console.log(weeklyAssignmentWeightSplit);
+    /* For Each category in the course {
+      currentCategorySum = sum of all graded score percentages in a category
+      numGradedItems = #Num of fields with grades in that category
+      sumGradedCatWeights = sum of individual weights for each graded field
+      earnedCatWeight=((currentCategorySum/numGradedItems))/100*sumGradedCatWeights
+      totalEarnedWeight += earnedCatWeight
+      totalGradedCatWeights += sumGradedCatWeights
+    */
+    const courseDataTotal = {};
 
-    earnedCatWeights = calculateWeightedAverages(avgCurrentGrades, sumGradedCatWeights);
+    for (const week in weeklyAssignmentGradeSplit) {
+      courseDataTotal[week] = {};
 
-    console.log(earnedCatWeights)
+      for (const class_name in weeklyAssignmentGradeSplit[week]) {
+        if (!courseDataTotal[week].hasOwnProperty(class_name)) {
+          courseDataTotal[week][class_name] = {
+            totalEarnedWeight: 0,
+            totalGradedCatWeights: 0,
+          };
+        }
 
-    totalEarnedWeight  = sumNestedValues(earnedCatWeights)
+        for (const category in weeklyAssignmentGradeSplit[week][class_name]) {
+          let currentCategorySum = 0;
+          let numGradedItems = 0;
+          let sumGradedCatWeights = 0;
 
-    console.log(totalEarnedWeight)
+          for (const taskName in weeklyAssignmentGradeSplit[week][class_name][
+            category
+          ]) {
+            const grade =
+              weeklyAssignmentGradeSplit[week][class_name][category][taskName];
+            const weight =
+              weeklyAssignmentWeightSplit[week][class_name][category][taskName];
 
-    totalGradedCatWeights = sumNestedValues(sumGradedCatWeights)
+            currentCategorySum += grade;
+            numGradedItems += 1;
+            sumGradedCatWeights += weight;
+          }
 
-    console.log(totalGradedCatWeights)
+          const earnedCatWeight =
+            (currentCategorySum / numGradedItems / 100) * sumGradedCatWeights;
+
+          courseDataTotal[week][class_name].totalEarnedWeight += earnedCatWeight;
+          courseDataTotal[week][class_name].totalGradedCatWeights += sumGradedCatWeights;
+        }
+      }
+    }
+
+    console.log("Weeks Data:", courseDataTotal);   
+
+    courseGPA = globalUserData.gpaScale;
+    console.log(courseGPA);
+
+    courseCreditHrs = {};
+
+    for (const className in currentClassGeneral) {
+      courseCreditHrs[className] = currentClassGeneral[className].creditHours;
+    }
+
+    console.log(courseCreditHrs);
+    for (const course in courseCreditHrs) {
+      const creditHours = parseInt(courseCreditHrs[course].match(/\d+/)[0], 10);
+      courseCreditHrs[course] = creditHours;
+    }
+    console.log(courseCreditHrs);
+
+    gradeScale = {};
+
+    for (const class_name in currentClassGeneral) {
+      gradeScale[class_name] = currentClassGeneral[class_name].gradeScale;
+    }
+
+    console.log("Grade Scale:", gradeScale);
+    // Sort gradeScale in descending order
+    for (let course in gradeScale) {
+      let sortedGrades = Object.entries(gradeScale[course])
+        .sort((a, b) => b[1] - a[1])
+        .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
+      gradeScale[course] = sortedGrades;
+    }
+
+    // Sort courseGPA in descending order
+    let sortedGPA = Object.entries(courseGPA)
+      .sort((a, b) => b[1] - a[1])
+      .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
+    courseGPA = sortedGPA;
+
+  /*
+  courseGrade = (totalEarnedWeight / totalgradedCatWeights)*100
+	courseGPA = Compare to scale to get the 0-4.0 number.
+	courseCreditHrs = # credit hours for that course
+	weightedGPAPts = (courseGPA*courseCreditHrs)
+	totalWeightedGPAPts += weightedGPAPts
+	totalCourseCreditHrs += courseCreditHrs
+  */
+  const courseGradeData = {};
+  console.log(courseGPA)
+  for (const week in courseDataTotal) {
+    courseGradeData[week] = {};
+
+    for (const class_name in courseDataTotal[week]) {
+      const totalEarnedWeight =
+        courseDataTotal[week][class_name].totalEarnedWeight;
+      const totalGradedCatWeights =
+        courseDataTotal[week][class_name].totalGradedCatWeights;
+
+      const courseGrade = (totalEarnedWeight / totalGradedCatWeights) * 100;
+      //compare courseGrade to gradeScale value to get back the key
+      for (grade in gradeScale[class_name]) {
+        if (courseGrade >= gradeScale[class_name][grade]) {
+          letterCourseGrade = grade;
+          break;
+        }
+      }
+      const currentcourseGPA = courseGPA[letterCourseGrade];
+      const currentCourseCreditHrs = courseCreditHrs[class_name];
+      const weightedGPAPts = parseFloat(currentcourseGPA) * parseFloat(currentCourseCreditHrs );
+
+      courseGradeData[week][class_name] = {
+        courseCreditHrs: currentCourseCreditHrs,
+        weightedGPAPts: weightedGPAPts,
+      };
+    }
+  }
+  let weeklyTotals = {};
+
+  for (let week in courseGradeData) {
+      let totalCreditHrs = 0;
+      let totalWeightedPts = 0;
+      for (let course in courseGradeData[week]) {
+          totalCreditHrs += courseGradeData[week][course].courseCreditHrs;
+          totalWeightedPts += courseGradeData[week][course].weightedGPAPts;
+      }
+      weeklyTotals[week] = {
+          totalCreditHrs,
+          totalWeightedPts
+      };
+  }
+  
+  console.log(weeklyTotals);
+  let GPAbyWeek = {};
+
+  for (let week in weeklyTotals) {
+      const totalWeightedPts = weeklyTotals[week].totalWeightedPts;
+      const totalCreditHrs = weeklyTotals[week].totalCreditHrs;
+      const GPA = totalWeightedPts / totalCreditHrs;
+      GPAbyWeek[week] = GPA.toFixed(2);
+  }
+
+  console.log(GPAbyWeek);
+  let GPAbyWeekWithDates = {};
+
+  for (let week in GPAbyWeek) {
+    const GPA = GPAbyWeek[week];
+    const dateRange = weeksDictionary[week];
+    GPAbyWeekWithDates[dateRange] = GPA;
+  }
+
+  console.log(GPAbyWeekWithDates);
+  let barChart = document.getElementById("barChart");
+    if (barChart) {
+      pieChart.remove();
+    }
+
+    let canvasBar = document.createElement("canvas");
+    canvas.setAttribute("id", "barChart");
+    document.getElementById("barChartSize").appendChild(canvasBar);
     
- 
-  });
 
+
+  });
 
 ///////////function for all other course tab/////////////////
 async function dataForTabs(course) {
@@ -676,7 +881,7 @@ async function dataForTabs(course) {
     weeklyChunks.push(dateList.splice(0, 7));
   }
 
-  // Save weeks with date ranges in a dictionary
+  // Save courseDataTotal with date ranges in a dictionary
   const weeksDictionary = {};
   weeklyChunks.forEach((chunk, index) => {
     const weekKey = `Week ${index + 1}`;
@@ -697,7 +902,7 @@ function isDateInWeek(dateStr, weekRange) {
 
 //helper function to remove null task
 function removeNullValues(data) {
-  if (typeof data === 'object' && data !== null) {
+  if (typeof data === "object" && data !== null) {
     for (const key in data) {
       if (data[key] === null) {
         delete data[key];
@@ -710,9 +915,12 @@ function removeNullValues(data) {
 
 //help function to remove any empty object
 function removeEmptyObjects(data) {
-  if (typeof data === 'object' && data !== null) {
+  if (typeof data === "object" && data !== null) {
     for (const key in data) {
-      if (typeof data[key] === 'object' && Object.keys(data[key]).length === 0) {
+      if (
+        typeof data[key] === "object" &&
+        Object.keys(data[key]).length === 0
+      ) {
         delete data[key];
       } else {
         removeEmptyObjects(data[key]);
@@ -728,9 +936,9 @@ function calculateAverages(data) {
     averages[className] = {};
     for (const category in data[className]) {
       const values = Object.values(data[className][category]);
-      const validValues = values.filter(value => value !== null);
+      const validValues = values.filter((value) => value !== null);
       const sum = validValues.reduce((total, value) => total + value, 0);
-      const average = (sum / validValues.length)/100;
+      const average = sum / validValues.length / 100;
       averages[className][category] = average;
     }
   }
@@ -760,7 +968,8 @@ function calculateWeightedAverages(avgGrades, catWeights) {
   for (const className in avgGrades) {
     weightedAverages[className] = {};
     for (const category in avgGrades[className]) {
-      const product = avgGrades[className][category] * catWeights[className][category];
+      const product =
+        avgGrades[className][category] * catWeights[className][category];
       weightedAverages[className][category] = product;
     }
   }
@@ -779,3 +988,57 @@ function sumNestedValues(data) {
   }
   return summedValues;
 }
+
+function carryOverTasks(weeklyTaskSplit) {
+  for (const week in weeklyTaskSplit) {
+    const weekNumber = parseInt(week.split(" ")[1]);
+    const nextWeek = "Week " + (weekNumber + 1);
+
+    if (weeklyTaskSplit.hasOwnProperty(nextWeek)) {
+      for (const class_name in weeklyTaskSplit[week]) {
+        if (!weeklyTaskSplit[nextWeek].hasOwnProperty(class_name)) {
+          weeklyTaskSplit[nextWeek][class_name] = {};
+        }
+
+        for (const category in weeklyTaskSplit[week][class_name]) {
+          if (!weeklyTaskSplit[nextWeek][class_name].hasOwnProperty(category)) {
+            weeklyTaskSplit[nextWeek][class_name][category] = {};
+          }
+
+          for (const taskName in weeklyTaskSplit[week][class_name][category]) {
+            if (
+              !weeklyTaskSplit[nextWeek][class_name][category].hasOwnProperty(
+                taskName
+              )
+            ) {
+              weeklyTaskSplit[nextWeek][class_name][category][taskName] =
+                weeklyTaskSplit[week][class_name][category][taskName];
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/*
+    avgCurrentGrades=calculateAverages(currentGrades)
+
+    console.log(avgCurrentGrades)
+
+    sumGradedCatWeights=sumValidWeights(currentGrades, currentWeight);
+
+    console.log(sumGradedCatWeights)
+
+    earnedCatWeights = calculateWeightedAverages(avgCurrentGrades, sumGradedCatWeights);
+
+    console.log(earnedCatWeights)
+
+    totalEarnedWeight  = sumNestedValues(earnedCatWeights)
+
+    console.log(totalEarnedWeight)
+
+    totalGradedCatWeights = sumNestedValues(sumGradedCatWeights)
+
+    console.log(totalGradedCatWeights)
+*/
