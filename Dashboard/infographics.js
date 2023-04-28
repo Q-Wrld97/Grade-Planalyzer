@@ -1045,6 +1045,7 @@ async function dataForTabs(course) {
       weeklyAssignmentGradeSplit[prevWeekKey]
     );
   }
+  
 
   console.log(
     "Updated weeklyAssignmentWeightSplit:",
@@ -1054,36 +1055,161 @@ async function dataForTabs(course) {
     "Updated weeklyAssignmentGradeSplit:",
     weeklyAssignmentGradeSplit
   );
-  const weeklyWeightedGrades = calculateWeightedGrades(weeklyAssignmentWeightSplit, weeklyAssignmentGradeSplit);
   
-  console.log("Weekly weighted grades:", weeklyWeightedGrades);
+  removeInvalidEntries(weeklyAssignmentWeightSplit, weeklyAssignmentGradeSplit);
+
+  console.log(
+    "Updated weeklyAssignmentWeightSplit:",
+    weeklyAssignmentWeightSplit
+  );
+  console.log(
+    "Updated weeklyAssignmentGradeSplit:",
+    weeklyAssignmentGradeSplit
+  );
+
+
+let weeklyCourseGrades = {};
+
+for (const week in weeklyAssignmentWeightSplit) {
+  let totalEarnedWeight = 0;
+  let totalGradedCatWeights = 0;
+
+  for (const category in weeklyAssignmentWeightSplit[week]) {
+    let currentCategorySum = 0;
+    let numGradedItems = 0;
+    let sumGradedCatWeights = 0;
+
+    for (const task in weeklyAssignmentWeightSplit[week][category]) {
+      const weight = weeklyAssignmentWeightSplit[week][category][task];
+      const grade = weeklyAssignmentGradeSplit[week][category][task];
+
+      if (grade !== undefined) {
+        currentCategorySum += grade;
+        numGradedItems += 1;
+        sumGradedCatWeights += weight;
+      }
+    }
+
+    if (numGradedItems > 0) {
+      const earnedCatWeight = ((currentCategorySum / numGradedItems) / 100) * sumGradedCatWeights;
+      totalEarnedWeight += earnedCatWeight;
+      totalGradedCatWeights += sumGradedCatWeights;
+    }
+  }
+
+  const courseGrade = (totalEarnedWeight / totalGradedCatWeights) * 100;
+  weeklyCourseGrades[week] = courseGrade;
+}
+
+console.log(weeklyCourseGrades);
+
+let updatedWeeklyCourseGrades = {};
+
+for (const key in weeklyCourseGrades) {
+  if (weeksDictionary[key]) {
+    updatedWeeklyCourseGrades[weeksDictionary[key]] = weeklyCourseGrades[key];
+  }
+}
+
+console.log(updatedWeeklyCourseGrades);
+
+for (const key in updatedWeeklyCourseGrades) {
+  const newKey = key.split("||")[0].trim();
+  const newValue = parseFloat(updatedWeeklyCourseGrades[key].toFixed(2));
+  delete updatedWeeklyCourseGrades[key];
+  updatedWeeklyCourseGrades[newKey] = newValue;
+}
+
+console.log(updatedWeeklyCourseGrades);
+
+const monthNames = {
+  "01": "Jan",
+  "02": "Feb",
+  "03": "Mar",
+  "04": "Apr",
+  "05": "May",
+  "06": "Jun",
+  "07": "Jul",
+  "08": "Aug",
+  "09": "Sep",
+  "10": "Oct",
+  "11": "Nov",
+  "12": "Dec"
+};
+
+const newWeeklyCourseGrades = {};
+
+for (const [key, value] of Object.entries(updatedWeeklyCourseGrades)) {
+  const dateParts = key.split('-');
+  const newKey = `${monthNames[dateParts[1]]}-${dateParts[2]}`;
+  newWeeklyCourseGrades[newKey] = value;
+}
+
+console.log(newWeeklyCourseGrades);
+
+let barChart = document.getElementById("barChart");
+if (barChart) {
+  barChart.remove();
+}
+
+let canvasBar = document.createElement("canvas");
+canvasBar.setAttribute("id", "barChart");
+document.getElementById("barChartSize").appendChild(canvasBar);
+
+// Define the data for the chart
+const dataForBar = {
+  labels: Object.keys(newWeeklyCourseGrades),
+  datasets: [
+    {
+      label: "GPA",
+      data: Object.values(newWeeklyCourseGrades),
+      backgroundColor: "rgba(54, 162, 235, 0.2)",
+      borderColor: "rgba(54, 162, 235, 1)",
+      borderWidth: 1,
+    },
+  ],
+};
+
+// Define the options for the chart
+const options = {
+  scales: {
+    y: {
+      min: 0,
+      max: 100,
+
+      ticks: {
+        stepSize: 0.5,
+      },
+    },
+  },
+};
+
+// Create the chart
+const ctx = canvasBar.getContext("2d");
+const myChart = new Chart(ctx, {
+  type: "bar",
+  data: dataForBar,
+  options: options,
+});
 
 }
 
-function calculateWeightedGrades(weeklyWeightSplit, weeklyGradeSplit) {
-  const weightedGrades = {};
 
-  Object.keys(weeklyGradeSplit).forEach(week => {
-    weightedGrades[week] = {};
 
-    Object.keys(weeklyGradeSplit[week]).forEach(category => {
-      const grades = weeklyGradeSplit[week][category];
-      const weights = weeklyWeightSplit[week][category];
-
-      let weightedSum = 0;
-      let totalWeight = 0;
-
-      Object.keys(grades).forEach(task => {
-        weightedSum += grades[task] * weights[task];
-        totalWeight += weights[task];
-      });
-
-      weightedGrades[week][category] = totalWeight !== 0 ? weightedSum / totalWeight : 0;
-    });
-  });
-
-  return weightedGrades;
+function removeInvalidEntries(weightSplit, gradeSplit) {
+  for (const week in weightSplit) {
+    for (const category in weightSplit[week]) {
+      for (const item in weightSplit[week][category]) {
+        const grade = gradeSplit[week][category][item];
+        if (grade === null || Number.isNaN(grade)) {
+          delete weightSplit[week][category][item];
+          delete gradeSplit[week][category][item];
+        }
+      }
+    }
+  }
 }
+
 
 function mergeAssignments(target, week) {
   Object.keys(week).forEach((category) => {
