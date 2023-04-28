@@ -1,5 +1,3 @@
-
-
 // Grab Data for Infographic
 function getInfographicDataCheck() {
   if (
@@ -335,12 +333,12 @@ document
     console.log(classTotals);
     console.log("Grand Total Items:", grandTotalItems);
     console.log("Grand Total Completed:", grandTotalCompleted);
-    
+
     // Calculate not completed items
     let grandTotalNotCompleted = grandTotalItems - grandTotalCompleted;
-    grandTotalCompleted = grandTotalCompleted/grandTotalItems * 100;
-    grandTotalNotCompleted = grandTotalNotCompleted/grandTotalItems * 100;
-    
+    grandTotalCompleted = (grandTotalCompleted / grandTotalItems) * 100;
+    grandTotalNotCompleted = (grandTotalNotCompleted / grandTotalItems) * 100;
+
     let pieChart = document.getElementById("pieChartInfo");
     if (pieChart) {
       pieChart.remove();
@@ -590,13 +588,15 @@ document
           const earnedCatWeight =
             (currentCategorySum / numGradedItems / 100) * sumGradedCatWeights;
 
-          courseDataTotal[week][class_name].totalEarnedWeight += earnedCatWeight;
-          courseDataTotal[week][class_name].totalGradedCatWeights += sumGradedCatWeights;
+          courseDataTotal[week][class_name].totalEarnedWeight +=
+            earnedCatWeight;
+          courseDataTotal[week][class_name].totalGradedCatWeights +=
+            sumGradedCatWeights;
         }
       }
     }
 
-    console.log("Weeks Data:", courseDataTotal);   
+    console.log("Weeks Data:", courseDataTotal);
 
     courseGPA = globalUserData.gpaScale;
     console.log(courseGPA);
@@ -635,7 +635,7 @@ document
       .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
     courseGPA = sortedGPA;
 
-  /*
+    /*
   courseGrade = (totalEarnedWeight / totalgradedCatWeights)*100
 	courseGPA = Compare to scale to get the 0-4.0 number.
 	courseCreditHrs = # credit hours for that course
@@ -643,159 +643,156 @@ document
 	totalWeightedGPAPts += weightedGPAPts
 	totalCourseCreditHrs += courseCreditHrs
   */
-  const courseGradeData = {};
-  console.log(courseGPA)
-  for (const week in courseDataTotal) {
-    courseGradeData[week] = {};
+    const courseGradeData = {};
+    console.log(courseGPA);
+    for (const week in courseDataTotal) {
+      courseGradeData[week] = {};
 
-    for (const class_name in courseDataTotal[week]) {
-      const totalEarnedWeight =
-        courseDataTotal[week][class_name].totalEarnedWeight;
-      const totalGradedCatWeights =
-        courseDataTotal[week][class_name].totalGradedCatWeights;
+      for (const class_name in courseDataTotal[week]) {
+        const totalEarnedWeight =
+          courseDataTotal[week][class_name].totalEarnedWeight;
+        const totalGradedCatWeights =
+          courseDataTotal[week][class_name].totalGradedCatWeights;
 
-      const courseGrade = (totalEarnedWeight / totalGradedCatWeights) * 100;
-      //compare courseGrade to gradeScale value to get back the key
-      for (grade in gradeScale[class_name]) {
-        if (courseGrade >= gradeScale[class_name][grade]) {
-          letterCourseGrade = grade;
-          break;
+        const courseGrade = (totalEarnedWeight / totalGradedCatWeights) * 100;
+        //compare courseGrade to gradeScale value to get back the key
+        for (grade in gradeScale[class_name]) {
+          if (courseGrade >= gradeScale[class_name][grade]) {
+            letterCourseGrade = grade;
+            break;
+          }
         }
+        const currentcourseGPA = courseGPA[letterCourseGrade];
+        const currentCourseCreditHrs = courseCreditHrs[class_name];
+        const weightedGPAPts =
+          parseFloat(currentcourseGPA) * parseFloat(currentCourseCreditHrs);
+
+        courseGradeData[week][class_name] = {
+          courseCreditHrs: currentCourseCreditHrs,
+          weightedGPAPts: weightedGPAPts,
+        };
       }
-      const currentcourseGPA = courseGPA[letterCourseGrade];
-      const currentCourseCreditHrs = courseCreditHrs[class_name];
-      const weightedGPAPts = parseFloat(currentcourseGPA) * parseFloat(currentCourseCreditHrs );
-
-      courseGradeData[week][class_name] = {
-        courseCreditHrs: currentCourseCreditHrs,
-        weightedGPAPts: weightedGPAPts,
-      };
     }
-  }
-  let weeklyTotals = {};
+    let weeklyTotals = {};
 
-  for (let week in courseGradeData) {
+    for (let week in courseGradeData) {
       let totalCreditHrs = 0;
       let totalWeightedPts = 0;
       for (let course in courseGradeData[week]) {
-          totalCreditHrs += courseGradeData[week][course].courseCreditHrs;
-          totalWeightedPts += courseGradeData[week][course].weightedGPAPts;
+        totalCreditHrs += courseGradeData[week][course].courseCreditHrs;
+        totalWeightedPts += courseGradeData[week][course].weightedGPAPts;
       }
       weeklyTotals[week] = {
-          totalCreditHrs,
-          totalWeightedPts
+        totalCreditHrs,
+        totalWeightedPts,
       };
-  }
-  
-  console.log(weeklyTotals);
-  let GPAbyWeek = {};
+    }
 
-  for (let week in weeklyTotals) {
+    console.log(weeklyTotals);
+    let GPAbyWeek = {};
+
+    for (let week in weeklyTotals) {
       const totalWeightedPts = weeklyTotals[week].totalWeightedPts;
       const totalCreditHrs = weeklyTotals[week].totalCreditHrs;
       const GPA = totalWeightedPts / totalCreditHrs;
       GPAbyWeek[week] = GPA.toFixed(2);
-  }
-
-  console.log(GPAbyWeek);
-  let GPAbyWeekWithDates = {};
-  //replace the  week1- end of term to the actual week ranges
-  for (let week in GPAbyWeek) {
-    const GPA = GPAbyWeek[week];
-    const dateRange = weeksDictionary[week];
-    GPAbyWeekWithDates[dateRange] = GPA;
-  }
-  // remove the ending dates of each weeks
-  for (let week in GPAbyWeekWithDates) {
-    const newKey = week.split("|")[0].substring(5)
-    GPAbyWeekWithDates[newKey] = GPAbyWeekWithDates[week];
-    delete GPAbyWeekWithDates[week];
-  }
-  
-  console.log(courseGPA)
-  //iterate courseGPA store the first value in a variable call max and the last value in a variable call min
-  let max = 0;
-  let min = 0;
-  for (let course in courseGPA) {
-    if (max == 0) {
-      max = courseGPA[course];
     }
-    min = courseGPA[course];
-  }
 
-  const monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
+    console.log(GPAbyWeek);
+    let GPAbyWeekWithDates = {};
+    //replace the  week1- end of term to the actual week ranges
+    for (let week in GPAbyWeek) {
+      const GPA = GPAbyWeek[week];
+      const dateRange = weeksDictionary[week];
+      GPAbyWeekWithDates[dateRange] = GPA;
+    }
+    // remove the ending dates of each weeks
+    for (let week in GPAbyWeekWithDates) {
+      const newKey = week.split("|")[0].substring(5);
+      GPAbyWeekWithDates[newKey] = GPAbyWeekWithDates[week];
+      delete GPAbyWeekWithDates[week];
+    }
 
-  for (let week in GPAbyWeekWithDates) {
-    const monthNum = Number(week.split("|")[0].substring(0, 2));
-    const monthName = monthNames[monthNum - 1];
-    const dayNum = week.split("|")[0].substring(3);
-    const newKey = `${monthName} ${dayNum}`;
-    GPAbyWeekWithDates[newKey] = GPAbyWeekWithDates[week];
-    delete GPAbyWeekWithDates[week];
-  }
-
-
-  console.log(GPAbyWeekWithDates);
-  let barChart = document.getElementById("barChart");
-  if (barChart) {
-    barChart.remove();
-  }
-  
-  let canvasBar = document.createElement("canvas");
-  canvasBar.setAttribute("id", "barChart");
-  document.getElementById("barChartSize").appendChild(canvasBar);
-  
-  // Define the data for the chart
-  const dataForBar = {
-    labels: Object.keys(GPAbyWeekWithDates),
-    datasets: [{
-      label: 'GPA',
-      data: Object.values(GPAbyWeekWithDates),
-      backgroundColor: 'rgba(54, 162, 235, 0.2)',
-      borderColor: 'rgba(54, 162, 235, 1)',
-      borderWidth: 1
-    }]
-  };
-  
-  // Define the options for the chart
-  const options = {
-    scales: {
-      y: {
-        min: min,
-        max: max,
-        
-        ticks: {
-          stepSize: 0.5
-        }
+    console.log(courseGPA);
+    //iterate courseGPA store the first value in a variable call max and the last value in a variable call min
+    let max = 0;
+    let min = 0;
+    for (let course in courseGPA) {
+      if (max == 0) {
+        max = courseGPA[course];
       }
+      min = courseGPA[course];
     }
-  };
-  
-  // Create the chart
-  const ctx = canvasBar.getContext('2d');
-  const myChart = new Chart(ctx, {
-    type: 'bar',
-    data: dataForBar,
-    options: options
-  });
-    
-    
-    
 
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
 
+    for (let week in GPAbyWeekWithDates) {
+      const monthNum = Number(week.split("|")[0].substring(0, 2));
+      const monthName = monthNames[monthNum - 1];
+      const dayNum = week.split("|")[0].substring(3);
+      const newKey = `${monthName} ${dayNum}`;
+      GPAbyWeekWithDates[newKey] = GPAbyWeekWithDates[week];
+      delete GPAbyWeekWithDates[week];
+    }
+
+    console.log(GPAbyWeekWithDates);
+    let barChart = document.getElementById("barChart");
+    if (barChart) {
+      barChart.remove();
+    }
+
+    let canvasBar = document.createElement("canvas");
+    canvasBar.setAttribute("id", "barChart");
+    document.getElementById("barChartSize").appendChild(canvasBar);
+
+    // Define the data for the chart
+    const dataForBar = {
+      labels: Object.keys(GPAbyWeekWithDates),
+      datasets: [
+        {
+          label: "GPA",
+          data: Object.values(GPAbyWeekWithDates),
+          backgroundColor: "rgba(54, 162, 235, 0.2)",
+          borderColor: "rgba(54, 162, 235, 1)",
+          borderWidth: 1,
+        },
+      ],
+    };
+
+    // Define the options for the chart
+    const options = {
+      scales: {
+        y: {
+          min: min,
+          max: max,
+
+          ticks: {
+            stepSize: 0.5,
+          },
+        },
+      },
+    };
+
+    // Create the chart
+    const ctx = canvasBar.getContext("2d");
+    const myChart = new Chart(ctx, {
+      type: "bar",
+      data: dataForBar,
+      options: options,
+    });
   });
 
 ///////////function for all other course tab/////////////////
@@ -845,7 +842,7 @@ async function dataForTabs(course) {
   console.log(classTotals);
   console.log(course);
   // Calculate not completed items
-  let notCompleted = (classTotals[course].total - classTotals[course].completed);
+  let notCompleted = classTotals[course].total - classTotals[course].completed;
 
   // populate the pie chart
   let pieChart = document.getElementById("pieChartInfo");
@@ -867,7 +864,10 @@ async function dataForTabs(course) {
             "rgba(255, 99, 132, 0.5)",
           ],
           borderColor: ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)"],
-          data: [classTotals[course].completed/classTotals[course].total*100, notCompleted/classTotals[course].total*100],
+          data: [
+            (classTotals[course].completed / classTotals[course].total) * 100,
+            (notCompleted / classTotals[course].total) * 100,
+          ],
         },
       ],
     },
@@ -924,8 +924,8 @@ async function dataForTabs(course) {
   console.log("Start date:", startDate);
   console.log("End date:", endDate);
 
-  const startDateFormat = new Date("2023-04-24");
-  const endDateFormat = new Date("2023-05-06");
+  const startDateFormat = new Date(startDate);
+  const endDateFormat = new Date(endDate);
 
   // Generate a list of dates between startDateFormat and endDateFormat
   const dateList = [];
@@ -945,11 +945,100 @@ async function dataForTabs(course) {
   const weeksDictionary = {};
   weeklyChunks.forEach((chunk, index) => {
     const weekKey = `Week ${index + 1}`;
-    const weekValue = `${chunk[0]}-${chunk[chunk.length - 1]}`;
+    const weekValue = `${chunk[0]}||${chunk[chunk.length - 1]}`;
     weeksDictionary[weekKey] = weekValue;
   });
 
   console.log(weeksDictionary);
+
+  console.log(currentDates)
+
+
+  const weeklyAssignmentSplit = {};
+
+  for (const week in weeksDictionary) {
+    const weekRange = weeksDictionary[week];
+    weeklyAssignmentSplit[week] = {};
+
+    for (const taskType in currentDates) {
+      weeklyAssignmentSplit[week][taskType] = {};
+
+      for (const task in currentDates[taskType]) {
+        const taskDate = currentDates[taskType][task];
+
+        if (isDateInWeek(taskDate, weekRange)) {
+          weeklyAssignmentSplit[week][taskType][task] = taskDate;
+        }
+      }
+
+      // If no task found for the taskType, delete the empty object
+      if (Object.keys(weeklyAssignmentSplit[week][taskType]).length === 0) {
+        delete weeklyAssignmentSplit[week][taskType];
+      }
+    }
+  }
+  console.log(weeklyAssignmentSplit)
+
+      //for each week in the output dictionary, replace the task date with the grade
+      const weeklyAssignmentGradeSplit = JSON.parse(
+        JSON.stringify(weeklyAssignmentSplit)
+      );
+  
+      for (const week in weeklyAssignmentGradeSplit) {
+          for (const taskType in weeklyAssignmentGradeSplit[week]) {
+            for (const task in weeklyAssignmentGradeSplit[week][
+              taskType
+            ]) {
+              const grade = currentGrades[taskType][task];
+              weeklyAssignmentGradeSplit[week][taskType][task] = grade;
+            }
+          }
+      }
+  
+      // go through weeklyAssignmentGradeSplit and remove any null tasks
+      console.log(weeklyAssignmentGradeSplit);
+  
+      //for each week in the output dictionary, replace the task date with the weight
+      const weeklyAssignmentWeightSplit = JSON.parse(
+        JSON.stringify(weeklyAssignmentSplit)
+      );
+  
+      for (const week in weeklyAssignmentWeightSplit) {
+          for (const taskType in weeklyAssignmentWeightSplit[week]) {
+            for (const task in weeklyAssignmentWeightSplit[week][
+              taskType
+            ]) {
+              const weight = currentWeight[taskType][task];
+              weeklyAssignmentWeightSplit[week][taskType][task] = weight;
+            }
+          }
+        
+      }
+  
+      console.log(weeklyAssignmentWeightSplit);
+  
+  // go through weeklyAssignmentGradeSplit annd weeklyAssignmentWeightsplit and if any task is null in weeklyAssignmentGradeSplit, remove it from weeklyAssignmentWeightSplit and weeklyAssignmentGradeSplit
+  for (const week in weeklyAssignmentGradeSplit) {
+    for (const taskType in weeklyAssignmentGradeSplit[week]) {
+      for (const task in weeklyAssignmentGradeSplit[week][taskType]) {
+        const grade = weeklyAssignmentGradeSplit[week][taskType][task];
+        if (grade === null) {
+          delete weeklyAssignmentGradeSplit[week][taskType][task];
+          delete weeklyAssignmentWeightSplit[week][taskType][task];
+        }
+      }
+    }
+  }
+  console.log(weeklyAssignmentGradeSplit);
+  console.log(weeklyAssignmentWeightSplit);
+  // go through weeklyAssignmentGradeSplit and weeklyAssignmentWeightsplit and remove any empty objects
+  removeEmptyObjectsForSingleCourse(weeklyAssignmentGradeSplit);
+  removeEmptyObjectsForSingleCourse(weeklyAssignmentWeightSplit);
+  console.log(weeklyAssignmentWeightSplit);
+  console.log(weeklyAssignmentGradeSplit);
+
+  
+
 }
 
 //helper function for rolling GPA
@@ -968,6 +1057,16 @@ function removeNullValues(data) {
         delete data[key];
       } else {
         removeNullValues(data[key]);
+      }
+    }
+  }
+}
+function removeEmptyObjectsForSingleCourse(obj) {
+  for (const key in obj) {
+    if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+      removeEmptyObjectsForSingleCourse(obj[key]);
+      if (Object.keys(obj[key]).length === 0) {
+        delete obj[key];
       }
     }
   }
