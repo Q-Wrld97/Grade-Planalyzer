@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="images/logo4.ico">
-    <link rel="stylesheet"  href="dashboard.css">
+    <link rel="stylesheet" href="dashboard.css">
     <title>Grade PlanAlyzer</title>
     <nav class="navbar">
         <div class="navbar-left">
@@ -19,7 +20,7 @@
         <div class="navbar-right">
             <a href="#" class="navbar-link">Dashboard</a>
             <a href="Settings/html/settings.html" class="navbar-link">Settings</a>
-            <a onclick="signOut()" class="navbar-link">Logout</a>     
+            <a onclick="signOut()" class="navbar-link">Logout</a>
         </div>
     </nav>
 </head>
@@ -30,45 +31,56 @@
         <div class="logo">
             <img src="../Assets/temp_home_images/logo3.png" alt="Logo splash">
             <div class="progress">
-                <div id="preLoading" class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                <div id="preLoading" class="progress-bar bg-success" role="progressbar" style="width: 25%"
+                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
         </div>
     </div>
     <!-- Preloader ends here -->
-    
+
     <section id="banner">
-        <div class = "select_form">
-            <select name="select" id="semesterSelect" >
+        <div class="select_form">
+            <select name="select" id="semesterSelect">
             </select>
         </div>
 
         <!-- <center><h2>Grade Planalyzer</h2></center> -->
         <div class="tab">
 
-            <button class="tablinks" id="lookAheadIcon" onclick="openTab(event, 'LookAhead')"><img src="../Assets/Icons/lookAhead2.png" class="lookAheadIcon"></button>
-            <button class="tablinks" id="infographicIcon"><img src="../Assets/Icons/infographics2.png" class="infographicsIcon"><!--Infographics--></button>
-            <button class="tablinks" id="gradeEntryIcon"><img src="../Assets/Icons/gradeEntry2.png" class="gradeEntryIcon"></button>
-            <button class="tablinks" id='courseInfoIcon'><img src="../Assets/Icons/courseInfo2.png" class="courseInfoIcon"></button>
+            <button class="tablinks" id="lookAheadIcon" onclick="openTab(event, 'LookAhead')"><img
+                    src="../Assets/Icons/lookAhead2.png" class="lookAheadIcon"></button>
+            <button class="tablinks" id="infographicIcon"><img src="../Assets/Icons/infographics2.png"
+                    class="infographicsIcon"><!--Infographics--></button>
+            <button class="tablinks" id="gradeEntryIcon"><img src="../Assets/Icons/gradeEntry2.png"
+                    class="gradeEntryIcon"></button>
+            <button class="tablinks" id='courseInfoIcon'><img src="../Assets/Icons/courseInfo2.png"
+                    class="courseInfoIcon"></button>
             <button class="tablinks" id="whatIfIcon"><img src="../Assets/Icons/whatIf2.png" class="whatIfIcon"></button>
-            
+
         </div>
 
         <div class="tab2">
             <div class="dashboardEmptySection">
-                <h6 class="dashtext">The Look Ahead tab displays a table of upcoming "To-Do" tasks alongside a weekly weather forecast. Marking a task as complete and submitting will populate its field in the Grade Entry tab.
+                <h6 class="dashtext">The Look Ahead tab displays a table of upcoming "To-Do" tasks alongside a weekly
+                    weather forecast. Marking a task as complete and submitting will populate its field in the Grade
+                    Entry tab.
                 </h6>
             </div>
             <div class="dashboardEmptySection">
-                <h6 class="dashtext">The Infographics tab displays more advanced visual representations of grade progress throughout a semester, such as charts and diagrams.</h6>
+                <h6 class="dashtext">The Infographics tab displays more advanced visual representations of grade
+                    progress throughout a semester, such as charts and diagrams.</h6>
             </div>
             <div class="dashboardEmptySection">
-                <h6 class="dashtext">The Grade Entry tab is where students may enter new or view/edit existing grade data.</h6>
+                <h6 class="dashtext">The Grade Entry tab is where students may enter new or view/edit existing grade
+                    data.</h6>
             </div>
             <div class="dashboardEmptySection">
-                <h6 class="dashtext">The Course Info tab serves as the content hub for the addition, deletion or editing of courses within a semester.</h6>
+                <h6 class="dashtext">The Course Info tab serves as the content hub for the addition, deletion or editing
+                    of courses within a semester.</h6>
             </div>
             <div class="dashboardEmptySection">
-                <h6 class="dashtext">The What-If? tab allows students to simulate final grade outcomes using sliders to represent scores for their remaining graded work in each category.</h6>
+                <h6 class="dashtext">The What-If? tab allows students to simulate final grade outcomes using sliders to
+                    represent scores for their remaining graded work in each category.</h6>
             </div>
             <div id="LookAhead" class="tabcontent">
                 <div class="future-forecast">
@@ -80,7 +92,7 @@
                             <div class="temp">Day - 35.6&#176; C</div>
                         </div>
                     </div>
-            
+
                     <div class="weather-forecast" id="weather-forecast">
                         <div class="weather-forecast-item">
                             <div class="day">Tue</div>
@@ -121,30 +133,31 @@
                     </div>
                 </div>
                 <div id="col69">
-                    <div class="col69-1">
-                        <h3 class="display-7">ToDo:</h3>
-                    </div>
-                    <div class="col69-2">
-                        <h3 class="display-7">04-27-2023 to 05-04-2023</h3>
-                    </div>
-                    <div class="col69-3">
-                        <select onchange="populateData()" name="weeks" id="weeks" >
-                            <option value="" disabled selected>Choose an option</option>
-                            <option value="Week1">Period: 1 Week</option>
-                            <option value="Week2">Period: 2 Weeks</option>
-                            <option value="Week3">Period: 3 Weeks</option>
-                            <option value="Week4">Period: 4 Weeks</option>
-                        </select>
+                    <div class="container-col69">
+                        <div class="col69-1">
+                            <h3 class="display-7">ToDo:</h3>
+                        </div>
+                        <div class="col69-2">
+                            <h3 class="display-7">04-27-2023 to 05-04-2023</h3>
+                        </div>
+                        <div class="col69-3">
+                            <select onchange="populateData()" name="weeks" id="weeks">
+                                <option value="" disabled selected>Choose an option</option>
+                                <option value="Week1">Period: 1 Week</option>
+                                <option value="Week2">Period: 2 Weeks</option>
+                                <option value="Week3">Period: 3 Weeks</option>
+                                <option value="Week4">Period: 4 Weeks</option>
+                            </select>
+                            <button id="confirm" class="button">Confirm</button>
+                        </div>
                     </div>
                 </div>
                 <div id="col70">
-                    <div class="button-container">
-                        <button id="confirm"class="button">Confirm</button>
-                    </div>
+
                 </div>
-                
+
                 <div id="col1">
-                    <div id="tableLookAhead"class="row">
+                    <div id="tableLookAhead" class="row">
                         <div class="col-md-12">
                             <div class="table-container">
                                 <table class="table table-striped">
@@ -158,14 +171,14 @@
                                         </tr>
                                     </thead>
                                     <tbody id="tableBody">
-         
+
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <div id="col2">
                     <div class="chart-wrapper" id="chartContainer">
                         <canvas id="pieChart"></canvas>
@@ -184,26 +197,26 @@
                 <div class="infotabRight">
                     <p class="h5" id="grabVlue1">Current Semester GPA:</p>
                     <p class="h5" id="grabVlue2">Potential Week-end GPA:</p>
-                    <p class="h5" id="grabVlue2">Potential Term GPA:</p> 
+                    <p class="h5" id="grabVlue2">Potential Term GPA:</p>
                 </div>
 
                 <div class="infotabBottomLeft">
-                    <div class="container" id="infographicTabs" >
+                    <div class="container" id="infographicTabs">
                         <button class="tablinks" id="infographicClass0" onclick="">ALL</button>
                     </div>
                 </div>
-                
-        
-                <div id="infoColumn">                    
+
+
+                <div id="infoColumn">
                     <div id="infoColumn1">
                         <div id="pieChartSize" class="pieChartSize">
-                            <p class="h3" >Total Coursework Completed</p>
+                            <p class="h3">Total Coursework Completed</p>
                             <canvas id="pieChartInfo"></canvas>
                         </div>
                     </div>
                     <div id="infoColumn2">
                         <div id="barChartSize" class="barChartSize">
-                            <p class="h3" >Weekly Rolling Semester GPA</p>
+                            <p class="h3">Weekly Rolling Semester GPA</p>
                             <br>
                             <br>
                             <br>
@@ -312,55 +325,55 @@
 
                 <div class="gradeEntryTabRight">
                     <div class="container-submitButton">
-                        <button onclick="submitGrade()"class="button" type="submit">Submit Grade Changes</button>
+                        <button onclick="submitGrade()" class="button" type="submit">Submit Grade Changes</button>
                     </div>
                 </div>
 
                 <div class="gradeEntryTabBottomLeft">
                     <div id="courseTab" class="container">
                         <!--Grab the rest by ID-->
-               
+
                     </div>
                 </div>
-                
-                <div id="pastGradeEntryColumn">                    
+
+                <div id="pastGradeEntryColumn">
                     <p class="h5">Ungraded: </p>
                     <div class="recentFormSize" id="recentFormSize">
-        
 
-                    </div>  
+
+                    </div>
                 </div>
-                <div id="gradeEntryColumn"> 
-                    <p class="h5">Graded: </p>                  
+                <div id="gradeEntryColumn">
+                    <p class="h5">Graded: </p>
                     <div id="gradeEntryColumn1">
-                        <div class="formSize"  id="pastDiscussion">
-                           
+                        <div class="formSize" id="pastDiscussion">
+
                         </div>
                     </div>
-                    <div id="gradeEntryColumn2" >
+                    <div id="gradeEntryColumn2">
                         <div class="formSize" id="pastQuiz">
-                    
+
                         </div>
                     </div>
-                    <div id="gradeEntryColumn3" >
-                        <div class="formSize" id="pastExam" >
-                            
+                    <div id="gradeEntryColumn3">
+                        <div class="formSize" id="pastExam">
+
                         </div>
-                        
+
                     </div>
-                    <div id="gradeEntryColumn4" >
+                    <div id="gradeEntryColumn4">
                         <div class="formSize" id="pastProject">
-        
+
                         </div>
-                        
+
                     </div>
-                    <div id="gradeEntryColumn5" >
+                    <div id="gradeEntryColumn5">
                         <div class="formSize" id="pastAssignment">
 
                         </div>
-                        
+
                     </div>
-                    <div id="gradeEntryColumn6" >
+                    <div id="gradeEntryColumn6">
                         <div class="formSize" id="pastParticipation">
 
                         </div>
@@ -371,10 +384,10 @@
             <div id="CourseInfo" class="tabcontent">
                 <div class="courseInfoContainer">
                     <div class="course-square">
-                      <i id="iconSize" class="fa fa-plus"></i>
-                      <span>Add Course</span>
+                        <i id="iconSize" class="fa fa-plus"></i>
+                        <span>Add Course</span>
                     </div>
-                </div>                 
+                </div>
             </div>
 
             <div id="WhatIf" class="tabcontent">
@@ -395,20 +408,20 @@
 
                     </div>
                 </div>
-                
-        
-                <div id="infoColumn">                    
+
+
+                <div id="infoColumn">
                     <div id="whatIfColumn1">
-                       
+
                     </div>
-                    
+
                     <div id="whatIfColumn2">
                         <div class="whatIfGradeImage">
                             <img src="../Assets/Grade_Planalyzer_Logo_PNG.png" alt="Logo">
                         </div>
                         <div class="whatIfGradeBox">
                             <div class="whatIfGradeBoxValue" id="whatIfGradeBoxValue">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -419,7 +432,9 @@
 </body>
 
 <!-- Look Ahead -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- Pie Chart -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
@@ -439,4 +454,5 @@
 <script src="gradeEntry.js"></script>
 <script src="courseInfo.js"></script>
 <script src="whatIf.js"></script>
+
 </html>

@@ -278,7 +278,6 @@ body {
 
 /*======================Look Ahead code=========================*/
 #col69 {
-    display: flex;
     float: left;
     width: 70%;
     height: 7vh;
@@ -286,17 +285,25 @@ body {
     color: white;
     padding-top: 10px;
 }
-.col69-1, .col69-2, .col69-3 {
-    flex: 1;
+
+.container-col69 {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.col69-1 {
+    max-width: 100px;
 }
 
 .col69-2{
-    flex-basis: auto;
+    text-align: center;
 }
 
 .col69-3 {
     text-align: right;
 }
+
 
 #col70 {
     float: right;
@@ -666,7 +673,7 @@ select {
     height: 7.5vh;
     float: left;
     align-self: left;
-    
+
 
 }
 
@@ -997,5 +1004,5 @@ select {
 .dashtext {
     padding-top: 40px;
     padding-left: 20px;
-    
+
 }
