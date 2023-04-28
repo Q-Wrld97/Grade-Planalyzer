@@ -1,26 +1,4 @@
-//Line chart for column
-const ctx = document.getElementById("barChart");
 
-new Chart(ctx, {
-  type: "bar",
-  data: {
-    labels: ["SWE", "LAN", "DES", "COS", "TOC", "CNT"],
-    datasets: [
-      {
-        label: "Classes",
-        data: [12, 19, 3, 5, 2, 33],
-        borderWidth: 1,
-      },
-    ],
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  },
-});
 
 // Grab Data for Infographic
 function getInfographicDataCheck() {
@@ -369,6 +347,7 @@ document
     let canvas = document.createElement("canvas");
     canvas.setAttribute("id", "pieChartInfo");
     document.getElementById("pieChartSize").appendChild(canvas);
+
     new Chart(document.getElementById("pieChartInfo"), {
       type: "pie",
       data: {
@@ -718,22 +697,76 @@ document
 
   console.log(GPAbyWeek);
   let GPAbyWeekWithDates = {};
-
+  //replace the  week1- end of term to the actual week ranges
   for (let week in GPAbyWeek) {
     const GPA = GPAbyWeek[week];
     const dateRange = weeksDictionary[week];
     GPAbyWeekWithDates[dateRange] = GPA;
   }
+  // remove the ending dates of each weeks
+  for (let week in GPAbyWeekWithDates) {
+    const newKey = week.split("|")[0]
+    GPAbyWeekWithDates[newKey] = GPAbyWeekWithDates[week];
+    delete GPAbyWeekWithDates[week];
+  }
+  
+  console.log(courseGPA)
+  //iterate courseGPA store the first value in a variable call max and the last value in a variable call min
+  let max = 0;
+  let min = 0;
+  for (let course in courseGPA) {
+    if (max == 0) {
+      max = courseGPA[course];
+    }
+    min = courseGPA[course];
+  }
+
+
 
   console.log(GPAbyWeekWithDates);
   let barChart = document.getElementById("barChart");
-    if (barChart) {
-      pieChart.remove();
+  if (barChart) {
+    barChart.remove();
+  }
+  
+  let canvasBar = document.createElement("canvas");
+  canvasBar.setAttribute("id", "barChart");
+  document.getElementById("barChartSize").appendChild(canvasBar);
+  
+  // Define the data for the chart
+  const dataForBar = {
+    labels: Object.keys(GPAbyWeekWithDates),
+    datasets: [{
+      label: 'GPA',
+      data: Object.values(GPAbyWeekWithDates),
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      borderColor: 'rgba(54, 162, 235, 1)',
+      borderWidth: 1
+    }]
+  };
+  
+  // Define the options for the chart
+  const options = {
+    scales: {
+      y: {
+        min: min,
+        max: max,
+        ticks: {
+          stepSize: 0.5
+        }
+      }
     }
-
-    let canvasBar = document.createElement("canvas");
-    canvas.setAttribute("id", "barChart");
-    document.getElementById("barChartSize").appendChild(canvasBar);
+  };
+  
+  // Create the chart
+  const ctx = canvasBar.getContext('2d');
+  const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: dataForBar,
+    options: options
+  });
+    
+    
     
 
 
