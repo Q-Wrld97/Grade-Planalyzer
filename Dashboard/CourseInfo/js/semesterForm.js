@@ -44,15 +44,17 @@ async function addSemesterData() {
         return;
     }
     //check if semester exists in database
-    dbSemester = await db.collection("users").doc(userUID).get();
-    console.log(dbSemester.data().semester);
-    //if semester exist
-    if (dbSemester.data().semester.length === null) {
-        //keep going because semester does not exist
+    const dbSemester = await db.collection("users").doc(userUID).get();
+    const semesters = dbSemester.data().semester;
+    
+    // if semester field does not exist or is null
+    if (!semesters || semesters === null) {
+      // do something when semester is null or does not exist
     } else {
-      for (var i = 0; i < dbSemester.data().semester.length; i++) {
-        if (dbSemester.data().semester[i] == semester) {
-          alert("semester already exist");
+      // loop through the array of semesters and check if semester already exists
+      for (let i = 0; i < semesters.length; i++) {
+        if (semesters[i] === semester) {
+          alert("semester already exists");
           return;
         }
       }

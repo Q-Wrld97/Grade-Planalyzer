@@ -951,8 +951,7 @@ async function dataForTabs(course) {
 
   console.log(weeksDictionary);
 
-  console.log(currentDates)
-
+  console.log(currentDates);
 
   const weeklyAssignmentSplit = {};
 
@@ -977,46 +976,41 @@ async function dataForTabs(course) {
       }
     }
   }
-  console.log(weeklyAssignmentSplit)
+  console.log(weeklyAssignmentSplit);
 
-      //for each week in the output dictionary, replace the task date with the grade
-      const weeklyAssignmentGradeSplit = JSON.parse(
-        JSON.stringify(weeklyAssignmentSplit)
-      );
-  
-      for (const week in weeklyAssignmentGradeSplit) {
-          for (const taskType in weeklyAssignmentGradeSplit[week]) {
-            for (const task in weeklyAssignmentGradeSplit[week][
-              taskType
-            ]) {
-              const grade = currentGrades[taskType][task];
-              weeklyAssignmentGradeSplit[week][taskType][task] = grade;
-            }
-          }
+  //for each week in the output dictionary, replace the task date with the grade
+  const weeklyAssignmentGradeSplit = JSON.parse(
+    JSON.stringify(weeklyAssignmentSplit)
+  );
+
+  for (const week in weeklyAssignmentGradeSplit) {
+    for (const taskType in weeklyAssignmentGradeSplit[week]) {
+      for (const task in weeklyAssignmentGradeSplit[week][taskType]) {
+        const grade = currentGrades[taskType][task];
+        weeklyAssignmentGradeSplit[week][taskType][task] = grade;
       }
-  
-      // go through weeklyAssignmentGradeSplit and remove any null tasks
-      console.log(weeklyAssignmentGradeSplit);
-  
-      //for each week in the output dictionary, replace the task date with the weight
-      const weeklyAssignmentWeightSplit = JSON.parse(
-        JSON.stringify(weeklyAssignmentSplit)
-      );
-  
-      for (const week in weeklyAssignmentWeightSplit) {
-          for (const taskType in weeklyAssignmentWeightSplit[week]) {
-            for (const task in weeklyAssignmentWeightSplit[week][
-              taskType
-            ]) {
-              const weight = currentWeight[taskType][task];
-              weeklyAssignmentWeightSplit[week][taskType][task] = weight;
-            }
-          }
-        
+    }
+  }
+
+  // go through weeklyAssignmentGradeSplit and remove any null tasks
+  console.log(weeklyAssignmentGradeSplit);
+
+  //for each week in the output dictionary, replace the task date with the weight
+  const weeklyAssignmentWeightSplit = JSON.parse(
+    JSON.stringify(weeklyAssignmentSplit)
+  );
+
+  for (const week in weeklyAssignmentWeightSplit) {
+    for (const taskType in weeklyAssignmentWeightSplit[week]) {
+      for (const task in weeklyAssignmentWeightSplit[week][taskType]) {
+        const weight = currentWeight[taskType][task];
+        weeklyAssignmentWeightSplit[week][taskType][task] = weight;
       }
-  
-      console.log(weeklyAssignmentWeightSplit);
-  
+    }
+  }
+
+  console.log(weeklyAssignmentWeightSplit);
+
   // go through weeklyAssignmentGradeSplit annd weeklyAssignmentWeightsplit and if any task is null in weeklyAssignmentGradeSplit, remove it from weeklyAssignmentWeightSplit and weeklyAssignmentGradeSplit
   for (const week in weeklyAssignmentGradeSplit) {
     for (const taskType in weeklyAssignmentGradeSplit[week]) {
@@ -1036,9 +1030,68 @@ async function dataForTabs(course) {
   removeEmptyObjectsForSingleCourse(weeklyAssignmentWeightSplit);
   console.log(weeklyAssignmentWeightSplit);
   console.log(weeklyAssignmentGradeSplit);
+  // Iterate over the weeks, merging each previous week's assignments
+  for (let i = 1; i < Object.keys(weeklyAssignmentWeightSplit).length; i++) {
+    const currentWeekKey = `Week ${i + 1}`;
+    const prevWeekKey = `Week ${i}`;
 
+    // Add previous week's weight and grade to the current week
+    mergeAssignments(
+      weeklyAssignmentWeightSplit[currentWeekKey],
+      weeklyAssignmentWeightSplit[prevWeekKey]
+    );
+    mergeAssignments(
+      weeklyAssignmentGradeSplit[currentWeekKey],
+      weeklyAssignmentGradeSplit[prevWeekKey]
+    );
+  }
+
+  console.log(
+    "Updated weeklyAssignmentWeightSplit:",
+    weeklyAssignmentWeightSplit
+  );
+  console.log(
+    "Updated weeklyAssignmentGradeSplit:",
+    weeklyAssignmentGradeSplit
+  );
+  const weeklyWeightedGrades = calculateWeightedGrades(weeklyAssignmentWeightSplit, weeklyAssignmentGradeSplit);
   
+  console.log("Weekly weighted grades:", weeklyWeightedGrades);
 
+}
+
+function calculateWeightedGrades(weeklyWeightSplit, weeklyGradeSplit) {
+  const weightedGrades = {};
+
+  Object.keys(weeklyGradeSplit).forEach(week => {
+    weightedGrades[week] = {};
+
+    Object.keys(weeklyGradeSplit[week]).forEach(category => {
+      const grades = weeklyGradeSplit[week][category];
+      const weights = weeklyWeightSplit[week][category];
+
+      let weightedSum = 0;
+      let totalWeight = 0;
+
+      Object.keys(grades).forEach(task => {
+        weightedSum += grades[task] * weights[task];
+        totalWeight += weights[task];
+      });
+
+      weightedGrades[week][category] = totalWeight !== 0 ? weightedSum / totalWeight : 0;
+    });
+  });
+
+  return weightedGrades;
+}
+
+function mergeAssignments(target, week) {
+  Object.keys(week).forEach((category) => {
+    if (!target.hasOwnProperty(category)) {
+      target[category] = {};
+    }
+    Object.assign(target[category], week[category]);
+  });
 }
 
 //helper function for rolling GPA
@@ -1063,7 +1116,7 @@ function removeNullValues(data) {
 }
 function removeEmptyObjectsForSingleCourse(obj) {
   for (const key in obj) {
-    if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+    if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
       removeEmptyObjectsForSingleCourse(obj[key]);
       if (Object.keys(obj[key]).length === 0) {
         delete obj[key];
