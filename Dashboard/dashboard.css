@@ -7,6 +7,11 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.h3{
+    padding-left: 15px;
+}
+
+
 body {
     margin: 0;
     background-color: #23242a;
@@ -981,9 +986,6 @@ select {
     width: 200px;
 }
 
-.whatIfGradeBoxValue h3 {
-    font-size: 3em;
-}
 
 /*==============================================
 =================PRE-LOADER=====================
