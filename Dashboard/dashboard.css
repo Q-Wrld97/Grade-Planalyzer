@@ -750,7 +750,7 @@ select {
     height: 20vh;
     color: white;
     background: rgba(24, 24, 27, 0.8);
-    overflow-y: auto;
+    overflow-y: hidden;
 
 }
 
