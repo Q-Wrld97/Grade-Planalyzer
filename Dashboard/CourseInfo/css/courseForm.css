@@ -18,7 +18,7 @@
 .font-color{
     color: white;
   }
-  
+
 .gradingScale {
     display: flex;
     flex-direction: row;
@@ -92,7 +92,7 @@
     animation: animate 6s linear infinite;
     animation-delay: -3s;
 }
-.courseFromTextColor{
+.courseFormTextColor{
     color: white;
 }
 h6{
