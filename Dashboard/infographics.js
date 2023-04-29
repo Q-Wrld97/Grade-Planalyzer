@@ -797,7 +797,27 @@ document
       data: dataForBar,
       options: options,
     });
+    
+    // get current date in this format: 2021-04-01
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    const todayDate = `${year}-${month}-${day}`;
+
+  
+  const pastGradedTasks = getPastGradedTasksByClass(currentDate, currentGrades)
+  console.log(pastGradedTasks)
+
+  const updatedWeights = removeNonGradedTasks(currentWeight, pastGradedTasks);
+  console.log(updatedWeights);
+
+
+
   });
+
+
+
 
 ///////////function for all other course tab/////////////////
 async function dataForTabs(course) {
@@ -1202,7 +1222,11 @@ const myChart = new Chart(ctx, {
 
 }
 
-
+function isDateBeforeToday(date) {
+  const currentDate = new Date();
+  const inputDate = new Date(date);
+  return inputDate < currentDate;
+}
 
 function removeInvalidEntries(weightSplit, gradeSplit) {
   for (const week in weightSplit) {
@@ -1366,6 +1390,7 @@ function carryOverTasks(weeklyTaskSplit) {
     }
   }
 }
+
 
 /*
     avgCurrentGrades=calculateAverages(currentGrades)
