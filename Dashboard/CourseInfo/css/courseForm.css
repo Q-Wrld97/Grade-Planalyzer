@@ -27,6 +27,7 @@
     height: 300px;
     align-self: center;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .customGradingScale {
