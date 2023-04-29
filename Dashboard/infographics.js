@@ -812,6 +812,8 @@ document
   const updatedWeights = removeNonGradedTasks(currentWeight, pastGradedTasks);
   console.log(updatedWeights);
 
+  
+
 
 
   });
