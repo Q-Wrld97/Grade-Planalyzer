@@ -15,6 +15,10 @@
     min-height: 100vh;
 }
 
+.font-color{
+    color: white;
+  }
+  
 .gradingScale {
     display: flex;
     flex-direction: row;
