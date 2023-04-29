@@ -16,6 +16,7 @@ body {
     margin: 0;
     background-color: #23242a;
     color: white;
+    overflow-y: hidden;
 }
 
 /*============Dash Background=====================*/
@@ -135,7 +136,7 @@ body {
 
 /* Select Option */
 .select_form {
-    padding: 20px;
+    padding: 20px 0px 20px 3vh;
     border-radius: 10px;
 }
 
