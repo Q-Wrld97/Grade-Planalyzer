@@ -58,6 +58,8 @@
     min-height: 100vh;
     flex-direction: column;
     background: url(../Assets/dashBackground.gif);
+    margin-top: -60px; /*Added -60px margin-top to remove scroll bars on big enough screens*/
+	padding-top: 60px; /*Added 60px padding-top so input box will not go over the nav bar*/
 }
 .container-Btn {
     display: flex;

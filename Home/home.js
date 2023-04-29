@@ -86,22 +86,26 @@ images.forEach(image => {
     header.textContent = image.getAttribute('data-header');
     const description = document.createElement('p');
     description.textContent = image.getAttribute('data-description');
+    // Create and append the second description paragraph
+    const newP = document.createElement('p');
+    newP.textContent = image.getAttribute('data-description2');
+    description.appendChild(newP);
 
     // Set the popup images, header and description styles
-    sliderimage.style.width= '70vw';
+    sliderimage.style.width= '50vw';
     sliderimage.style.float= 'left';
     sliderimage.style.position = 'relative';
 
     
     description.style.color= 'white';
     description.style.float= 'right';
-    description.style.width= '20vw';
+    description.style.width= '40vw';
     description.style.position = 'relative';
 
 
     header.style.color= 'white';
     header.style.float= 'right';
-    header.style.width= '20vw';
+    header.style.width= '40vw';
     header.style.position = 'relative';
    
 

@@ -64,11 +64,14 @@
   min-height: 100vh;
   flex-direction: column;
   background: url(../Assets/dashBackground.gif);
+  margin-top: -60px; /*Added -60px margin-top to remove scroll bars on big enough screens*/
+	padding-top: 60px; /*Added 60px padding-top so input box will not go over the nav bar*/
 }
 
 .box {
   position: relative;
   width: 700px;
+  /* min-height: 500px; */
   height: 800px;
   background: rgba(24, 24, 27);
   border-radius: 8px;
