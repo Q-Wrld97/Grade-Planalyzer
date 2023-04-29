@@ -645,7 +645,7 @@ select {
 
 .barChartSize {
     width: auto;
-    height: auto;
+    height: 60vh;
     margin: 0 auto;
     padding-left: 20px;
 
@@ -982,7 +982,7 @@ select {
     text-align: center;
     border: 3px solid rgb(255, 255, 255);
     border-radius: 5px;
-    height: 70px;
+    height: auto;
     width: 200px;
 }
 
