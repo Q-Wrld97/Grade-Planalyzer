@@ -1524,7 +1524,7 @@ function getLetterGrades(overallGrades, gradeScale) {
       const scale = gradeScale[className];
 
       for (const letter in scale) {
-          if (grade >= scale[letter]) {
+          if (Math.floor(grade + 0.5) >= scale[letter]) {
               letterGrades[className] = letter;
               break;
           }
@@ -1533,7 +1533,6 @@ function getLetterGrades(overallGrades, gradeScale) {
 
   return letterGrades;
 }
-
 
 
 function calculateGradesWithWeight(grades, weights) {
