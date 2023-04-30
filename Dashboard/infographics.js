@@ -798,27 +798,85 @@ document
       options: options,
     });
     
-    // get current date in this format: 2021-04-01
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = today.getMonth() + 1;
-    const day = today.getDate();
-    const todayDate = `${year}-${month}-${day}`;
 
-  
-  const pastGradedTasks = getPastGradedTasksByClass(currentDate, currentGrades)
-  console.log(pastGradedTasks)
+    // Calculate the overall grade for each class
+    const [updatedGrades, updatedWeights, updatedDates] = removeNullTasks(currentGrades, currentWeight, currentDates);
+    
 
-  const updatedWeights = removeNonGradedTasks(currentWeight, pastGradedTasks);
-  console.log(updatedWeights);
+    console.log(updatedGrades);
+    console.log(updatedWeights);
+    console.log(updatedDates);
 
+    const [updatedGradesCurrently, updatedWeightsCurrently, updatedDatesCurrently] = removeUnpassedTasks(updatedGrades, updatedWeights, updatedDates);
+
+    console.log(updatedGradesCurrently);
+    console.log(updatedWeightsCurrently);
+
+    
+    const gradesWithWeightByClass = calculateGradesWithWeight(updatedGradesCurrently, updatedWeightsCurrently);
+      
+    console.log(gradesWithWeightByClass);
+
+
+    const overallGrades = calculateOverallGrades(gradesWithWeightByClass);
+    console.log(overallGrades);
+
+
+    const letterGrades = getLetterGrades(overallGrades, gradeScale);
+    console.log(letterGrades);
+   //calculate potential grade
+
+  //remove unpassed tasks
+   var [updatedGradesPotential, updatedWeightsPotential, updatedDatesPotential] = removeUnpassedTasks(currentGrades, currentWeight, currentDates);
+   
+
+  console.log(updatedGradesPotential);
+  console.log(updatedWeightsPotential);
+  //add 100 to all null tasks
+  updatedGradesPotential = fillNullTasks(updatedGradesPotential, 100);
+  console.log(updatedGradesPotential);
+  //calculate grades with weight
+
+  const gradesWithWeightByClassPotential = calculateGradesWithWeight(updatedGradesPotential, updatedWeightsPotential);
+
+  console.log(gradesWithWeightByClassPotential);
+
+  //calculate overall grades
+  const overallGradesPotential = calculateOverallGrades(gradesWithWeightByClassPotential);
+  console.log(overallGradesPotential);
+
+  //calculate letter grades
+  const letterGradesPotential = getLetterGrades(overallGradesPotential, gradeScale);
+  console.log(letterGradesPotential);
+
+    const tableBody = document.getElementById("tableBodyInfo");
+    tableBody.innerHTML = "";
+
+    for (const className in letterGrades) {
+        const tr = document.createElement("tr");
+
+        const classCell = document.createElement("td");
+        classCell.textContent = className;
+        tr.appendChild(classCell);
+
+        const gradeCell = document.createElement("td");
+        gradeCell.textContent = letterGrades[className];
+        tr.appendChild(gradeCell);
+
+        const potentialGradeCell = document.createElement("td");
+        potentialGradeCell.textContent = letterGradesPotential[className];
+        tr.appendChild(potentialGradeCell);
+
+        tableBody.appendChild(tr);
+    }
+
+   
   
 
 
 
   });
-
-
+  
 
 
 ///////////function for all other course tab/////////////////
@@ -1222,6 +1280,10 @@ const myChart = new Chart(ctx, {
   options: options,
 });
 
+
+
+
+
 }
 
 function isDateBeforeToday(date) {
@@ -1391,6 +1453,132 @@ function carryOverTasks(weeklyTaskSplit) {
       }
     }
   }
+}
+
+function fillNullTasks(grades, fillValue) {
+  for (const className in grades) {
+      for (const category in grades[className]) {
+          for (const task in grades[className][category]) {
+              if (grades[className][category][task] === null) {
+                  grades[className][category][task] = fillValue;
+              }
+          }
+      }
+  }
+
+  return grades;
+}
+function getLetterGrades(overallGrades, gradeScale) {
+  const letterGrades = {};
+
+  for (const className in overallGrades) {
+      const grade = overallGrades[className];
+      const scale = gradeScale[className];
+
+      for (const letter in scale) {
+          if (grade >= scale[letter]) {
+              letterGrades[className] = letter;
+              break;
+          }
+      }
+  }
+
+  return letterGrades;
+}
+
+
+
+function calculateGradesWithWeight(grades, weights) {
+  const gradesWithWeightByClass = {};
+
+  for (const className in grades) {
+      gradesWithWeightByClass[className] = {};
+
+      for (const category in grades[className]) {
+          let totalWeight = 0;
+          let weightedSum = 0;
+
+          for (const task in grades[className][category]) {
+              const grade = grades[className][category][task];
+              const weight = weights[className][category][task];
+
+              totalWeight += weight;
+              weightedSum += grade * weight;
+          }
+
+          if (totalWeight > 0) {
+              gradesWithWeightByClass[className][category] = weightedSum / totalWeight;
+          } else {
+              gradesWithWeightByClass[className][category] = 0;
+          }
+      }
+  }
+
+  return gradesWithWeightByClass;
+}
+
+
+function calculateOverallGrades(grades) {
+const overallGrades = {};
+
+for (const className in grades) {
+    let total = 0;
+    let numComponents = 0;
+
+    for (const component in grades[className]) {
+        total += grades[className][component];
+        numComponents += 1;
+    }
+
+    overallGrades[className] = parseFloat((total / numComponents).toFixed(2));
+}
+
+return overallGrades;
+}
+
+function removeUnpassedTasks(grades, weights, dates) {
+  const updatedGrades = JSON.parse(JSON.stringify(grades));
+  const updatedWeights = JSON.parse(JSON.stringify(weights));
+  const updatedDates = JSON.parse(JSON.stringify(dates));
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  for (const className in updatedDates) {
+      for (const category in updatedDates[className]) {
+          for (const task in updatedDates[className][category]) {
+              const taskDate = new Date(updatedDates[className][category][task]);
+              if (taskDate >= today) {
+                  delete updatedGrades[className][category][task];
+                  delete updatedWeights[className][category][task];
+                  delete updatedDates[className][category][task];
+              }
+          }
+      }
+  }
+
+  return [updatedGrades, updatedWeights, updatedDates];
+
+}
+
+
+function removeNullTasks(grades, weights, dates) {
+  const updatedGrades = JSON.parse(JSON.stringify(grades));
+  const updatedWeights = JSON.parse(JSON.stringify(weights));
+  const updatedDates = JSON.parse(JSON.stringify(dates));
+
+  for (const className in updatedGrades) {
+      for (const category in updatedGrades[className]) {
+          for (const task in updatedGrades[className][category]) {
+              if (updatedGrades[className][category][task] === null) {
+                  delete updatedGrades[className][category][task];
+                  delete updatedWeights[className][category][task];
+                  delete updatedDates[className][category][task];
+              }
+          }
+      }
+  }
+
+  return [updatedGrades, updatedWeights, updatedDates];
 }
 
 
