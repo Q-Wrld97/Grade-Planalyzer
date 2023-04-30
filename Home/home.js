@@ -9,6 +9,48 @@ $(window).on('load', function() {
 window.addEventListener('resize', function() {
     location.reload();
   });
+  
+//Icon toss
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    var images = document.querySelectorAll('.image_top');
+    for (var i = 0; i < images.length; i++) {
+      var image = images[i];
+      image.style.top = '70vh'; 
+    }
+  }, 2500); 
+});
+
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    var images = document.querySelectorAll('.image_bottom');
+    for (var i = 0; i < images.length; i++) {
+      var image = images[i];
+      image.style.bottom = '70vh';
+    }
+  }, 2500); 
+});
+
+window.addEventListener('DOMContentLoaded', function() {
+var images = document.querySelectorAll('.zoom');
+for (var i = 0; i < images.length; i++) {
+  var image = images[i];
+  setTimeout((function(img) {
+    return function() {
+      var position = parseInt(getComputedStyle(img).getPropertyValue('top'));
+      img.classList.add('show'); 
+    };
+  })(image), 1000 * i + 5500); 
+}
+});
+
+$(window).on('load', function() {
+    setTimeout(function() {
+        $(".ani_container").fadeOut("slow");
+    }, 6000); // 6000ms = 6 seconds   
+});
+
+
 
 //Slider simple left and right 
 
