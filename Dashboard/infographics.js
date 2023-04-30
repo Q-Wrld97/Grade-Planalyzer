@@ -839,7 +839,9 @@ const myChart = new Chart(ctx, {
 
 
   //remove unpassed tasks
-   var [updatedGradesPotential, updatedWeightsPotential, updatedDatesPotential] = removeUnpassedTasks(currentGrades, currentWeight, currentDates);
+  var updatedGradesPotential =  currentGrades
+  var updatedWeightsPotential = currentWeight
+
    
 
   console.log(updatedGradesPotential);
@@ -1505,7 +1507,7 @@ function fillNullTasks(grades, fillValue) {
   for (const className in grades) {
       for (const category in grades[className]) {
           for (const task in grades[className][category]) {
-              if (grades[className][category][task] === null) {
+              if (grades[className][category][task] === null || Number.isNaN(grades[className][category][task])) {
                   grades[className][category][task] = fillValue;
               }
           }
