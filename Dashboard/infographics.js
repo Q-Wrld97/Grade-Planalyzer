@@ -762,42 +762,46 @@ document
     canvasBar.setAttribute("id", "barChart");
     document.getElementById("barChartSize").appendChild(canvasBar);
 
-    // Define the data for the chart
-    const dataForBar = {
-      labels: Object.keys(GPAbyWeekWithDates),
-      datasets: [
-        {
-          label: "GPA",
-          data: Object.values(GPAbyWeekWithDates),
-          backgroundColor: "rgba(54, 162, 235, 0.2)",
-          borderColor: "rgba(54, 162, 235, 1)",
-          borderWidth: 1,
-        },
-      ],
-    };
+ // Define the data for the chart
+const dataForBar = {
+  labels: Object.keys(GPAbyWeekWithDates),
+  datasets: [
+    {
+      label: "", // update label to an empty string
+      data: Object.values(GPAbyWeekWithDates),
+      backgroundColor: "rgba(54, 162, 235, 0.2)",
+      borderColor: "rgba(54, 162, 235, 1)",
+      borderWidth: 1,
+    },
+  ],
+};
 
-    // Define the options for the chart
-    const options = {
-      scales: {
-        y: {
-          min: min,
-          max: max,
-
-          ticks: {
-            stepSize: 0.5,
-          },
-        },
+// Define the options for the chart
+const options = {
+  scales: {
+    y: {
+      min: min,
+      max: max,
+      ticks: {
+        stepSize: 0.5,
       },
-    };
-
-    // Create the chart
-    const ctx = canvasBar.getContext("2d");
-    const myChart = new Chart(ctx, {
-      type: "bar",
-      data: dataForBar,
-      options: options,
-    });
+    },
+  
     
+  },
+  legend: {
+    labels: {
+      boxWidth: 0 } },
+};
+
+// Create the chart
+const ctx = canvasBar.getContext("2d");
+const myChart = new Chart(ctx, {
+  type: "bar",
+  data: dataForBar,
+  options: options,
+});
+
 
     // Calculate the overall grade for each class
     const [updatedGrades, updatedWeights, updatedDates] = removeNullTasks(currentGrades, currentWeight, currentDates);
@@ -806,6 +810,7 @@ document
     console.log(updatedGrades);
     console.log(updatedWeights);
     console.log(updatedDates);
+    
 
     const [updatedGradesCurrently, updatedWeightsCurrently, updatedDatesCurrently] = removeUnpassedTasks(updatedGrades, updatedWeights, updatedDates);
 
@@ -1114,21 +1119,24 @@ async function dataForTabs(course) {
   removeEmptyObjectsForSingleCourse(weeklyAssignmentWeightSplit);
   console.log(weeklyAssignmentWeightSplit);
   console.log(weeklyAssignmentGradeSplit);
+  removeInvalidEntries(weeklyAssignmentWeightSplit, weeklyAssignmentGradeSplit);
+  const keys = Object.keys(weeklyAssignmentWeightSplit);
   // Iterate over the weeks, merging each previous week's assignments
-  for (let i = 1; i < Object.keys(weeklyAssignmentWeightSplit).length; i++) {
-    const currentWeekKey = `Week ${i + 1}`;
-    const prevWeekKey = `Week ${i}`;
+// Iterate over the weeks, merging each previous week's assignments
+for (let i = 1; i < keys.length; i++) {
+  const currentWeekKey = keys[i];
+  const prevWeekKey = keys[i - 1];
 
-    // Add previous week's weight and grade to the current week
-    mergeAssignments(
-      weeklyAssignmentWeightSplit[currentWeekKey],
-      weeklyAssignmentWeightSplit[prevWeekKey]
-    );
-    mergeAssignments(
-      weeklyAssignmentGradeSplit[currentWeekKey],
-      weeklyAssignmentGradeSplit[prevWeekKey]
-    );
-  }
+  // Add previous week's weight and grade to the current week
+  mergeAssignments(
+    weeklyAssignmentWeightSplit[currentWeekKey],
+    weeklyAssignmentWeightSplit[prevWeekKey]
+  );
+  mergeAssignments(
+    weeklyAssignmentGradeSplit[currentWeekKey],
+    weeklyAssignmentGradeSplit[prevWeekKey]
+  );
+}
   
 
   console.log(

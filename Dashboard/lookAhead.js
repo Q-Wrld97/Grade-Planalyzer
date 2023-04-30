@@ -1,5 +1,3 @@
-
-
 ///////////////////////////////Data Grabbing///////////////////////////////
 
 async function getLookAhead() {
@@ -253,30 +251,30 @@ async function populateData() {
 
   var selectedOption = document.getElementById("weeks").value; // get the value of the selected option from the dropdown
 
-  if (selectedOption === "Week1") {  // if the user selects "Week1", set the start date to the current date and add 6 days to get the end date
-    
-   
-  } else if (selectedOption === "Week2") {  // if the user selects "Week2", add 7 days to the current date to get the start date and add 6 days to get the end date
+  if (selectedOption === "Week1") {
+    // if the user selects "Week1", set the start date to the current date and add 6 days to get the end date
+  } else if (selectedOption === "Week2") {
+    // if the user selects "Week2", add 7 days to the current date to get the start date and add 6 days to get the end date
     startDate.setDate(startDate.getDate() + 7);
     endDate.setDate(startDate.getDate() + 6);
 
     if (startDate.getMonth() !== endDate.getMonth()) {
       endDate.setMonth(startDate.getMonth() + 1);
     }
-
-  } else if (selectedOption === "Week3") {  // if the user selects "Week3", add 14 days to the current date to get the start date and add 6 days to get the end date
+  } else if (selectedOption === "Week3") {
+    // if the user selects "Week3", add 14 days to the current date to get the start date and add 6 days to get the end date
     startDate.setDate(startDate.getDate() + 14);
     endDate.setDate(startDate.getDate() + 6);
-
-  } else if (selectedOption === "Week4") {  // if the user selects "Week4", add 21 days to the current date to get the start date and add 6 days to get the end date
+  } else if (selectedOption === "Week4") {
+    // if the user selects "Week4", add 21 days to the current date to get the start date and add 6 days to get the end date
     startDate.setDate(startDate.getDate() + 21);
     endDate.setDate(startDate.getDate() + 6);
   }
 
   var dateRangeElement = document.getElementById("date-range");
-  var newDateRange = startDate.toLocaleDateString() + " to " + endDate.toLocaleDateString();
+  var newDateRange =
+    startDate.toLocaleDateString() + " to " + endDate.toLocaleDateString();
   dateRangeElement.innerText = newDateRange;
-
 
   // create an array of items sorted by their deadline dates
   let items = [];
@@ -312,6 +310,14 @@ async function populateData() {
     let remainingDays = Math.ceil(
       (item.deadline - currentDate) / (1000 * 60 * 60 * 24)
     );
+    let weight = item.item[`${item.categoryKey}Weight`];
+    let weightStr;
+
+    if (typeof weight === "number" && !Number.isInteger(weight)) {
+      weightStr = weight.toFixed(2);
+    } else {
+      weightStr = weight.toString();
+    }
 
     count++;
     let tr = document.createElement("tr");
@@ -321,10 +327,11 @@ async function populateData() {
     let assignmentTd = document.createElement("td");
     assignmentTd.textContent = item.itemKey;
     let weightTd = document.createElement("td");
-    weightTd.textContent = `${item.item[`${item.categoryKey}Weight`]}%`;
+    weightTd.textContent = `${weightStr}%`;
     let deadlineTd = document.createElement("td");
-    deadlineTd.textContent = `${item.item[`${item.categoryKey}Dates`]
-      } (${remainingDays} days left)`;
+    deadlineTd.textContent = `${
+      item.item[`${item.categoryKey}Dates`]
+    } (${remainingDays} days left)`;
     let completionTd = document.createElement("td");
     let completionInput = document.createElement("input");
     completionInput.setAttribute("type", "checkbox");
@@ -419,13 +426,11 @@ document.getElementById("confirm").addEventListener("click", async function () {
       data[i].closest("tr").remove();
     }
   }
-  reloadData()
-
+  reloadData();
 });
 
-
 function calculatePieChartData(data) {
-  // todoCourseWeight 
+  // todoCourseWeight
   let weightedValues = {};
   for (let classKey in data) {
     weightedValues[classKey] = 0;
@@ -435,7 +440,8 @@ function calculatePieChartData(data) {
         continue;
       }
       for (let itemKey in data[classKey][categoryKey]) {
-        let item = data[classKey][categoryKey][itemKey]; {
+        let item = data[classKey][categoryKey][itemKey];
+        {
           weightedValues[classKey] += item[`${categoryKey}Weight`];
         }
       }
@@ -449,7 +455,9 @@ function calculatePieChartData(data) {
       // Skip processing creditHours
       if (categoryKey === "creditHours") {
         const creditHoursString = data[classKey][categoryKey];
-        const creditHoursInteger = parseInt(creditHoursString.replace(" Credits", ""));
+        const creditHoursInteger = parseInt(
+          creditHoursString.replace(" Credits", "")
+        );
         creditHours[classKey] = creditHoursInteger;
       }
     }
@@ -457,7 +465,8 @@ function calculatePieChartData(data) {
   // todoRelativeWeight
   let weightedCreditHours = {};
   for (let classKey in weightedValues) {
-    weightedCreditHours[classKey] = weightedValues[classKey] * creditHours[classKey];
+    weightedCreditHours[classKey] =
+      weightedValues[classKey] * creditHours[classKey];
   }
   // todoTotalWeight
   let totalWeightedCreditHours = 0;
@@ -467,20 +476,19 @@ function calculatePieChartData(data) {
   // caculate percetnage by dividing todoRelativeWeight by todoTotalWeight
   let percentage = {};
   for (let classKey in weightedCreditHours) {
-    percentage[classKey] = (weightedCreditHours[classKey] / totalWeightedCreditHours) * 100;
+    percentage[classKey] =
+      (weightedCreditHours[classKey] / totalWeightedCreditHours) * 100;
   }
   return percentage;
-
 }
-
 
 async function reloadData() {
   // show the loading screen
-  var progressBar = document.getElementById('preLoading');
-  const preloader = document.querySelector('.preloader');
-  preloader.style.display = 'flex';
-  progressBar.setAttribute('aria-valuenow', 25);
-  progressBar.style.width = 25 + '%'
+  var progressBar = document.getElementById("preLoading");
+  const preloader = document.querySelector(".preloader");
+  preloader.style.display = "flex";
+  progressBar.setAttribute("aria-valuenow", 25);
+  progressBar.style.width = 25 + "%";
   //wait a second to make sure the user is logged in
   await new Promise((r) => setTimeout(r, 1000));
   let userID = auth.currentUser.uid;
@@ -527,8 +535,8 @@ async function reloadData() {
   }
 
   // show progress bar at 50%
-  progressBar.setAttribute('aria-valuenow', 50);
-  progressBar.style.width = 50 + '%';
+  progressBar.setAttribute("aria-valuenow", 50);
+  progressBar.style.width = 50 + "%";
 
   removeUndefined(allCategoryTypeData);
   console.log(allCategoryTypeData);
@@ -575,8 +583,8 @@ async function reloadData() {
   }
 
   // show progress bar at 75%
-  progressBar.setAttribute('aria-valuenow', 75);
-  progressBar.style.width = 75 + '%';
+  progressBar.setAttribute("aria-valuenow", 75);
+  progressBar.style.width = 75 + "%";
 
   removeUndefined(allDateTypeData);
   console.log(allDateTypeData);
@@ -617,16 +625,12 @@ async function reloadData() {
   console.log(generalData);
 
   // show progress bar at 100%
-  progressBar.setAttribute('aria-valuenow', 100);
-  progressBar.style.width = 100 + '%';
+  progressBar.setAttribute("aria-valuenow", 100);
+  progressBar.style.width = 100 + "%";
   // hide the loading screen
-  preloader.style.display = 'none';
+  preloader.style.display = "none";
 
   return allCategoryTypeData;
 }
 ///////////////////////////////////////////Generating Dates//////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
