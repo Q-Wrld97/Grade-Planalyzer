@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="../css/courseForm.css">
-<title>Course From</title>
+<title>Course Form</title>
 </head>
 <body>
 	<section id="banner">
@@ -30,7 +30,10 @@
 				<div id="animated">
 					<!-- <h2>Login</h2>
 					<img src="../../../Assets/Grade_Planalyzer_Logo_PNG.png" alt="Logo" id="loginImg">-->
-					<div class="courseFromTextColor">
+					<div class="font-color"> 
+						<h2>New Course</h2>
+					</div>
+					<div class="courseFormTextColor">
 						<h6>Course Name:</h6>
 						<div class="checkBox">
 							<input type="text" name="courseName" id="CourseName" class="form-control" placeholder="Enter 3 Letter Acronym" maxlength="3" aria-describedby="CourseName" oninput="addUpperCaseHandler('CourseName')">
@@ -58,9 +61,10 @@
 									</div>
 									<div class="custom-control custom-radio" style="margin-left: 10px;">
 										<input onclick="yesnoCheck()" type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-						
-										<label class="custom-control-label" for="customRadio3"></label>
-										<div id="ifYes" >
+
+										<label class="custom-control-label" for="customRadio3">Custom</label>
+										<div id="ifYes" style="display:none">
+											<label>Enter lower bound percentages:</label>
 											<input class="form-control-custom" name="A" type="number" min="1" max="100" placeholder="A"/>
 											<input class="form-control-custom" name="A-" type="number" min="1" max="100" placeholder="A-"/>
 											<input class="form-control-custom" name="B+" type="number" min="1" max="100" placeholder="B+"/>

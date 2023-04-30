@@ -247,6 +247,37 @@ async function populateData() {
   let tableBody = document.getElementById("tableBody");
   tableBody.innerHTML = ""; // clear the table body before repopulating it
 
+  var startDate = new Date(); // taking current date
+  var endDate = new Date();
+  endDate.setDate(startDate.getDate() + 6);
+
+  var selectedOption = document.getElementById("weeks").value; // get the value of the selected option from the dropdown
+
+  if (selectedOption === "Week1") {  // if the user selects "Week1", set the start date to the current date and add 6 days to get the end date
+    
+   
+  } else if (selectedOption === "Week2") {  // if the user selects "Week2", add 7 days to the current date to get the start date and add 6 days to get the end date
+    startDate.setDate(startDate.getDate() + 7);
+    endDate.setDate(startDate.getDate() + 6);
+
+    if (startDate.getMonth() !== endDate.getMonth()) {
+      endDate.setMonth(startDate.getMonth() + 1);
+    }
+
+  } else if (selectedOption === "Week3") {  // if the user selects "Week3", add 14 days to the current date to get the start date and add 6 days to get the end date
+    startDate.setDate(startDate.getDate() + 14);
+    endDate.setDate(startDate.getDate() + 6);
+
+  } else if (selectedOption === "Week4") {  // if the user selects "Week4", add 21 days to the current date to get the start date and add 6 days to get the end date
+    startDate.setDate(startDate.getDate() + 21);
+    endDate.setDate(startDate.getDate() + 6);
+  }
+
+  var dateRangeElement = document.getElementById("date-range");
+  var newDateRange = startDate.toLocaleDateString() + " to " + endDate.toLocaleDateString();
+  dateRangeElement.innerText = newDateRange;
+
+
   // create an array of items sorted by their deadline dates
   let items = [];
   for (let classKey in data) {
@@ -292,9 +323,8 @@ async function populateData() {
     let weightTd = document.createElement("td");
     weightTd.textContent = `${item.item[`${item.categoryKey}Weight`]}%`;
     let deadlineTd = document.createElement("td");
-    deadlineTd.textContent = `${
-      item.item[`${item.categoryKey}Dates`]
-    } (${remainingDays} days left)`;
+    deadlineTd.textContent = `${item.item[`${item.categoryKey}Dates`]
+      } (${remainingDays} days left)`;
     let completionTd = document.createElement("td");
     let completionInput = document.createElement("input");
     completionInput.setAttribute("type", "checkbox");
@@ -319,7 +349,7 @@ async function populateData() {
 
   const pieChartData = calculatePieChartData(data);
   console.log(pieChartData);
-  
+
   // create chart
   let chartData = {
     labels: Object.keys(pieChartData),
@@ -390,7 +420,7 @@ document.getElementById("confirm").addEventListener("click", async function () {
     }
   }
   reloadData()
-  
+
 });
 
 
@@ -437,14 +467,14 @@ function calculatePieChartData(data) {
   // caculate percetnage by dividing todoRelativeWeight by todoTotalWeight
   let percentage = {};
   for (let classKey in weightedCreditHours) {
-    percentage[classKey] = (weightedCreditHours[classKey] / totalWeightedCreditHours)*100;
+    percentage[classKey] = (weightedCreditHours[classKey] / totalWeightedCreditHours) * 100;
   }
   return percentage;
-    
+
 }
 
 
-async function reloadData(){
+async function reloadData() {
   // show the loading screen
   var progressBar = document.getElementById('preLoading');
   const preloader = document.querySelector('.preloader');
@@ -594,6 +624,9 @@ async function reloadData(){
 
   return allCategoryTypeData;
 }
+///////////////////////////////////////////Generating Dates//////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 

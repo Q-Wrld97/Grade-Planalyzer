@@ -138,7 +138,7 @@
                             <h3 class="display-7">ToDo:</h3>
                         </div>
                         <div class="col69-2">
-                            <h3 class="display-7">04-27-2023 to 05-04-2023</h3>
+                            <h3 id="date-range" class="display-7"> </h3>
                         </div>
                         <div class="col69-3">
                             <select onchange="populateData()" name="weeks" id="weeks">
@@ -148,7 +148,8 @@
                                 <option value="Week3">Period: 3 Weeks</option>
                                 <option value="Week4">Period: 4 Weeks</option>
                             </select>
-                            <button id="confirm" class="button">Confirm</button>
+                            <button id="confirm" class="button" onclick="populateData()">Confirm</button>
+
                         </div>
                     </div>
                 </div>
@@ -236,77 +237,8 @@
                                                 <th>Potential Term Letter Grade</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tableBody">
-                                            <tr>
-                                                <td>SWE</td>
-                                                <td>F</td>
-                                                <td>A+</td>
-                                            </tr>
-                                            <tr>
-                                                <td>SWE</td>
-                                                <td>F</td>
-                                                <td>A+</td>
-                                            </tr>
-                                            <tr>
-                                                <td>SWE</td>
-                                                <td>F</td>
-                                                <td>A+</td>
-                                            </tr>
-                                            <tr>
-                                                <td>SWE</td>
-                                                <td>F</td>
-                                                <td>A+</td>
-                                            </tr>
-                                            <tr>
-                                                <td>SWE</td>
-                                                <td>F</td>
-                                                <td>A+</td>
-                                            </tr>
-                                            <tr>
-                                                <td>SWE</td>
-                                                <td>F</td>
-                                                <td>A+</td>
-                                            </tr>
-                                            <tr>
-                                                <td>SWE</td>
-                                                <td>F</td>
-                                                <td>A+</td>
-                                            </tr>
-                                            <tr>
-                                                <td>SWE</td>
-                                                <td>F</td>
-                                                <td>A+</td>
-                                            </tr>
-                                            <tr>
-                                                <td>SWE</td>
-                                                <td>F</td>
-                                                <td>A+</td>
-                                            </tr>
-                                            <tr>
-                                                <td>SWE</td>
-                                                <td>F</td>
-                                                <td>A+</td>
-                                            </tr>
-                                            <tr>
-                                                <td>SWE</td>
-                                                <td>F</td>
-                                                <td>A+</td>
-                                            </tr>
-                                            <tr>
-                                                <td>SWE</td>
-                                                <td>F</td>
-                                                <td>A+</td>
-                                            </tr>
-                                            <tr>
-                                                <td>SWE</td>
-                                                <td>F</td>
-                                                <td>A+</td>
-                                            </tr>
-                                            <tr>
-                                                <td>SWE</td>
-                                                <td>F</td>
-                                                <td>A+</td>
-                                            </tr>
+                                        <tbody id="tableBodyInfo">
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -416,14 +348,15 @@
                     </div>
 
                     <div id="whatIfColumn2">
-                        <div class="whatIfGradeImage">
-                            <img src="../Assets/Grade_Planalyzer_Logo_PNG.png" alt="Logo">
-                        </div>
-                        <div class="whatIfGradeBox">
-                            <div class="whatIfGradeBoxValue" id="whatIfGradeBoxValue">
-
+                        <section class="whatIfGradeImage">
+                            <!-- <div class="whatIfGradeImage">
+                                    <img src="../Assets/Grade_Planalyzer_Logo_Letterless.png" alt="Logo">
+                            </div> -->
+                            <div class="whatIfGradeBox">
                             </div>
-                        </div>
+                            <div class="whatIfGradeBoxValue" id="whatIfGradeBoxValue">
+                            </div>
+                        </section>
                     </div>
                 </div>
             </div>

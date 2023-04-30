@@ -20,10 +20,10 @@ function addNewData(){
     
     var gradeScale = {
       'A': 93,
-      'A-': 92,
+      'A-': 90,
       'B+': 87,
       'B': 83,
-      'B-': 82,
+      'B-': 80,
       'C+': 77,
       'C': 73,
       'C-': 70,

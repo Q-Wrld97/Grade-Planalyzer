@@ -351,8 +351,10 @@ function calculateWhatif() {
   let whatifGradeBoxValue = document.getElementById("whatIfGradeBoxValue");
   whatifGradeBoxValue.innerHTML = "";
   let totalScoreHtml = document.createElement("h3");
+  totalScoreHtml.id = "whatIfTotalScoreHtml";
   totalScoreHtml.innerHTML = totalWhatIfScore.toFixed(2);
   let gradeLetterHtml = document.createElement("h3");
+  gradeLetterHtml.id = "whatIfGradeLetterHtml";
   gradeLetterHtml.innerHTML = gradeLetter;
 
   whatifGradeBoxValue.appendChild(totalScoreHtml);
