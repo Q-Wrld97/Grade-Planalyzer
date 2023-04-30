@@ -812,8 +812,14 @@ const myChart = new Chart(ctx, {
     console.log(updatedDates);
     
 
-    const [updatedGradesCurrently, updatedWeightsCurrently, updatedDatesCurrently] = removeUnpassedTasks(updatedGrades, updatedWeights, updatedDates);
-
+    var [updatedGradesCurrently, updatedWeightsCurrently, updatedDatesCurrently] = removeUnpassedTasks(updatedGrades, updatedWeights, updatedDates);
+    console.log("-----------------------------------------------------");
+    console.log(updatedGradesCurrently);
+    console.log(updatedWeightsCurrently);
+    updatedGradesCurrently=removeEmptyValues(updatedGradesCurrently)
+    updatedWeightsCurrently=removeEmptyValues(updatedWeightsCurrently)
+    updatedWeightsCurrently=removeEmptyObjectsForLetter(updatedWeightsCurrently)
+    updatedGradesCurrently=removeEmptyObjectsForLetter(updatedGradesCurrently)
     console.log(updatedGradesCurrently);
     console.log(updatedWeightsCurrently);
 
@@ -831,12 +837,15 @@ const myChart = new Chart(ctx, {
     console.log(letterGrades);
    //calculate potential grade
 
+
   //remove unpassed tasks
    var [updatedGradesPotential, updatedWeightsPotential, updatedDatesPotential] = removeUnpassedTasks(currentGrades, currentWeight, currentDates);
    
 
   console.log(updatedGradesPotential);
   console.log(updatedWeightsPotential);
+  updateGradesPotential=removeEmptyObjectsForLetter(updatedGradesPotential)
+  updatedWeightsPotential=removeEmptyObjectsForLetter(updatedWeightsPotential)
   //add 100 to all null tasks
   updatedGradesPotential = fillNullTasks(updatedGradesPotential, 100);
   console.log(updatedGradesPotential);
@@ -881,8 +890,37 @@ const myChart = new Chart(ctx, {
 
 
   });
-  
 
+  function removeEmptyObjectsForLetter(obj) {
+    for (const classKey in obj) {
+      const classObj = obj[classKey];
+      for (const categoryKey in classObj) {
+        if (Object.keys(classObj[categoryKey]).length === 0) {
+          delete classObj[categoryKey];
+        }
+      }
+    }
+    return obj;
+  }
+  
+  function removeEmptyValues(obj) {
+    // Create a new object to store the non-empty values
+    const newObj = {};
+    
+    // Loop through each key in the input object
+    for (const key in obj) {
+      // Check if the value is empty (i.e. an empty object or array)
+      if (Object.keys(obj[key]).length === 0) {
+        continue; // Skip to the next key
+      }
+      
+      // Otherwise, add the key-value pair to the new object
+      newObj[key] = obj[key];
+    }
+    
+    // Return the new object without empty values
+    return newObj;
+  }
 
 ///////////function for all other course tab/////////////////
 async function dataForTabs(course) {

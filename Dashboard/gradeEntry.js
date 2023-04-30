@@ -324,16 +324,19 @@ async function submitGrade() {
   console.log(recentGradeKeyArray);
   console.log(recentGradeKey);
   for (i = 0; i < recentGradeKeyArray.length; i++) {
-    courseData = await db
-      .collection("users")
-      .doc(userID)
-      .collection(semester)
-      .doc(course)
-      .collection(recentGradeKeyArray[i])
-      .doc(recentGradeKeyArray[i] + "Grades")
-      .update({
-        [recentGradeKey[i]]: parseFloat(recentGrade[recentGradeKey[i]]),
-      });
+    const gradeValue = parseFloat(recentGrade[recentGradeKey[i]]);
+    if (gradeValue !== null && !isNaN(gradeValue)) {
+      courseData = await db
+        .collection("users")
+        .doc(userID)
+        .collection(semester)
+        .doc(course)
+        .collection(recentGradeKeyArray[i])
+        .doc(recentGradeKeyArray[i] + "Grades")
+        .update({
+          [recentGradeKey[i]]: gradeValue,
+        });
+    }
   }
   // show the loading screen
   getGradeEntry();

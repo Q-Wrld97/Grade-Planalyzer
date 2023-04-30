@@ -255,7 +255,7 @@ async function populateData() {
     // if the user selects "Week1", set the start date to the current date and add 6 days to get the end date
   } else if (selectedOption === "Week2") {
     // if the user selects "Week2", add 7 days to the current date to get the start date and add 6 days to get the end date
-    startDate.setDate(startDate.getDate() + 7);
+    startDate.setDate(startDate.getDate());
     endDate.setDate(startDate.getDate() + 6);
 
     if (startDate.getMonth() !== endDate.getMonth()) {
@@ -263,12 +263,12 @@ async function populateData() {
     }
   } else if (selectedOption === "Week3") {
     // if the user selects "Week3", add 14 days to the current date to get the start date and add 6 days to get the end date
-    startDate.setDate(startDate.getDate() + 14);
-    endDate.setDate(startDate.getDate() + 6);
+    startDate.setDate(startDate.getDate());
+    endDate.setDate(startDate.getDate() + 20);
   } else if (selectedOption === "Week4") {
     // if the user selects "Week4", add 21 days to the current date to get the start date and add 6 days to get the end date
-    startDate.setDate(startDate.getDate() + 21);
-    endDate.setDate(startDate.getDate() + 6);
+    startDate.setDate(startDate.getDate());
+    endDate.setDate(startDate.getDate() + 27);
   }
 
   var dateRangeElement = document.getElementById("date-range");
