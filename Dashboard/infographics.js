@@ -778,6 +778,13 @@ const dataForBar = {
 
 // Define the options for the chart
 const options = {
+  maintainAspectRatio: false,
+  aspectRatio: .5,
+  plugins: {
+    legend: {
+      display: false
+    }
+  },
   scales: {
     y: {
       min: min,
@@ -790,8 +797,12 @@ const options = {
     
   },
   legend: {
+    display: false,
     labels: {
-      boxWidth: 0 } },
+      display: false,
+      boxWidth: 0 
+      } },
+
 };
 
 // Create the chart
@@ -1308,6 +1319,13 @@ const dataForBar = {
 
 // Define the options for the chart
 const options = {
+  maintainAspectRatio: false,
+  aspectRatio: .5,
+  plugins: {
+    legend: {
+      display: false
+    }
+  },
   scales: {
     y: {
       min: 0,
