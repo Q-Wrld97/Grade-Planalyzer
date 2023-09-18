@@ -1,9 +1,9 @@
 ## Team Members
 
-- **Adam Clark**
-  - Roles: Back-End Lead, Scrum Master, Product Owner
 - **Quang Le**
   - Roles: Team Lead, GitHub Master, Full-Stack Developer
+- **Adam Clark**
+  - Roles: Back-End Lead, Scrum Master, Product Owner
 - **Nicholas Moussa**
   - Roles: Front-End Developer
 - **Mahmood Sakib**
