@@ -1,12 +1,19 @@
-Team Members 
-  o Adam Clark – Back-End Lead/Scrum Master/Product Owner
-  o Quang Le – Team Lead/GitHub Master/Full-Stack Developer
-  o Nicholas Moussa – Front-End Developer
-  o Mahmood Sakib – Front-End Lead/Full-Stack Developer
-  o Kyla Tolentino – Front-End Developer/Graphic Designer
+## Team Members
+
+- **Adam Clark**
+  - Roles: Back-End Lead, Scrum Master, Product Owner
+- **Quang Le**
+  - Roles: Team Lead, GitHub Master, Full-Stack Developer
+- **Nicholas Moussa**
+  - Roles: Front-End Developer
+- **Mahmood Sakib**
+  - Roles: Front-End Lead, Full-Stack Developer
+- **Kyla Tolentino**
+  - Roles: Front-End Developer, Graphic Designer
 
 
-**Executive Summary
+
+## Executive Summary
 As students, we all know from personal experience that there are always moments
 toward the end of any given semester in which we all inevitably whip out our calculators to
 perform a series of “doomsday” GPA number crunchings. Questions arise such as “What do I
