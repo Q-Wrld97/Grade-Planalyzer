@@ -1,7 +1,7 @@
 ## Team Members
 
 - **Quang Le**
-  - Roles: Team Lead, GitHub Master, Full-Stack Developer
+  - Roles: Team Lead, GitHub Master, Full-Stack Developer, Infrastructure Architect
 - **Adam Clark**
   - Roles: Back-End Lead, Scrum Master, Product Owner
 - **Nicholas Moussa**
